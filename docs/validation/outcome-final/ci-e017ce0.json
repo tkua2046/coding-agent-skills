@@ -1,0 +1,18 @@
+{
+  "command": [
+    "gh",
+    "run",
+    "list",
+    "--branch",
+    "codex/workflow-canary",
+    "--commit",
+    "e017ce09592e41fcdf523df922d1a51d5081fac7",
+    "--limit",
+    "5",
+    "--json",
+    "databaseId,status,conclusion,url,headSha,event"
+  ],
+  "exit_code": 0,
+  "stdout": "[{\"conclusion\":\"success\",\"databaseId\":34114568720,\"event\":\"pull_request\",\"headSha\":\"e017ce09592e41fcdf523df922d1a51d5081fac7\",\"status\":\"completed\",\"url\":\"https://github.com/tkua2046/coding-agent-skills/actions/runs/34114568720\"},{\"conclusion\":\"success\",\"databaseId\":34114561961,\"event\":\"push\",\"headSha\":\"e017ce09592e41fcdf523df922d1a51d5081fac7\",\"status\":\"completed\",\"url\":\"https://github.com/tkua2046/coding-agent-skills/actions/runs/34114561961\"}]\n",
+  "stderr": ""
+}

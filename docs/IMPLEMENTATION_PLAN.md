@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: the four task-appropriate skills have completed a bounded baseline comparison and one evidence-driven repair wave. [Results](validation/canary/INDEX.md) retain unresolved failures; this candidate is for owner review, not release. Full local checks and independent review passed; draft-PR delivery is pending. Earlier S1–S3 and C1/C2 records below are historical.
+Status: the reviewed skill candidate is delivered in [draft PR #1](https://github.com/tkua2046/coding-agent-skills/pull/1). A bounded baseline comparison, one repair wave, independent review, local gates and candidate CI are complete; [delivery evidence](validation/outcome-final/README.md) records the tested commit. [Results](validation/canary/INDEX.md) retain unresolved failures. Owner acceptance is pending and release remains blocked. Earlier S1–S3 and C1/C2 records below are historical.
 Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
 
 ## Outcome-driven increment
@@ -9,7 +9,7 @@ Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
 |---|---|---|---|
 | O1 | Each skill goal has an executable or independently assessable test, with original evidence retained | Reviewed [contract](proposals/outcome-workflow.md), concrete cases, effective scoring controls and a working real-model adapter | complete; review findings verified closed, 12 scoring checks passed |
 | O2 | Task-appropriate skills tested against the frozen previous version | O1; run paired trials, fix demonstrated failures, assess global benefit separately from grades | bounded iteration complete; two targeted repairs pass; final failures/inconclusive/deferred cases and unproven broader benefit retained |
-| O3 | A reviewable candidate with an honest result index and concise user guidance | Final affected runs/checks and independent review; owner acceptance remains pending | complete locally; full fast gate and independent review passed; draft-PR delivery pending |
+| O3 | A reviewable candidate with an honest result index and concise user guidance | Final affected runs/checks and independent review; owner acceptance remains pending | complete for owner review; draft PR delivered, local gates/independent review/candidate CI passed; release blocked |
 
 Keep this increment on the feature branch. No main update, merge, tag, release or global installation. The historical bootstrap description below records past behavior; it is not current delivery authorization. Commit boundaries follow coherent reviewed outcomes, not each prompt edit. [Goals](../evals/GOALS.md) · [Proposal review](reviews/outcome-proposal-review.md) · [Recheck](reviews/outcome-proposal-recheck.md).
 

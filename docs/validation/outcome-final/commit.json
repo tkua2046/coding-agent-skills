@@ -1,0 +1,18 @@
+{
+  "command": [
+    "git",
+    "commit",
+    "--quiet",
+    "-m",
+    "Refine workflow depth and evaluate skills against user-visible goals"
+  ],
+  "branch": "codex/workflow-canary",
+  "head_before": "b9087c56f2b136aff7c4b3495fffeccdfe760a28",
+  "staged_tree": "b06e8fafbeb8b4d0cfcb0a3051fe8cf45063d331",
+  "started_at": "2026-09-07T11:01:27.102341+00:00",
+  "elapsed_seconds": 40.875,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...............................................................Passed\nruff format..............................................................Passed\nSkill bundle and documentation validation................................Passed\nRepository tests with coverage...........................................Passed\n- hook id: tests-with-coverage\n- duration: 39.24s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /Users/tk/Documents/coding-agent-skills\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 187 items\n\ntests/test_canary.py ................................................... [ 27%]\n........................................................................ [ 65%]\n............                                                             [ 72%]\ntests/test_canary_runtime.py ...................                         [ 82%]\ntests/test_check.py ..............................                       [ 98%]\ntests/test_evidence.py ...                                               [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName                      Stmts   Miss Branch BrPart  Cover   Missing\n---------------------------------------------------------------------\ntools/__init__.py             0      0      0      0   100%\ntools/canary.py             637     54    258     26    90%   73, 84, 205, 214, 274-276, 280-281, 343, 367, 402, 424, 472-473, 513, 553, 594, 689, 710, 713, 807-810, 815, 860, 898, 942, 966, 990, 1008, 1017, 1127-1139, 1176, 1202-1219, 1224\ntools/canary_runtime.py      74      2     16      3    94%   76->78, 119, 190\ntools/check.py              105      0     52      0   100%\ntools/evidence.py            12      0      0      0   100%\n---------------------------------------------------------------------\nTOTAL                       828     56    326     29    92%\nCoverage XML written to file coverage.xml\n============================= 187 passed in 39.03s =============================\n\nVersioned canary inputs (no model calls).................................Passed\n",
+  "head_after": "e017ce09592e41fcdf523df922d1a51d5081fac7"
+}
