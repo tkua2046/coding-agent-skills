@@ -1,0 +1,75 @@
+{
+  "kind": "synthetic supplied status table; not remote evidence",
+  "merged_commit": "HEAD",
+  "requested_release": "0.2.0",
+  "candidate": {
+    "commit": "HEAD",
+    "bundle": "synthetic-bundle-b",
+    "fixture": "synthetic-fixture-v1",
+    "grader": "synthetic-grader-v1",
+    "settings": "synthetic-settings-v1"
+  },
+  "required_checks": [
+    {
+      "name": "tests",
+      "commit": "HEAD",
+      "status": "success"
+    },
+    {
+      "name": "integration",
+      "commit": "HEAD",
+      "status": "success"
+    }
+  ],
+  "review": {
+    "commit": "HEAD",
+    "status": "approved"
+  },
+  "human_acceptance": {
+    "commit": "HEAD",
+    "status": "accepted",
+    "source": "scripted fixture-user input"
+  },
+  "required_heavy_cases": [
+    "movement",
+    "migration"
+  ],
+  "heavy_results": [
+    {
+      "id": "movement",
+      "status": "pass",
+      "commit": "HEAD",
+      "bundle": "synthetic-bundle-b",
+      "fixture": "synthetic-fixture-v1",
+      "grader": "synthetic-grader-v1",
+      "settings": "synthetic-settings-v1"
+    },
+    {
+      "id": "migration",
+      "status": "pass",
+      "commit": "HEAD",
+      "bundle": "synthetic-bundle-b",
+      "fixture": "synthetic-fixture-v1",
+      "grader": "synthetic-grader-v1",
+      "settings": "synthetic-settings-v1"
+    }
+  ],
+  "artifact": {
+    "commit": "HEAD",
+    "version": "0.2.0",
+    "status": "validated",
+    "source": "supplied synthetic artifact status; no downloadable artifact"
+  },
+  "baseline_comparison": {
+    "status": "complete",
+    "same_fixture_grader_settings": true,
+    "baseline_failures": [
+      "movement"
+    ],
+    "candidate_required_pass": true
+  },
+  "publication": {
+    "tag": null,
+    "release": null
+  }
+}

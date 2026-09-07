@@ -1,0 +1,35 @@
+"""One-off supplemental controls for OGR-01; no change to the frozen suite/scorer."""
+import json, sys, tempfile
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from tools import canary
+root=Path(__file__).resolve().parents[1]
+source=root/'docs/validation/outcome-contract/handoff-controls.json'
+config=canary.settings('gpt-6-astra','medium',600)
+cal=root/'docs/validation/canary/20260907T082604-813e3ca009e44d6cbd680a50b29f49a7/report.json'
+canary.check_calibration(root,cal,config,canary.environment())
+directory,report=canary.new_record(root,'supplemental-grader-controls')
+report.update(grader=canary.grading_identity(root),engine=canary.engine_identity(root),settings=config,environment=canary.environment(),purpose='Two known-output handoff scoring controls, not worker quality or a real reader.',control_source=str(source.relative_to(root)),calibration=str(cal.relative_to(root)))
+canary.save(directory/'attempt.json',report)
+print(directory,flush=True)
+try:
+ inputs=canary.read_json(source);canary.save(directory/'inputs.json',inputs)
+ (directory/'orchestration.py.txt').write_bytes(Path(__file__).read_bytes())
+ outcomes=[]
+ with tempfile.TemporaryDirectory(prefix='canary-control-') as temp:
+  for index,example in enumerate(inputs['examples']):
+   packet=Path(temp).resolve()/str(index);packet.mkdir()
+   canary.write_files(packet/'artifacts',{k:v.encode() for k,v in example['artifacts'].items()})
+   (packet/'request.md').write_text(example['request'])
+   check=canary.runtime.probe(packet,source);canary.save(directory/f'{index}-isolation.json',check)
+   if not check['passed']:raise RuntimeError('Control isolation failed')
+   result,grade,status=canary.grade_packet(root,packet,directory/f'{index}-reply.json',inputs['rubric'],config)
+   canary.save(directory/f'{index}-grade.json',grade);canary.require_completed(result)
+   matched=canary.calibration_matches(example,grade,status)
+   outcomes.append(matched);print(json.dumps({'control':example['id'],'status':status,'expected':example['expected'],'matched':matched}),flush=True)
+ report.update(status='pass' if outcomes and all(outcomes) else 'fail',matched_controls=outcomes)
+except (Exception,KeyboardInterrupt) as exc:
+ report['error']=f'{type(exc).__name__}: {exc}'
+p=canary.finish(directory,report)
+print(p,report['status'],flush=True)
+sys.exit(report['status']!='pass')

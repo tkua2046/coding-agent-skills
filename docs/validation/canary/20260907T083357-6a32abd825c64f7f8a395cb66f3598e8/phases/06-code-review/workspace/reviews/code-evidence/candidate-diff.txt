@@ -1,0 +1,903 @@
+diff --git a/README.md b/README.md
+index 6cf925e..ca879b7 100644
+--- a/README.md
++++ b/README.md
+@@ -3,4 +3,7 @@ Call `batch.execute({"a": 4}, '[{"id":"o1","items":[["a",2]]}]')` to obtain
+ remaining inventory and an ordered acceptance result for each order. The Python API
+ is `inventory.reserve(stock, orders)`. Caller input is preserved. JSON validation
+ rejects unknown/duplicate SKUs and nonpositive/noninteger quantities before execution.
+-Previously callers had to ensure stock was sufficient. See DEVNOTES.md for checks.
++If any item exceeds remaining stock, the entire order returns `accepted=False`
++without deducting any items. Later orders continue against stock left by successful
++orders, which return `accepted=True`. Exact-fit and empty orders are accepted.
++See DEVNOTES.md for checks.
+diff --git a/docs/DESIGN.md b/docs/DESIGN.md
+index b02917d..e6eb963 100644
+--- a/docs/DESIGN.md
++++ b/docs/DESIGN.md
+@@ -3,3 +3,79 @@ The JSON boundary validates shapes, positive quantities, unique IDs and item SKU
+ The engine trusts validated orders and copies stock once for batch-local mutation.
+ Sufficient inventory is currently the caller's responsibility. The function returns
+ one boolean acceptance result per order and does not mutate caller inputs.
++
++## D2 proposed: whole-order rejection
++
++Outcome: reject an insufficient order without changing batch stock, then continue
++with later orders. Status: candidate implemented; independent review remains pending
++(see [current stage record](../reviews/stage-s1.md)). [REQUEST.md](REQUEST.md) is the extension authority; D1 above is
++preserved history, with only its sufficient-inventory precondition superseded.
++
++Main decision: check all items against current remaining stock before deducting any
++item. This avoids rollback and keeps the existing stock copy and APIs. Next step:
++independent review of this design, [PLAN.md](PLAN.md), and the implementation
++candidate. The original 15-minute allowance covers the whole task, including reviews;
++it is not a separate budget for each phase.
++
++### Existing behavior and compatibility
++
++Inspection confirms `inventory.reserve(stock, orders)` copies stock once, subtracts
++each item unconditionally and returns `(remaining, outcomes)` with all outcomes
++accepted. `batch.execute(stock, text)` decodes the entire JSON batch before calling
++the engine. `command_codec.decode` owns validation. Both APIs and return shapes stay
++unchanged; no new validation is proposed for the trusted Python engine.
++
++The current contract and the extension are recorded in [SPEC.md](SPEC.md). Input
++stock, orders and nested item lists remain untouched. Counts remain integers, and
++valid nonnegative input stock must remain nonnegative throughout processing.
++
++### Decisions and consequences
++
++| Decision | Reason / alternative | Consequence | Example |
++|---|---|---|---|
++| Preflight every item, then deduct only if all are sufficient | Validated SKUs are unique per order; subtract-and-rollback adds unnecessary mutable recovery state | Two passes for an accepted order, linear total item work; no per-order stock copy | Enough `a` but too little `b` leaves both unchanged |
++| Compare against batch-local remaining stock in input order | Earlier successes consume inventory; comparing against original stock would over-accept | Rejection affects only that order and does not halt the batch | Two requests for the last unit yield `True`, then `False` |
++| Keep insufficiency as an ordinary `accepted=False` outcome | The request distinguishes stock rejection from malformed JSON | Existing validation exceptions and validation-before-execution remain unchanged | Unknown SKU still raises; known SKU with too little stock returns `False` |
++
++An empty order passes the all-items check and is accepted. Exact exhaustion is
++accepted. Additional allocation structures, persistence, concurrency and transaction
++frameworks are out of scope. No unresolved contract decisions were found.
++
++### Decisive acceptance
++
++Run the following batch through both `reserve` and `execute` (JSON-encode the same
++orders for the latter). Start with `{"a": 4, "b": 1}`:
++
++| Order | Items | Accepted | Remaining after order |
++|---|---|---|---|
++| `reject` | `[["a",3],["b",2]]` | `False` | `{"a":4,"b":1}` |
++| `later` | `[["a",4],["b",1]]` | `True` | `{"a":0,"b":0}` |
++| `empty` | `[]` | `True` | `{"a":0,"b":0}` |
++
++Expected return: `({"a":0,"b":0}, [{"order_id":"reject","accepted":False},
++{"order_id":"later","accepted":True}, {"order_id":"empty","accepted":True}])`.
++The first order must not spend its three available `a` units because `b` is short;
++the second spends all four `a` and the one `b`. This catches partial deduction,
++stopping after rejection, incorrect result order and rejecting exact exhaustion.
++
++Also check sequential depletion: stock `{"a":2}`, orders requesting 1, 2, then 1
++unit yield acceptances `True, False, True` and final `{"a":0}`. This distinguishes
++current remaining stock from original stock and preserves prior successful work.
++Check an insufficient single item at zero stock, empty order on empty stock, and an
++empty batch. Assert caller stock and the entire nested orders structure equal deep
++snapshots afterward, with integer stock values and actual boolean outcomes.
++
++Keep existing adapter validation checks and cover malformed shapes, duplicate IDs,
++unknown/duplicate SKUs and nonpositive/noninteger quantities, including booleans.
++A malformed later order must still raise before any execution, preserving stock.
++These are compatibility checks of existing policy, not new rejection rules.
++
++### Verified baseline and limits
++
++On 2026-09-07, both `"$CANARY_PYTHON" -m unittest discover -s tests -v` and
++`"$CANARY_PYTHON" hooks/pre-commit` passed all six existing tests. The supplied
++hook also rejects empty discovery. Existing tests cover successful reservation,
++empty batch and selected validation errors, but not shortage rejection or nested
++order immutability. A read-only probe of the decisive batch currently returned
++`{"a":-3,"b":-2}` with all three outcomes `True`, confirming the missing behavior.
++These results establish the baseline only; proposed acceptance has not passed.
+diff --git a/docs/PLAN.md b/docs/PLAN.md
+index eb9777a..b47e330 100644
+--- a/docs/PLAN.md
++++ b/docs/PLAN.md
+@@ -1,3 +1,55 @@
+ # Plan
+ S0 complete: in-memory reservation and JSON validation are delivered.
+ No pending work before the current change request.
++
++## Current extension: pending S1
++
++Status: S1 candidate implemented and locally checked; independent document review,
++independent code review and human review remain pending. S1 is not accepted.
++Current evidence and next action: [S1 stage record](../reviews/stage-s1.md).
++Requirements: [REQUEST.md](REQUEST.md), preserving [ORIGINAL.md](ORIGINAL.md).
++Design and decisive acceptance: [DESIGN.md, D2](DESIGN.md#d2-proposed-whole-order-rejection).
++Completed S0 remains unchanged; its historical report is
++[history/completed.md](history/completed.md).
++
++Next outcome: the independent reviewer resolves the document-review limitation and confirms whole-order atomicity, continuation,
++compatibility and feasible checks, or records concrete blockers for correction.
++The candidate is prepared under the current implementation request; this does not
++waive the unresolved document-review dependency. Use a focused design/plan review and
++a focused code/test review for this small in-memory change, within the original
++15-minute whole-task allowance. No review approval is claimed.
++
++| Stage | Observable outcome / scope | Dependency and boundary | Decisive acceptance / risk | State |
++|---|---|---|---|---|
++| S1 | Whole-order rejection and continuation through both APIs; engine change, regression tests and README usage update together | Independent design/plan review remains unresolved; one coherent reviewable patch because checking and deduction must ship together | D2 late-shortage batch and sequential depletion; input immutability, integer counts, empty/exact-fit behavior and unchanged JSON errors; complete local gate | Candidate checked; reviews pending |
++
++S1 should keep `batch.py` and `command_codec.py` behavior intact, place allocation
++logic in `inventory.py`, and extend `tests/test_inventory.py`. Update README's
++caller-sufficiency statement to describe rejection. The current spec addendum is
++already proposed in this planning phase; reconcile documentation if review changes
++the contract. No dependencies, new infrastructure or expanded validation policies.
++
++### Execution, checks and handoff
++
++Follow [DEVNOTES.md](../DEVNOTES.md) and the request's agent-only review policy:
++implement with regression tests, run the full suite and supplied hook, review the
++resulting code/test snapshot, fix findings and rerun affected checks plus the gate.
++Human review happens afterward. No commit, push, version advancement or release is
++requested; S1 is a single patch boundary, not an instruction to commit.
++
++Existing commands, verified in this phase (six tests passed in each):
++
++```sh
++"$CANARY_PYTHON" -m unittest discover -s tests -v
++"$CANARY_PYTHON" hooks/pre-commit
++```
++
++Use these same commands after adding regression coverage; no installation or external
++service is needed. The decisive new examples are proposed checks, not existing passes.
++Baseline implementation findings and the negative-stock probe are in
++[DESIGN.md](DESIGN.md#verified-baseline-and-limits).
++
++Done means both APIs satisfy D2 acceptance, compatibility checks and the nonempty
++full gate pass, focused code review findings are resolved, and README reflects the
++behavior. Append implementation evidence and reviewer identity/snapshot/findings
++to a stage record without overwriting prior reports. Until then, keep S1 pending.
+diff --git a/docs/SPEC.md b/docs/SPEC.md
+index a16fc75..b098199 100644
+--- a/docs/SPEC.md
++++ b/docs/SPEC.md
+@@ -1,3 +1,19 @@
+ # Current contract
+ See ORIGINAL.md for accepted behavior. Reservation uses batch-local state and returns
+ remaining stock and ordered outcomes. No persistent database or concurrent writers.
++
++## Requested extension (implemented candidate; review pending)
++
++[REQUEST.md](REQUEST.md) supersedes only the caller-sufficiency precondition in
++[ORIGINAL.md](ORIGINAL.md). For each order in input sequence, compare every requested
++quantity with current batch-local remaining stock. If any item is insufficient,
++append `{"order_id": id, "accepted": False}` and leave all stock unchanged by that
++order. Otherwise deduct every item and append the same shape with `accepted: True`.
++Continue after rejection using stock left by prior successful orders. Empty orders
++are accepted without mutation; quantities equal to available stock are sufficient.
++
++Preserve both public APIs, return shape and result order, input immutability, integer
++counts and existing JSON validation/error behavior. Validated input shapes, positive
++quantities and known unique SKUs remain preconditions; add no validation policies.
++Persistence, concurrency, transaction frameworks and remote infrastructure are out
++of scope. See [DESIGN.md](DESIGN.md#decisive-acceptance) for acceptance examples.
+diff --git a/inventory.py b/inventory.py
+index 9c92c21..97e787e 100644
+--- a/inventory.py
++++ b/inventory.py
+@@ -3,7 +3,9 @@ def reserve(stock, orders):
+     remaining = dict(stock)
+     outcomes = []
+     for order in orders:
+-        for sku, quantity in order["items"]:
+-            remaining[sku] -= quantity
+-        outcomes.append({"order_id": order["id"], "accepted": True})
++        accepted = all(remaining[sku] >= quantity for sku, quantity in order["items"])
++        if accepted:
++            for sku, quantity in order["items"]:
++                remaining[sku] -= quantity
++        outcomes.append({"order_id": order["id"], "accepted": accepted})
+     return remaining, outcomes
+diff --git a/reviews/design-current.json b/reviews/design-current.json
+new file mode 100644
+index 0000000..fc2956b
+--- /dev/null
++++ b/reviews/design-current.json
+@@ -0,0 +1,82 @@
++{
++  "verdict": "ready",
++  "findings": [],
++  "reviewed_at": "2026-09-07T08:37:48.541310+00:00",
++  "scope": "One combined design and implementation-plan document review of proposed D2 and pending S1 against REQUEST.md, original behavior, current code and check configuration.",
++  "reviewed_version": {
++    "base_commit": "abcfcd12d06342c980498a2b137d78514cd2fab7",
++    "candidate": "Working-tree D2 design, S1 plan and proposed SPEC addendum; these three documents differ from HEAD.",
++    "sha256": {
++      "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
++      "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
++      "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
++      "docs/SPEC.md": "1546effbd2ee4665c05221d0dfe21b5ec03324ea2d1581eb7dd60ae5839ec37a",
++      "docs/DESIGN.md": "0085b5732ce33e4554e4b01097bc6394ee2a1fcb51ba2e74bbc0876702037477",
++      "docs/PLAN.md": "57431cf80af3e4319d0e38305513dd9a311c6eca6dff2cfef7d50e46d1b13648",
++      "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
++      "README.md": "6abea4adc72cada64ecaab4a50ae1f1439e7cd4ad06aa0e7612f3120aaa5fa11",
++      "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
++      "inventory.py": "47ed82f0de9981ed68e93aca4248025e41bf90bc109f411589c8e2cff7793736",
++      "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
++      "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
++      "tests/test_inventory.py": "e8ae44127d4f5c2008bff5ef59f098519b1c8d82d9115bc0eb63b4e24c6222f5",
++      "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
++      "skills/feature-design/SKILL.md": "2b8bd4e19b0511a26cc6685ee7436cd3cb63635be65ce9aaab600103848571e3",
++      "skills/feature-design/prompts/review-design.md": "4cfa2518b3534f5e2c611eab60ae11280b0ed429783ae023521d4162d0556ad7",
++      "skills/feature-design/assets/review.template.md": "65e4f470e5a9c867ef855ddacdf27cfaf0e8ddb1bb17bf2cf72147707beb0bd7",
++      "skills/implementation-plan/SKILL.md": "92df55b108c5b54508eb2d56324136ff77fe231d409ffa31dff308e171d8ba0e",
++      "skills/implementation-plan/prompts/review-implementation.md": "6d9321c4ed1b25d9ee1b3a2d275c326ebf2bd5a3e160773f5a5877b9ae1f5260"
++    }
++  },
++  "reviewer": {
++    "identity": "Codex, fresh review-phase context",
++    "classification": "self-review under the skill fallback; separate reviewer unavailable",
++    "limitation": "Attempted to create a separate design reviewer context, but collaboration returned: collab spawn failed: no thread with id: 01a07b02-b235-7483-94fa-8f13b1a292e1. Both review operations were therefore performed locally. No separate-agent review or human approval is claimed.",
++    "disposition": "Disclosed review limitation, nonblocking under the design skill fallback and the request authorizing this combined document review."
++  },
++  "design_assessment": {
++    "verdict": "ready",
++    "evidence": [
++      "DESIGN.md D2 Decisions and consequences: preflight all unique validated item SKUs against current remaining stock before any deduction gives whole-order rejection without rollback, with linear item work.",
++      "DESIGN.md Decisive acceptance: late shortage leaves both quantities unchanged, the later exact-fit order succeeds, and an empty order succeeds. Sequential requests of 1, 2, 1 against stock 2 yield True, False, True, protecting prior successes and continuation.",
++      "SPEC.md Requested extension and DESIGN.md Existing behavior and compatibility preserve both APIs, result ordering, input immutability, integer counts and existing validation. batch.execute decodes the entire batch before reserve; command_codec.decode owns existing validation.",
++      "D2 explicitly handles zero stock, empty stock/order/batch and exact exhaustion. Persistence, concurrency, transaction frameworks and new validation remain outside scope. No unresolved behavior decision or material reading-cost issue was found."
++    ]
++  },
++  "plan_assessment": {
++    "verdict": "ready",
++    "evidence": [
++      "PLAN.md Current extension: pending S1 preserves completed S0 and its historical report, links requirements and D2, and identifies the next review and implementation boundary near the top.",
++      "S1 groups engine behavior, regression tests and README usage in one reviewable patch. Checking and deduction have no deferred dependency. Acceptance uses concrete D2 expected results, both APIs and compatibility cases rather than a test-count target.",
++      "PLAN.md Execution, checks and handoff identifies real suite and hook commands, a code/test snapshot review, findings correction, reruns and appended stage evidence. hooks/pre-commit rejects empty discovery.",
++      "The single small in-memory increment is proportionate to the original 15-minute whole-task allowance; this is a feasibility assessment, not a guarantee of future completion time. No package installation, infrastructure, commit, push or release is required.",
++      "The plan owns delivery and acceptance without duplicating implementation internals. Human review is explicitly afterward; S1 remains planned until implementation and its checks/review are complete."
++    ]
++  },
++  "checks_performed": [
++    {
++      "kind": "static inspection",
++      "result": "Read all identified source documents, relevant engine/adapter/validation code, six existing tests, local gate and supplied review instructions; traced proposed acceptance and compatibility against the request."
++    },
++    {
++      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" -m unittest discover -s tests -v",
++      "exit_code": 0,
++      "result": "All six existing baseline tests passed."
++    },
++    {
++      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" hooks/pre-commit",
++      "exit_code": 0,
++      "result": "All six existing baseline tests passed; nonempty discovery guard inspected."
++    },
++    {
++      "command": "git status --short; git rev-parse HEAD",
++      "result": "Reported the base commit and existing modifications to DESIGN.md, PLAN.md and SPEC.md; emitted sandbox cache/config warnings. Content hashes identify the reviewed working-tree snapshot."
++    }
++  ],
++  "limitations": [
++    "Existing tests do not establish shortage rejection. inventory.reserve still unconditionally deducts and accepts every order; this is the intended pending implementation, not a document blocker.",
++    "No product or proposal edits were made. This review does not establish implementation correctness, runtime acceptance, human approval or release readiness."
++  ],
++  "next_action": "Implementation may begin on planned S1 based on this document review, with the disclosed reviewer-context limitation. Implement whole-order preflight and regression coverage, update README, run the full suite and supplied gate, then review the resulting code/test snapshot and resolve findings before human handoff. Keep S1 pending until that evidence exists.",
++  "history": "No prior review record was present at initial inspection. Existing docs/history/completed.md and all source documents are preserved."
++}
+diff --git a/reviews/s1-evidence/baseline-gate.txt b/reviews/s1-evidence/baseline-gate.txt
+new file mode 100644
+index 0000000..a055c07
+--- /dev/null
++++ b/reviews/s1-evidence/baseline-gate.txt
+@@ -0,0 +1,11 @@
++test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
++test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
++test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
++test_empty (test_inventory.InventoryTests.test_empty) ... ok
++test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
++test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
++
++----------------------------------------------------------------------
++Ran 6 tests in 0.000s
++
++OK
+diff --git a/reviews/s1-evidence/baseline-tests.txt b/reviews/s1-evidence/baseline-tests.txt
+new file mode 100644
+index 0000000..a055c07
+--- /dev/null
++++ b/reviews/s1-evidence/baseline-tests.txt
+@@ -0,0 +1,11 @@
++test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
++test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
++test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
++test_empty (test_inventory.InventoryTests.test_empty) ... ok
++test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
++test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
++
++----------------------------------------------------------------------
++Ran 6 tests in 0.000s
++
++OK
+diff --git a/reviews/s1-evidence/candidate.diff b/reviews/s1-evidence/candidate.diff
+new file mode 100644
+index 0000000..b450ba3
+--- /dev/null
++++ b/reviews/s1-evidence/candidate.diff
+@@ -0,0 +1,275 @@
++diff --git a/README.md b/README.md
++index 6cf925e..ca879b7 100644
++--- a/README.md
+++++ b/README.md
++@@ -6 +6,4 @@ rejects unknown/duplicate SKUs and nonpositive/noninteger quantities before exec
++-Previously callers had to ensure stock was sufficient. See DEVNOTES.md for checks.
+++If any item exceeds remaining stock, the entire order returns `accepted=False`
+++without deducting any items. Later orders continue against stock left by successful
+++orders, which return `accepted=True`. Exact-fit and empty orders are accepted.
+++See DEVNOTES.md for checks.
++diff --git a/docs/DESIGN.md b/docs/DESIGN.md
++index b02917d..e6eb963 100644
++--- a/docs/DESIGN.md
+++++ b/docs/DESIGN.md
++@@ -5,0 +6,76 @@ one boolean acceptance result per order and does not mutate caller inputs.
+++
+++## D2 proposed: whole-order rejection
+++
+++Outcome: reject an insufficient order without changing batch stock, then continue
+++with later orders. Status: candidate implemented; independent review remains pending
+++(see [current stage record](../reviews/stage-s1.md)). [REQUEST.md](REQUEST.md) is the extension authority; D1 above is
+++preserved history, with only its sufficient-inventory precondition superseded.
+++
+++Main decision: check all items against current remaining stock before deducting any
+++item. This avoids rollback and keeps the existing stock copy and APIs. Next step:
+++independent review of this design, [PLAN.md](PLAN.md), and the implementation
+++candidate. The original 15-minute allowance covers the whole task, including reviews;
+++it is not a separate budget for each phase.
+++
+++### Existing behavior and compatibility
+++
+++Inspection confirms `inventory.reserve(stock, orders)` copies stock once, subtracts
+++each item unconditionally and returns `(remaining, outcomes)` with all outcomes
+++accepted. `batch.execute(stock, text)` decodes the entire JSON batch before calling
+++the engine. `command_codec.decode` owns validation. Both APIs and return shapes stay
+++unchanged; no new validation is proposed for the trusted Python engine.
+++
+++The current contract and the extension are recorded in [SPEC.md](SPEC.md). Input
+++stock, orders and nested item lists remain untouched. Counts remain integers, and
+++valid nonnegative input stock must remain nonnegative throughout processing.
+++
+++### Decisions and consequences
+++
+++| Decision | Reason / alternative | Consequence | Example |
+++|---|---|---|---|
+++| Preflight every item, then deduct only if all are sufficient | Validated SKUs are unique per order; subtract-and-rollback adds unnecessary mutable recovery state | Two passes for an accepted order, linear total item work; no per-order stock copy | Enough `a` but too little `b` leaves both unchanged |
+++| Compare against batch-local remaining stock in input order | Earlier successes consume inventory; comparing against original stock would over-accept | Rejection affects only that order and does not halt the batch | Two requests for the last unit yield `True`, then `False` |
+++| Keep insufficiency as an ordinary `accepted=False` outcome | The request distinguishes stock rejection from malformed JSON | Existing validation exceptions and validation-before-execution remain unchanged | Unknown SKU still raises; known SKU with too little stock returns `False` |
+++
+++An empty order passes the all-items check and is accepted. Exact exhaustion is
+++accepted. Additional allocation structures, persistence, concurrency and transaction
+++frameworks are out of scope. No unresolved contract decisions were found.
+++
+++### Decisive acceptance
+++
+++Run the following batch through both `reserve` and `execute` (JSON-encode the same
+++orders for the latter). Start with `{"a": 4, "b": 1}`:
+++
+++| Order | Items | Accepted | Remaining after order |
+++|---|---|---|---|
+++| `reject` | `[["a",3],["b",2]]` | `False` | `{"a":4,"b":1}` |
+++| `later` | `[["a",4],["b",1]]` | `True` | `{"a":0,"b":0}` |
+++| `empty` | `[]` | `True` | `{"a":0,"b":0}` |
+++
+++Expected return: `({"a":0,"b":0}, [{"order_id":"reject","accepted":False},
+++{"order_id":"later","accepted":True}, {"order_id":"empty","accepted":True}])`.
+++The first order must not spend its three available `a` units because `b` is short;
+++the second spends all four `a` and the one `b`. This catches partial deduction,
+++stopping after rejection, incorrect result order and rejecting exact exhaustion.
+++
+++Also check sequential depletion: stock `{"a":2}`, orders requesting 1, 2, then 1
+++unit yield acceptances `True, False, True` and final `{"a":0}`. This distinguishes
+++current remaining stock from original stock and preserves prior successful work.
+++Check an insufficient single item at zero stock, empty order on empty stock, and an
+++empty batch. Assert caller stock and the entire nested orders structure equal deep
+++snapshots afterward, with integer stock values and actual boolean outcomes.
+++
+++Keep existing adapter validation checks and cover malformed shapes, duplicate IDs,
+++unknown/duplicate SKUs and nonpositive/noninteger quantities, including booleans.
+++A malformed later order must still raise before any execution, preserving stock.
+++These are compatibility checks of existing policy, not new rejection rules.
+++
+++### Verified baseline and limits
+++
+++On 2026-09-07, both `"$CANARY_PYTHON" -m unittest discover -s tests -v` and
+++`"$CANARY_PYTHON" hooks/pre-commit` passed all six existing tests. The supplied
+++hook also rejects empty discovery. Existing tests cover successful reservation,
+++empty batch and selected validation errors, but not shortage rejection or nested
+++order immutability. A read-only probe of the decisive batch currently returned
+++`{"a":-3,"b":-2}` with all three outcomes `True`, confirming the missing behavior.
+++These results establish the baseline only; proposed acceptance has not passed.
++diff --git a/docs/PLAN.md b/docs/PLAN.md
++index eb9777a..b47e330 100644
++--- a/docs/PLAN.md
+++++ b/docs/PLAN.md
++@@ -3,0 +4,52 @@ No pending work before the current change request.
+++
+++## Current extension: pending S1
+++
+++Status: S1 candidate implemented and locally checked; independent document review,
+++independent code review and human review remain pending. S1 is not accepted.
+++Current evidence and next action: [S1 stage record](../reviews/stage-s1.md).
+++Requirements: [REQUEST.md](REQUEST.md), preserving [ORIGINAL.md](ORIGINAL.md).
+++Design and decisive acceptance: [DESIGN.md, D2](DESIGN.md#d2-proposed-whole-order-rejection).
+++Completed S0 remains unchanged; its historical report is
+++[history/completed.md](history/completed.md).
+++
+++Next outcome: the independent reviewer resolves the document-review limitation and confirms whole-order atomicity, continuation,
+++compatibility and feasible checks, or records concrete blockers for correction.
+++The candidate is prepared under the current implementation request; this does not
+++waive the unresolved document-review dependency. Use a focused design/plan review and
+++a focused code/test review for this small in-memory change, within the original
+++15-minute whole-task allowance. No review approval is claimed.
+++
+++| Stage | Observable outcome / scope | Dependency and boundary | Decisive acceptance / risk | State |
+++|---|---|---|---|---|
+++| S1 | Whole-order rejection and continuation through both APIs; engine change, regression tests and README usage update together | Independent design/plan review remains unresolved; one coherent reviewable patch because checking and deduction must ship together | D2 late-shortage batch and sequential depletion; input immutability, integer counts, empty/exact-fit behavior and unchanged JSON errors; complete local gate | Candidate checked; reviews pending |
+++
+++S1 should keep `batch.py` and `command_codec.py` behavior intact, place allocation
+++logic in `inventory.py`, and extend `tests/test_inventory.py`. Update README's
+++caller-sufficiency statement to describe rejection. The current spec addendum is
+++already proposed in this planning phase; reconcile documentation if review changes
+++the contract. No dependencies, new infrastructure or expanded validation policies.
+++
+++### Execution, checks and handoff
+++
+++Follow [DEVNOTES.md](../DEVNOTES.md) and the request's agent-only review policy:
+++implement with regression tests, run the full suite and supplied hook, review the
+++resulting code/test snapshot, fix findings and rerun affected checks plus the gate.
+++Human review happens afterward. No commit, push, version advancement or release is
+++requested; S1 is a single patch boundary, not an instruction to commit.
+++
+++Existing commands, verified in this phase (six tests passed in each):
+++
+++```sh
+++"$CANARY_PYTHON" -m unittest discover -s tests -v
+++"$CANARY_PYTHON" hooks/pre-commit
+++```
+++
+++Use these same commands after adding regression coverage; no installation or external
+++service is needed. The decisive new examples are proposed checks, not existing passes.
+++Baseline implementation findings and the negative-stock probe are in
+++[DESIGN.md](DESIGN.md#verified-baseline-and-limits).
+++
+++Done means both APIs satisfy D2 acceptance, compatibility checks and the nonempty
+++full gate pass, focused code review findings are resolved, and README reflects the
+++behavior. Append implementation evidence and reviewer identity/snapshot/findings
+++to a stage record without overwriting prior reports. Until then, keep S1 pending.
++diff --git a/docs/SPEC.md b/docs/SPEC.md
++index a16fc75..b098199 100644
++--- a/docs/SPEC.md
+++++ b/docs/SPEC.md
++@@ -3,0 +4,16 @@ remaining stock and ordered outcomes. No persistent database or concurrent write
+++
+++## Requested extension (implemented candidate; review pending)
+++
+++[REQUEST.md](REQUEST.md) supersedes only the caller-sufficiency precondition in
+++[ORIGINAL.md](ORIGINAL.md). For each order in input sequence, compare every requested
+++quantity with current batch-local remaining stock. If any item is insufficient,
+++append `{"order_id": id, "accepted": False}` and leave all stock unchanged by that
+++order. Otherwise deduct every item and append the same shape with `accepted: True`.
+++Continue after rejection using stock left by prior successful orders. Empty orders
+++are accepted without mutation; quantities equal to available stock are sufficient.
+++
+++Preserve both public APIs, return shape and result order, input immutability, integer
+++counts and existing JSON validation/error behavior. Validated input shapes, positive
+++quantities and known unique SKUs remain preconditions; add no validation policies.
+++Persistence, concurrency, transaction frameworks and remote infrastructure are out
+++of scope. See [DESIGN.md](DESIGN.md#decisive-acceptance) for acceptance examples.
++diff --git a/inventory.py b/inventory.py
++index 9c92c21..97e787e 100644
++--- a/inventory.py
+++++ b/inventory.py
++@@ -6,3 +6,5 @@ def reserve(stock, orders):
++-        for sku, quantity in order["items"]:
++-            remaining[sku] -= quantity
++-        outcomes.append({"order_id": order["id"], "accepted": True})
+++        accepted = all(remaining[sku] >= quantity for sku, quantity in order["items"])
+++        if accepted:
+++            for sku, quantity in order["items"]:
+++                remaining[sku] -= quantity
+++        outcomes.append({"order_id": order["id"], "accepted": accepted})
++diff --git a/tests/test_inventory.py b/tests/test_inventory.py
++index 4059142..a1cc79a 100644
++--- a/tests/test_inventory.py
+++++ b/tests/test_inventory.py
++@@ -1,0 +2,3 @@ import unittest
+++import copy
+++import json
+++from unittest.mock import patch
++@@ -23,0 +27,84 @@ class InventoryTests(unittest.TestCase):
+++
+++    def assert_both_apis(self, stock, orders, expected):
+++        original_stock = copy.deepcopy(stock)
+++        original_orders = copy.deepcopy(orders)
+++        for api in (reserve, lambda stock, orders: execute(stock, json.dumps(orders))):
+++            with self.subTest(api=api):
+++                remaining, outcomes = api(stock, orders)
+++                self.assertEqual((remaining, outcomes), expected)
+++                self.assertIsNot(remaining, stock)
+++                self.assertEqual(stock, original_stock)
+++                self.assertEqual(orders, original_orders)
+++                self.assertTrue(all(type(value) is int and value >= 0 for value in remaining.values()))
+++                self.assertTrue(all(type(outcome["accepted"]) is bool for outcome in outcomes))
+++
+++    def test_late_shortage_rejects_whole_order_and_continues(self):
+++        self.assert_both_apis(
+++            {"a": 4, "b": 1},
+++            [{"id": "reject", "items": [["a", 3], ["b", 2]]},
+++             {"id": "later", "items": [["a", 4], ["b", 1]]},
+++             {"id": "empty", "items": []}],
+++            ({"a": 0, "b": 0}, [{"order_id": "reject", "accepted": False},
+++                                {"order_id": "later", "accepted": True},
+++                                {"order_id": "empty", "accepted": True}]),
+++        )
+++
+++    def test_rejection_preserves_prior_success_and_remaining_stock(self):
+++        self.assert_both_apis(
+++            {"a": 2},
+++            [{"id": "first", "items": [["a", 1]]},
+++             {"id": "reject", "items": [["a", 2]]},
+++             {"id": "last", "items": [["a", 1]]}],
+++            ({"a": 0}, [{"order_id": "first", "accepted": True},
+++                        {"order_id": "reject", "accepted": False},
+++                        {"order_id": "last", "accepted": True}]),
+++        )
+++
+++    def test_rejection_alone_leaves_every_quantity_unchanged(self):
+++        self.assert_both_apis(
+++            {"a": 4, "b": 1, "unused": 9},
+++            [{"id": "reject", "items": [["a", 3], ["b", 2]]}],
+++            ({"a": 4, "b": 1, "unused": 9}, [{"order_id": "reject", "accepted": False}]),
+++        )
+++
+++    def test_zero_stock_rejects(self):
+++        self.assert_both_apis(
+++            {"a": 0}, [{"id": "reject", "items": [["a", 1]]}],
+++            ({"a": 0}, [{"order_id": "reject", "accepted": False}]),
+++        )
+++
+++    def test_empty_order_on_empty_stock(self):
+++        self.assert_both_apis(
+++            {}, [{"id": "empty", "items": []}],
+++            ({}, [{"order_id": "empty", "accepted": True}]),
+++        )
+++
+++    def test_empty_batch_both_apis(self):
+++        self.assert_both_apis({"a": 2}, [], ({"a": 2}, []))
+++
+++    def test_adapter_validation_finishes_before_execution(self):
+++        invalid_orders = [
+++            None, {}, {"id": "bad", "items": [], "extra": 1},
+++            {"id": 1, "items": []}, {"id": "first", "items": []},
+++            {"id": "bad", "items": {}},
+++            {"id": "bad", "items": [["a"]]},
+++            {"id": "bad", "items": ["a"]},
+++            {"id": "bad", "items": [["missing", 1]]},
+++            {"id": "bad", "items": [["a", 1], ["a", 1]]},
+++        ]
+++        invalid_orders.extend(
+++            {"id": "bad", "items": [["a", quantity]]}
+++            for quantity in (0, -1, 1.5, True, False, "1", None)
+++        )
+++        texts = ["{", "{}", "null"] + [
+++            json.dumps([{"id": "first", "items": [["a", 1]]}, invalid])
+++            for invalid in invalid_orders
+++        ]
+++        for text in texts:
+++            with self.subTest(text=text):
+++                stock = {"a": 4}
+++                with patch("batch.reserve") as engine:
+++                    with self.assertRaises(ValueError):
+++                        execute(stock, text)
+++                    engine.assert_not_called()
+++                self.assertEqual(stock, {"a": 4})
+diff --git a/reviews/s1-evidence/checks.json b/reviews/s1-evidence/checks.json
+new file mode 100644
+index 0000000..4b27a19
+--- /dev/null
++++ b/reviews/s1-evidence/checks.json
+@@ -0,0 +1,29 @@
++[
++  {
++    "command": [
++      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
++      "-m",
++      "unittest",
++      "discover",
++      "-s",
++      "tests",
++      "-v"
++    ],
++    "environment": {
++      "PYTHONDONTWRITEBYTECODE": "1"
++    },
++    "exit_code": 0,
++    "output": "tests.txt"
++  },
++  {
++    "command": [
++      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
++      "hooks/pre-commit"
++    ],
++    "environment": {
++      "PYTHONDONTWRITEBYTECODE": "1"
++    },
++    "exit_code": 0,
++    "output": "gate.txt"
++  }
++]
+diff --git a/reviews/s1-evidence/gate.txt b/reviews/s1-evidence/gate.txt
+new file mode 100644
+index 0000000..4da57b4
+--- /dev/null
++++ b/reviews/s1-evidence/gate.txt
+@@ -0,0 +1,18 @@
++test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
++test_adapter_validation_finishes_before_execution (test_inventory.InventoryTests.test_adapter_validation_finishes_before_execution) ... ok
++test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
++test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
++test_empty (test_inventory.InventoryTests.test_empty) ... ok
++test_empty_batch_both_apis (test_inventory.InventoryTests.test_empty_batch_both_apis) ... ok
++test_empty_order_on_empty_stock (test_inventory.InventoryTests.test_empty_order_on_empty_stock) ... ok
++test_late_shortage_rejects_whole_order_and_continues (test_inventory.InventoryTests.test_late_shortage_rejects_whole_order_and_continues) ... ok
++test_rejection_alone_leaves_every_quantity_unchanged (test_inventory.InventoryTests.test_rejection_alone_leaves_every_quantity_unchanged) ... ok
++test_rejection_preserves_prior_success_and_remaining_stock (test_inventory.InventoryTests.test_rejection_preserves_prior_success_and_remaining_stock) ... ok
++test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
++test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
++test_zero_stock_rejects (test_inventory.InventoryTests.test_zero_stock_rejects) ... ok
++
++----------------------------------------------------------------------
++Ran 13 tests in 0.002s
++
++OK
+diff --git a/reviews/s1-evidence/git-diagnostics.txt b/reviews/s1-evidence/git-diagnostics.txt
+new file mode 100644
+index 0000000..b2b68a8
+--- /dev/null
++++ b/reviews/s1-evidence/git-diagnostics.txt
+@@ -0,0 +1,3 @@
++git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-k46CxA1l' (errno=Operation not permitted)
++git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-L3Yal0t6' (errno=Operation not permitted)
++warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+diff --git a/reviews/s1-evidence/snapshot.json b/reviews/s1-evidence/snapshot.json
+new file mode 100644
+index 0000000..381c73d
+--- /dev/null
++++ b/reviews/s1-evidence/snapshot.json
+@@ -0,0 +1,28 @@
++{
++  "base_commit": "abcfcd12d06342c980498a2b137d78514cd2fab7",
++  "sha256": {
++    "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
++    "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
++    "README.md": "80ee88e170d5e84c7f8df56db7e54dc28713166a32fb7e4d85b5ac8678267a3a",
++    "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
++    "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
++    "docs/DESIGN.md": "fff7fe7b30371af08bef447ff4b05f989f663f03e889031dd545a2bcb2465f19",
++    "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
++    "docs/PLAN.md": "85b0f7b834c278c85ff2f045495c375f20a790dd6fd99e4e09baa2e997559416",
++    "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
++    "docs/SPEC.md": "f7278f26e8614bdf5a388cd14954cc78c362a238d956b599bfca61e37c735deb",
++    "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
++    "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
++    "inventory.py": "83579bb46a62f164470408a2c11ae62229051400c65615d2d3f4bc14f78a32c7",
++    "reviews/design-current.json": "bbb421ccc7787ffe3bd660371ee6e181902cc459f20d08656d78cf15d88cbe72",
++    "reviews/s1-evidence/baseline-gate.txt": "0d0fcbe12e71c82a1e20fb9379677d4612432d2a76e54cefe852558b5ffba67c",
++    "reviews/s1-evidence/baseline-tests.txt": "0d0fcbe12e71c82a1e20fb9379677d4612432d2a76e54cefe852558b5ffba67c",
++    "reviews/s1-evidence/candidate.diff": "b51c00be47787a576a60cc0f46207d32f6fc82cfb7467c6d7239cec8f4b027fa",
++    "reviews/s1-evidence/checks.json": "069480f26cb82b4ca2d62d73bd8f079e6ede97f68dd17b4a48f5dd64fe3796d6",
++    "reviews/s1-evidence/gate.txt": "c684765042a49f1ac51d1771d0625b8361a5e0f93c7ff9b6d18fba1c77550252",
++    "reviews/s1-evidence/git-diagnostics.txt": "8164092d856923e62f0f96c9fb9a7fc4654730d296be9e91e4fa1e5c0d4ff585",
++    "reviews/s1-evidence/tests.txt": "c684765042a49f1ac51d1771d0625b8361a5e0f93c7ff9b6d18fba1c77550252",
++    "tests/test_inventory.py": "7df8512c878c01546cff27d0d499eef712ef2a2c77fc97ee00aeab5d10cbeab0"
++  },
++  "note": "Stage record and this manifest excluded to avoid circular hashes. candidate.diff captures tracked candidate changes against HEAD; manifest identifies inputs, preserved prior report and raw evidence."
++}
+diff --git a/reviews/s1-evidence/tests.txt b/reviews/s1-evidence/tests.txt
+new file mode 100644
+index 0000000..4da57b4
+--- /dev/null
++++ b/reviews/s1-evidence/tests.txt
+@@ -0,0 +1,18 @@
++test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
++test_adapter_validation_finishes_before_execution (test_inventory.InventoryTests.test_adapter_validation_finishes_before_execution) ... ok
++test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
++test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
++test_empty (test_inventory.InventoryTests.test_empty) ... ok
++test_empty_batch_both_apis (test_inventory.InventoryTests.test_empty_batch_both_apis) ... ok
++test_empty_order_on_empty_stock (test_inventory.InventoryTests.test_empty_order_on_empty_stock) ... ok
++test_late_shortage_rejects_whole_order_and_continues (test_inventory.InventoryTests.test_late_shortage_rejects_whole_order_and_continues) ... ok
++test_rejection_alone_leaves_every_quantity_unchanged (test_inventory.InventoryTests.test_rejection_alone_leaves_every_quantity_unchanged) ... ok
++test_rejection_preserves_prior_success_and_remaining_stock (test_inventory.InventoryTests.test_rejection_preserves_prior_success_and_remaining_stock) ... ok
++test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
++test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
++test_zero_stock_rejects (test_inventory.InventoryTests.test_zero_stock_rejects) ... ok
++
++----------------------------------------------------------------------
++Ran 13 tests in 0.002s
++
++OK
+diff --git a/reviews/stage-s1.md b/reviews/stage-s1.md
+new file mode 100644
+index 0000000..e26f802
+--- /dev/null
++++ b/reviews/stage-s1.md
+@@ -0,0 +1,67 @@
++# S1: whole-order inventory rejection
++
++State: reviewing; candidate implemented and locally checked, not accepted.
++Next action: independent reviewer reviews D2/S1 documents and this code/test snapshot,
++resolves DOC-1, and records code findings. Human review remains pending afterward.
++Open findings: DOC-1. Independent code review: pending; no verdict claimed.
++
++Requirements: [REQUEST](../docs/REQUEST.md). Design: [D2](../docs/DESIGN.md).
++Plan: [S1](../docs/PLAN.md). Agent-only work is authorized; human review follows.
++No commit, push, release or version advancement was performed.
++
++## Candidate and outcome
++
++Base: `abcfcd12d06342c980498a2b137d78514cd2fab7`.
++[Snapshot hashes](s1-evidence/snapshot.json) identify code, tests, documents, prior
++report and evidence. [Diff against base](s1-evidence/candidate.diff) includes the
++pre-existing proposal changes and this implementation. The stage record is excluded
++from its own snapshot; it introduces no executable behavior.
++
++`inventory.reserve` checks all requested items against remaining stock before any
++deduction. Rejected orders leave stock unchanged; later orders continue. Both APIs,
++validation ownership and input preservation remain intact. README describes usage;
++document status now distinguishes the candidate from accepted work. No adapter or
++validation implementation changed. Prior reports and original requirements remain
++intact, including [S0](../docs/history/completed.md) and the
++[prior document report](design-current.json).
++
++## Checks
++
++Commands use the supplied `CANARY_PYTHON`, with `PYTHONDONTWRITEBYTECODE=1`.
++[Exact command arrays and exit codes](s1-evidence/checks.json) record the runtime.
++
++| Check | Result | Evidence |
++|---|---|---|
++| Baseline: `"$CANARY_PYTHON" -m unittest discover -s tests -v` | 6 tests passed | [Output](s1-evidence/baseline-tests.txt) |
++| Baseline: `"$CANARY_PYTHON" hooks/pre-commit` | 6 tests passed | [Output](s1-evidence/baseline-gate.txt) |
++| Candidate: `"$CANARY_PYTHON" -m unittest discover -s tests -v` | Exit 0; 13 tests passed | [Output](s1-evidence/tests.txt) |
++| Candidate: `"$CANARY_PYTHON" hooks/pre-commit` | Exit 0; 13 tests passed, nonempty discovery | [Output](s1-evidence/gate.txt) |
++
++Regression cases exercise both APIs with explicit expected outcomes: late shortage,
++rejection alone, continuation and exact fit, prior depletion, zero stock, empty order
++and batch, deep input preservation, integer counts and boolean results. JSON cases
++check existing malformed-input errors and assert the engine is never called when a
++later order is invalid. The installed gate only runs unittest and makes no edits;
++no separate lint/format or release checks are configured in this fixture.
++
++Git emitted sandbox cache/config diagnostics, preserved with the snapshot. It still
++returned the base and diff successfully. No external services or installations used.
++`git diff --cached --check` passed after capturing the diff with zero context:
++the initial whitespace finding was a blank context marker inside the evidence diff.
++All intended candidate files and evidence are staged, including the unchanged prior
++review report that was already untracked on arrival. Nothing is committed.
++
++## Review status
++
++| Finding | Source and consequence | Disposition / verification needed |
++|---|---|---|
++| DOC-1 | `design-current.json` reports ready but classifies its reviewer as self-review after separate-context creation failed. PLAN requires independent document review. The report's claimed nonblocking fallback does not establish that independence. | Open. Preserve the original report. Independent reviewer must inspect the current D2/S1/spec against REQUEST and record a verdict tied to this snapshot. |
++
++Implementation was prepared under the current user's explicit authorization to
++complete independent work. DOC-1 is not waived, and passing local checks does not
++establish document or code approval. The executing agent inspected the patch but
++does not present that as independent review. No code-review finding IDs exist yet.
++Keep this candidate frozen for the separately supplied reviewer; append findings
++and subsequent fix/check rounds without overwriting this evidence.
++
++Human review: pending. Commit: not created. Stage acceptance: pending reviews.
+diff --git a/tests/test_inventory.py b/tests/test_inventory.py
+index 4059142..a1cc79a 100644
+--- a/tests/test_inventory.py
++++ b/tests/test_inventory.py
+@@ -1,4 +1,7 @@
+ import unittest
++import copy
++import json
++from unittest.mock import patch
+ from inventory import reserve
+ from batch import execute
+ 
+@@ -21,3 +24,87 @@ class InventoryTests(unittest.TestCase):
+     def test_bad_quantity(self):
+         with self.assertRaises(ValueError):
+             execute({"a":4},'[{"id":"o","items":[["a",true]]}]')
++
++    def assert_both_apis(self, stock, orders, expected):
++        original_stock = copy.deepcopy(stock)
++        original_orders = copy.deepcopy(orders)
++        for api in (reserve, lambda stock, orders: execute(stock, json.dumps(orders))):
++            with self.subTest(api=api):
++                remaining, outcomes = api(stock, orders)
++                self.assertEqual((remaining, outcomes), expected)
++                self.assertIsNot(remaining, stock)
++                self.assertEqual(stock, original_stock)
++                self.assertEqual(orders, original_orders)
++                self.assertTrue(all(type(value) is int and value >= 0 for value in remaining.values()))
++                self.assertTrue(all(type(outcome["accepted"]) is bool for outcome in outcomes))
++
++    def test_late_shortage_rejects_whole_order_and_continues(self):
++        self.assert_both_apis(
++            {"a": 4, "b": 1},
++            [{"id": "reject", "items": [["a", 3], ["b", 2]]},
++             {"id": "later", "items": [["a", 4], ["b", 1]]},
++             {"id": "empty", "items": []}],
++            ({"a": 0, "b": 0}, [{"order_id": "reject", "accepted": False},
++                                {"order_id": "later", "accepted": True},
++                                {"order_id": "empty", "accepted": True}]),
++        )
++
++    def test_rejection_preserves_prior_success_and_remaining_stock(self):
++        self.assert_both_apis(
++            {"a": 2},
++            [{"id": "first", "items": [["a", 1]]},
++             {"id": "reject", "items": [["a", 2]]},
++             {"id": "last", "items": [["a", 1]]}],
++            ({"a": 0}, [{"order_id": "first", "accepted": True},
++                        {"order_id": "reject", "accepted": False},
++                        {"order_id": "last", "accepted": True}]),
++        )
++
++    def test_rejection_alone_leaves_every_quantity_unchanged(self):
++        self.assert_both_apis(
++            {"a": 4, "b": 1, "unused": 9},
++            [{"id": "reject", "items": [["a", 3], ["b", 2]]}],
++            ({"a": 4, "b": 1, "unused": 9}, [{"order_id": "reject", "accepted": False}]),
++        )
++
++    def test_zero_stock_rejects(self):
++        self.assert_both_apis(
++            {"a": 0}, [{"id": "reject", "items": [["a", 1]]}],
++            ({"a": 0}, [{"order_id": "reject", "accepted": False}]),
++        )
++
++    def test_empty_order_on_empty_stock(self):
++        self.assert_both_apis(
++            {}, [{"id": "empty", "items": []}],
++            ({}, [{"order_id": "empty", "accepted": True}]),
++        )
++
++    def test_empty_batch_both_apis(self):
++        self.assert_both_apis({"a": 2}, [], ({"a": 2}, []))
++
++    def test_adapter_validation_finishes_before_execution(self):
++        invalid_orders = [
++            None, {}, {"id": "bad", "items": [], "extra": 1},
++            {"id": 1, "items": []}, {"id": "first", "items": []},
++            {"id": "bad", "items": {}},
++            {"id": "bad", "items": [["a"]]},
++            {"id": "bad", "items": ["a"]},
++            {"id": "bad", "items": [["missing", 1]]},
++            {"id": "bad", "items": [["a", 1], ["a", 1]]},
++        ]
++        invalid_orders.extend(
++            {"id": "bad", "items": [["a", quantity]]}
++            for quantity in (0, -1, 1.5, True, False, "1", None)
++        )
++        texts = ["{", "{}", "null"] + [
++            json.dumps([{"id": "first", "items": [["a", 1]]}, invalid])
++            for invalid in invalid_orders
++        ]
++        for text in texts:
++            with self.subTest(text=text):
++                stock = {"a": 4}
++                with patch("batch.reserve") as engine:
++                    with self.assertRaises(ValueError):
++                        execute(stock, text)
++                    engine.assert_not_called()
++                self.assertEqual(stock, {"a": 4})
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-PEoBJmoV' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-tRi1MEVq' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted

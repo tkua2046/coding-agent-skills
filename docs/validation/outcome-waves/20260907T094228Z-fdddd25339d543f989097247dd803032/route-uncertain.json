@@ -1,0 +1,8 @@
+{
+  "case": "route-uncertain",
+  "report": "docs/validation/canary/20260907T095332-493e3b8bc66140ac95e4a579b481e4cc/report.json",
+  "status": "inconclusive",
+  "worker_elapsed_seconds": 135.935,
+  "wave_elapsed_seconds": 235.125,
+  "error": "ValueError: Grader cited missing evidence or an invented quote"
+}

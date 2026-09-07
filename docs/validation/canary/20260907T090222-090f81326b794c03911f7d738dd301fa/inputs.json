@@ -1,0 +1,49 @@
+{
+  "purpose": "Case-local supplemental scoring control prepared before execution for OGR-01. Frozen global scorer is unchanged. These test the scoring prompt on scripted evidence, not skill quality or a real reader.",
+  "rubric": {
+    "version": 2,
+    "criteria": [
+      {
+        "id": "usable-handoff",
+        "required": true,
+        "requirement": "A reader can quickly recover design choices and delivery state.",
+        "pass_when": "Restricted reader answers are supported by exposed text and identify all-or-nothing rejection, the actual state/validation choice and current outcome or next action. Main records put current status/open issues first, with raw logs behind links. Assess delivery state after the unconditional final author handoff: exposed current entrypoints agree with the latest authoritative review/check records and accurately identify remaining owner action. Explicitly labeled historical phase snapshots can retain their old state behind a current summary.",
+        "fail_when": "Reader cannot answer from document beginnings or mistakes historic completion for current acceptance; pending implementation is presented as finished, or human approval is invented. An unqualified current entrypoint still calls a completed independent review pending, even if the reader faithfully repeats that stale text; a link to a pre-review handoff does not resolve a contradictory latest state."
+      }
+    ]
+  },
+  "examples": [
+    {
+      "id": "stale-current",
+      "expected": "fail",
+      "expected_criteria": {
+        "usable-handoff": "fail"
+      },
+      "request": "This known-output control assesses the final author handoff after an independent review. The scripted reader saw only reading-probe/excerpts/0.txt and answered what changed and what remains before human acceptance. Assess excerpt support AND accuracy against the latest review. Do not treat an explicitly historical phase-05 snapshot as current, and do not call these scripted reader outputs an actual usability trial.",
+      "artifacts": {
+        "current.txt": "All orders are prechecked against batch-local remaining stock before deduction; a shortage rejects the whole order without mutation. Later orders continue; caller inputs and previous successful deductions are preserved. Existing validation and APIs are unchanged.\nCurrent: S1 is implemented; independent code review is pending, then human review.\n",
+        "review.txt": "Independent code review of snapshot c1 is complete and ready, with no findings. Tests and installed gate passed on unchanged c1. Owner review is the next action; human acceptance is pending.\n",
+        "phase-05.txt": "Historical author snapshot, before independent review: S1 implemented; independent code review pending. This is not current delivery state.\n",
+        "reading-probe/excerpts/0.txt": "All orders are prechecked against batch-local remaining stock before deduction; a shortage rejects the whole order without mutation. Later orders continue; caller inputs and previous successful deductions are preserved. Existing validation and APIs are unchanged.\nCurrent: S1 is implemented; independent code review is pending, then human review.\n",
+        "reading-probe/reply.md": "Orders use batch-local prechecking for atomic rejection and preserve caller inputs/previous successes. S1 is implemented; independent code review remains pending before human review.",
+        "reading-probe/execution.json": "{\"completed\": true, \"exit_code\": 0, \"timed_out\": false, \"interrupted\": false, \"fixture\": \"Scripted control reader output, not a fresh actual reader\"}"
+      }
+    },
+    {
+      "id": "historical-with-current-handoff",
+      "expected": "pass",
+      "expected_criteria": {
+        "usable-handoff": "pass"
+      },
+      "request": "This known-output control assesses the final author handoff after an independent review. The scripted reader saw only reading-probe/excerpts/0.txt and answered what changed and what remains before human acceptance. Assess excerpt support AND accuracy against the latest review. Do not treat an explicitly historical phase-05 snapshot as current, and do not call these scripted reader outputs an actual usability trial.",
+      "artifacts": {
+        "current.txt": "All orders are prechecked against batch-local remaining stock before deduction; a shortage rejects the whole order without mutation. Later orders continue; caller inputs and previous successful deductions are preserved. Existing validation and APIs are unchanged.\nCurrent: S1 is implemented and independently code-reviewed with no findings. Tests and installed gate passed on c1. Only owner review and human acceptance remain pending; see review.txt. Earlier author snapshot is retained in phase-05.txt as history.\n",
+        "review.txt": "Independent code review of snapshot c1 is complete and ready, with no findings. Tests and installed gate passed on unchanged c1. Owner review is the next action; human acceptance is pending.\n",
+        "phase-05.txt": "Historical author snapshot, before independent review: S1 implemented; independent code review pending. This is not current delivery state.\n",
+        "reading-probe/excerpts/0.txt": "All orders are prechecked against batch-local remaining stock before deduction; a shortage rejects the whole order without mutation. Later orders continue; caller inputs and previous successful deductions are preserved. Existing validation and APIs are unchanged.\nCurrent: S1 is implemented and independently code-reviewed with no findings. Tests and installed gate passed on c1. Only owner review and human acceptance remain pending; see review.txt. Earlier author snapshot is retained in phase-05.txt as history.\n",
+        "reading-probe/reply.md": "Orders use batch-local prechecking for atomic rejection and preserve caller inputs/previous successes. S1 is implemented and independently reviewed. Tests/gate passed for c1; the next action is owner review, with human acceptance pending.",
+        "reading-probe/execution.json": "{\"completed\": true, \"exit_code\": 0, \"timed_out\": false, \"interrupted\": false, \"fixture\": \"Scripted control reader output, not a fresh actual reader\"}"
+      }
+    }
+  ]
+}

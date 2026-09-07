@@ -1,0 +1,27 @@
+"""One explicitly selected wave; no retries. Raw records belong to the existing runner."""
+import argparse,concurrent.futures,json,sys,time,uuid
+from datetime import datetime,timezone
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from tools import canary
+p=argparse.ArgumentParser();p.add_argument('--calibration',required=True,type=Path);p.add_argument('--baseline');p.add_argument('--cases',nargs='+');p.add_argument('--workers',type=int,default=2);p.add_argument('--label',required=True);args=p.parse_args()
+root=Path(__file__).resolve().parents[1]
+config=canary.settings('gpt-6-astra','medium',600)
+canary.check_calibration(root,args.calibration,config,canary.environment())
+case_ids=args.cases or list(canary.cases(root))
+stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex
+out=root/'docs/validation/outcome-waves'/stamp;out.mkdir(parents=True)
+canary.save(out/'request.json',{'label':args.label,'baseline':args.baseline,'cases':case_ids,'parallelism':args.workers,'settings':config,'calibration':str(args.calibration.resolve()),'note':'One attempt per selected case; no automatic retries. Parallel elapsed observations are descriptive, not isolated performance measurements.'})
+def run(case_id):
+    t=time.monotonic()
+    record=canary.run_case(root,case_id,config,config,args.calibration,args.baseline)
+    report=canary.read_json(record)
+    return {'case':case_id,'report':str(record.relative_to(root)),'status':report['status'],'worker_elapsed_seconds':report.get('observations',{}).get('worker_elapsed_seconds'),'wave_elapsed_seconds':round(time.monotonic()-t,3),'error':report.get('error')}
+results=[]
+print('Wave record: '+str(out),flush=True)
+with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
+    for future in concurrent.futures.as_completed([pool.submit(run,c) for c in case_ids]):
+        result=future.result();results.append(result);canary.save(out/(result['case']+'.json'),result);print(json.dumps(result),flush=True)
+canary.save(out/'results.json',results)
+print('Completed wave: '+str(out/'results.json'),flush=True)
+sys.exit(any(r['status']!='pass' for r in results))

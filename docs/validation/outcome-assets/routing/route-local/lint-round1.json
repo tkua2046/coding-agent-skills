@@ -1,0 +1,14 @@
+{
+  "argv": [
+    ".venv/bin/ruff",
+    "check",
+    "evals/cases/route-local/oracle.py",
+    "evals/cases/route-local/author_verify.py",
+    "evals/cases/route-uncertain/oracle.py",
+    "evals/cases/route-uncertain/author_verify.py"
+  ],
+  "exit_code": 1,
+  "stdout": "I001 [*] Import block is un-sorted or un-formatted\n  --> evals/cases/route-local/author_verify.py:3:1\n   |\n 1 |   \"\"\"Reproduce fixture and oracle author controls; never invokes a model.\"\"\"\n 2 |\n 3 | / import argparse\n 4 | | import hashlib\n 5 | | import json\n 6 | | import os\n 7 | | from pathlib import Path\n 8 | | import shutil\n 9 | | import subprocess\n10 | | import sys\n11 | | import tempfile\n   | |_______________^\n12 |\n13 |   parser = argparse.ArgumentParser()\n   |\nhelp: Organize imports\n   |\n6  | import os\n   - from pathlib import Path\n7  | import shutil\n8  | import subprocess\n9  | import sys\n10 | import tempfile\n11 + from pathlib import Path\n12 |\n   |\n\nI001 [*] Import block is un-sorted or un-formatted\n  --> evals/cases/route-uncertain/author_verify.py:3:1\n   |\n 1 |   \"\"\"Reproduce fixture and oracle author controls; never invokes a model.\"\"\"\n 2 |\n 3 | / import argparse\n 4 | | import hashlib\n 5 | | import json\n 6 | | import os\n 7 | | from pathlib import Path\n 8 | | import shutil\n 9 | | import subprocess\n10 | | import sys\n11 | | import tempfile\n   | |_______________^\n12 |\n13 |   parser = argparse.ArgumentParser()\n   |\nhelp: Organize imports\n   |\n6  | import os\n   - from pathlib import Path\n7  | import shutil\n8  | import subprocess\n9  | import sys\n10 | import tempfile\n11 + from pathlib import Path\n12 |\n   |\n\nFound 2 errors.\n[*] 2 fixable with the `--fix` option.\n",
+  "stderr": "",
+  "disposition": "Import ordering only in the two new author verification scripts; correction follows, fixtures and oracles unaffected."
+}

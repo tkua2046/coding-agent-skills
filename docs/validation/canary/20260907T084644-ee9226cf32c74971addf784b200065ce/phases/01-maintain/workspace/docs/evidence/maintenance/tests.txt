@@ -1,0 +1,10 @@
+test_block_preserves_pose_and_continues (test_navigator.NavigationTests.test_block_preserves_pose_and_continues) ... ok
+test_blocked_forward_facing_west_at_negative_coordinate (test_navigator.NavigationTests.test_blocked_forward_facing_west_at_negative_coordinate) ... ok
+test_left_wraps (test_navigator.NavigationTests.test_left_wraps) ... ok
+test_turn_and_forward (test_navigator.NavigationTests.test_turn_and_forward) ... ok
+test_unknown_command (test_navigator.NavigationTests.test_unknown_command) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK

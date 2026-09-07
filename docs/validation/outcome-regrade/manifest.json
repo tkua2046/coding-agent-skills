@@ -1,0 +1,13 @@
+{
+  "kind": "One-off helper and no-model verification archive; real scoring not executed",
+  "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2",
+  "grader": "17f84dbcc760a443f99076038e60faf52daa3c000f22d2b50f2f92d963244012",
+  "sha256": {
+    "controls-final.py.txt": "7801915b060b0e3428267aecab48cb023656cc70c7453f6535e9b6a23a5dc6d7",
+    "controls-round1.json": "7384d1b78b0d7527f07470205dc8d42bb2178709f3a68efe7a206b247b426a94",
+    "controls-round1.py.txt": "5f57143eeebab479df52d2bc96e27b4f107ef571697a57ce8acc70ab24c21f93",
+    "controls-round2.json": "84dda990466035fb423ca48f1dbd5961381d6662ba79725592971f1f91c6406a",
+    "real-no-model-isolation.json": "e5d1d77d0d936f74d0e971168fb40b0dc4a907452d08c9a4d14af20f3c592e85",
+    "regrade_outcome.py.txt": "3b2efdf5bb4693ef4e64fc8353b91a154dbf74fd620ec502a02d863bc1538d3e"
+  }
+}

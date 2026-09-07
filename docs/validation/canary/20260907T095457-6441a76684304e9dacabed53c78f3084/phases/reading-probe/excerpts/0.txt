@@ -1,0 +1,30 @@
+# Navigator design
+
+Current outcome: extend the accepted navigator with caller-supplied fixed occupied
+cells. D1 remains accepted; the occupancy amendment below is proposed and its
+design review is pending. Requirements: [original](ORIGINAL.md),
+[confirmed request](OCCUPIED_REQUEST.md), and [addendum](OCCUPIED_SPEC.md).
+
+Use a per-run immutable coordinate lookup and check a forward destination before
+changing pose. A blocked move returns `False` for that command, leaves the entire
+pose unchanged, and allows subsequent commands. Existing two-argument calls keep
+their behavior. Next: perform the amendment design review and the separate
+[plan](PLAN.md) review; implementation belongs to a later task.
+
+## Accepted design D1 (preserved)
+
+Keep state local to each run; no global session. A caller supplies pose and commands.
+A direction lookup supports translation; turns only affect heading. Unbounded
+coordinates avoid imposing a board size. Unknown commands are programmer errors.
+
+Historical acceptance: [completed S0](history/completed.md). That acceptance does
+not cover this amendment.
+
+## Proposed occupancy amendment
+
+The current `navigator.py` computes forward destinations in `_target` and assigns
+them immediately in `run`; every recognized command currently appends `True`.
+Retain the direction lookup and turn arithmetic. Propose the compatible interface
+`run(pose, commands, occupied=())`, accepting an iterable of integer `(x, y)` tuples.
+Snapshot it into a local `frozenset` once per run. This avoids caller mutation and
+one-shot iterable consumption affecting successive membership checks, collapses

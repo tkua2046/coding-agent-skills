@@ -1,0 +1,32 @@
+{
+  "source_type": "synthetic existing application; copied source bytes unchanged",
+  "copied_files": {
+    "inventory.py": {
+      "source": "evals/cases/bounded-delivery/fixture/inventory.py",
+      "sha256": "47ed82f0de9981ed68e93aca4248025e41bf90bc109f411589c8e2cff7793736"
+    },
+    "batch.py": {
+      "source": "evals/cases/bounded-delivery/fixture/batch.py",
+      "sha256": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b"
+    },
+    "command_codec.py": {
+      "source": "evals/cases/bounded-delivery/fixture/command_codec.py",
+      "sha256": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de"
+    },
+    "tests/test_inventory.py": {
+      "source": "evals/cases/bounded-delivery/fixture/tests/test_inventory.py",
+      "sha256": "e8ae44127d4f5c2008bff5ef59f098519b1c8d82d9115bc0eb63b4e24c6222f5"
+    },
+    "README.md": {
+      "source": "evals/cases/bounded-delivery/fixture/README.md",
+      "sha256": "6abea4adc72cada64ecaab4a50ae1f1439e7cd4ad06aa0e7612f3120aaa5fa11"
+    }
+  },
+  "new_fixture_files": [
+    "AGENTS.md",
+    "DEVNOTES.md",
+    "docs/REQUEST.md"
+  ],
+  "history": "Neutral starting snapshot only; no imported design/plan/review approvals or fabricated completed work.",
+  "authorization": "Author controls are not real model trials; independent review is pending."
+}

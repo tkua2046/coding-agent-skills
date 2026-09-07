@@ -1,0 +1,126 @@
+{
+  "criteria": [
+    {
+      "id": "preservation",
+      "status": "pass",
+      "reason": "The design preserves the source, constructs v2 separately, and identifies crash boundaries and reconciliation after an uncertain commit.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Never truncate, rename, delete, or rewrite the v1 source, even after success."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Marker replacement is the logical commit point. A process crash before it leaves\nv1 active; a process crash after it can leave v2 active even if success was never\nreturned. That is safe because validation and destination publication preceded\nthe switch, and the original v1 still exists."
+        }
+      ]
+    },
+    {
+      "id": "retry-validation",
+      "status": "pass",
+      "reason": "The proposed contract requires exact typed preservation, rejects malformed and duplicate input, validates the completed candidate before activation, and rebuilds partial attempts without appending.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC.md",
+          "quote": "Migration and v2 parsing reject duplicate object member names,\nmalformed JSON, non-finite numbers, missing required fields, and non-string v1\nIDs."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Exact ID set and type-aware JSON value equality are required; `30` must not silently become `\"30\"` or `true`."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "3. Write a uniquely named temporary file in the destination directory. Flush and\n   `fsync` it, close it, reopen it, and validate both v2 structure and semantic\n   equivalence to the validated source. On failure, never change the marker."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Retry with v1 selected validates the source and creates a fresh snapshot; it never\nmerges or appends an old candidate. Ignore leftover temporary files."
+        }
+      ]
+    },
+    {
+      "id": "dependencies",
+      "status": "pass",
+      "reason": "Reader support precedes migration; publication keeps preservation, validation and recovery together. Linked acceptance explicitly checks interruption before activation, usable v1, exact retry output and activation after validation.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "S1. Keep source preservation, destination validation, marker activation and retry together: a partial migration writer would lack a safe usable contract."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "S2 must keep migration disabled until the caller can read v2."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC.md",
+          "quote": "| Kill during temporary candidate write, or fail validation/file sync/destination replace | Marker remains v1; original valid fixture still loads. Retry from the source eventually yields exactly the two expected entries. |"
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC.md",
+          "quote": "| Kill after destination replace/directory sync but before marker replace, including during temporary marker write | Ignore complete orphan v2 and partial marker temp; v1 remains selected. Retry regenerates candidate, validates and activates once. |"
+        }
+      ]
+    },
+    {
+      "id": "proportionate-design",
+      "status": "pass",
+      "reason": "The design justifies snapshot publication and marker activation against in-place rewriting and journaling, with explicit storage costs and single-writer scope.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "| Immutable source, complete replacement snapshot | In-place rewriting risks losing the usable source; a journal adds recovery states unnecessary for this small fixture. | Never truncate, rename, delete, or rewrite the v1 source, even after success. Disk must accommodate both versions and staging files. |"
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "| Keep `active.json` as the only activation authority | Inferring activation from a v2 file's existence would expose an orphan after a crash. | A complete `settings-v2.json` plus a v1 marker still means v1. |"
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "No generalized storage framework or new\ndependency is needed."
+        }
+      ]
+    },
+    {
+      "id": "honest-status",
+      "status": "pass",
+      "reason": "The original contract and completed v1 history remain intact, implementation files are unchanged, and baseline execution is clearly distinguished from proposed migration checks and pending reviews.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/ORIGINAL.md",
+          "quote": "Keep each stable ID and value. Before successful completion, including on crash,\noriginal v1 data must remain usable. Retry cannot duplicate or drop entries.\nThe caller switches to v2 only after successful validation."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "> Complete: v1 reading. Pending: design and review v2 migration before execution."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "- Design review: pending. Plan review: pending. No review reports superseded.\n- S1/S2 implementation, code checks and code reviews: not started."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/evidence/migration-baseline.md",
+          "quote": "This verifies callable primitives on the local fixture filesystem only. It does\nnot test a migration, termination during an operation, atomic observation by a\nreader, power failure, or other operating systems/filesystems."
+        }
+      ]
+    },
+    {
+      "id": "first-screen-comprehension",
+      "status": "fail",
+      "reason": "The executed reader identifies the migration, storage tradeoff and next reader stage with a supported rejection check. However, its interrupted-retry answer omits exact ID/value preservation and validation as a prerequisite to activation. The exposed beginnings supply snapshot rebuilding but not the full safety acceptance; details in the full design cannot repair this probe.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Preserve the original v1 file and construct a complete v2 file before atomically\nswitching `active.json`. This costs temporary disk space but keeps v1 usable across\ninterruption; retry rebuilds a whole snapshot instead of appending entries."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "One stated acceptance check is rejection of malformed data or duplicate keys; concrete input/output examples are not exposed."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "4. **Interruption and retry safety:** Check that interruption before activation leaves the original v1 file preserved and usable, and that retry rebuilds a complete v2 snapshot rather than appending entries before activation. The excerpts do not supply a detailed interruption test or resolved filesystem durability requirements."
+        }
+      ]
+    }
+  ]
+}

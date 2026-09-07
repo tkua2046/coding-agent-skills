@@ -1,6 +1,6 @@
 # Validation
 
-Current workflow refinement: [canary evidence index](validation/canary/INDEX.md). The new fast suite/gate passes; real heavy baseline/candidate evaluation and semantic calibration remain pending until release. The results below belong to the initial library and are preserved as historical evidence, not current canary grades.
+Current workflow refinement: [actual canary results](validation/canary/INDEX.md) and [delivery checks](validation/outcome-final/). Real baseline/candidate evaluation and scoring calibration have run; unresolved failures, inconclusive scores and a deferred final case still block release acceptance. The results below belong to the initial library and are preserved as historical evidence, not current canary grades.
 
 ## Initial library (historical)
 

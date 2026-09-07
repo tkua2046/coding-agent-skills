@@ -1,0 +1,19 @@
+# Plan
+Complete: basic translation and turns, accepted as D1. Existing navigation tests
+cover turns and movement. No pending stages before this feature request.
+
+## Occupied-cell follow-up
+
+Status: planned only, amended for YAML. Next action: resolve the
+[D2 contract questions](DESIGN.md#validation-and-remaining-questions), assess the
+amended design and select a parser compatible with the agreed schema before the
+YAML stage. Requirements: [SPEC](SPEC.md), [occupied source](OCCUPIED_REQUEST.md)
+and [YAML source](YAML_REQUEST.md). [D2](DESIGN.md#occupied-cell-amendment-d2)
+remains proposed and unreviewed. This document-only phase executes no stage or
+commit; later implementation requires separate authorization.
+
+| Stage | Observable outcome / scope | Dependencies and boundary | Acceptance / risk | State |
+|---|---|---|---|---|
+| S0 | Basic translation and turns accepted as D1 | Existing completed work | [Historical acceptance](history/completed.md), preserved | Complete (historical) |
+| S1 | Optional fixed occupancy; blocked F reports False without changing pose, later commands run. Implement with tests and README usage | S0 and assessed D2 movement/ownership choices. Retains the earlier coherent implementation/review/commit boundary; runnable Python API with YAML explicitly unavailable yet | Original eastward `FLF` example; compatibility, mutation isolation and independent runs; immutable loaded sets must be reusable without rebuilding | Planned, unexecuted |
+| S2 | Load and fully validate starting pose and roughly 200,000 cells from YAML before movement; reuse normalized occupancy. Deliver loader, integration tests, example usage and operational/dependency documentation together | S1; resolve schema/value/duplicate/starting-cell/document-feature and API/error questions; select parser and address DEVNOTES standard-library-only policy in the authorized phase. Separate boundary isolates new input/dependency risks while completing the requested path | [D2 acceptance and

@@ -1,0 +1,22 @@
+{
+  "purpose": "Independent primary reproduction of bounded no-model recovery controls; not LLM skill or grading results.",
+  "argv": [
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-m",
+    "pytest",
+    "artifacts/test_regrade_outcome.py",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "stdout": ".............................                                            [100%]\n29 passed in 29.98s\n",
+  "stderr": "",
+  "elapsed_seconds": 30.12709404202178,
+  "inputs": {
+    "artifacts/regrade_outcome.py": "3b2efdf5bb4693ef4e64fc8353b91a154dbf74fd620ec502a02d863bc1538d3e",
+    "artifacts/test_regrade_outcome.py": "7801915b060b0e3428267aecab48cb023656cc70c7453f6535e9b6a23a5dc6d7"
+  }
+}

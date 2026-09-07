@@ -1,0 +1,25 @@
+{
+  "base_commit": "934b68b9c49f4e46e24743f4541359017dd8d0e3",
+  "sha256": {
+    "README.md": "792b42b7c16c0a601bf9ae1e0a18cac8be4651c9a0f2551358a24cf91c7c70cd",
+    "docs/DESIGN.md": "0f386d1951fa20f93ac3105889f9e61efc9e7fdb553705d93af3b2646daa1a1b",
+    "docs/PLAN.md": "18156a34088d2432e67da12d60a8594d69ade07c110ca5f56a936be4018ae8f3",
+    "docs/SPEC.md": "fab896c64fe20bc47dd387a790ca53c77e32fb9a05923988735d083e55571a4d",
+    "inventory.py": "d693834721cc027b58a6c7cb6a0086a06ca27c2350a03081b4a5306f7a3f0a05",
+    "tests/test_inventory.py": "fa4f6d205efc3a6ebc75582c3c5eb8cd0d7dc8f9ac7025f5716cbac0efe9e77b",
+    "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+    "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+    "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+    "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+    "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+    "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+    "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+    "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+    "reviews/design-current.json": "0898ab1c4950442ef76103c11a450a0757e79bbe68a91465c6cde81a44e2ad43",
+    "reviews/s1-tests.log": "fdf102f7226babc84651c149a6fc60c7d67174ccda42169aaeac24ec71aefb17",
+    "reviews/s1-gate.log": "d3dcd37ec2623fff4f057ce734aea6d0ca74832684c8abfa183f4784ebde0c96",
+    "reviews/s1-counterexample.log": "96dff5da6397a865741ca0d687eb49d0572744d722b228687ea391e01fa22c7b",
+    "reviews/s1-candidate.patch": "fcb002992431c939e771283c40ed4206586bd6201084584f7fc991bb9a3da358"
+  },
+  "scope": "Candidate product, tests, documents and check evidence. Handoff and this manifest excluded to avoid self-reference. Patch includes pre-existing D2/plan edits; prior review preserved verbatim."
+}

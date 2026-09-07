@@ -1,6 +1,6 @@
 # Proposal: maintainable development with coding agents
 
-Status: owner authorized execution with “执行”. The [independent delta review](workflow-regression-review.md) covers archived v3; the [earlier review](workflow-proposal-review.md) covers v2. Implementation and evidence status are tracked in the [current increment](../IMPLEMENTATION_PLAN.md#current-increment) and [canary index](../validation/canary/INDEX.md). Heavy tests remain deferred until release.
+Historical status: owner authorized execution with “执行”. The [independent delta review](workflow-regression-review.md) covers archived v3; the [earlier review](workflow-proposal-review.md) covers v2. This increment is retained in the [C1/C2 history](../IMPLEMENTATION_PLAN.md#historical-c1c2-increment); the [canary index](../validation/canary/INDEX.md) owns current evidence. Heavy tests were deferred until release at this checkpoint; the later overnight iteration separately authorized real runs.
 
 **Approved direction:** retain the four existing skills and revise their conflicting defaults so the user's full workflow is useful at different task sizes. Deliver small skill changes, concrete examples and behavioral evidence; do not add a workflow framework. Implementation-plan maintenance is one important part of this proposal, alongside scope control, design quality, review convergence, verification, context and delivery.
 

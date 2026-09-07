@@ -1,0 +1,44 @@
+{
+  "verdict": "ready",
+  "findings": [],
+  "reviewer": "Assigned independent reviewer in a fresh context separate from the author; combined design and implementation-plan review.",
+  "reviewed_content": {
+    "candidate": "DESIGN D2 and PLAN S1, proposed and not implemented; current working-tree contents identified by SHA-256 below.",
+    "sha256": {
+      "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+      "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+      "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+      "docs/SPEC.md": "1851be43c792d0d8c63b2e30fedc18a0ac4c01b17d21741b17328a490051b021",
+      "docs/DESIGN.md": "ccd3fa33d5aba22a42e0b6f03b235982e699ad183e99ecaf0c53e5d935a3383d",
+      "docs/PLAN.md": "3a57d445c06d2c512f734a20dceca143f5d6cec0cade9cd50775e186fbe8a93b",
+      "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+      "README.md": "6abea4adc72cada64ecaab4a50ae1f1439e7cd4ad06aa0e7612f3120aaa5fa11",
+      "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+      "inventory.py": "47ed82f0de9981ed68e93aca4248025e41bf90bc109f411589c8e2cff7793736",
+      "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+      "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+      "tests/test_inventory.py": "e8ae44127d4f5c2008bff5ef59f098519b1c8d82d9115bc0eb63b4e24c6222f5",
+      "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+      ".git/hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+      "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+      "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+      "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+      "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637"
+    }
+  },
+  "assessment": [
+    "D2 meets REQUEST: preflight against current batch-local stock before any deduction gives whole-order rejection; later orders continue, equality and empty orders succeed. Unique known SKUs and validated positive quantities make the two-pass approach sufficient.",
+    "Both API signatures, copied stock, input immutability, integer quantities, ordered results and existing full-payload JSON validation are preserved by the proposed design. No new validation or external infrastructure is introduced.",
+    "S1 is a coherent code/test/usage outcome. SPEC provides independent expected values for partial-deduction risk, rejection alone, continuation, depletion, exact-stock success, empty orders/batches, input preservation and adapter validation regressions.",
+    "The plan exposes the next stage promptly, preserves S0/D1 history, and specifies nonempty local checks, independent code snapshot review, fixes with affected rechecks, and later human review. Scope is proportionate to the requested 15-minute whole-task allowance; elapsed time from prior phases was not independently verified."
+  ],
+  "checks_performed": [
+    "Read fixture AGENTS.md, both supplied review skills and review prompts, original/request/current specification, design, plan, historical context, relevant source, tests, usage and operations documentation.",
+    "Inspected both hook copies: identical contents; unittest discovery explicitly fails when empty.",
+    "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" -m unittest discover -s tests -v: passed all 6 baseline tests.",
+    "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" .git/hooks/pre-commit: passed all 6 baseline tests.",
+    "git status --short reported existing modifications to DESIGN, PLAN and SPEC; Git also emitted sandbox cache/config warnings. Exact reviewed contents are identified by file hashes instead of relying on Git cleanliness."
+  ],
+  "limitations": "Document readiness only. Existing baseline tests do not establish the requested shortage behavior; the inspected engine still deducts unconditionally. This review provides no implementation correctness, requested-feature runtime acceptance, code-review approval or human approval.",
+  "next_action": "Implementation may begin with S1. Implement the engine change, regression coverage and README usage; run the specified gates, resolve independent code snapshot review findings, and hand off for human review. No commit, push, version advancement or release."
+}

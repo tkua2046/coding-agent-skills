@@ -1,0 +1,30 @@
+# Accepted design D1
+Keep state local to each run; no global session. A caller supplies pose and commands.
+A direction lookup supports translation; turns only affect heading. Unbounded
+coordinates avoid imposing a board size. Unknown commands are programmer errors.
+
+## Occupied-cell amendment D1.1
+
+Status: proposed amendment; design review pending. D1 acceptance above remains
+historical and does not cover this amendment.
+
+Goal: callers can supply fixed occupied cells. Main choice: take a per-run set
+snapshot and reject a forward target before changing pose. A blocked command
+returns `False`; subsequent commands still run. Existing two-argument calls remain
+compatible. For example, from `(0, 0, 1)` with `(1, 0)` occupied, `FRF` ends at
+`(0, -1, 2)` with `[False, True, True]`.
+
+Scope: movement blocking only; no routing, persistence, moving obstacles, or file
+configuration. Next step: review this amendment and the [plan](PLAN.md), then
+implement in a later task. Sources: [confirmed request](OCCUPIED_REQUEST.md) and
+[specification addendum](OCCUPIED_SPEC.md).
+
+### Current behavior and proposed interface
+
+`navigator.run(pose, commands)` currently uses `_target` to commit every forward
+move and appends `True` for each recognized command. `_target` and `DIRECTIONS`
+already provide the candidate pose; they need no replacement. Turns update only
+heading; unknown commands raise `ValueError("unknown command")`.
+
+Proposed interface: `run(pose, commands, occupied=())`, accepting an iterable of
+integer `(x, y)` tuples. Copy these into a local `frozenset` once before processing

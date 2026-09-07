@@ -1,0 +1,8 @@
+{
+  "case": "v2-scope-extension",
+  "report": "docs/validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/report.json",
+  "status": "inconclusive",
+  "worker_elapsed_seconds": 332.58500000000004,
+  "wave_elapsed_seconds": 463.676,
+  "error": "ValueError: Grader cited missing evidence or an invented quote"
+}

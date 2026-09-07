@@ -1,0 +1,8 @@
+{
+  "case": "bounded-investigation",
+  "report": "docs/validation/canary/20260907T083357-130ffc0a8e31423fbe8c8ab9ded1d958/report.json",
+  "status": "pass",
+  "worker_elapsed_seconds": 163.086,
+  "wave_elapsed_seconds": 245.454,
+  "error": null
+}

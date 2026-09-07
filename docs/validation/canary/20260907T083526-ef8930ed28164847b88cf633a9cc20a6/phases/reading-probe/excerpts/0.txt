@@ -1,0 +1,30 @@
+# Design: whole-order inventory rejection
+
+Amendment D2 passed [independent document review](../reviews/design-current.json)
+with no findings. Implementation is ready for code review; current evidence and
+pending reviews are in the [S1 handoff](../reviews/s1-handoff.md).
+[REQUEST.md](REQUEST.md) is the unchanged feature authority;
+[ORIGINAL.md](ORIGINAL.md) preserves the original requirements. Next outcome:
+[PLAN.md](PLAN.md#s1-whole-order-rejection-implemented-review-pending) delivers rejection without
+partial deductions, followed by human review. A short amendment and one stage are
+appropriate because this is a local, in-memory change with unchanged interfaces.
+
+## D2: behavior and rationale
+
+Keep the batch-local stock copy. For each validated order, check all requested
+quantities against the current remaining stock before making any deductions. If
+any quantity exceeds availability, append `{"order_id": id, "accepted": False}`
+and leave the entire remaining dictionary unchanged by that order. Otherwise
+deduct every requested quantity and append the same result shape with `True`.
+Continue processing later orders in input order. Equality is sufficient; an empty
+order succeeds without changing stock. Previously accepted deductions survive a
+later rejection. Nonnegative input stock therefore remains nonnegative, and all
+counts remain integers.
+
+Prechecking avoids partial mutation and rollback bookkeeping. A per-order stock
+copy would also work but would copy unrelated stock for every order; it is
+unnecessary given validated unique SKUs. Use ordinary checks and deductions,
+without new dependencies or a transaction abstraction. Validation ensures item
+lists are reusable and SKUs are unique within each order; the Python API continues
+to trust these preconditions rather than introducing new validation policies.
+

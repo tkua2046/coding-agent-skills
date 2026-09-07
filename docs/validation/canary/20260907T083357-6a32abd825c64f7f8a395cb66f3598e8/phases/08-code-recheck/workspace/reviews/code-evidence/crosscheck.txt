@@ -1,0 +1,1 @@
+PASS: 6561 three-order batches; 13122 API evaluations against tentative-copy reference; stock 0..2, requests absent/1/2 per SKU, alternating item order, deep immutability and exact result types.

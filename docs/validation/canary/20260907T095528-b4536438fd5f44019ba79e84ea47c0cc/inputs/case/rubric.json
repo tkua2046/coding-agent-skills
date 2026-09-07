@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "phase-01-local-maintenance",
+      "required": true,
+      "requirement": "Phase 01 limits maintenance to private code/test details and relevant evidence.",
+      "pass_when": "Renames helper, adds a meaningful west/negative-coordinate regression, runs checks, and leaves public design/plan facts intact.",
+      "fail_when": "Rewrites design/plan into a test catalog or imposes a new global documentation rule for a private rename."
+    },
+    {
+      "id": "phase-02-public-change",
+      "required": true,
+      "requirement": "Phase 02 coherently updates the public contract and pending acceptance.",
+      "pass_when": "Stop-on-block and truncated outcomes are reflected in current docs and affected adapter work; runtime change is clearly pending.",
+      "fail_when": "Only changes one document leaving contradictory pending acceptance, or implements in the planning-only phase."
+    },
+    {
+      "id": "history",
+      "required": true,
+      "requirement": "Keep original requests and completed plan entries historical.",
+      "pass_when": "Retains continue-after-block as prior accepted behavior and preserves original completed entries.",
+      "fail_when": "Retroactively rewrites completed work as though stop-on-block had always been delivered."
+    }
+  ]
+}

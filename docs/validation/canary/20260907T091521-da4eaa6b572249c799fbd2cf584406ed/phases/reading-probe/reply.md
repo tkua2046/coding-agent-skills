@@ -1,0 +1,7 @@
+1. Caller-supplied fixed occupied cells would block forward movement. A blocked move returns `False`, leaves the entire pose unchanged, and allows later commands to execute. Preserve local per-run state, heading-only turns, unbounded coordinates, unknown-command errors, existing two-argument calls, and the return shape.
+
+2. The proposed decision is to extend `run` with optional `occupied=()`, snapshot occupancy into a local `frozenset` once per run, and check the candidate destination before applying forward movement. This reuses the existing movement structure, collapses duplicate cells, avoids mutating caller data, and provides expected O(1) membership checks. The snapshot means occupancy is fixed for that run. The interface remains subject to review.
+
+3. The next uncompleted outcome is S1: implement occupancy blocking with tests and documentation updates. It depends on D1-O1/interface convention review and plan review; implementation is a later task. A decisive check supported by the exposed behavior is that a forward move into an occupied cell returns `False`, preserves the entire pose, and does not prevent later commands from executing. The linked acceptance examples are not exposed, so no specific example from that document can be supplied. No feature checks have run; the baseline passed only existing movement, turn, and error checks.
+
+These answers reflect first-screen machine comprehension, not human usability proof.

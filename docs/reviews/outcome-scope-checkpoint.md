@@ -1,0 +1,86 @@
+# Global scope checkpoint: a tested morning-review candidate
+
+**Current decision, 09:18 UTC: replace the 220-call recommendation below with a focused morning-review scope and a 175-call ceiling.** Finish the existing first-wave operation-goal coverage, make the smallest evidenced scope-summary repair, test that repair on two directly relevant cases, and independently review the change and actual results. Deliver a useful reviewable candidate with explicit remaining release work. Do not refresh every affected heavy record merely to make the final bundle's release matrix green.
+
+**Why this revision:** the earlier recommendation made full evidence freshness a morning-delivery prerequisite. That exceeds the relevant gate. The user's prior instruction was “当然太过heavy的测试也不能每次小改动都跑。在最后release之前跑就行。” [DEVNOTES](../../DEVNOTES.md#canary-cadence) likewise allows heavy checks to remain pending on a PR. The overnight instruction authorizes real learning and iteration; it does not make release readiness the immediate deliverable. Preserve the earlier analysis below as superseded history, including the confirmed OSC-01 finding and its original evidence.
+
+| Required before morning review | Concrete stopping condition |
+|---|---|
+| Complete the already requested initial 17-case cohort and identified active measurement-correction waves | Preserve original worker outputs, checks, readers and valid/invalid scoring attempts. Failed or inconclusive cases remain visible; completion of a run is not a passing result. Do not start new recovery/repair waves to polish the catalog. |
+| Freeze and review the minimal two-prompt change for OSC-01 after candidate-v1 probes finish | Refresh the current scope/next outcome without rewriting accepted history or adding process. Independent review must assess the actual diff, not merely endorse this intention. |
+| Run the final candidate on `v2-scope-extension` and `v3-maintenance` | **7 fresh calls** under their declared phases. The first tests the actual scope-summary defect with a new worker and restricted reader; the second tests the repair's direct risk: unnecessary history/plan churn. Inspect complete outputs and decisive assertions, not only aggregate grades. |
+| Independently review those actual results and complete normal fast checks | Require supported current-scope comprehension and preserved history/scope boundaries before describing the defect as fixed. Invalid scorer quotations do not invalidate original worker evidence; they also do not establish a valid automated pass. A reviewer may reach a separately labeled evidence-backed finding from those originals. |
+
+**Defer to release preparation:** the other ten affected heavy candidate replays, the predeclared matched delivery variability repeat, setup's matched measurement-repair rerun, and optional scorer-only recoveries not needed to resolve the concrete repair. Record these deferrals before the final candidate tests; do not silently remove them or substitute an earlier favorable repeat. Review and record necessary case-local measurement corrections without treating their future acceptance as already established. No new scoring-recovery machinery is required for a usable PR.
+
+At **09:17:45 UTC**, 135 fresh canonical calls were recorded, plus the two outside smoke calls and any still-running calls. The prior projection for completing already queued work was about 151–155; the focused seven-call validation gives approximately **158–162**, so 175 provides bounded contingency rather than a target to consume. Reconcile the live ledger before launching work. No blanket retries, new cases or second broad skill-repair wave are recommended. If a targeted result exposes a real defect, keep it open and address it with a documented minimal correction and relevant verification within that contingency; do not call knowingly deficient work fixed. If the bound prevents verification, explicitly mark the change as needing work rather than claiming completion.
+
+**Morning status must distinguish three things:** the actual tested repair; useful but historical first-wave evidence for the other goals; and missing current-version release evidence. Affected old records remain preserved and **stale for the final bundle's release identity**, not retroactively failed or refreshed. The release gate stays blocked until matching required evidence exists. No overall benefit, complete final-version validation, human acceptance, or release readiness is claimed. Independent review of originals supplements the morning decision; it does not silently override the automated release gate.
+
+This revised scope is my independent recommendation, not an assertion of user approval. Only this review file was changed; no models were run and no skills, evaluation contracts or runtime files were modified.
+
+## Superseded assessment — 09:13 UTC
+
+The following 220-call recommendation and full-refresh ordering are retained for provenance. They are superseded by the morning-review scope above; the observations and OSC-01 evidence remain applicable.
+
+**Decision: recommend a revised hard ceiling of 220 fresh CLI calls for this overnight experiment, including calls already spent.** Retain the current 17-case cohort, complete the identified measurement corrections, and permit **one targeted skill-repair wave** for the confirmed scope-summary defect below. Freeze candidate v1 until its active matched probes finish. No new cases, general evaluation framework, model matrix, or second prompt-repair wave belongs in this revised scope.
+
+**Status: incomplete.** Overall skill benefit is unproved; some original grades are invalid or disputed, and a real candidate readability failure remains open. The extension supports resolving that failure, not obtaining an all-green report. **220 is a ceiling, not a promise that every remaining evaluation will fit.** Preserve and disclose any deferred work; do not silently extend the ceiling again. This is an independent scope recommendation under the existing autonomous task authorization, not user approval of a budget change or acceptance of the skills.
+
+Independent checkpoint, 7 September 2026. Evidence inspected through **09:13:54 UTC**; waves were active. Only this report was written. No model tests, product/skill edits, frozen-runtime changes, commits, or delivery actions were performed. Scope was experiment value, budget and stopping conditions, with a targeted inspection of the newly reported defect—not a full code/document review. Applied repository instructions and the stage-development review operation.
+
+## Why this extension is proportionate
+
+The [proposal](../proposals/outcome-workflow.md) requires a fresh global reassessment at the initial self-imposed 150-call boundary. That number is neither a user token allowance nor a product quality threshold. The [first global review](outcome-global-round1.md) found little demonstrated benefit and correctly favored measurement repair over more prompt rules. The [handoff recheck](outcome-handoff-recheck.md) subsequently justified the missing final-author opportunity and aligned the migration question with its criterion. Those corrections do not establish skill improvement.
+
+The new scope-extension evidence changes the decision: there is now a concrete failure of the user's central goal—understanding the current change at a glance. Stopping all skill work to preserve 150 or 175 would leave that failure unaddressed despite the authorized goal-driven iteration. One small repair and its affected regression coverage are justified. More cases or broad prompt expansion are not.
+
+## OSC-01 — Confirmed current-scope summary defect
+
+**Open; targeted skill repair justified.** I independently compared the [confirmed phase-02 request][request], [case questions][case], [rubric][rubric], final design/plan, exact reader excerpts and [reader answer][reader]. Archived request/case/rubric match the current contract. All four literal quotations supporting the proposed `first-screen-comprehension` failure occur exactly in their cited artifacts.
+
+The request adds YAML starting pose, approximately 200,000 occupied cells loaded once, and clear invalid-structure failure before any movement. The [design beginning][design] instead leads with accepted D1 and the occupied-cell amendment; it links a later YAML amendment without presenting the complete current outcome. The [plan beginning][plan] mentions YAML but spends its visible space on a long S1a row; the restricted excerpt cuts through S1b before its acceptance. The reader consequently describes occupied-cell movement and lookup while missing the new startup and validation behavior. Full documents retain the scope, so this is a failure of the current entrypoint, not proof that the feature requirement was entirely discarded.
+
+Unlike HMR-01, the question asks what behavior is changing and the rubric legitimately expects the confirmed scope. The original [overall report][scope-report] remains **inconclusive** because other grading quotations were rejected; do not relabel it a valid overall fail. This independently supported criterion failure is nevertheless sufficient to motivate a repair. Human glanceability and the repair's causal effect remain unestablished.
+
+**Smallest useful change:** clarify in feature-design drafting and implementation-plan planning that preserving accepted history does not freeze the current entrypoint. When confirmed scope changes, refresh the short current summary and affected pending outcome; keep stable decisions and original evidence linked. Do not rewrite all history, add a new document/review phase, or insert fixture-specific YAML wording or reader-limit quotas. Existing generic first-screen guidance was insufficient in this observation; the preservation-versus-current-state distinction is the plausible mechanism to test.
+
+## Budget accounting and remaining work
+
+At **09:12:30 UTC**, canonical evidence contained **115 recorded fresh calls**: 21 calibration/aborted-calibration, 2 supplemental scoring controls, and 92 worker/reader/grader calls, including recorded phases of unfinished runs. Two actual smoke calls outside that catalog bring the recorded total to **117**, plus launched calls not yet recorded. Copied calibration records, skipped phases and internal tool turns are excluded. Future scoring recoveries must count only their new grader call, not copied worker evidence.
+
+The earlier “four invalid scores” count is already stale: [baseline release-stale][stale] adds a fifth. Also, the [reviewed recovery proposal](outcome-regrade-proposal.md) currently admits only the two small-feature records. It does not yet authorize or establish a valid recovery for either scope-extension record or release-stale. The candidate scope-extension failure must survive any recovery; “only recover proposed passes” is unsuitable for that case.
+
+| Remaining evaluation, in priority order | Bound / decision |
+|---|---|
+| Finish already requested original/resumed waves and matched corrected delivery, migration and two neutral planning probes | Already scheduled. At the count cutoff, approximately **34–38 additional calls** remained under the declared phases; expected cumulative total **151–155** including the two smokes. Active calls are included in this projection, not added twice. Preserve failures and original v1 evidence. |
+| Correct setup's case-local scoring obligation and evaluate the matched pair | **6 calls** for two standard runs. The original baseline's deterministic checks all pass, while its scorer requires an oracle result absent from its packet. Preserve that inconclusive result; review the narrow measurement correction before running it. Do not modify skills to satisfy missing evaluator evidence. |
+| Apply one reviewed, frozen repair to the two skill prompts and evaluate affected candidate cases | **38–42 calls**, not 30–35. Run `v2-scope-extension` first; if the defect persists, stop further prompt editing and report the limitation. If repaired, complete the remaining affected regression coverage listed below. Reuse compatible baseline evidence; case/settings changes invalidate that compatibility. |
+| Perform the predeclared delivery repeat using the final candidate and matching baseline/corrected case | **14–22 calls** for the pair; 14 assumes all correction phases skip. Reserve the upper bound before starting the pair. This is a variability observation, not retry-until-pass. |
+| Recover already identified malformed scoring replies, without rerunning workers | At most **5 new grader calls**, one per pinned original, only after the applicable recovery contract is independently checked. Preserve negative criteria, invalid originals and failed recovery children. Defer unsupported recoveries rather than generalize the framework overnight. |
+
+The 12 affected candidate cases are `bounded-delivery`, `bounded-investigation`, `existing-intake`, `review-defective`, `review-ready`, `route-local`, `route-uncertain`, `v1-small-feature`, `v2-scope-extension`, `v3-maintenance`, `v4-migration-risk`, and `v5-review-recheck`. Their actual phase declarations yield **38–42** calls including readers and scorers. No automatic re-evaluation of unaffected skills is proposed.
+
+Completing every listed item projects roughly **214–230 total calls**, depending on conditional correction phases. Thus 220 cannot honestly guarantee completion of all items. Reserve calls for active work and required affected validation before launching optional recoveries or the repeat. If the remaining allowance cannot cover a whole comparison, **defer that comparison and name it in the final result index**. Do not waive meaningful correction phases to fit the estimate. The same rule applies if timeout or evidence errors leave a run incomplete.
+
+## Stop conditions and final interpretation
+
+- One concrete skill repair, frozen before its wave. No further prompt expansion if that repair fails or a different defect emerges; retain the finding and report the candidate's actual status. A necessary material fix may remain pending for the next reviewed scope.
+- No retry merely because a score is negative, inconsistent, slow or inconvenient. A single approved scorer-only recovery is an evidence recovery, not a new worker success or permission to erase valid negative observations.
+- Stop launching calls at 220, counting aborted attempts and outside smokes. Reconcile recorded and in-flight calls before reaching the ceiling; a minimal ledger in the existing result record is sufficient. No new budget-management framework is needed.
+- Final reporting must separate case quality, goal-by-goal benefit and missing evidence. A repaired scope summary can support a local benefit claim; it cannot establish overall productivity, automatic skill discovery, or human reading satisfaction. Small-task improvement must preserve migration reasoning, useful review and truthful acceptance state.
+- The morning deliverable may be a reviewed candidate with explicit failures/incomplete evaluations. No release-gate pass, owner acceptance, merge, publication or global installation follows from this checkpoint.
+
+Evidence navigation: [goals](../../evals/GOALS.md), [prior dispositions](outcome-dispositions.md), [active wave requests/results](../validation/outcome-waves/), [original baseline setup report][setup]. The dispositions predate several later observations; they are retained history, not proof those later runs have completed.
+
+[request]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/inputs/case/requests/02.md
+[case]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/inputs/case/case.json
+[rubric]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/inputs/case/rubric.json
+[reader]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/phases/reading-probe/reply.md
+[design]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/phases/reading-probe/excerpts/0.txt
+[plan]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/phases/reading-probe/excerpts/1.txt
+[scope-report]: ../validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/report.json
+[stale]: ../validation/canary/20260907T090734-5a79df1e185a46bcad525e9c43c587c4/report.json
+[setup]: ../validation/canary/20260907T085907-3cb838e09ec448fd9dc50289753193b4/report.json
+
+Navigation correction by the primary task: the contributor-guide anchor points to its existing Canary cadence section. Review conclusions are unchanged; the [original received text](../validation/outcome-contract/scope-checkpoint-original.md.txt) is retained.

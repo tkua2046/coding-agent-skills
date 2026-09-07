@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T083526-78cd855023b842669e1273b62047dfbd",
+  "kind": "behavior",
+  "created_at": "2026-09-07T08:35:26.669822+00:00",
+  "status": "pass",
+  "case_id": "bounded-investigation",
+  "identity": {
+    "case": "bd81322235f048854b9d38bccfbb346bbc2cbb17a3b00199181c39e139592b13",
+    "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2",
+    "grader": "17f84dbcc760a443f99076038e60faf52daa3c000f22d2b50f2f92d963244012",
+    "skills": {
+      "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+      "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+      "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+      "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+      "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+      "skills/feature-design/prompts/draft-design.md": "326803d156af5c62dd222a71d41b9e7c6b59654969e3175586a2464f3b646222",
+      "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+      "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": null,
+  "calibration": {
+    "path": "/Users/tk/Documents/coding-agent-skills/docs/validation/canary/20260907T082604-813e3ca009e44d6cbd680a50b29f49a7/report.json",
+    "sha256": "c510563e006ed5899863f80b7b7c1da58b3e100442b3fbf92a8e7322af3e98ca",
+    "grader": "17f84dbcc760a443f99076038e60faf52daa3c000f22d2b50f2f92d963244012"
+  },
+  "fixture_head": "002878b3d5c45160ca513534d4fbaeb6dbafe303",
+  "observations": {
+    "executed_phases": [
+      "01-investigate"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 130.807,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 3,
+        "lines": 11,
+        "bytes": 670
+      },
+      "final": {
+        "files": 7,
+        "lines": 95,
+        "bytes": 10385
+      }
+    }
+  },
+  "deterministic": [
+    {
+      "id": "preserve-application",
+      "status": "pass",
+      "evidence": {
+        "report.py": true,
+        "tests": true,
+        "README.md": true
+      }
+    },
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commits",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "runner.skills-preserved",
+      "status": "pass"
+    },
+    {
+      "id": "runner.workflow-budget",
+      "status": "pass",
+      "evidence": {
+        "worker_elapsed_seconds": 130.807,
+        "workflow_budget_seconds": 300
+      }
+    }
+  ],
+  "semantic": "pass",
+  "finished_at": "2026-09-07T08:38:58.476841+00:00",
+  "evidence": {
+    "attempt.json": "d80bd60ad1ef2053e2cddba4b94f5595cdcaed0696f29ffac18697027ad1d43a",
+    "calibration/0-grade.json": "e32ad6da39ce9cc25aefcd82631aa98cc8c66008b35cb0411f6b6cea117d6373",
+    "calibration/0-isolation.json": "80266025297732a2c9f8a0c7094d532dcfd893204243dd42a892ffce3c86095d",
+    "calibration/0-reply.execution.json": "1e43e11063288ad90391b00644e8d1e9c53f1b774fbaec5755c9929f5c655207",
+    "calibration/0-reply.json": "0093ce48089923c20101d0133e191e68fed8105697198957a376460faa7bfce6",
+    "calibration/1-grade.json": "b20aa3e59966f10835a2946238d9f8ba4401fa29cb12f1cae8269dd35971d782",
+    "calibration/1-isolation.json": "9f735e6bb6d7655fc8b5c4d3b7860808e447f7efd6e6de169904d8e7fb515955",
+    "calibration/1-reply.execution.json": "8312373767a2b5b3f1b55deff64fa3474afc7e3df8ac747707355ebb6d518547",
+    "calibration/1-reply.json": "d4bd14d79db01115b1df165955f287c642461790f6e415ba0c0f086efc708237",
+    "calibration/10-grade.json": "ab66027e3e64746cb4622516506d2ca3f96a4b0d2e1ff02066cd7a6095eaa363",
+    "calibration/10-isolation.json": "4452de75fdd32577847b44ed8928ec3fda49b54804fe612b5f0b9ad8a21cb881",
+    "calibration/10-reply.execution.json": "252d4aa3e249da41759d141e562560859041612d9e77d29c0e701e4e16556b8a",
+    "calibration/10-reply.json": "9bc3225234dab597835f764e5ddf794e2e523489924d1eedb5a40cab50e95e72",
+    "calibration/11-grade.json": "642d2082fc56a13d202009703929075226b6597423355a9c369e0a8cdcbbd654",
+    "calibration/11-isolation.json": "b3a49e3955fcfc0f2a0063faf1b15e2cce35f04a93d214fd1ef0fc43b4afc69c",
+    "calibration/11-reply.execution.json": "2dd1320b95540eda7c1dfa64a9c9f6dbad41b12250e1dcd4a11d8f542e8ca15c",
+    "calibration/11-reply.json": "89f6dbe633be6a08912baac46de90048ed2c7d22a0da24cb7a73e4d33fbcec52",
+    "calibration/2-grade.json": "9b10749302eb62a96efc493865c276aab1c552f1c6451128ef0bed63fc64b558",
+    "calibration/2-isolation.json": "8c4b12a0752cbcd18457cea30c1d0a8b6ea537ba793add2589334f02c3f32d59",
+    "calibration/2-reply.execution.json": "a1143c2e51105ad04f72874059b95b606afe252d08dcf5be3774bc8fa5d0ab47",
+    "calibration/2-reply.json": "d4a1fc2eaaeb73a34baaaf2248195335946dab0d0fc0a598bab78fe63797ef64",
+    "calibration/3-grade.json": "36ddd847ba1ed4208886c2807d91e16596191d713d0fc5a81d34b61c3db8c4db",
+    "calibration/3-isolation.json": "4e9356afe5e854e40bc830afe1294267b9760e96410a19b136666e7101b42e07",
+    "calibration/3-reply.execution.json": "04e14ad2c5fb2c76094eb0ffc9248204ae9bbf34d8360065d0340b8fb126520f",
+    "calibration/3-reply.json": "3d5e06106e51195d1a34c1176f13e2afdc243727f23db09900caf6b9ca8dbc1e",
+    "calibration/4-grade.json": "f1c61c1778fea9bf6f10313478dc747f7e5ee84e2ca64e636165f47d3bd1bf12",
+    "calibration/4-isolation.json": "ab1e8135d6fd20b3010d4408c64ff984e7ef5ebf787345fb0753b18d1de59107",
+    "calibration/4-reply.execution.json": "d32d2d7efd66f5cf6832d87d82e2a407bfeef4b416f50fa498fe1f96cba31937",
+    "calibration/4-reply.json": "edaf34eac01abc8a9fa6f081390adee67d155e3ae6b1e56b40ef6a7136d2f36b",
+    "calibration/5-grade.json": "c019a773bf21b16bd3b9ba55dd957315e7e8d09ae2ce998a6809db112b25f866",
+    "calibration/5-isolation.json": "5c95d189b4733e24ae19f650d59e8f1657a4bda775f1964a3d468ecf349c4380",
+    "calibration/5-reply.execution.json": "a1999e9b816195ab7862e39c805c5bc79a3aaacd7973ea38b24b9334af0eb312",
+    "calibration/5-reply.json": "faf97ba224bec46f1fe5381e4d22e6f8b1e2145fe12759e41a733726e4f24d0a",
+    "calibration/6-grade.json": "8f8f5056de720f17be3598aae02ec2c4633815fa00d286501000c3fb3ee07a0b",
+    "calibration/6-isolation.json": "c4ef60d0597b2fb94685134b3ed7bd9138c21a6f5ce36722ed3990b46ceed88a",
+    "calibration/6-reply.execution.json": "d3eede5a1b0a4ec865a6063a814c0bec74f22dd3b5ece14c33eddfa0ee962a09",
+    "calibration/6-reply.json": "96dda6b55a57b88ee0986281475c95554d113a67773029bc93478de8700e966d",
+    "calibration/7-grade.json": "a487c9afaf7810cc87bdfd30a05b305b01099dd6c2ae076ed0aafee2ff7135ab",
+    "calibration/7-isolation.json": "9a07e56a048972e069a793783752f5240617047a5f7a3f80f7470d43841e2615",
+    "calibration/7-reply.execution.json": "54cc7f22f39aabeefb2a146c081c2b19598e1d2f47283d5a1018f1014cc34894",
+    "calibration/7-reply.json": "d4ff7bdc7e23976a4e67132d9363cb2b8d8a81f14ad470b2d84018cc25d76771",
+    "calibration/8-grade.json": "1f7138692ddb82e49665d5f69982efe36389e603bb2b6a0d2d8cdcf232837e28",
+    "calibration/8-isolation.json": "e6ab33bb3e75c3fa16d4790e1bd8c5cdd39ad7674b12670ac821bf91495d4a7e",
+    "calibration/8-reply.execution.json": "e8999ec4083072563ff84f0a898797957b1837255ae1f683371a0ca0a691682c",
+    "calibration/8-reply.json": "ef000b97f1027e53b51e49552d82743035378fadd3ad740aa072c597e7acb6f9",
+    "calibration/9-grade.json": "302b2cf010d7c6d488eff751b849a4c649c1ddf1be6d230c386a5c2d181ae748",
+    "calibration/9-isolation.json": "4b5f7bfa6e18d076456e42b7c746b711c1625f043804c690ce63d0f2c948ab89",
+    "calibration/9-reply.execution.json": "c0a016a17d538dce0fbff99790fff5fa172d915db19249d3f0be592a0237cec6",
+    "calibration/9-reply.json": "498734924833c08c91216d0566da993605aa8a3e59dea833997b7d3b21bc67ec",
+    "calibration/attempt.json": "2fd47fc01247eda2abd47429b2dac1fe158dff82ca2c7d513539856bd4bfa2ca",
+    "calibration/inputs.json": "b7a541ca5ba0f99587ce69c6b0724495805c5ef55fc186f5a80c9ec2be8c9d2e",
+    "calibration/report.json": "c510563e006ed5899863f80b7b7c1da58b3e100442b3fbf92a8e7322af3e98ca",
+    "deterministic.json": "daf274968d28b2db6c035165d5acc55c5cde9a32b08aa690f5a840c5d1b94c7a",
+    "grade-reply.execution.json": "77f0e8ae32999f9fbf6937db97bdec3263c1131b271463ec69c8e4e5b87b4148",
+    "grade-reply.json": "240ca684c0808f476daff67cf91264a9503af2f8a40174ecbe2d3a377e56c485",
+    "grade.json": "4bbf67363b0aa3765a95ad7c4ea542b83b3166d90ccc8d9c7139df9fda54f250",
+    "grader-isolation.json": "4baddde8207b498884df23e9c382468852091f3a8b2123a966a6a99075b9d34c",
+    "initial/AGENTS.md": "4da1c49814482d484175708b6ab2409abe993c0833a8a44ad99dd702b6606248",
+    "initial/DEVNOTES.md": "2e0997359c867e16c1889866bc7024e53b37fc341551f1168def8087f15e52bf",
+    "initial/README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "initial/report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "initial/skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+    "initial/skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+    "initial/skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+    "initial/skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+    "initial/skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+    "initial/skills/feature-design/prompts/draft-design.md": "326803d156af5c62dd222a71d41b9e7c6b59654969e3175586a2464f3b646222",
+    "initial/skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+    "initial/skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+    "initial/tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6",
+    "initial-git.json": "b7c57755199e9093b2ed9937a34f3457d277ecc771793a38c838caf7b49ce97b",
+    "inputs/bundles/skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+    "inputs/bundles/skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+    "inputs/bundles/skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+    "inputs/bundles/skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+    "inputs/bundles/skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+    "inputs/bundles/skills/feature-design/prompts/draft-design.md": "326803d156af5c62dd222a71d41b9e7c6b59654969e3175586a2464f3b646222",
+    "inputs/bundles/skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+    "inputs/bundles/skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+    "inputs/case/case.json": "2acf0c047306a9504c7d7cde29632fa79280d92857b04452c805d1030cb5ac50",
+    "inputs/case/fixture/AGENTS.md": "4da1c49814482d484175708b6ab2409abe993c0833a8a44ad99dd702b6606248",
+    "inputs/case/fixture/DEVNOTES.md": "2e0997359c867e16c1889866bc7024e53b37fc341551f1168def8087f15e52bf",
+    "inputs/case/fixture/README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "inputs/case/fixture/report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "inputs/case/fixture/tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6",
+    "inputs/case/requests/01.md": "ea3ca6c88bb924de64c63aa62ee84513ffa30ba01474a2bb969ae01cce174986",
+    "inputs/case/rubric.json": "81c4e209f3b4687112afdcd16ac5a6f134d89b35c5e91d4583dc3dccccf4a0f7",
+    "isolation.json": "c88ba392bf09dcf0cd46528978004acefe934368450017480953c9ba4cab9d02",
+    "phases/01-investigate/execution.json": "be8efbdc967d92b8b0ae53e4a1b528c6a4d4e1c9e2b73a972e981affcde56d5b",
+    "phases/01-investigate/git.json": "50a2156f9a7b1954431180e9770a6796f23398324f848e0b2d3a0dd908759a6e",
+    "phases/01-investigate/prompt.md": "bc7476e4d6f0093bc1b32ff4bcf78ec8d4e3a6a78948c232cd23bd7f3a060621",
+    "phases/01-investigate/reply.md": "8f421bb3e853f568e47e9dcb63663556b8a48ae7bfbeca66642fc201abd4a451",
+    "phases/01-investigate/request.md": "ea3ca6c88bb924de64c63aa62ee84513ffa30ba01474a2bb969ae01cce174986",
+    "phases/01-investigate/workspace/AGENTS.md": "4da1c49814482d484175708b6ab2409abe993c0833a8a44ad99dd702b6606248",
+    "phases/01-investigate/workspace/DEVNOTES.md": "2e0997359c867e16c1889866bc7024e53b37fc341551f1168def8087f15e52bf",
+    "phases/01-investigate/workspace/README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "phases/01-investigate/workspace/docs/INVESTIGATION.md": "b05ea1d77d85e694d4f023210494db05fbaf8100249512af3e28b996f7148489",
+    "phases/01-investigate/workspace/docs/evidence/order-report-20260907-0835/baseline.txt": "924b9af7a58276e6e896240b0dcd2fa9a8774389a6752c4a09b0c2cd76964206",
+    "phases/01-investigate/workspace/docs/evidence/order-report-20260907-0835/commands.md": "3d2d0cfaa5edf8b6c69280c9031d050e867a351178b24ac73887ffac403d1002",
+    "phases/01-investigate/workspace/docs/evidence/order-report-20260907-0835/probe.py": "62d0545f75dfb12c9812a472badbb0513c37290ba1d85ff5ca0dde911c78e2ad",
+    "phases/01-investigate/workspace/docs/evidence/order-report-20260907-0835/results.txt": "69a9c491ae4058215c0048bdc123447ddf58c143399cb487323f894506d92275",
+    "phases/01-investigate/workspace/report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "phases/01-investigate/workspace/skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+    "phases/01-investigate/workspace/skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+    "phases/01-investigate/workspace/skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+    "phases/01-investigate/workspace/skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+    "phases/01-investigate/workspace/skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+    "phases/01-investigate/workspace/skills/feature-design/prompts/draft-design.md": "326803d156af5c62dd222a71d41b9e7c6b59654969e3175586a2464f3b646222",
+    "phases/01-investigate/workspace/skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+    "phases/01-investigate/workspace/skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+    "phases/01-investigate/workspace/tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6",
+    "phases/observations.json": "c2eca1cc0cd1fe540cbd4325cbd8f1e5727f52d2bd950571aa222ab053c4bac2",
+    "phases/reading-probe/excerpts/0.txt": "90f4ae06fcc40ab95f4fa9a93bd07063a44ff457f5866ed568980f575d43ca95",
+    "phases/reading-probe/execution.json": "a7fd9f81aa3e1abfbb2538fc7a6d80ac2ae0c21a530608a01a8d1df5b8683328",
+    "phases/reading-probe/input.json": "79c798a6b0a15accd62b425a5a49bfbe521f3397675e63e7f8f25223381e023b",
+    "phases/reading-probe/isolation.json": "a9007ab4e7a2f706b3c78e374151c33c0cc3da53d3397750e51f340b47b1a8d2",
+    "phases/reading-probe/prompt.md": "746d2e96320fbb6cf0d971c0e34f16672d2616e6c89c4fcc13c46cfd4c734830",
+    "phases/reading-probe/reply.md": "fa4dcd0efef8c33d6264b35d46ab8fc737f43b5705c97eb36ad6aa46ff3957c5"
+  }
+}

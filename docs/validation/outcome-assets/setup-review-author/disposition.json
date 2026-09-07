@@ -1,0 +1,33 @@
+{
+  "kind": "Author control disposition and scope record; no behavioral grade",
+  "recorded_at": "2026-09-07T08:16:39.522528+00:00",
+  "original_failed_record": "20260907T081145094170Z-controls.json",
+  "finding": "The first fixture wrapper and oracle invoked git inside the runtime sandbox. The macOS /usr/bin/git launcher attempted developer-tool discovery that the restricted runtime could not access.",
+  "observed_diagnostic": "xcode-select: error: No developer tools were found and no install could be requested (possibly because there is no active GUI session).",
+  "correction": "The fixture wrapper locates its installed directory and delegates to the same tools/check.py entrypoint without launching git. The evaluator checks the installed executable wrapper and local core.hooksPath configuration directly. No runner, permission profile, global setting or dependency was changed.",
+  "passing_followup": "20260907T081305760904Z-controls.json",
+  "final_hash_bound_controls": "20260907T081518182732Z-controls.json",
+  "final_result": "All 25 original/positive/fault controls pass, including restoration and the actual stdlib-only runtime fallback.",
+  "remaining_runtime_observation": "The parent should verify an accessible Git executable for prepare-pr working-tree inspection before heavy execution; this task fixed the fixture hook dependency only. Sandbox shell Git failed in the observed environment even though author-side Git initialization worked.",
+  "case_scope": {
+    "workflow-setup": "Setup/adaptation, then a fresh-context prepare-pr operation using the actual setup diff, local PR.md only and pending maintainer human review.",
+    "review-ready": "One combined static design/plan review; sufficient proposal.",
+    "review-defective": "Same-shaped static review; late selected-row validation and postponed whole-file validation, buried in 98/96-line notes."
+  },
+  "tradeoffs": [
+    "Application, original test suite, samples and established discovery/coverage/hook conventions are deliberately fixed; prompts state these boundaries.",
+    "Coverage JSON is compared to independent line/branch measurement with the prepared runtime. This verifies instrumentation, not adequacy of tests or agent behavior; there is no percentage threshold.",
+    "Review oracles only enforce unchanged inputs and report-only output. Rubrics assess contract/dependency detection, reader cost, restraint and truthful concise conclusions.",
+    "The phase-02 PR rubric requires comparing phase archives to detect setup rewrites or erased evidence; the final deterministic oracle only requires a nonempty local draft plus the working preserved setup.",
+    "Restoration verifies filesystem entries, bytes and modes, not timestamps; supplied skills and virtual environments are excluded from the setup oracle snapshot.",
+    "No model trials, semantic calibration, reviewer acceptance or human approval are claimed."
+  ],
+  "authored_case_files": 49,
+  "writes_limited_to": [
+    "evals/cases/workflow-setup",
+    "evals/cases/review-ready",
+    "evals/cases/review-defective",
+    "docs/validation/outcome-assets/setup-review-author"
+  ],
+  "no_commits_pushes_installs_or_remote_actions": true
+}

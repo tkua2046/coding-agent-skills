@@ -1,0 +1,85 @@
+{
+  "criteria": [
+    {
+      "id": "resolve-uncertainty",
+      "status": "pass",
+      "reason": "The recorded bounded probe checked exact expected outputs across six synthetic cases and empty input, then measured repeated catalog loading and parsing. The findings accurately limit the observations to this local workload; the investigation completed within five minutes.",
+      "evidence": [
+        {
+          "path": "artifacts/01-investigate/workspace/docs/evidence/order-report-20260907-0835/probe.py",
+          "quote": "actual = fn(orders, path)\n                    samples[name].append(time.perf_counter() - start)\n                    assert actual == expected"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/evidence/order-report-20260907-0835/results.txt",
+          "quote": "current load_catalog calls for 5000 orders: 5000\nonce load_catalog calls for 5000 orders: 1"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/evidence/order-report-20260907-0835/results.txt",
+          "quote": "5000    0.288    0.000    1.598    0.000 report.py:5(load_catalog)\n     5000    0.003    0.000    1.110    0.000 __init__.py:299(loads)"
+        },
+        {
+          "path": "artifacts/01-investigate/execution.json",
+          "quote": "Probe exit status: 0"
+        },
+        {
+          "path": "artifacts/observations.json",
+          "quote": "\"worker_elapsed_seconds\": 130.807"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "One machine, three trials, small synthetic files, likely warm filesystem cache; no production trace, cold-disk isolation, concurrency, peak-memory measurement, or end-to-end latency target."
+        }
+      ]
+    },
+    {
+      "id": "proportionate-next-action",
+      "status": "pass",
+      "reason": "The recommendation follows the fixed-catalog premise: evaluate a local once-per-nonempty-batch load, with representative performance and compatibility verification before delivery. Production code and tests remain unchanged, and no rebuild was implemented.",
+      "evidence": [
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "Next, seek authorization to evaluate a small change that loads the catalog once per nonempty batch, then validate against representative batch/catalog sizes and an agreed latency target. This investigation delivers no production change or rebuild design."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "confirms that the catalog is fixed within each batch."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "Before authorized delivery, establish representative workload sizes and acceptable latency, verify exact totals/order, empty-input behavior, error compatibility and fresh catalog reads across separate batches, and measure time/memory on those workloads."
+        },
+        {
+          "path": "artifacts/01-investigate/git.json",
+          "quote": "\"status\": \"?? docs/\",\n  \"diff\": \"\""
+        }
+      ]
+    },
+    {
+      "id": "readable-findings",
+      "status": "pass",
+      "reason": "The restricted reader correctly identified the measured cause, deferred rebuild, local next action, and unresolved representative performance from the actual excerpt. The exposed text supports those answers, and separate probe, command, and result files preserve the full experiment.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Repeated catalog loading dominates this local workload. Next, seek authorization to evaluate a small change that loads the catalog once per nonempty batch, then validate against representative batch/catalog sizes and an agreed latency target."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "A standard-library scratch probe compared current code with a once-per-batch variant using fixed synthetic catalogs of 100/1,000 rows and batches of 100/1,000/5,000 orders."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "This supports repeated catalog loading as the dominant cost in the tested local workload."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Seek authorization to evaluate loading the catalog once per nonempty batch, then validate against representative batch/catalog sizes and an agreed latency target. Representative performance and whether it meets that target remain unestablished; the excerpt supplies neither representative sizes nor a target."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "[Commands and statuses](evidence/order-report-20260907-0835/commands.md), [baseline output](evidence/order-report-20260907-0835/baseline.txt), [probe](evidence/order-report-20260907-0835/probe.py), and [raw timings/profile/hashes](evidence/order-report-20260907-0835/results.txt)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "case": "normal",
+    "exit": 0,
+    "expected": 0
+  },
+  {
+    "case": "installed-hook-docs",
+    "exit": 0,
+    "expected": 0
+  },
+  {
+    "case": "failure",
+    "exit": 1,
+    "expected": 1
+  },
+  {
+    "case": "zero",
+    "exit": 1,
+    "expected": 1
+  },
+  {
+    "case": "stdlib-pass",
+    "exit": 0,
+    "expected": 0
+  },
+  {
+    "case": "stdlib-failure",
+    "exit": 1,
+    "expected": 1
+  },
+  {
+    "case": "stdlib-zero",
+    "exit": 1,
+    "expected": 1
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "reviewed_content_sha256": {
+    "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+    "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+    "inventory.py": "d693834721cc027b58a6c7cb6a0086a06ca27c2350a03081b4a5306f7a3f0a05",
+    "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+    "docs/PLAN.md": "18156a34088d2432e67da12d60a8594d69ade07c110ca5f56a936be4018ae8f3",
+    "docs/SPEC.md": "fab896c64fe20bc47dd387a790ca53c77e32fb9a05923988735d083e55571a4d",
+    "docs/DESIGN.md": "0f386d1951fa20f93ac3105889f9e61efc9e7fdb553705d93af3b2646daa1a1b",
+    "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+    "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+    "tests/test_inventory.py": "fa4f6d205efc3a6ebc75582c3c5eb8cd0d7dc8f9ac7025f5716cbac0efe9e77b",
+    "reviews/s1-tests.log": "fdf102f7226babc84651c149a6fc60c7d67174ccda42169aaeac24ec71aefb17",
+    "reviews/s1-candidate.json": "91fadf1b5a954574e78ec8e575dd76c8a30ba67b51d2fa1a542fe8648e66aa52",
+    "reviews/s1-counterexample.log": "96dff5da6397a865741ca0d687eb49d0572744d722b228687ea391e01fa22c7b",
+    "reviews/s1-handoff.md": "bcb7c9b5617540c05992ce6ab518fc1afd509806364e52dcca9894270e33dd46",
+    "reviews/s1-gate.log": "d3dcd37ec2623fff4f057ce734aea6d0ca74832684c8abfa183f4784ebde0c96",
+    "reviews/s1-candidate.patch": "fcb002992431c939e771283c40ed4206586bd6201084584f7fc991bb9a3da358",
+    "reviews/design-current.json": "0898ab1c4950442ef76103c11a450a0757e79bbe68a91465c6cde81a44e2ad43",
+    "README.md": "792b42b7c16c0a601bf9ae1e0a18cac8be4651c9a0f2551358a24cf91c7c70cd",
+    "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+    "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+    "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+    "skills/stage-development/SKILL.md": "48cdfeb605e12716ced524d899b2bb3a2c65f7ca11a95c2fa8f349cb5c1aa024",
+    "skills/stage-development/prompts/review-stage.md": "1802dbca6613255883b83d9e349704664ab2bbbde9a51c66d222aeadb93769e8"
+  },
+  "candidate_manifest_verified": true,
+  "content_unchanged_after_checks": true,
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "checks": [
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_invalid_json_batch_never_reaches_reservation (test_inventory.InventoryTests.test_invalid_json_batch_never_reaches_reservation) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\ntest_whole_order_rejection_through_both_apis (test_inventory.InventoryTests.test_whole_order_rejection_through_both_apis) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "hooks/pre-commit"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_invalid_json_batch_never_reaches_reservation (test_inventory.InventoryTests.test_invalid_json_batch_never_reaches_reservation) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\ntest_whole_order_rejection_through_both_apis (test_inventory.InventoryTests.test_whole_order_rejection_through_both_apis) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-QPj8r6jF' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-zSYOKls5' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--",
+        "batch.py",
+        "command_codec.py",
+        "hooks/pre-commit",
+        "docs/REQUEST.md",
+        "docs/ORIGINAL.md",
+        "docs/history/completed.md"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-73D9LWIR' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-BcuwQKMu' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "case": "route-uncertain",
+  "kind": "author fixture/boundary controls, not skill or grader trials",
+  "oracle_sha256": "d7fce4717ccdab8503791c735e49e36ab55503d57fce8ae20ed185cccf549098",
+  "fixture_sha256": {
+    "AGENTS.md": "a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08",
+    "DEVNOTES.md": "6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6",
+    "README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "docs/REQUEST.md": "23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1",
+    "report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6"
+  },
+  "controls": [
+    {
+      "control": "existing-fixture-tests",
+      "expected_exit": 0,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_empty (test_report.ReportTests.test_empty) ... ok\ntest_subtotals (test_report.ReportTests.test_subtotals) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "starting-behavior",
+      "expected_exit": 0,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "from pathlib import Path\nimport sys\nsys.path.insert(0, str(Path.cwd()))\nfrom unittest.mock import patch\nfrom report import summarize\norders = [{\"sku\": \"a\", \"quantity\": n} for n in [3, 2, 0]]\nwith patch(\"report.load_catalog\", return_value={\"a\": {\"price_cents\": 125}}) as loader:\n    assert summarize(orders, \"unused\") == [{\"sku\": \"a\", \"subtotal_cents\": n} for n in [375, 250, 0]]\n    assert loader.call_count == 3\nassert summarize([], \"missing.json\") == []\nprint(\"Three orders cause three loader calls; exact ordered totals and empty behavior observed; no timing claim\")\n",
+      "exit_code": 0,
+      "stdout": "Three orders cause three loader calls; exact ordered totals and empty behavior observed; no timing claim\n",
+      "stderr": "",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "allowed-notes-and-scratch",
+      "expected_exit": 0,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 0,
+      "stdout": "Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\n",
+      "stderr": "",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "changed-application",
+      "expected_exit": 1,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 20, in <module>\nAssertionError: Changed protected input: report.py\n",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "deleted-test",
+      "expected_exit": 1,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 19, in <module>\nAssertionError: Missing protected input: tests/test_report.py\n",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "extra-project-module",
+      "expected_exit": 1,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 33, in <module>\nAssertionError: Unexpected project file outside planning scope: replacement.py\n",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "missing-handoff",
+      "expected_exit": 1,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 38, in <module>\nAssertionError: Missing readable next-work handoff: docs/NEXT.md\n",
+      "workspace_unchanged": true
+    },
+    {
+      "control": "unsupported-claim-boundary-limit",
+      "expected_exit": 0,
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-"
+      ],
+      "stdin": "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755\",\n    \"docs/REQUEST.md\": \"23ff60f602a8c92b2fba49a7718a90ce52a0fc669d033626a808f966e909dce1\",\n    \"report.py\": \"56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608\",\n    \"tests/test_report.py\": \"ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n",
+      "exit_code": 0,
+      "stdout": "Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\n",
+      "stderr": "",
+      "workspace_unchanged": true,
+      "semantic_expectation": "evidence-and-scope must fail: both claims are deliberately invented; this control has NOT been LLM graded",
+      "interpretation": "Boundary oracle passing does not establish evidence honesty or useful planning"
+    }
+  ],
+  "expected_boundary_results_matched": true,
+  "semantic_or_reader_execution": "not run; requires independent case review then real matched trials"
+}

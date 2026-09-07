@@ -1,0 +1,24 @@
+{
+  "kind": "NO-MODEL strengthened packet mutation control",
+  "argv": [
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "artifacts/test_regrade_outcome.py",
+    "-k",
+    "packet-change"
+  ],
+  "exit_code": 0,
+  "stdout": ".                                                                        [100%]\n1 passed, 28 deselected in 2.31s\n",
+  "stderr": "",
+  "elapsed_seconds": 2.454,
+  "created_at": "2026-09-07T09:06:24.329165+00:00",
+  "helper_sha256": "3b2efdf5bb4693ef4e64fc8353b91a154dbf74fd620ec502a02d863bc1538d3e",
+  "test_sha256": "7801915b060b0e3428267aecab48cb023656cc70c7453f6535e9b6a23a5dc6d7",
+  "reason": "Change both packet text and proposed quote so canonical quote validation succeeds against mutated packet; require recovery helper immutable-packet guard to reject."
+}

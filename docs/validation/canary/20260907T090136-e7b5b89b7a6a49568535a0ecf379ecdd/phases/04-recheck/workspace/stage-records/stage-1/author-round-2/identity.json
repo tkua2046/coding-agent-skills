@@ -1,0 +1,6 @@
+{
+  "candidate": "candidate-1 (unchanged)",
+  "manifest_sha256": "bb19193140ac5976a596ef65076db7e7ac3b0998e6acc244aab8759ceff8dc6d",
+  "patch_sha256": "3e6ee5fc680b2564087cd8159bb318a982431e60aada21f04bda2c0a78de9431",
+  "verification": "All 11 file hashes and patch bytes match before and after checks."
+}

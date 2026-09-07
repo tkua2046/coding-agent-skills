@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/NEXT.md",
+      "text": "# Next work: reuse the catalog within each report call\n\nStatus: proposed design and implementation plan; no production change implemented.\nAuthority: [original request](REQUEST.md), [fixture guidance](../AGENTS.md), and\n[current API](../report.py). Existing source documents and reports are preserved.\n\n**Next developer outcome:** remove repeated catalog loading within a nonempty\n`summarize(orders, catalog_path)` call, with compatibility tests and a before/after\nmeasurement in one reviewable change. Keep the current synchronous API, output\norder and exact integer-cent arithmetic. An empty input must still return `[]`\nwithout opening the catalog. Each new call must read a fresh catalog snapshot.\n\nThis is a bounded local change: inspection and a small baseline probe establish\navoidable repeated work; they do not establish production latency or justify a\ndatabase, shared cache or background queue. A combined design/plan is sufficient.\n\n## Evidence and limits\n\n- [Existing tests](../tests/test_report.py): both passed, exit 0; [raw output](planning-baseline.txt).\n- [Reproducible scratch probe](../scratch/probe_report.py): exit 0;\n  [raw measurements and profile](planning-probe.txt). It exercises unmodified code\n  with a generated 1,000-row, 37,015-byte catalog. Three unprofiled repetitions\n  gave median times of 0.000326 s for one order, 0.031454 s for 100 orders and\n  0.322908 s for 1,000 orders. Separate profiles counted one catalog load per order\n  (zero for empty input). At 1,000 orders, loading consumed 0.309 of 0.338 profiled\n  seconds, including JSON decoding, file reads and dictionary construction.\n- Exact outputs were checked against independently calculated values. The probe\n  also verified iterator input, empty iterators with a missing path and catalog\n  freshness between calls.\n- These are synthetic local, repeatedly read workloads, subject to filesystem\n"
+    }
+  ],
+  "questions": [
+    "What work should the developer do next, and why does it follow from the available evidence?",
+    "What has actually been established, what remains uncertain or unperformed, and what result would justify moving forward?"
+  ]
+}

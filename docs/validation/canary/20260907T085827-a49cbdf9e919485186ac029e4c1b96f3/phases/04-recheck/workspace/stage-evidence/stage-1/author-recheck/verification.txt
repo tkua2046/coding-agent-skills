@@ -1,0 +1,5 @@
+All 11 working/index manifest entries and captured payload patch match.
+60 invalid-input cases preserve state and recover with default and large keyword steps.
+Existing regression test detects both baseline boolean defects; expected failures retained.
+All 11 working/index manifest entries and captured payload patch match.
+Focused suite and full gate passed; payload unchanged after checks.

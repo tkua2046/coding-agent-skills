@@ -1,0 +1,34 @@
+[
+  {
+    "case": "bounded-delivery",
+    "report": "docs/validation/canary/20260907T090510-e0640bf3c1ac48fbae25dfec4392a7a6/report.json",
+    "status": "pass",
+    "worker_elapsed_seconds": 704.783,
+    "wave_elapsed_seconds": 831.037,
+    "error": null
+  },
+  {
+    "case": "v4-migration-risk",
+    "report": "docs/validation/canary/20260907T091901-572ec8619c5e4a5cbc4d498974adf8f6/report.json",
+    "status": "fail",
+    "worker_elapsed_seconds": 182.025,
+    "wave_elapsed_seconds": 300.914,
+    "error": null
+  },
+  {
+    "case": "route-local",
+    "report": "docs/validation/canary/20260907T092402-902583d3cfff40e1a88c63d6eddaf926/report.json",
+    "status": "pass",
+    "worker_elapsed_seconds": 150.662,
+    "wave_elapsed_seconds": 245.083,
+    "error": null
+  },
+  {
+    "case": "route-uncertain",
+    "report": "docs/validation/canary/20260907T092807-ff5642a36e9c4a34a5a5f7b9b414b010/report.json",
+    "status": "pass",
+    "worker_elapsed_seconds": 157.483,
+    "wave_elapsed_seconds": 251.259,
+    "error": null
+  }
+]

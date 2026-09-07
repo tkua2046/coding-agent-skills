@@ -1,0 +1,732 @@
+[
+  {
+    "control": "positive-oracle",
+    "exit_code": 0,
+    "checks": {
+      "checks": [
+        {
+          "check": "application-and-conventions-preserved",
+          "passed": true,
+          "changed": [],
+          "unexpected_python": []
+        },
+        {
+          "check": "installed-local-hook",
+          "passed": true
+        },
+        {
+          "check": "local-pr-draft-present",
+          "passed": true
+        },
+        {
+          "check": "hook-accepts-success",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK\n"
+        },
+        {
+          "check": "fresh-application-branch-coverage",
+          "passed": true,
+          "actual": {
+            "executed_lines": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              13,
+              14,
+              15,
+              16,
+              17,
+              20,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              42,
+              45,
+              47,
+              48,
+              49,
+              50,
+              54,
+              55,
+              56,
+              57,
+              59,
+              60,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              80
+            ],
+            "missing_lines": [
+              81
+            ],
+            "executed_branches": [
+              [
+                15,
+                16
+              ],
+              [
+                15,
+                17
+              ],
+              [
+                25,
+                26
+              ],
+              [
+                25,
+                27
+              ],
+              [
+                27,
+                28
+              ],
+              [
+                27,
+                42
+              ],
+              [
+                28,
+                29
+              ],
+              [
+                28,
+                30
+              ],
+              [
+                31,
+                32
+              ],
+              [
+                31,
+                33
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                33,
+                35
+              ],
+              [
+                59,
+                60
+              ],
+              [
+                69,
+                70
+              ],
+              [
+                69,
+                71
+              ],
+              [
+                80,
+                -1
+              ]
+            ],
+            "missing_branches": [
+              [
+                59,
+                -45
+              ],
+              [
+                80,
+                81
+              ]
+            ]
+          },
+          "independently_measured": {
+            "executed_lines": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              13,
+              14,
+              15,
+              16,
+              17,
+              20,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              42,
+              45,
+              47,
+              48,
+              49,
+              50,
+              54,
+              55,
+              56,
+              57,
+              59,
+              60,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              80
+            ],
+            "missing_lines": [
+              81
+            ],
+            "executed_branches": [
+              [
+                15,
+                16
+              ],
+              [
+                15,
+                17
+              ],
+              [
+                25,
+                26
+              ],
+              [
+                25,
+                27
+              ],
+              [
+                27,
+                28
+              ],
+              [
+                27,
+                42
+              ],
+              [
+                28,
+                29
+              ],
+              [
+                28,
+                30
+              ],
+              [
+                31,
+                32
+              ],
+              [
+                31,
+                33
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                33,
+                35
+              ],
+              [
+                59,
+                60
+              ],
+              [
+                69,
+                70
+              ],
+              [
+                69,
+                71
+              ],
+              [
+                80,
+                -1
+              ]
+            ],
+            "missing_branches": [
+              [
+                59,
+                -45
+              ],
+              [
+                80,
+                81
+              ]
+            ]
+          }
+        },
+        {
+          "check": "hook-rejects-seeded-test-failure",
+          "passed": true,
+          "exit_code": 1,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "test_seeded_failure (check_canary_failure.GateProbe.test_seeded_failure) ... FAIL\ntest_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n======================================================================\nFAIL: test_seeded_failure (check_canary_failure.GateProbe.test_seeded_failure)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/outcome-independent-16ujw4ec/positive/qa/check_canary_failure.py\", line 4, in test_seeded_failure\n    self.assertEqual(7, 8, 'temporary evaluator failure')\nAssertionError: 7 != 8 : temporary evaluator failure\n\n----------------------------------------------------------------------\nRan 6 tests in 0.011s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "check": "hook-rejects-zero-tests",
+          "passed": true,
+          "exit_code": 1,
+          "timed_out": false,
+          "stdout": "",
+          "stderr": "Checks failed: no tests discovered\n"
+        },
+        {
+          "check": "hook-accepts-restored-suite",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.011s\n\nOK\n"
+        },
+        {
+          "check": "workspace-restored",
+          "passed": true,
+          "scope": "entries, file bytes, symlink targets and modes; excludes skills/.venv"
+        }
+      ]
+    }
+  },
+  {
+    "control": "positive-documentation-only",
+    "exit_code": 0,
+    "changed_paths": [
+      "README.md"
+    ],
+    "fresh_coverage_exists": true,
+    "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+    "stderr": "test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK\n"
+  },
+  {
+    "control": "docs-skip-mutant-oracle",
+    "exit_code": 0,
+    "checks": {
+      "checks": [
+        {
+          "check": "application-and-conventions-preserved",
+          "passed": true,
+          "changed": [],
+          "unexpected_python": []
+        },
+        {
+          "check": "installed-local-hook",
+          "passed": true
+        },
+        {
+          "check": "local-pr-draft-present",
+          "passed": true
+        },
+        {
+          "check": "hook-accepts-success",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-HFX2rB74' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-UfvwKQcr' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\ntest_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK\n"
+        },
+        {
+          "check": "fresh-application-branch-coverage",
+          "passed": true,
+          "actual": {
+            "executed_lines": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              13,
+              14,
+              15,
+              16,
+              17,
+              20,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              42,
+              45,
+              47,
+              48,
+              49,
+              50,
+              54,
+              55,
+              56,
+              57,
+              59,
+              60,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              80
+            ],
+            "missing_lines": [
+              81
+            ],
+            "executed_branches": [
+              [
+                15,
+                16
+              ],
+              [
+                15,
+                17
+              ],
+              [
+                25,
+                26
+              ],
+              [
+                25,
+                27
+              ],
+              [
+                27,
+                28
+              ],
+              [
+                27,
+                42
+              ],
+              [
+                28,
+                29
+              ],
+              [
+                28,
+                30
+              ],
+              [
+                31,
+                32
+              ],
+              [
+                31,
+                33
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                33,
+                35
+              ],
+              [
+                59,
+                60
+              ],
+              [
+                69,
+                70
+              ],
+              [
+                69,
+                71
+              ],
+              [
+                80,
+                -1
+              ]
+            ],
+            "missing_branches": [
+              [
+                59,
+                -45
+              ],
+              [
+                80,
+                81
+              ]
+            ]
+          },
+          "independently_measured": {
+            "executed_lines": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              10,
+              13,
+              14,
+              15,
+              16,
+              17,
+              20,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              42,
+              45,
+              47,
+              48,
+              49,
+              50,
+              54,
+              55,
+              56,
+              57,
+              59,
+              60,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              80
+            ],
+            "missing_lines": [
+              81
+            ],
+            "executed_branches": [
+              [
+                15,
+                16
+              ],
+              [
+                15,
+                17
+              ],
+              [
+                25,
+                26
+              ],
+              [
+                25,
+                27
+              ],
+              [
+                27,
+                28
+              ],
+              [
+                27,
+                42
+              ],
+              [
+                28,
+                29
+              ],
+              [
+                28,
+                30
+              ],
+              [
+                31,
+                32
+              ],
+              [
+                31,
+                33
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                33,
+                35
+              ],
+              [
+                59,
+                60
+              ],
+              [
+                69,
+                70
+              ],
+              [
+                69,
+                71
+              ],
+              [
+                80,
+                -1
+              ]
+            ],
+            "missing_branches": [
+              [
+                59,
+                -45
+              ],
+              [
+                80,
+                81
+              ]
+            ]
+          }
+        },
+        {
+          "check": "hook-rejects-seeded-test-failure",
+          "passed": true,
+          "exit_code": 1,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-tRvChQ86' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-ymeZTCtB' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\ntest_seeded_failure (check_canary_failure.GateProbe.test_seeded_failure) ... FAIL\ntest_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n======================================================================\nFAIL: test_seeded_failure (check_canary_failure.GateProbe.test_seeded_failure)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/outcome-independent-16ujw4ec/docs-skip-mutant/qa/check_canary_failure.py\", line 4, in test_seeded_failure\n    self.assertEqual(7, 8, 'temporary evaluator failure')\nAssertionError: 7 != 8 : temporary evaluator failure\n\n----------------------------------------------------------------------\nRan 6 tests in 0.011s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "check": "hook-rejects-zero-tests",
+          "passed": true,
+          "exit_code": 1,
+          "timed_out": false,
+          "stdout": "",
+          "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-VwSwYkw3' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-wKSZU1Hc' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\nChecks failed: no tests discovered\n"
+        },
+        {
+          "check": "hook-accepts-restored-suite",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "stdout": "Name           Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------------\ninventory.py      58      1     18      2    96%   59->exit, 81\n----------------------------------------------------------\nTOTAL             58      1     18      2    96%\n",
+          "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-Ea4EUlDC' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-2AMdblyo' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\ntest_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok\ntest_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok\ntest_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok\ntest_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok\ntest_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK\n"
+        },
+        {
+          "check": "workspace-restored",
+          "passed": true,
+          "scope": "entries, file bytes, symlink targets and modes; excludes skills/.venv"
+        }
+      ]
+    }
+  },
+  {
+    "control": "docs-skip-mutant-documentation-only",
+    "exit_code": 0,
+    "changed_paths": [
+      "README.md"
+    ],
+    "fresh_coverage_exists": false,
+    "stdout": "Documentation-only change: skipping application checks.\n",
+    "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-ekNjj3QC' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-dl8DWuj5' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+  },
+  {
+    "control": "review-ready-no-report",
+    "exit_code": 1
+  },
+  {
+    "control": "review-ready-report-only",
+    "exit_code": 0
+  },
+  {
+    "control": "review-ready-design-edited",
+    "exit_code": 1
+  },
+  {
+    "control": "review-defective-no-report",
+    "exit_code": 1
+  },
+  {
+    "control": "review-defective-report-only",
+    "exit_code": 0
+  },
+  {
+    "control": "review-defective-design-edited",
+    "exit_code": 1
+  }
+]

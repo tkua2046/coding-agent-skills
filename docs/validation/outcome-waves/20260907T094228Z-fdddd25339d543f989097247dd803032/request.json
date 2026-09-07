@@ -1,0 +1,27 @@
+{
+  "label": "candidate-v2-affected-regressions-after-targeted-scope-pass",
+  "baseline": null,
+  "cases": [
+    "v3-maintenance",
+    "v4-migration-risk",
+    "bounded-delivery",
+    "bounded-investigation",
+    "existing-intake",
+    "review-ready",
+    "review-defective",
+    "route-local",
+    "route-uncertain",
+    "v1-small-feature",
+    "v5-review-recheck",
+    "release-stale",
+    "release-ready"
+  ],
+  "parallelism": 3,
+  "settings": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "calibration": "/Users/tk/Documents/coding-agent-skills/docs/validation/canary/20260907T082604-813e3ca009e44d6cbd680a50b29f49a7/report.json",
+  "note": "One attempt per selected case; no automatic retries. Parallel elapsed observations are descriptive, not isolated performance measurements."
+}

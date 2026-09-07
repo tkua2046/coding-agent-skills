@@ -1,0 +1,4 @@
+interface:
+  display_name: "Development Workflow"
+  short_description: "Maintain checks, documentation and delivery"
+  default_prompt: "Use $dev-workflow for the requested operation in this repository."

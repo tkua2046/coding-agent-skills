@@ -1,0 +1,7 @@
+1. **Behavior and preserved state:** Insufficient orders will be rejected without changing batch stock, and processing will continue with later orders. Caller stock, orders, and nested item lists remain untouched. APIs, return shapes, JSON validation behavior, and integer counts stay unchanged; valid nonnegative stock must remain nonnegative. Only D1’s caller-supplied sufficient-inventory precondition is superseded.
+
+2. **Whole-order acceptance or rejection:** Check every item against current remaining stock before deducting anything. This prevents partial deductions on rejection, avoids rollback, and retains the existing stock copy and APIs.
+
+3. **Completion and remaining work:** S0 is complete. The S1 candidate is implemented and locally checked, but is not accepted. Next is independent review to resolve the design/plan review dependency and confirm atomicity, continuation, compatibility, and feasible checks—or identify blockers. Independent document review, independent code review, and human review remain pending. The excerpts do not supply their results or the truncated remainder of the plan.
+
+These answers reflect only the exposed excerpts; this machine comprehension probe is not human usability proof.

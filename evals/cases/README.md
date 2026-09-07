@@ -1,7 +1,8 @@
 # Versioned workflow canary cases
 
-These ten version-1 heavy cases are synthetic inputs for the reviewed workflow
-validation proposal. Heavy worker/grader runs are deferred until release. Historical
+These seventeen versioned heavy cases support the [goal-based refinement](../GOALS.md).
+The owner authorized real baseline/candidate runs for this increment; ordinary small
+edits still use the fast tier. Historical
 archives in docs/validation informed scenario selection only; they are not runs or
 new-test evidence for these cases. No private interview/project material is used.
 
@@ -17,13 +18,31 @@ new-test evidence for these cases. No private interview/project material is used
 | v6-execution-handoff | Execute, review, fix, recheck, resume pending, scripted acceptance/delivery |
 | release-stale | Assess stale candidate evidence and pending integration |
 | release-ready | Assess current passing supplied release evidence |
+| bounded-delivery | Inventory reservation: plan, combined review, implement, code review and final author handoff; skip unnecessary fixes/rechecks |
+| bounded-investigation | Experiment on catalog-backed report slowness before proposing infrastructure |
+| workflow-setup | Adapt an existing application's checks/docs, then prepare its actual local PR draft |
+| review-ready | Review a sufficient local design/plan without manufacturing blockers |
+| review-defective | Find a validation/dependency error and the document structure that hides it |
+| route-local | Choose useful next work for a local inventory change, without a prescribed workflow |
+| route-uncertain | Choose useful next work for an unmeasured report slowdown, without a prescribed workflow |
+
+V1/V2 revision 2 and V4 revision 3 use restricted first-screen reading. V4 separates
+next-stage acceptance from its explicit recovery question. The bounded delivery,
+investigation and neutral planning probes also use this reader. Delivery revision 2
+adds an unconditional status-only author handoff after review. Delivery uses a prescribed multi-role scaffold:
+it tests decisions, usability, stopping and progress within that scaffold, not
+independent selection/elimination of every phase. Its inventory application is
+outside the navigation examples embedded in the skills. The two neutral planning
+probes test the proposed next commitment, with explicit skill selection; they do
+not test automatic discovery or autonomous execution of every role.
+
 
 ## Runner boundary
 
 Copy only fixture/ into the worker project and selected bundles into skills/<bundle>.
 Supply each requests/ file as that phase's user task. Apply an overlay's contents
 at the project root immediately before its phase. Never expose case.json,
-rubric.json, oracle.py or this index as worker inputs. Every phase starts in a fresh
+rubric.json, oracle.py or this index as worker inputs. Every executed phase starts in a fresh
 agent context, sharing the working project; retain each phase reply/transcript and
 workspace snapshot separately so later edits cannot erase earlier failures.
 
@@ -41,6 +60,11 @@ independently exercise default/positive inputs and invalid-input state preservat
 These stdlib assertions execute from stdin with the worker project as CWD; they do
 not trust worker tests or output claims. Other cases use preservation plus semantic
 criteria; document verdicts are not inferred by matching words in reports.
+
+V3 revision 2 protects each supplied history file against modification/deletion,
+while permitting new evidence records. The original directory-equality failure,
+independent HPR01 finding and negative controls remain in the
+[review record](../../docs/reviews/outcome-final-review.md#hpr01--history-preservation-measurement-addendum).
 
 Initialize Git before installing each declared fixture hook as executable
 .git/hooks/pre-commit. The counter baseline intentionally fails the negative-input
@@ -63,4 +87,4 @@ remote, build download or real release is needed. Synthetic bundle/fixture/grade
 settings identities in these tables are facts within the release scenario; they
 are not hashes of the actual evaluation run, which the runner records separately.
 
-Runtime commands and the evaluator are maintained [one level up](../README.md). See the [current result index](../../docs/validation/canary/INDEX.md) for executed checks and limits. Asset-author scratch checks are not substituted for retained runner evidence. Heavy behavior/calibration runs remain pending.
+Runtime commands and the evaluator are maintained [one level up](../README.md). See the [current result index](../../docs/validation/canary/INDEX.md) for executed checks and limits. Asset-author scratch checks are not substituted for retained runner evidence. See the current result index for actual behavior/calibration status.

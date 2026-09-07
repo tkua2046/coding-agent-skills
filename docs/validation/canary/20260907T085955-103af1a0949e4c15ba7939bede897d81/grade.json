@@ -1,0 +1,69 @@
+{
+  "criteria": [
+    {
+      "id": "inspect-baseline",
+      "status": "pass",
+      "reason": "Inspected formatter and tests and ran the baseline suite. Execution confirms the sharp-s mismatch; intake records it as pre-existing, and source comparison confirms no silent fix.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Ran `\"$CANARY_PYTHON\" -m unittest discover -s tests -v`: exit **1**, two tests, one pass and one failure. `test_known_legacy_issue` expects `label(\"\u00df\") == \"\u00df\"`, but the implementation returns `\"SS\"`. This failure occurred before any code changes; the baseline is **not green**."
+        },
+        {
+          "path": "artifacts/01-intake/execution.json",
+          "quote": "Documented test suite, using the prepared runtime exit status: 1"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE-evidence.md",
+          "quote": "AssertionError: 'SS' != '\u00df'"
+        }
+      ]
+    },
+    {
+      "id": "consequential-intake",
+      "status": "pass",
+      "reason": "Raises concrete questions about customization capability, scope, normalization, failure handling and Unicode compatibility. Routine choices remain proposed defaults without selecting or implementing an API contract.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "**What customization must clients perform, and at what scope?** For example, should one call produce `\"Hello\"` from `\" hello \"`, must clients be able to add arbitrary prefixes such as `\"ID: hello\"`, or must a reusable client preference affect many calls?"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "**Does customization receive the original string or an already normalized string, and what happens on failure?** A client preserving `\" hello \"` needs the original spaces and case, which are lost after existing normalization. If custom formatting fails, should the call raise or fall back to `\"HELLO\"`?"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Use existing one-argument calls and observed results as the provisional compatibility reference; leave the failing Unicode expectation and implementation intact pending a decision."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Reuse the current unittest location for later acceptance examples once behavior is agreed; no API signature or implementation mechanism is selected here."
+        }
+      ]
+    },
+    {
+      "id": "preserve-scope",
+      "status": "pass",
+      "reason": "The bounded intake links source requirements, relevant code, tests and baseline evidence while leaving consequential decisions open. All supplied source files remain identical; only intake and evidence documents were added, with no design or implementation.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "The unchanged source request is [FEATURE.txt](FEATURE.txt:1):\n> Allow clients to customize how labels are formatted. Existing clients must keep their current behavior."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "[formatter.py](formatter.py:1) implements exactly `value.strip().upper()`, with no configuration or stored state. The only callers found in this fixture are [tests/test_formatter.py](tests/test_formatter.py:1); real client needs cannot be inferred from them."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Commands, runtime, stdout, and stderr are in [INTAKE-evidence.md](INTAKE-evidence.md). These are the checks actually run; no feature validation is claimed."
+        },
+        {
+          "path": "artifacts/01-intake/git.json",
+          "quote": "\"status\": \"?? INTAKE-evidence.md\\n?? INTAKE.md\",\n  \"diff\": \"\",\n  \"log\": \"0b69833 Fixture baseline\""
+        }
+      ]
+    }
+  ]
+}

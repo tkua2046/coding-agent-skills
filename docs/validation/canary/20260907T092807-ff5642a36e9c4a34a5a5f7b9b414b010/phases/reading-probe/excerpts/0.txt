@@ -1,0 +1,10 @@
+# Next developer work: order report
+
+Status: planning complete; every delivery stage below is **planned**, not executed. Requirements: [REQUEST.md](REQUEST.md). Proposed design and compatibility examples: [DESIGN.md](DESIGN.md). Observed baseline: [PLANNING-EVIDENCE.md](PLANNING-EVIDENCE.md).
+
+**Start with S1:** establish a reproducible baseline, then implement one lazy catalog load per nonempty `summarize` call in S2. Preserve exact integer-cent results, row order, empty-iterable behavior and freshness between calls. Repeated catalog construction is verified; its production performance impact is unknown. Database, shared cache and queue work is deferred pending evidence and an agreed need.
+
+| Stage / proposed commit boundary | Observable outcome and scope | Dependency / material risk | Acceptance and done condition | State |
+|---|---|---|---|---|
+| S1 — characterize behavior and baseline | Add focused compatibility coverage in `tests/test_report.py` and a reproducible local benchmark/evidence record. Use the current implementation as baseline; record its identity and workload details. Keep any benchmark utility separate from the public API. | None. Existing coverage is only subtotal and empty list; synthetic timings may not represent support workloads. | Existing and added compatibility tests pass against unchanged production code. Cover the design's order/iterator, exact arithmetic, freshness and failure cases. Record baseline load counts (N for N orders; zero when empty) as evidence, not as permanent expected behavior. Record timings and workload parameters sufficient to repeat the comparison. One coherent characterization commit is the intended boundary. | Planned |
+| S2 — reuse catalog within a call | Bounded change in `report.py`: load after the first order is yielded, reuse through the batch, discard state at return/failure. Add the optimization regression assertions and update performance evidence together. | Depends on S1. Risks: eager empty-input I/O, acci

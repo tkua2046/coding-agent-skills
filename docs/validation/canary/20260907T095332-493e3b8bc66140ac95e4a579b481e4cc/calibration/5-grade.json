@@ -1,0 +1,68 @@
+{
+  "criteria": [
+    {
+      "id": "scope-history",
+      "status": "inconclusive",
+      "reason": "The available earlier review preserves R1 and correctly assesses D2. The requested D3 design and final report are unavailable, so preservation of scope and history in the current review cannot be assessed. Recover both missing artifacts.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Next action: author must preserve x and y as well as heading; then recheck all three components, False and continuation at the new revision. Original R1 and D2 remain available in docs/history/."
+        },
+        {
+          "path": "artifacts/capture.txt",
+          "quote": "Capture incomplete: docs/DESIGN.md at D3 and reviews/round-2.md are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "decisions-next-action",
+      "status": "inconclusive",
+      "reason": "The earlier review supplies a concrete full-pose counterexample and actionable correction for D2. Without D3 and its review, neither the current invariant assessment nor its disposition can be determined. Recover the current design and report.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "For (2,3,1) facing east and occupied (3,3), blocked F produces (3,3,1), not (2,3,1). Heading is preserved but position still advances, corrupting caller state. False and continuation are specified but do not repair the pose invariant."
+        },
+        {
+          "path": "artifacts/capture.txt",
+          "quote": "Capture incomplete: docs/DESIGN.md at D3 and reviews/round-2.md are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "verification-closure",
+      "status": "inconclusive",
+      "reason": "D2 retains the position defect, and round-1 correctly keeps R1 open. That historical defect does not establish D3 behavior. The missing D3 design and final report are needed to assess whether closure checks all pose components, False and continuation while preserving earlier findings.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/history/D2.md",
+          "quote": "If occupied, assign x/y to that target,\nretain the original heading and emit False. Otherwise assign target and emit True.\nContinue accepting later commands."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Current status: needs changes; R1 remains open at D2."
+        },
+        {
+          "path": "artifacts/capture.txt",
+          "quote": "Capture incomplete: docs/DESIGN.md at D3 and reviews/round-2.md are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "evidence-boundaries",
+      "status": "inconclusive",
+      "reason": "The available earlier report explicitly limits its conclusions to static inspection and leaves human acceptance pending. The missing final report prevents assessing its revision attribution, evidence limits or stronger claims. Recover that report and any records supporting such claims.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "This verdict verifies document content only. No runtime tests were run; human acceptance remains pending."
+        },
+        {
+          "path": "artifacts/capture.txt",
+          "quote": "Capture incomplete: docs/DESIGN.md at D3 and reviews/round-2.md are unavailable. Historical D2 and round-1 are retained. Current disposition, runtime execution and human acceptance are unknown."
+        }
+      ]
+    }
+  ]
+}

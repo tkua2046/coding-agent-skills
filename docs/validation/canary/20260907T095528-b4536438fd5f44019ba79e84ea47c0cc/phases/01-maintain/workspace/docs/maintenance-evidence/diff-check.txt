@@ -1,0 +1,4 @@
+Command: git -c core.excludesFile=/dev/null diff --check
+Exit: 0
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-01fv2m4Y' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-LQNbtTcf' (errno=Operation not permitted)

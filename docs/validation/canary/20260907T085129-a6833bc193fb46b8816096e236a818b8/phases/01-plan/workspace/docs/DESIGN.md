@@ -1,0 +1,79 @@
+# Design: v1 to v2 settings migration
+
+Status: proposed; design review pending. Authority: [original requirements](ORIGINAL.md), preserved unchanged. No migration is implemented or reviewed by this document.
+
+## At a glance
+
+- Outcome: preserve every stable ID and JSON value while moving to `{"version":2,"settings":{"theme":"dark","timeout":30}}`.
+- Main choice: copy, validate, then atomically replace `active.json`; never modify or remove the original v1 file.
+- Consequence: interruption leaves a usable v1 source, and the selector references a complete validated file. Retained source and staging files cost disk space.
+- Scope: single-process migration on a local filesystem; retain `load(path)` compatibility and add v2 reading. No automatic migration on reads.
+- Next step: resolve the proposed contract defaults below and review this design, then review the [plan](PLAN.md). Both reviews remain pending; implementation is a later task.
+
+Outline: [baseline](#baseline-and-interfaces), [decisions](#decisions-and-consequences), [protocol](#state-and-failure-protocol), [acceptance](#acceptance), [open decisions](#validation-and-open-decisions).
+
+## Baseline and interfaces
+
+`settings.load(path)` currently accepts version 1, checks duplicate IDs before building a dictionary, and returns IDs mapped to values. The normal fixture returns `{"theme":"dark","timeout":30}`; the duplicate fixture raises `ValueError`. The current design says the caller reads `data/active.json`; there is no caller/selector implementation in the supplied code. The selector contains `{"format":1,"path":"settings-v1.json"}`. Only two reader tests exist. See [local evidence](evidence/migration-baseline.md).
+
+Proposed public surface in `settings.py`: preserve `load(path)` and its mapping return value, accepting versions 1 and 2; introduce explicit `migrate(active_path)` returning the validated active mapping after activation or a validated already-v2 no-op. The caller must use the returned result/re-read the selector only after success. A raised error must not be treated as permission to switch. Selector-relative paths resolve against the selector directory, independent of working directory. Selector format and document version must agree. Reading a candidate directly does not activate it.
+
+These are proposed interface choices, not existing APIs. README will own usage when implemented; DEVNOTES will own operational guarantees and recovery. This design owns rationale and acceptance; ORIGINAL remains the requirements authority.
+
+## Decisions and consequences
+
+| Decision | Reason / alternative considered | Consequence | Example |
+|---|---|---|---|
+| Retain source bytes, stage v2 separately, switch selector last | In-place rewrite can destroy the only usable v1 data | Extra disk use; automatic source deletion is out of scope | A killed writer leaves the original v1 reader usable |
+| Validate IDs before constructing a settings object; require string IDs and preserve JSON value types | JSON object keys are strings; coercion or last-wins conversion can lose identity | Non-string IDs must fail pending a different agreed encoding | Duplicate `theme` values fail, never silently choose `light` |
+| Strictly parse both versions and selector, rejecting duplicate JSON member names and non-finite numbers | Python JSON defaults can silently discard duplicate keys or allow non-JSON numeric values | Tightens malformed-input behavior; valid fixture behavior stays compatible | Two `theme` members in v2 fail rather than overwrite |
+| Re-read persisted candidate and compare its complete mapping to validated source, with type-sensitive JSON equality | Parseability and entry count alone cannot detect changed values, swapped IDs, or `30` becoming `"30"` | Validation requires full in-memory data, consistent with the current reader | `timeout: true` cannot validate against `timeout: 1` |
+| Use a fresh exclusively created candidate in the selector directory for each v1 attempt | Reusing a fixed destination risks trusting a stale/partial unrelated file | Retries may leave unreferenced files, but never add logical entries; do not overwrite unknown files | A previous truncated candidate is ignored on retry |
+| Treat atomic selector replacement as the activation commit point | A separate success marker creates another synchronization boundary | A crash after activation but before return can leave v2 active; retry validates v2 and returns success | No requirement that lack of a return means rollback |
+| Flush files and directory metadata in dependency order | Atomic rename alone does not establish persistence ordering | Filesystem-dependent durability must be checked before implementation promises host-crash safety | Candidate must be durable before selector can reference it |
+
+Proposed input domain: v1 is an object with exact integer `version: 1`, an entries array, and entries containing unique string `id` plus any finite JSON `value`; v2 is an object with exact integer `version: 2` and a `settings` object. Empty strings and empty collections are allowed; preserve strings exactly (no normalization), nested arrays/objects, booleans, null, and numbers without intentional coercion. Version booleans are invalid. Formatting and object order are not preserved. Extra metadata fields are ignored, matching the current reader's behavior, and are not migrated; this is an open compatibility decision below. Malformed shape, duplicates, unknown version, or selector mismatch yield `ValueError`; underlying I/O failures propagate as `OSError`. Exact messages beyond existing behavior are not a new contract.
+
+## State and failure protocol
+
+Migration owns new candidate and selector-temporary files only. The original and unrelated files are never removed or overwritten. Assumption requiring review: no concurrent writers/readers changing the selector or source during migration; no hostile paths/symlinks. Multi-process coordination is explicitly outside requirements.
+
+1. Read and validate selector and selected source. Reject an unsupported format or mismatch without writes. If already v2, validate that selected v2 file and return its mapping without migration.
+2. For v1, validate all entries before conversion. Serialize a fresh candidate beside the selector using an exclusive name, flush and sync its contents, close and re-open it through the v2 validator. Compare the full typed mapping to the source. Never append or merge a previous attempt.
+3. Ensure the candidate's directory entry is durable. Write a separate selector temporary file containing `{"format":2,"path":"<candidate filename>"}`; flush/sync it. Both selector temporary and live selector must be on the same filesystem.
+4. Atomically replace `active.json` with the prepared selector, then sync its parent directory before reporting success. The selected candidate is now immutable. Do not clean up the original, even on success.
+5. On any pre-replacement failure, keep the selector unchanged and propagate the error. Best-effort cleanup may remove only unreferenced temporary files created by this attempt; cleanup failure must not hide the original error. Keeping those files is also safe.
+
+After replacement, an error (including directory-sync failure) has an uncertain completion outcome. Do not roll back or delete the candidate. Caller recovery re-reads the selector: validate and return if v2; retry from the retained source if v1. A crash during atomic replacement must expose either the old selector or the complete new one on the supported filesystem. Before activation, all retry attempts start from v1; after activation, retries are validated no-ops. The original v1 remains directly readable in every case. This gives idempotent logical data, not a guarantee of exactly one physical staging file or an exactly-once success response.
+
+## Acceptance
+
+Expected values below are derived from the source fixtures/explicit inputs, not from converter output. All migration checks are proposed.
+
+| Case / input | Expected result and persisted state |
+|---|---|
+| Normal fixture, selector format 1 | Candidate parses as exactly `{"version":2,"settings":{"theme":"dark","timeout":30}}`; `load(candidate)` and migration return the two-entry mapping. Selector changes to format 2 only after persisted validation; original bytes stay unchanged and `load(original)` still works. |
+| Duplicate fixture: `theme=dark`, `theme=light` | `ValueError`; no activation, no silently dropped entry, original bytes and selector unchanged. |
+| Empty entries; separately IDs `""` and `"01"` with null and `[false,{"x":3}]` | Empty settings object; separately `{"":null,"01":[false,{"x":3}]}` with exact IDs and JSON types preserved. Numeric ID `1` fails under proposed string-only policy. |
+| Missing value, invalid entries type, duplicate raw JSON members, non-finite number, unknown version, or selector/document mismatch | Reject before activation; retain original and selector. Already-v2 malformed content also fails without falling back silently. |
+| Persisted candidate changed to drop `timeout`, add `extra`, change `30` to `"30"`, or contain truncated JSON | Validation fails; v1 remains selected. Equal count or valid JSON is insufficient. |
+| Kill after partial candidate write, after candidate sync/validation, or after selector temp sync but before replacement | Old selector and source remain usable. Fresh-process retry ignores leftovers, activates the exact normal mapping once, and preserves source bytes. |
+| Candidate write/sync, re-read, or selector replacement fails (e.g. injected disk-full/permission error) | Error; old selector survives pre-commit failure. No success reported and no source deletion. |
+| Kill immediately after selector replacement or fail final directory sync | On restart, selector is old or new under the agreed durability model. Old means retry from v1; new must reference the fully validated candidate. Both paths yield exactly the normal mapping; source is still readable. |
+| Repeat after successful migration; separately pre-existing unrelated candidate files | Valid v2 no-op leaves selector and mapping unchanged; unrelated files retain their bytes. No duplicate or missing logical entries and no new candidate on an already-v2 retry. |
+
+## Validation and open decisions
+
+Verified: fixture inspection and both existing reader tests pass; [evidence](evidence/migration-baseline.md) records command and limitations. Not verified: v2 reading, migration, fault recovery, or filesystem persistence guarantees. A proposed implementation should exercise the acceptance table with isolated directories, fault injection and fresh-process termination/retry, plus the full unittest gate. Process termination tests do not prove sudden-power-loss durability.
+
+Review blockers/defaults to confirm before execution:
+
+- **Input contract:** approve string-only IDs, strict JSON parsing, ignored extra metadata and the proposed interface/error behavior. The current reader can accept some non-string IDs and malformed JSON extensions; representing these losslessly may require a different v2 encoding, which must not be invented implicitly.
+- **Crash scope/platform:** approve a same-filesystem local atomic-replace plus file/directory-sync persistence model and identify the supported OS/filesystem. No supplied evidence establishes host/power-loss guarantees. If the platform cannot provide this ordering, retain v1 activation and resolve the storage protocol; do not silently weaken “including on crash.”
+- **Completion semantics:** approve selector replacement as commit, including success-by-retry after loss of the original response. An API return and persistent activation cannot be atomic with each other.
+- **Ownership:** approve no concurrent mutation during migration and retention of original/orphan files. Automatic reclamation and live-writer coordination need separate requirements if desired.
+
+## Preserved baseline design
+
+The caller reads data/active.json and loads the selected v1 file. Stable IDs are
+unique; duplicate IDs are errors. No migration or recovery protocol exists yet.

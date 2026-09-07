@@ -1,0 +1,4 @@
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-D0eKWxEG' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-N3S6TCnQ' (errno=Operation not permitted)
+
+Exit: 0

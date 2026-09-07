@@ -1,0 +1,45 @@
+Intake baseline evidence; existing source and tests unchanged.
+Runtime: /Users/tk/Documents/coding-agent-skills/.venv/bin/python
+Python: 3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]
+
+Baseline suite
+Command argv: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'unittest', 'discover', '-s', 'tests', '-v']
+Exit status: 1
+STDOUT:
+
+STDERR:
+test_known_legacy_issue (test_formatter.FormatterTests.test_known_legacy_issue) ... FAIL
+test_spaces (test_formatter.FormatterTests.test_spaces) ... ok
+
+======================================================================
+FAIL: test_known_legacy_issue (test_formatter.FormatterTests.test_known_legacy_issue)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-etxhlxek/worker/tests/test_formatter.py", line 11, in test_known_legacy_issue
+    self.assertEqual(label("ß"), "ß")
+AssertionError: 'SS' != 'ß'
+- SS
++ ß
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)
+
+
+Current behavior probe
+Command argv: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-c', 'from formatter import label\nfor value in [" a ", "Mixed Case", "ß", "", " ", "é", None, 12]:\n    try:\n        print(f"label({value!r}) -> {label(value)!r}")\n    except Exception as exc:\n        print(f"label({value!r}) -> {type(exc).__name__}: {exc}")\n']
+Exit status: 0
+STDOUT:
+label(' a ') -> 'A'
+label('Mixed Case') -> 'MIXED CASE'
+label('ß') -> 'SS'
+label('') -> ''
+label(' ') -> ''
+label('é') -> 'É'
+label(None) -> AttributeError: 'NoneType' object has no attribute 'strip'
+label(12) -> AttributeError: 'int' object has no attribute 'strip'
+
+STDERR:
+

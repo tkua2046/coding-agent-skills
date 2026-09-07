@@ -1,0 +1,1 @@
+Infrastructure adapter smoke only; this is not a skill trial. Use CANARY_PYTHON to read input.txt, multiply its integer by two, and write observed.txt containing exactly smoke-ok:42. Return the result in the required JSON shape. Use no skills, external services, packages or files outside this workspace.

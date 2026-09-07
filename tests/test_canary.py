@@ -54,6 +54,7 @@ def execution(reply, **changes):
         "interrupted": False,
         "stdout": "synthetic transcript",
         "stderr": "",
+        "elapsed_seconds": 0.25,
         "reply": reply,
         **changes,
     }
@@ -173,6 +174,8 @@ class SyntheticRuntime:
                 skill = (workspace / "initial/skills/control/SKILL.md").read_text()
                 status = "fail" if "baseline" in skill else self.candidate_status
                 path = "artifacts/second/reply.md"
+                if not (workspace / path).exists():
+                    path = "artifacts/second/decision.json"
                 quote = (workspace / path).read_text()
             reply = (
                 "{malformed synthetic grader"
@@ -540,6 +543,37 @@ def test_early_calibration_failure_is_retained_but_later_valid_run_recovers(
     assert canary.hashes(canary.files(failed.parent)) == retained
 
 
+@pytest.mark.parametrize(
+    "failure",
+    [
+        {"interrupted": True, "exit_code": -9},
+        {"timed_out": True, "exit_code": -9},
+        {"exit_code": 7},
+    ],
+)
+def test_incomplete_calibration_stops_before_next_control(
+    tiny_root, fake_runtime, monkeypatch, failure
+):
+    execute = fake_runtime.execute
+
+    def incomplete(workspace, prompt, output, config, schema=None):
+        result = execute(workspace, prompt, output, config, schema)
+        result.update(completed=False, **failure)
+        return result
+
+    monkeypatch.setattr(canary.runtime, "execute", incomplete)
+    report = canary.calibration(tiny_root.root, CONFIG)
+    assert canary.verified_record(report)["status"] == "inconclusive"
+    assert len(fake_runtime.calls) == 1
+    retained = canary.read_json(report.parent / "0-reply.execution.json")
+    assert retained["reply"] and retained["stdout"]
+    for key, value in failure.items():
+        assert retained[key] == value
+    assert (report.parent / "0-grade.json").is_file()
+    assert not (report.parent / "1-isolation.json").exists()
+    assert not (report.parent / "1-reply.execution.json").exists()
+
+
 @pytest.mark.parametrize("asset", ["case.json", "rubric.json"])
 def test_content_revision_advances_with_fresh_comparable_evidence(accepted, asset):
     target = accepted.root / "evals/cases/control" / asset
@@ -790,6 +824,16 @@ def test_required_failure_dominates_inconclusive(tmp_path):
     )
 
 
+def test_grading_and_replay_agree_on_literal_crlf_evidence(tmp_path):
+    text = "First line.\r\nSecond line with café and literal \\n.\r\n"
+    artifacts = {"excerpt.txt": text.encode()}
+    canary.write_files(tmp_path / "artifacts", artifacts)
+    grade = {"criteria": [grade_row(path="artifacts/excerpt.txt", quote=text)]}
+    rubric = {"criteria": [criterion()]}
+    assert canary.validate_grade(grade, rubric, tmp_path) == "pass"
+    assert canary.validate_grade(grade, rubric, tmp_path, artifacts) == "pass"
+
+
 @pytest.mark.parametrize("case_id", ["counter-stage", "v6-execution-handoff"])
 def test_counter_oracles_reject_defect_missed_by_worker_tests(
     tmp_path, monkeypatch, case_id
@@ -924,3 +968,307 @@ def test_deterministic_failure_overrides_passing_grader(accepted, monkeypatch):
     assert row["semantic"] == "pass"
     assert row["status"] == "fail"
     assert gate(accepted)["status"] == "fail"
+
+
+def test_ready_skips_fix_and_recheck_without_overlay_or_model_and_replays(
+    tiny_root, fake_runtime, monkeypatch
+):
+    trial = tiny_root
+    trial.case["phases"][1]["skip_if_ready"] = "review.json"
+    trial.case["phases"].append(
+        {"id": "recheck", "request": "requests/02.md", "skip_if_ready": "review.json"}
+    )
+    put_json(trial.root / "evals/cases/control/case.json", trial.case)
+    execute = fake_runtime.execute
+
+    def review_ready(workspace, prompt, output, config, schema=None):
+        result = execute(workspace, prompt, output, config, schema)
+        if schema is None:
+            put_json(workspace / "review.json", {"verdict": "ready", "findings": []})
+        return result
+
+    monkeypatch.setattr(canary.runtime, "execute", review_ready)
+    calibration = canary.calibration(trial.root, CONFIG)
+    report = canary.run_case(trial.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.verified_behavior(trial.root, report, trial.case)["status"] == "pass"
+    assert [
+        c["output"].parent.name for c in fake_runtime.calls if c["schema"] is None
+    ] == ["first"]
+    for name in ("second", "recheck"):
+        phase = report.parent / "phases" / name
+        assert canary.read_json(phase / "execution.json") == canary.SKIPPED_EXECUTION
+        assert not (phase / "workspace/overlay.txt").exists()
+        assert not (phase / "reply.md").exists()
+    observed = canary.read_json(report.parent / "phases/observations.json")
+    assert observed["skipped_phases"] == ["second", "recheck"]
+    assert observed["worker_elapsed_seconds"] == 0.25
+    # Even re-sealed evidence cannot substitute a historical or malformed review.
+    put_json(
+        report.parent / "phases/second/skip-review.json",
+        {"verdict": "needs-changes", "findings": []},
+    )
+    refresh_manifest(report)
+    with pytest.raises(ValueError, match="current review"):
+        canary.verified_behavior(trial.root, report, trial.case)
+
+
+@pytest.mark.parametrize(
+    "review",
+    [
+        None,
+        b"{broken",
+        b'{"verdict":"ready"}',
+        b'{"verdict":"Ready","findings":[]}',
+        b'{"verdict":"needs-changes","verdict":"ready","findings":[]}',
+        b'{"verdict":"ready","findings":[NaN]}',
+        b'{"verdict":"needs-changes","findings":["R1"]}',
+        b'{"verdict":"needs-decision","findings":[]}',
+    ],
+)
+def test_nonready_or_invalid_review_executes_fix_and_replays(
+    tiny_root, fake_runtime, review
+):
+    trial = tiny_root
+    case_dir = trial.root / "evals/cases/control"
+    trial.case["phases"][1]["skip_if_ready"] = "review.json"
+    put_json(case_dir / "case.json", trial.case)
+    if review is not None:
+        (case_dir / "fixture/review.json").write_bytes(review)
+    calibration = canary.calibration(trial.root, CONFIG)
+    report = canary.run_case(trial.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.verified_behavior(trial.root, report, trial.case)["status"] == "pass"
+    phase = report.parent / "phases/second"
+    decision = canary.read_json(phase / "decision.json")
+    assert decision["skipped"] is False
+    assert (phase / "workspace/overlay.txt").is_file()
+    assert (phase / "reply.md").is_file()
+    if review is not None:
+        assert (phase / "skip-review.json").read_bytes() == review
+    # A forged skip flag cannot exempt an executed phase from completion checks.
+    put_json(phase / "execution.json", canary.SKIPPED_EXECUTION)
+    refresh_manifest(report)
+    with pytest.raises(ValueError, match="Execution incomplete"):
+        canary.verified_behavior(trial.root, report, trial.case)
+
+
+def add_reading_probe(trial):
+    trial.case["reading_probe"] = {
+        "documents": ["docs/PLAN.md", "docs/LONG.md"],
+        "questions": ["What is the next action?", "Which choice remains open?"],
+    }
+    case_dir = trial.root / "evals/cases/control"
+    put_json(case_dir / "case.json", trial.case)
+    docs = {
+        "docs/PLAN.md": (
+            "Next: inspect café. Literal \\n stays literal.\r\n" * 30
+            + "HIDDEN_LINE_31\r\n"
+        ).encode(),
+        "docs/LONG.md": ("é" * 2000 + "HIDDEN_AFTER_CHAR_CAP").encode(),
+    }
+    canary.write_files(case_dir / "fixture", docs)
+    return docs
+
+
+def test_reader_receives_only_literal_first_screen_and_retains_gradeable_evidence(
+    tiny_root, fake_runtime, monkeypatch
+):
+    trial = tiny_root
+    docs = add_reading_probe(trial)
+    execute = fake_runtime.execute
+
+    def inspect_reader(workspace, prompt, output, config, schema=None):
+        if output.parent.name == "reading-probe":
+            before = canary.files(workspace)
+            assert set(before) == {"input.json"}
+            assert prompt == canary.READER_PROMPT
+            assert config == CONFIG and schema is None
+            exposed = json.loads(before["input.json"])
+            assert exposed["questions"] == trial.case["reading_probe"]["questions"]
+            assert exposed["documents"] == [
+                {
+                    "path": "docs/PLAN.md",
+                    "text": docs["docs/PLAN.md"].decode().split("HIDDEN_LINE_31")[0],
+                },
+                {"path": "docs/LONG.md", "text": "é" * 2000},
+            ]
+        return execute(workspace, prompt, output, config, schema)
+
+    monkeypatch.setattr(canary.runtime, "execute", inspect_reader)
+    calibration = canary.calibration(trial.root, CONFIG)
+    report = canary.run_case(trial.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.verified_behavior(trial.root, report, trial.case)["status"] == "pass"
+    reader = report.parent / "phases/reading-probe"
+    assert (reader / "excerpts/0.txt").read_bytes() == docs["docs/PLAN.md"].split(
+        b"HIDDEN_LINE_31"
+    )[0]
+    grader = next(
+        c
+        for c in fake_runtime.calls
+        if c["output"] == report.parent / "grade-reply.json"
+    )
+    assert {
+        "artifacts/reading-probe/input.json",
+        "artifacts/reading-probe/execution.json",
+        "artifacts/reading-probe/reply.md",
+        "artifacts/observations.json",
+    } <= grader["before"].keys()
+    # Exposed text must recompute from the archived final worker documents.
+    exposed = canary.read_json(reader / "input.json")
+    exposed["documents"][0]["text"] += " added answer"
+    put_json(reader / "input.json", exposed)
+    refresh_manifest(report)
+    with pytest.raises(ValueError, match="Reader input"):
+        canary.verified_behavior(trial.root, report, trial.case)
+
+
+@pytest.mark.parametrize("failure", ["missing", "encoding", "timeout"])
+def test_reader_failure_retains_worker_evidence_without_acceptance(
+    tiny_root, fake_runtime, monkeypatch, failure
+):
+    trial = tiny_root
+    add_reading_probe(trial)
+    document = trial.root / "evals/cases/control/fixture/docs/PLAN.md"
+    if failure == "missing":
+        document.unlink()
+    elif failure == "encoding":
+        document.write_bytes(b"undecodable \xff")
+    execute = fake_runtime.execute
+
+    def fail_reader(workspace, prompt, output, config, schema=None):
+        result = execute(workspace, prompt, output, config, schema)
+        if output.parent.name == "reading-probe":
+            result.update(completed=False, timed_out=True, exit_code=-9)
+        return result
+
+    monkeypatch.setattr(canary.runtime, "execute", fail_reader)
+    calibration = canary.calibration(trial.root, CONFIG)
+    report = canary.run_case(trial.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.verified_record(report)["status"] == "inconclusive"
+    assert (report.parent / "phases/second/workspace/second-report.txt").is_file()
+    assert not (report.parent / "grade.json").exists()
+    if failure == "timeout":
+        result = canary.read_json(report.parent / "phases/reading-probe/execution.json")
+        assert result["timed_out"] and result["reply"]
+
+
+def test_per_example_rubric_requires_exact_criteria_during_calibration_and_replay(
+    tiny_root, fake_runtime, monkeypatch
+):
+    root = tiny_root.root
+    target = root / "evals/graders/calibration.json"
+    inputs = canary.read_json(target)
+    example = inputs["examples"][1]
+    example["rubric"] = {"version": 1, "criteria": [criterion("A"), criterion("B")]}
+    example["expected_criteria"] = {"A": "fail", "B": "pass"}
+    put_json(target, inputs)
+    execute = fake_runtime.execute
+    wrong = False
+
+    def grade_example(workspace, prompt, output, config, schema=None):
+        rubric = canary.read_json(workspace / "rubric.json")
+        if rubric == example["rubric"]:
+            assert schema == canary.grade_schema(rubric)
+            grade = {
+                "criteria": [
+                    grade_row(
+                        "pass" if wrong else "fail", "A", quote="synthetic-control:fail"
+                    ),
+                    grade_row(
+                        "fail" if wrong else "pass", "B", quote="synthetic-control:fail"
+                    ),
+                ]
+            }
+            reply = json.dumps(grade)
+            output.write_text(reply)
+            return execution(reply)
+        return execute(workspace, prompt, output, config, schema)
+
+    monkeypatch.setattr(canary.runtime, "execute", grade_example)
+    report = canary.calibration(root, CONFIG)
+    assert canary.check_calibration(root, report, CONFIG, ENV)
+    wrong = True
+    failed = canary.calibration(root, CONFIG)
+    assert canary.verified_record(failed)["status"] == "fail"
+    assert canary.read_json(failed)["matched_controls"] == [True, False, True]
+    # Same aggregate failure, different failed criterion: re-sealing is insufficient.
+    for suffix in ("grade.json", "reply.json", "reply.execution.json"):
+        shutil.copyfile(failed.parent / f"1-{suffix}", report.parent / f"1-{suffix}")
+    refresh_manifest(report)
+    with pytest.raises(ValueError, match="declared controls"):
+        canary.check_calibration(root, report, CONFIG, ENV)
+
+
+@pytest.mark.parametrize("seconds,expected", [(0.5, "pass"), (0.5001, "fail")])
+def test_workflow_deadline_uses_worker_wall_time_only_and_recomputes(
+    tiny_root, fake_runtime, monkeypatch, seconds, expected
+):
+    trial = tiny_root
+    trial.case["workflow_budget_seconds"] = 1
+    add_reading_probe(trial)
+    execute = fake_runtime.execute
+
+    def timed(workspace, prompt, output, config, schema=None):
+        result = execute(workspace, prompt, output, config, schema)
+        result["elapsed_seconds"] = (
+            1000 if schema or output.parent.name == "reading-probe" else seconds
+        )
+        return result
+
+    monkeypatch.setattr(canary.runtime, "execute", timed)
+    calibration = canary.calibration(trial.root, CONFIG)
+    report = canary.run_case(trial.root, "control", CONFIG, CONFIG, calibration)
+    row = canary.verified_behavior(trial.root, report, trial.case)
+    assert row["status"] == expected
+    observed = row["observations"]
+    assert observed["worker_elapsed_seconds"] == 2 * seconds
+    assert observed["executed_phases"] == ["first", "second"]
+    assert (
+        observed["documents"]["final"]["files"]
+        == observed["documents"]["initial"]["files"] + 3
+    )
+    # Retained time, not the report/check label, owns the deadline result.
+    checks = canary.read_json(report.parent / "deterministic.json")
+    budget = next(c for c in checks if c["id"] == "runner.workflow-budget")
+    budget["evidence"]["worker_elapsed_seconds"] = 0
+    put_json(report.parent / "deterministic.json", checks)
+    refresh_manifest(report)
+    with pytest.raises(ValueError, match="Workflow budget"):
+        canary.verified_behavior(trial.root, report, trial.case)
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("workflow_budget_seconds", 0),
+        ("workflow_budget_seconds", True),
+        ("workflow_budget_seconds", 1.5),
+        ("reading_probe", {"documents": ["../private"], "questions": ["Q"]}),
+        ("reading_probe", {"documents": ["doc.md"], "questions": []}),
+    ],
+)
+def test_optional_case_contracts_validate_before_execution(tiny_root, field, value):
+    tiny_root.case[field] = value
+    put_json(tiny_root.root / "evals/cases/control/case.json", tiny_root.case)
+    with pytest.raises(ValueError):
+        canary.cases(tiny_root.root)
+
+
+def test_baseline_cli_defaults_follow_manifest_and_allow_explicit_override(
+    tiny_root, monkeypatch, capsys
+):
+    root = tiny_root.root
+    put_json(root / "evals/baseline/manifest.json", {"commit": "declared-baseline"})
+    monkeypatch.setattr(canary, "ROOT", root)
+    monkeypatch.setattr(canary, "affected", lambda root, base: {"baseline": base})
+    monkeypatch.setattr(
+        canary,
+        "release_gate",
+        lambda root, paths, baseline: {"baseline": baseline, "status": "fail"},
+    )
+    for command, option in (("affected", "--base"), ("release-gate", "--baseline")):
+        for argv, expected in (
+            ([command], "declared-baseline"),
+            ([command, option, "override"], "override"),
+        ):
+            canary.main(argv)
+            assert json.loads(capsys.readouterr().out)["baseline"] == expected

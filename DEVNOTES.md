@@ -36,6 +36,8 @@ Root README owns usage, this guide owns contributor operations, CHANGELOG owns s
 
 Repository tests check bundle portability, metadata/resource failures, checker behavior and canary gate failure controls. They do not call an LLM. Fresh-agent behavioral trials use separate temporary workspaces; they never modify the bundle being evaluated. Record tested hashes, real outcomes, original findings and follow-up fixes. Keep disposable local logs in ignored `artifacts/`; immutable trial evidence belongs under `docs/validation/`.
 
+When staging an evidence archive, verify that every path declared in its report is present with identical bytes in Git. Nested fixture ignore rules can omit captured `artifacts/` or coverage files; explicitly stage those declared originals rather than changing ordinary scratch ignore rules. The [staged evidence check](docs/validation/outcome-final/staged-evidence.json) records this delivery's correction and verification.
+
 Run `.venv/bin/python -m tests.manual.hook_trials` for the slower isolated Git/hook exercise. Each invocation writes its own commands/results to a unique, exclusively created JSON file under `docs/validation/hook-trials/`, including failed runs. The original `hook-trials.json` is a retained historical run. This explicit trial is outside the fast commit-time test suite. Immutable validation archives are excluded from whitespace/newline fixers; preserve their bytes and fingerprints.
 
 ## Canary cadence
@@ -44,7 +46,11 @@ Run the fast gate for normal commits/PRs, including prompt changes. Use `.venv/b
 
 Before release, follow [the canary commands](evals/README.md) to calibrate the grader and run matching baseline/candidate trials. Every required case must pass for the final candidate. The gate verifies input and evidence identities and cannot be satisfied by historical summaries or test-only controls. Keep failures and their dispositions; after a fix, rerun affected cases rather than unrelated expensive trials. [Current results](docs/validation/canary/INDEX.md) distinguish fast validation from heavy acceptance.
 
+Start a skill change from its [user-visible goal](evals/GOALS.md), then select the cases that exercise that goal and possible regressions. A changed rubric/reader/fixture needs a fresh compatible comparison; never overwrite an old result. After a bounded repair wave, reassess whether the process is becoming burdensome and whether the evidence shows a benefit. Failed or inconclusive results remain visible on a reviewable PR; they cannot satisfy the release gate. One-off experiment and scoring-recovery helpers in archived evidence are not supported runner commands or installed skill dependencies.
+
 Archived source text, proposal snapshots and synthetic case inputs are excluded from automatic formatters. The checker still verifies licensed source archive hashes, and case validation/tests check the fixtures. Deliberately failing fixture code must not be “fixed” as repository housekeeping.
+
+Raw validation evidence is [collapsed by default in GitHub diffs](https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github) through `.gitattributes`; the current results and delivery entrypoints stay visible. Original files remain intact. This display hint does not remove GitHub's separate diff limits: use the result links or local Git review if the web diff is truncated.
 
 ## Version and release
 

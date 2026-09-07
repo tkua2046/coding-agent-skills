@@ -1,0 +1,91 @@
+{
+  "verdict": "ready",
+  "findings": [],
+  "open_finding_ids": [],
+  "next_action": "Owner review of this candidate; human acceptance remains pending. No commit or release is authorized or performed.",
+  "review_mode": "Independent assigned reviewer in a fresh context separate from the author; supplied skills/stage-development review operation.",
+  "reviewed_version": {
+    "base_commit": "871280dcbee0cb13fececcf2ce3fb27a58aeb064",
+    "candidate": "Working tree including all staged modifications and additions against HEAD. No unstaged or untracked candidate files were present at review entry.",
+    "scope": [
+      "inventory.py",
+      "tests/test_inventory.py",
+      "README.md",
+      "docs/SPEC.md",
+      "docs/DESIGN.md",
+      "docs/PLAN.md"
+    ],
+    "supporting_inspection": [
+      "AGENTS.md",
+      "docs/REQUEST.md",
+      "docs/ORIGINAL.md",
+      "docs/history/completed.md",
+      "DEVNOTES.md",
+      "batch.py",
+      "command_codec.py",
+      "hooks/pre-commit",
+      "reviews/design-current.json",
+      "reviews/stage-current.md"
+    ],
+    "sha256": {
+      "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+      "README.md": "8112fa46bd72e8c74bded3b74616a1491416f2f7f988e0dd23ebadba183ce2de",
+      "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+      "inventory.py": "83579bb46a62f164470408a2c11ae62229051400c65615d2d3f4bc14f78a32c7",
+      "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+      "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+      "tests/test_inventory.py": "a3a4e87d087778f5aebf70b56d9bb2481d2859ac141b3c6920d35ffdd0c474fa",
+      "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+      "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+      "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+      "docs/SPEC.md": "bc6a9f05a14155f4170493635899281de37b039d70b174412b8fccac11a37a70",
+      "docs/DESIGN.md": "bf7e54b927a2c06736f12fd9bb6742db9ba10520a9d19ff5a43916038cdf6948",
+      "docs/PLAN.md": "c0d3ede50376c4a5685b7d9b2778e2e667fc500ab1b6b255ad850ebb0aeadcc9",
+      "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+      "reviews/design-current.json": "1d7777e8789e01d19bd92f7d91b4608cbba18c5680af019fb72cc8dd75db3ed3",
+      "reviews/stage-current.md": "12ddfec9350bcf286894aabfb757bc7b3bd613fa4830f307296b7082ebcb51d6",
+      "reviews/evidence/s1-tests.txt": "901fc2dbfe3c33c97097e8436d90cebb12768475df655fda5aa00affb8149887",
+      "reviews/evidence/s1-gate.txt": "901fc2dbfe3c33c97097e8436d90cebb12768475df655fda5aa00affb8149887",
+      "reviews/evidence/s1-candidate.diff": "8ea983d7912558e33bd5f0bf8c2c166a11202a06167d29a312a265ce46921bd4"
+    },
+    "manifest": "reviews/evidence/s1-snapshot.json",
+    "manifest_sha256": "773e4cb35332584180a3d73af41fac623200d4483a67e3480052524a73169cc1",
+    "stability": "All 19 manifest hashes matched before and after runtime checks."
+  },
+  "assessment": [
+    "inventory.py:6-10 checks each requested quantity against current remaining stock before any deduction. With validated unique SKUs this rejects the entire insufficient order, preserves its stock and continues later orders correctly.",
+    "Stock is copied once; nested orders are only read. Integer subtraction and all() preserve integer counts and boolean outcomes. Empty orders succeed and exact-stock requests succeed.",
+    "Both function signatures and return shape are preserved. batch.py and command_codec.py are unchanged; decoding validates the full JSON batch before reservation and retains existing exceptions.",
+    "Regression assertions cover a later-item shortage with an earlier sufficient item, the rejected prefix independently, exact depletion, later rejection, empty orders and batches, both APIs, deep input preservation, output identity/types, malformed JSON and invalid input after a shortage. These detect the key partial-deduction and original-stock-check regressions.",
+    "README and current SPEC describe implemented behavior consistently with REQUEST and D2. Original requirements and historical D1/S0 remain preserved. No consequential scope or compatibility issues found."
+  ],
+  "checks": [
+    {
+      "command": "git status --short; git rev-parse HEAD; git diff HEAD -- inventory.py tests/test_inventory.py README.md docs; git diff --name-status HEAD; git ls-files --others --exclude-standard",
+      "result": "Inspected actual candidate diff and current source/tests; identified base and staged content. Git emitted sandbox cache/config warnings but returned requested data."
+    },
+    {
+      "command": "git diff --check HEAD",
+      "result": "Exit 0; no whitespace errors. Sandbox cache/config warnings only."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" -m unittest discover -s tests -v",
+      "result": "Exit 0, all 9 tests passed."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" hooks/pre-commit",
+      "result": "Exit 0, all 9 tests passed; gate inspected and rejects empty discovery."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" - <<'PY' (inline read-only enumeration)",
+      "result": "140625 three-order batches, 281250 API calls passed against an independent oracle that tentatively subtracts all items and discards any negative proposed state. Exhausted stocks 0..2 for two SKUs and quantities 1..3 across empty, single-item and two-item orders in both item orders, retaining an untouched third SKU. Checked remaining stock, ordered results, deep input preservation, distinct stock copy and exact integer/boolean types."
+    }
+  ],
+  "evidence": [
+    "reviews/evidence/code-review-checks.txt",
+    "reviews/evidence/s1-snapshot.json",
+    "reviews/evidence/s1-candidate.diff"
+  ],
+  "prior_review_dispositions": "Existing independent document review was ready with no findings. No prior code-current.json existed. All prior reports and evidence were preserved byte-for-byte; author check claims were supplemented with reviewer-run checks.",
+  "limitations": "Enumeration is bounded to the stated valid-input domain; validation branches were inspected and existing validation tests rerun, not exhaustively enumerated. No persistence/concurrency testing is required by this single-process contract. This verdict establishes readiness for owner review, not human acceptance, commit approval or release approval. Only review/evidence files were written."
+}

@@ -1,0 +1,7 @@
+1. **Behavior changing:** Proposed occupied cells block forward movement: a blocked `F` returns `False`, leaves the pose unchanged, and allows remaining commands to execute. Turns and successful moves return `True`. Preserve existing two-argument calls, local per-run state, caller collections, heading-independent occupancy, and `ValueError` for unknown commands. Implementation has not begun.
+
+2. **Main technical decision:** Snapshot ordinary occupancy iterables once into a local lookup, while reusing loader-produced immutable coordinate sets. This gives expected O(1) lookup per forward move at O(n) construction time and O(u) space. Scanning the caller’s collection instead costs O(n) per move and can observe caller mutation. YAML parser/dependency policy remains unresolved.
+
+3. **Next uncompleted outcome:** S1a delivers fixed occupied cells through the Python API, behavioral tests, and README usage. It depends on completed S0/D1 and is independent of YAML parsing. A decisive acceptance example is a forward move into an occupied coordinate returning `False`, preserving pose, and continuing subsequent commands. The excerpts provide no concrete coordinate-based test case. Contract resolution is the stated next action; implementation awaits a later authorized phase.
+
+These answers reflect excerpt comprehension, not human usability evidence.

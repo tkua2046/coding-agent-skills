@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "adequate-next-work",
+      "required": true,
+      "requirement": "Propose work that can satisfy the actual request, with consequential uncertainty and acceptance understood.",
+      "pass_when": "The next work is grounded in the actual report and catalog lifetime. It distinguishes the observed per-order catalog read/parse/index work from an unmeasured claim that this dominates representative latency. It names a bounded next action and the result or decision that action enables while preserving exact ordered totals, empty input and freshness across calls. It may propose or run a discriminating measurement, or propose a limited implementation hypothesis with explicit representative performance and compatibility checks before wider commitment. No particular tool, architecture or workflow label is mandatory.",
+      "fail_when": "Only says to investigate or optimize without a concrete question/action and decision condition; adopts a rewrite or shared lifetime without evidence or required compatibility reasoning; asserts production speedup from source or a synthetic timing alone; or cannot explain what remains unknown before committing to wider work."
+    },
+    {
+      "id": "proportionate-commitment",
+      "required": true,
+      "requirement": "Commit the developer to work justified by current uncertainty, consequences and dependencies.",
+      "pass_when": "The proposal explains enough to proceed without unnecessary prerequisite documents, approvals, infrastructure or an implementation/test inventory. Any extra investigation, stage or review has a concrete decision, risk or dependency it resolves. A short answer still retains essential contract and verification reasoning; several justified steps may be acceptable.",
+      "fail_when": "Makes speculative architecture, generic review chains, exhaustive documentation or repeated analysis a prerequisite without a present consequence; postpones a usable next step for a nonmaterial question; or claims that a short label or fewer documents alone establishes proportionality."
+    },
+    {
+      "id": "evidence-and-scope",
+      "required": true,
+      "requirement": "Separate known facts, observations, proposals and unperformed work while preserving the planning-only boundary.",
+      "pass_when": "Claims about source behavior are supported by the inspected fixture. Every claim of commands run, tests passed, measurements or review is supported by the archived execution and relevant outputs on the identified content. Proposed experiments/checks are explicitly unperformed when not run; static inspection is not measured performance. Existing project/source documents remain unchanged, new work stays within notes or authorized scratch exploration, and no production implementation or approval is claimed.",
+      "fail_when": "Invents or exaggerates a measurement, test result, review, completed implementation or approval; presents a future check as executed; changes protected project files even if later restored; implements the production feature under a different path rather than merely using a bounded exploratory scratch experiment; or performs out-of-scope external work."
+    },
+    {
+      "id": "usable-handoff",
+      "required": true,
+      "requirement": "A new reader can find a justified next action, current evidence limits and the condition for moving forward.",
+      "pass_when": "The actual restricted reader can recover those decisions from the exposed beginning of docs/NEXT.md, with answers supported by the excerpt. Supporting detail does not bury the decision. Current proposal and implementation/review status are accurate. No exact heading, category label, document count or workflow name is required.",
+      "fail_when": "The beginning offers only a category, boilerplate or disconnected tasks; the reader cannot identify what to do and why without unseen material; or the handoff invents completion, loses a material uncertainty, or conflicts with the actual current evidence."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+# Outcome setup and review cases — independent review
+
+**Verdict: needs changes. Open material finding: OSR-01 (P2), workflow-setup's documentation-only hook check.** Add the bounded control below before freezing that case for baseline trials. No material blocker found in review-ready or review-defective. The setup-to-PR transition is relevant and adequately specified in its requests and semantic rubric.
+
+Reviewed 7 September 2026, independently of Carson's case authorship. This review covers the three case trees and retained author controls, not candidate skills or semantic calibration. No reviewed case, runtime or grader source was changed during this review.
+
+## Reviewed identity and evidence
+
+The 49 case files and six evidence files match all 55 entries in [Carson's authored manifest](../validation/outcome-assets/setup-review-author/authored-files.json). The [final author record](../validation/outcome-assets/setup-review-author/20260907T081518182732Z-controls.json) is hash-bound to those 49 case files and records 25 passing controls. I inspected that script and retained results; I did not rerun all 25 controls.
+
+| Case tree | Files | Tree SHA-256 |
+|---|---:|---|
+| workflow-setup | 17 | `a9625828daea541d7a153139e853a5da7aba39b1cd27016dff3108d544647ed6` |
+| review-ready | 16 | `203ed8d57e130847a2643df44bb5a41bd9662e2e0610ceb97afdb91aadaacb47` |
+| review-defective | 16 | `5233ee3fa5898509c68ad5b39574b37a4b56a78791deef90862b845e3159e5cf` |
+
+Tree hashes use SHA-256 of `json.dumps(relative_path_to_sha256, sort_keys=True)` with paths relative to each case directory, including dotfiles. [Independent probe inputs and hashes](../validation/outcome-runtime/20260907T082507-setup-review-probes/manifest.json) retain the complete reviewed case files, positive/mutant gate sources and raw executions. Those probes ran before this report, using frozen engine `40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2`.
+
+## OSR-01 — P2 — Oracle accepts a gate that skips documentation-only changes
+
+**Location:** [workflow-setup/oracle.py](../../evals/cases/workflow-setup/oracle.py), lines 144–172; compare [request 01](../../evals/cases/workflow-setup/requests/01.md), lines 4–6. The explicit contract requires the installed hook to run the full suite even for documentation changes.
+
+The oracle exercises the hook in the existing setup working tree, then adds a failing test or empties `qa/`. It never creates a documentation-only Git change state. During the actual setup case, `tools/check.py` normally remains modified, so a gate that conditionally runs tests only when Python files differ from HEAD can pass every oracle check.
+
+**Observed counterexample:** In a disposable fixture with the normal initial commit, I inserted this early return into the author's positive gate control:
+
+```text
+changed = subprocess.check_output(
+    ["git", "diff", "--name-only", "HEAD"], text=True
+)
+if not any(name.endswith(".py") for name in changed.splitlines()):
+    print("Documentation-only change: skipping application checks.")
+    return 0
+```
+
+That defective gate passed all nine current oracle checks, including coverage comparison, seeded-failure rejection, empty-discovery rejection and restoration. I then committed the setup only in the disposable fixture, changed only README.md, removed its previous coverage JSON, and invoked the same installed hook. It exited zero through the early return, without running the suite or recreating coverage. The unmodified positive control, under the same documentation-only condition, ran the suite and produced fresh application coverage. [Raw comparison](../validation/outcome-runtime/20260907T082507-setup-review-probes/summary.json).
+
+**Consequence:** The deterministic gate can approve an adaptation that violates an explicit workflow requirement. Semantic inspection might catch the conditional shortcut, but the current executed oracle and 25 author controls do not establish this promised behavior.
+
+**Minimal correction:** Add one isolated documentation-only Git-state probe of the installed adapted hook, with evidence that the suite actually ran. Exercise this condition after establishing the adapted setup as the scratch baseline; merely adding a README edit while the Python setup change remains pending is insufficient. Retain a working positive control and reject this conditional-skip mutant. Preserve the existing test-failure/empty-discovery checks and restore all original workspace/Git state. This needs a bounded case/oracle control, not an engine or grading change.
+
+**Disposition:** Open. Recheck the changed case/control hashes against the positive and mutant outcomes above.
+
+## Other assessment and limits
+
+- **Effective hook and coverage:** The oracle invokes the installed executable wrapper, verifies its byte identity and hook path, removes stale coverage, compares application line/branch data with independent measurement, and restores entries, bytes and modes. The retained controls cover swallowed failures, zero tests, wrong coverage source, disabled branches, stale reports and the actual stdlib-only fallback. These are useful runtime controls; they do not establish skill behavior or test adequacy.
+- **PR transition:** A fresh phase must inspect the actual setup diff, including new files, retain earlier evidence, produce a local PR draft and identify pending human review. The `actual-change-pr-handoff` criterion explicitly checks phase-02 preservation and current-versus-prior validation. The final oracle only verifies that the draft exists; its usefulness and fidelity properly remain semantic judgments over both phase archives.
+- **Review fixtures:** Requests and all ordinary application/configuration inputs are identical. The ready D1/P1 coherently validate the whole file before selection and deliver the contract together. The defective D1 decision at lines 86–94 skips validation of discarded rows; P1 lines 86–94 postpones required whole-file checks until after Stage 1 acceptance. The omitted in-stock duplicate SKU is a concrete contract violation. The late placement after routine notes also gives the reading-cost criterion an identifiable consequence, rather than a length quota.
+- **Independent boundary controls:** For each review fixture, no report failed, report-only output passed, and editing the design failed. Both setup positive and conditional-skip controls passed the existing oracle; the additional documentation-only comparison distinguished them. All executions used disposable copies. Report placeholders were boundary controls, not semantic reviews or approval.
+- **Performance/usability scope:** These cases can examine review restraint, useful findings, PR handoff and descriptive elapsed work at matched settings. Their prescribed operations and synthetic documents do not establish autonomous workflow selection, general productivity gains or human glanceability. No model trial or human acceptance is claimed here.
+
+The earlier Git-launcher problem is separately resolved in the frozen runtime: [real Git and isolation checks](../validation/outcome-runtime/20260907T082202-git-fixed/checks.json). It is not an additional open case finding. Runtime and grader sources remain frozen; this report requests only the OSR-01 case/control correction.
+
+Formatting note by the primary task: the observed Python excerpt is marked as literal text so automatic code formatting preserves its original bytes. The [original received review](../validation/outcome-contract/outcome-setup-review-original.md.txt) and its conclusions are retained.

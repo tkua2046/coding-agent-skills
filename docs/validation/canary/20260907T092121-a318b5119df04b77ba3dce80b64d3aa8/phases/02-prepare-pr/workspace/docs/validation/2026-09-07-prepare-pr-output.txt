@@ -1,0 +1,71 @@
+Fresh prepare-pr validation; prior setup reports preserved.
+Python: 3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]
+Interpreter: /Users/tk/Documents/coding-agent-skills/.venv/bin/python
+TMPDIR: workspace .tmp/pr-validation (sandbox-compatible)
+Command: ['.git/hooks/pre-commit', 'README.md']
+Exit: 0
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.011s
+
+OK
+Name           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------
+inventory.py      58      1     18      2    96%   59->exit, 81
+----------------------------------------------------------
+TOTAL             58      1     18      2    96%
+
+Command: ['git', 'diff', '--check']
+Exit: 0
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-5JhJto9O' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-vb0BPFO1' (errno=Operation not permitted)
+
+Command: ['git', 'diff', '--cached', '--stat']
+Exit: 0
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-W4vUp9DN' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-5wqgB8gK' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Coverage JSON verified: inventory.py only; branch_coverage true.
+Coverage totals: {"covered_branches": 16, "covered_lines": 57, "excluded_lines": 0, "missing_branches": 2, "missing_lines": 1, "num_branches": 18, "num_partial_branches": 2, "num_statements": 58, "percent_branches_covered": 88.88888888888889, "percent_branches_covered_display": "89", "percent_covered": 96.05263157894737, "percent_covered_display": "96", "percent_statements_covered": 98.27586206896552, "percent_statements_covered_display": "98"}
+All pre-existing source, documentation, retained reports, hook and index bytes unchanged.
+Input SHA-256 identities: {
+  ".coveragerc": "b61dbf6129265ebefc5dd157e745a672dc9387104f305cd5bce4a32edf6a88e6",
+  ".git/hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1",
+  ".git/index": "dc88b276557eb30261db5cffbd220b5f568108d782339f5d89d615cadddcb078",
+  ".gitignore": "d0b5275961a2f165920716ebce02f3c591bfd379797fac7886f16ed3ce0f7325",
+  "AGENTS.md": "6d57ec5a87f5f15d3973e187068fe8f69e5eb5e41452ac33543969dee5e2851b",
+  "DEVNOTES.md": "30778eaf0ec6bc7236ce96d7a5dead2f2474cc6bc6c0f01fe96b862d950dd800",
+  "README.md": "6d0db80b7ce24299db7b5e7087506388f85122a792b1bde6c392bc41e1ebd4eb",
+  "VERSION": "40b8eb4000a913a7791090535f291d3d369874162a89ef3c9e3d4e887a1b9e79",
+  "docs/DEVELOPMENT_HISTORY.md": "b6117059af29f3c2576ad78245b28f18175a9a49c54af622ca6c61be985cdadd",
+  "docs/validation/2026-09-07-local-setup-output.txt": "f4b1eb975ec812246449b1b34a5f605e357566ea8447f1d8d912c1c6975948cc",
+  "docs/validation/2026-09-07-local-setup.md": "504d62fa1709642ea6d19a3413a21d10d3289e4482646e52fc36b95cdf9a26c0",
+  "examples/stock.csv": "c7a4809e3c542f3b7cd5fd4c55c35568f9c198a8adc3421d3de0c5c64436e283",
+  "hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1",
+  "inventory.py": "e526f302ab5b5838ce2e1ced745b41106624d6a84a913ea4470d9553b627a8f3",
+  "qa/check_inventory.py": "dadde4ee365a6aea2f78f33d6ed068e8fe78ab0e2c9b146c4132606b7fe641e9",
+  "quality.ini": "e6cbb025a8d9081c86c135831da8581959ad1638ae4c9d8db6fb2077e0bf09d4",
+  "skills/dev-workflow/SKILL.md": "d09bb0afb92b3399f9a156f78fc9aa7a0a7c1826ef1bfc0f7393b33acbf039a2",
+  "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+  "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+  "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+  "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+  "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+  "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+  "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+  "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+  "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+  "skills/dev-workflow/prompts/prepare-pr.md": "66af784c78c56deb91749a8475990aaeb53a02ac32d680d6fc5bf852cf629bc3",
+  "skills/dev-workflow/prompts/release.md": "28a9f83025d041992f159676d7c6ea1e21481659e9a135fd15f925284789e753",
+  "skills/dev-workflow/prompts/setup-dev-workflow.md": "ebc6da1d4527b3d1ed73b45b3c2d405563d9d53dfff960f2bcb014a5542573d4",
+  "skills/dev-workflow/references/documents.md": "2669b5655c85a9af660df896b7a7eab48f03037b1d33dfef3857997d3173d89d",
+  "tools/check.py": "d49d57861b1f2fcc43957479db04e0d77c5de2d1910f6b926a6e3e7b7fae872b"
+}
+
+Final draft check: all relative links resolve; no trailing whitespace.

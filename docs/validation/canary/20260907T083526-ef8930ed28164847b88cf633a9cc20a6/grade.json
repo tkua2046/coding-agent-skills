@@ -1,0 +1,127 @@
+{
+  "criteria": [
+    {
+      "id": "useful-depth",
+      "status": "pass",
+      "reason": "The local amendment makes concrete state, validation and acceptance decisions in one coherent delivery stage. Reviews introduced no unnecessary blockers or infrastructure. Recorded worker time was 540.073 seconds, within the shared 15-minute allowance.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Prechecking avoids partial mutation and rollback bookkeeping. A per-order stock\ncopy would also work but would copy unrelated stock for every order; it is\nunnecessary given validated unique SKUs."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "Treat implementation,\nregression tests and these behavior/usage updates as one reviewable change;"
+        },
+        {
+          "path": "artifacts/observations.json",
+          "quote": "\"worker_elapsed_seconds\": 540.073"
+        }
+      ]
+    },
+    {
+      "id": "working-feature",
+      "status": "pass",
+      "reason": "Final code prechecks each order against remaining stock before mutation and continues after rejection. Both APIs retain validation, ordering, input preservation and successful behavior. Meaningful prefix regressions detect the original defect; recorded suite and installed-gate executions pass on content matching the final snapshot.",
+      "evidence": [
+        {
+          "path": "artifacts/08-code-recheck/workspace/inventory.py",
+          "quote": "    remaining = dict(stock)\n    outcomes = []\n    for order in orders:\n        if any(quantity > remaining[sku] for sku, quantity in order[\"items\"]):\n            outcomes.append({\"order_id\": order[\"id\"], \"accepted\": False})\n            continue\n        for sku, quantity in order[\"items\"]:\n            remaining[sku] -= quantity\n        outcomes.append({\"order_id\": order[\"id\"], \"accepted\": True})"
+        },
+        {
+          "path": "artifacts/08-code-recheck/workspace/tests/test_inventory.py",
+          "quote": "                    self.assertEqual(remaining, expected_stock[length])\n                    self.assertEqual(outcomes, expected_outcomes[:length])\n                    self.assertIsNot(remaining, stock)\n                    self.assertEqual(stock, original_stock)\n                    self.assertEqual(batch, original_orders)\n                    self.assertTrue(all(type(n) is int for n in remaining.values()))"
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-counterexample.log",
+          "quote": "FAILED (failures=8)\n\nExpected baseline regression failure observed: True"
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-gate.log",
+          "quote": "Ran 8 tests in 0.002s\n\nOK\n\nExit: 0"
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-evidence.json",
+          "quote": "\"candidate_manifest_verified\": true,\n  \"content_unchanged_after_checks\": true"
+        }
+      ]
+    },
+    {
+      "id": "review-convergence",
+      "status": "pass",
+      "reason": "Separate document and code reviewers assessed the actual contract and identified content, accepted sufficient work, and preserved prior evidence. Code review independently ran the suite and gate. No findings required correction, so skipped fixes and rechecks were justified.",
+      "evidence": [
+        {
+          "path": "artifacts/02-document-review/workspace/reviews/design-current.json",
+          "quote": "Checked D2 against all requested behavior: whole-order rejection, unchanged stock on rejection, preservation of earlier successes, later-order continuation, exact depletion, empty orders, integer counts, ordered results, both API signatures, input immutability, and unchanged validation."
+        },
+        {
+          "path": "artifacts/08-code-recheck/workspace/inventory.py",
+          "quote": "        if any(quantity > remaining[sku] for sku, quantity in order[\"items\"]):\n            outcomes.append({\"order_id\": order[\"id\"], \"accepted\": False})\n            continue"
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "The new regression checks all six batch prefixes through both APIs, including a sufficient first item followed by a shortage, preservation of prior success, continuation, exact depletion, empty order/batch, exhaustion, copied stock, nested input immutability and integer/boolean types. Expected intermediate stocks would expose partial deductions or checking original stock instead of remaining stock."
+        },
+        {
+          "path": "artifacts/06-code-review/reply.md",
+          "quote": "Ready for owner review; no material findings. All eight tests and the local gate passed."
+        },
+        {
+          "path": "artifacts/07-code-fix/decision.json",
+          "quote": "\"skipped\": true,\n  \"reason\": \"review-ready\""
+        }
+      ]
+    },
+    {
+      "id": "usable-handoff",
+      "status": "pass",
+      "reason": "The executed restricted reader correctly recovered atomic rejection, batch-local prechecking and unchanged validation from exposed beginnings. It accurately distinguished implemented work from pending review and unavailable execution results. Entrypoints and review records lead with phase status, with detailed evidence linked separately.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/input.json",
+          "quote": "Keep the batch-local stock copy. For each validated order, check all requested\\nquantities against the current remaining stock before making any deductions."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Keep the batch-local stock copy and check every requested quantity before making deductions. This prevents partial mutation without rollback bookkeeping or a per-order stock copy. It relies on validated reusable item lists and unique SKUs within each order."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "The excerpts do not provide actual test/gate results or completed code-review findings. Human acceptance is not established;"
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-handoff.md",
+          "quote": "State: implemented; independent code review and human review pending."
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "\"next_action\": \"Owner reviews intent and usability; human acceptance remains pending. No commit or release is authorized or performed.\""
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "status": "pass",
+      "reason": "Comparison with initial files confirms original requests, historical completion, adapter, validation and gate remain unchanged. Changes stay within the requested feature and its documentation, tests and review evidence. Human acceptance remains pending; records show no commit, publication or version advancement.",
+      "evidence": [
+        {
+          "path": "artifacts/08-code-recheck/workspace/docs/history/completed.md",
+          "quote": "The initial reservation engine and validated JSON adapter are delivered. This is\nhistorical fixture context, not evidence that the newly requested rejection works."
+        },
+        {
+          "path": "artifacts/08-code-recheck/workspace/docs/SPEC.md",
+          "quote": "superseding only the sufficient-stock obligation in\n[ORIGINAL.md](ORIGINAL.md), which remains the historical requirements record."
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "Human intent/usability review and acceptance remain pending; ready is a code-review verdict only."
+        },
+        {
+          "path": "artifacts/08-code-recheck/git.json",
+          "quote": "\"log\": \"934b68b Fixture baseline\",\n  \"tags\": \"\""
+        }
+      ]
+    }
+  ]
+}

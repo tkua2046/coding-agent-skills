@@ -1,0 +1,7 @@
+{
+  "head": "59ec75633a24757b48faefb6a9db4c636b910350",
+  "status": "M docs/DESIGN.md\n?? reviews/",
+  "diff": "diff --git a/docs/DESIGN.md b/docs/DESIGN.md\nindex d584ac0..5678d04 100644\n--- a/docs/DESIGN.md\n+++ b/docs/DESIGN.md\n@@ -1,5 +1,4 @@\n-# Movement design D2\n+# Movement design D3\n Status: author-proposed correction to R1; awaiting review.\n-For F, calculate the adjacent target. If occupied, assign x/y to that target,\n-retain the original heading and emit False. Otherwise assign target and emit True.\n+For F, calculate the adjacent target. If occupied, leave x, y and heading unchanged and emit False. Otherwise assign target and emit True.\n Continue accepting later commands. Turns affect heading in place.",
+  "log": "59ec756 Fixture baseline",
+  "tags": ""
+}

@@ -1,0 +1,30 @@
+# Design: settings v2 migration
+
+Status: proposed; design review pending. Authority: [original requirement](ORIGINAL.md).
+Implementation is deferred. The proposal preserves v1 bytes and publishes validated
+v2 settings through an atomic replacement of `active.json`. This costs a second
+data file but makes interruption recoverable without undoing writes to the source.
+The next action is the requested design review, followed by the separately pending
+[plan review](PLAN.md); neither was performed in this task.
+
+This migration merits explicit compatibility and recovery analysis because a bad
+activation could lose persisted settings. Contents: [baseline](#baseline),
+[decisions](#decisions), [protocol](#protocol), [acceptance](#acceptance),
+[open decisions](#open-decisions-and-validation).
+
+## Baseline
+
+`settings.load(path)` parses v1 and returns an ID-to-value dictionary, rejecting
+duplicate IDs and versions other than 1. The two existing tests cover the supplied
+normal and duplicate-ID files. `data/active.json` selects `settings-v1.json` with
+format 1; selection is described as caller-owned, but no caller implementation is
+present. There is no v2 reader, migration, recovery, or crash test.
+See [inspection and experiments](evidence/migration-baseline.md).
+
+Historical design, retained verbatim:
+> The caller reads data/active.json and loads the selected v1 file. Stable IDs are
+> unique; duplicate IDs are errors. No migration or recovery protocol exists yet.
+
+## Decisions
+
+The original requires stable IDs and values, usable original v1 data before

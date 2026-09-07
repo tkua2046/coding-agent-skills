@@ -71,6 +71,8 @@ def test_capture_kills_process_group_and_retains_partial_output(
     assert options["start_new_session"] is True
     assert not {"PYTHONPATH", "PYTHONHOME"} & options["env"].keys()
     assert options["env"]["CANARY_PYTHON"] == sys.executable
+    assert options["env"]["GIT_CONFIG_GLOBAL"] == "/dev/null"
+    assert options["env"]["GIT_CONFIG_NOSYSTEM"] == "1"
     process.communicate.assert_any_call("input", timeout=1)
 
 
@@ -110,6 +112,11 @@ def test_commands_use_restricted_profile_without_legacy_sandbox(
             assert "--output-schema" in argv
     assert "--sandbox" not in argv
     config = configuration(argv)
+    if mode != "sandbox":
+        assert config["skills"]["include_instructions"] is False
+        assert config["orchestrator"]["skills"]["enabled"] is False
+        assert config["project_doc_max_bytes"] == 0
+        assert config["features"] == {"plugins": False, "apps": False}
     assert "sandbox_mode" not in config
     assert config["default_permissions"] == "canary"
     assert config["approval_policy"] == "never"
@@ -121,6 +128,33 @@ def test_commands_use_restricted_profile_without_legacy_sandbox(
     assert fs[":workspace_roots"]["skills"] == "read"
     assert str(tmp_path.parent) not in fs
     assert config["shell_environment_policy"]["set"]["TMPDIR"] == str(tmp_path / ".tmp")
+    assert config["shell_environment_policy"]["set"]["GIT_CONFIG_GLOBAL"] == "/dev/null"
+    assert config["shell_environment_policy"]["set"]["GIT_CONFIG_NOSYSTEM"] == "1"
+
+
+def test_apple_git_grant_is_limited_to_installed_developer_runtime(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setattr(runtime.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        runtime.Path,
+        "is_dir",
+        lambda path: str(path) == "/Library/Developer/CommandLineTools",
+    )
+    config = configuration(runtime.permission_args(tmp_path))
+    fs = config["permissions"]["canary"]["filesystem"]
+    assert fs["/Library/Developer/CommandLineTools"] == "read"
+    assert (
+        not {
+            "/Library",
+            "/Library/Developer",
+            str(runtime.Path.home()),
+            str(tmp_path.parent),
+        }
+        & fs.keys()
+    )
+    assert fs[":root"] == fs[":tmpdir"] == fs[":slash_tmp"] == "deny"
+    assert config["permissions"]["canary"]["network"]["enabled"] is False
 
 
 @pytest.mark.parametrize(

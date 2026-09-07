@@ -1,0 +1,822 @@
+{
+  "purpose": "Latest retained attempt at each current case/bundle identity; statuses copied from original reports, not regraded. Missing current V6 is deferred, not passed. Compare original evidence and the actual release gate.",
+  "baseline": "b9087c56f2b136aff7c4b3495fffeccdfe760a28",
+  "cases": [
+    {
+      "case": "bounded-delivery",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T090510-e0640bf3c1ac48fbae25dfec4392a7a6/report.json",
+        "worker_seconds": 704.783,
+        "executed_phases": [
+          "01-plan",
+          "02-document-review",
+          "05-implement",
+          "06-code-review",
+          "09-handoff"
+        ],
+        "skipped_phases": [
+          "03-document-fix",
+          "04-document-recheck",
+          "07-code-fix",
+          "08-code-recheck"
+        ],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T094228-9cae63d40af941b8be555400028d4817/report.json",
+        "worker_seconds": 619.238,
+        "executed_phases": [
+          "01-plan",
+          "02-document-review",
+          "05-implement",
+          "06-code-review",
+          "09-handoff"
+        ],
+        "skipped_phases": [
+          "03-document-fix",
+          "04-document-recheck",
+          "07-code-fix",
+          "08-code-recheck"
+        ],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "bounded-investigation",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T083357-130ffc0a8e31423fbe8c8ab9ded1d958/report.json",
+        "worker_seconds": 163.086,
+        "executed_phases": [
+          "01-investigate"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T094659-6d7b7192d2a2449db9a83b7544abde58/report.json",
+        "worker_seconds": 151.976,
+        "executed_phases": [
+          "01-investigate"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "counter-stage",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T090402-1664e48d45bf4fb4b40a06248153eaae/report.json",
+        "worker_seconds": 144.84,
+        "executed_phases": [
+          "01-execute"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T090221-d9617806505c41579145df19abada8b9/report.json",
+        "worker_seconds": 127.051,
+        "executed_phases": [
+          "01-execute"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "existing-intake",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T090136-e9f9ff66f1594c33b202c5f1e69bbf80/report.json",
+        "worker_seconds": 93.186,
+        "executed_phases": [
+          "01-intake"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T094757-ce99b6e7a1b7402e93107e3d2f08145a/report.json",
+        "worker_seconds": 88.557,
+        "executed_phases": [
+          "01-intake"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [
+          "consequential-intake"
+        ],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "release-ready",
+      "version": 1,
+      "baseline": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T091010-8abdb359ca2c44e6a59b742d2318f826/report.json",
+        "worker_seconds": 80.959,
+        "executed_phases": [
+          "01-assess"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": "ValueError: Grader cited missing evidence or an invented quote",
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pending"
+      }
+    },
+    {
+      "case": "release-stale",
+      "version": 1,
+      "baseline": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T090734-5a79df1e185a46bcad525e9c43c587c4/report.json",
+        "worker_seconds": 93.841,
+        "executed_phases": [
+          "01-assess"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": "ValueError: Grader cited missing evidence or an invented quote",
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pending"
+      }
+    },
+    {
+      "case": "review-defective",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T084000-a0eb40fca76a46c2bf887c6d5c80b331/report.json",
+        "worker_seconds": 89.385,
+        "executed_phases": [
+          "01-review"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T095057-9357aca7b7fc4ef28d0ae9607ccac1d7/report.json",
+        "worker_seconds": 76.825,
+        "executed_phases": [
+          "01-review"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "review-ready",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T083803-07c4c0591a634ee3afcfa02c7dd171e5/report.json",
+        "worker_seconds": 60.472,
+        "executed_phases": [
+          "01-review"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T095019-40c382652b654e9b9caacd747e731b3f/report.json",
+        "worker_seconds": 64.788,
+        "executed_phases": [
+          "01-review"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "route-local",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T092402-902583d3cfff40e1a88c63d6eddaf926/report.json",
+        "worker_seconds": 150.662,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T095225-753790f4724147848b81bfc711a55bbf/report.json",
+        "worker_seconds": 112.012,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "route-uncertain",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T092807-ff5642a36e9c4a34a5a5f7b9b414b010/report.json",
+        "worker_seconds": 157.483,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T095332-493e3b8bc66140ac95e4a579b481e4cc/report.json",
+        "worker_seconds": 135.935,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": "ValueError: Grader cited missing evidence or an invented quote",
+        "regrade": null
+      }
+    },
+    {
+      "case": "v1-small-feature",
+      "version": 2,
+      "baseline": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T091520-f558fdf21f704b13899de1b3ced023db/report.json",
+        "worker_seconds": 141.279,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": "ValueError: Grader cited missing evidence or an invented quote",
+        "regrade": {
+          "operation": "one-off-grader-only-recovery",
+          "source_report_path": "/Users/tk/Documents/coding-agent-skills/docs/validation/canary/20260907T084242-fd4d0ca28f534e23a8ef73b934ce8d97/report.json",
+          "source_report_sha256": "5ebfad94a8dfd0c290d0afc6e43fc4131587d9250ebb83a3d5182006701303ce",
+          "source_run_id": "20260907T084242-fd4d0ca28f534e23a8ef73b934ce8d97",
+          "worker_reused": true,
+          "reader_reused": true,
+          "fresh_worker_calls": 0,
+          "fresh_reader_calls": 0,
+          "fresh_grader_calls": 1,
+          "worker_timing": "Original observations are reused, not new execution time.",
+          "helper_sha256": "3b2efdf5bb4693ef4e64fc8353b91a154dbf74fd620ec502a02d863bc1538d3e",
+          "new_grader_elapsed_seconds": 86.106
+        }
+      },
+      "candidate": {
+        "status": "pending"
+      }
+    },
+    {
+      "case": "v2-scope-extension",
+      "version": 2,
+      "baseline": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T084545-77792470ee6b483c847a6350fe4c3237/report.json",
+        "worker_seconds": 340.891,
+        "executed_phases": [
+          "01-plan",
+          "02-extend"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": "ValueError: Grader cited missing evidence or an invented quote",
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T093307-869a3e1aa79842b79d2b32ba9949675b/report.json",
+        "worker_seconds": 344.306,
+        "executed_phases": [
+          "01-plan",
+          "02-extend"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "v3-maintenance",
+      "version": 2,
+      "baseline": {
+        "status": "pending"
+      },
+      "candidate": {
+        "status": "pending"
+      }
+    },
+    {
+      "case": "v4-migration-risk",
+      "version": 3,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T091901-572ec8619c5e4a5cbc4d498974adf8f6/report.json",
+        "worker_seconds": 182.025,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [
+          "first-screen-comprehension"
+        ],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T094228-a4fb5fdf8c1b492bae4eb21af911f9a2/report.json",
+        "worker_seconds": 221.918,
+        "executed_phases": [
+          "01-plan"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [
+          "first-screen-comprehension"
+        ],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    },
+    {
+      "case": "v5-review-recheck",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T085347-299c66b0e85c450cabe6663088366c86/report.json",
+        "worker_seconds": 259.825,
+        "executed_phases": [
+          "01-recheck",
+          "02-recheck-correction"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pending"
+      }
+    },
+    {
+      "case": "v6-execution-handoff",
+      "version": 1,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T090136-e7b5b89b7a6a49568535a0ecf379ecdd/report.json",
+        "worker_seconds": 937.84,
+        "executed_phases": [
+          "01-execute",
+          "02-review",
+          "03-fix",
+          "04-recheck",
+          "05-resume",
+          "06-accepted-delivery"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [
+          "local-commits"
+        ],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "deferred"
+      }
+    },
+    {
+      "case": "workflow-setup",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T092120-d4908cd5b1644a87a7a76c9256532b0a/report.json",
+        "worker_seconds": 247.576,
+        "executed_phases": [
+          "01-setup",
+          "02-prepare-pr"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T093636-3a4ef47ec46145019ae85aa54bc79a53/report.json",
+        "worker_seconds": 310.072,
+        "executed_phases": [
+          "01-setup",
+          "02-prepare-pr"
+        ],
+        "skipped_phases": [],
+        "semantic_nonpass": [],
+        "deterministic_nonpass": [],
+        "error": null,
+        "regrade": null
+      }
+    }
+  ],
+  "candidate_counts": {
+    "pass": 8,
+    "fail": 2,
+    "pending": 5,
+    "inconclusive": 1,
+    "deferred": 1
+  },
+  "all_behavior_attempts": [
+    {
+      "case": "bounded-investigation",
+      "report": "docs/validation/canary/20260907T083357-130ffc0a8e31423fbe8c8ab9ded1d958/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T083357-6a32abd825c64f7f8a395cb66f3598e8/report.json",
+      "status": "fail",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "bounded-investigation",
+      "report": "docs/validation/canary/20260907T083526-78cd855023b842669e1273b62047dfbd/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T083526-ef8930ed28164847b88cf633a9cc20a6/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "review-ready",
+      "report": "docs/validation/canary/20260907T083803-07c4c0591a634ee3afcfa02c7dd171e5/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "review-ready",
+      "report": "docs/validation/canary/20260907T083858-7af0ed6575f94a3ca1834416fa725ff0/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "review-defective",
+      "report": "docs/validation/canary/20260907T084000-a0eb40fca76a46c2bf887c6d5c80b331/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "review-defective",
+      "report": "docs/validation/canary/20260907T084102-34336eabfb044b8eaac1de37124972c7/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T084242-fd4d0ca28f534e23a8ef73b934ce8d97/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T084327-e8210bfcd7074d0581846925e88a1acf/report.json",
+      "status": "inconclusive",
+      "baseline_ref": null
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T084545-77792470ee6b483c847a6350fe4c3237/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T084628-39042d9c978f40198562574d39a34da4/report.json",
+      "status": "inconclusive",
+      "baseline_ref": null
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T084644-ee9226cf32c74971addf784b200065ce/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T084752-3146f5803caf47c3a4e182b09cd5c59e/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T085129-a6833bc193fb46b8816096e236a818b8/report.json",
+      "status": "fail",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T085243-10ea4c3268af46558499da7933657b04/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "v5-review-recheck",
+      "report": "docs/validation/canary/20260907T085347-299c66b0e85c450cabe6663088366c86/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v5-review-recheck",
+      "report": "docs/validation/canary/20260907T085412-48ca49428aed47b389365a5afe7926fa/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T085827-a49cbdf9e919485186ac029e4c1b96f3/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T085907-3cb838e09ec448fd9dc50289753193b4/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T085908-9ab1d583aa654b1083fb9f6efeae5f6e/report.json",
+      "status": "inconclusive",
+      "baseline_ref": null
+    },
+    {
+      "case": "existing-intake",
+      "report": "docs/validation/canary/20260907T085955-103af1a0949e4c15ba7939bede897d81/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T090136-e7b5b89b7a6a49568535a0ecf379ecdd/report.json",
+      "status": "fail",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "existing-intake",
+      "report": "docs/validation/canary/20260907T090136-e9f9ff66f1594c33b202c5f1e69bbf80/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "counter-stage",
+      "report": "docs/validation/canary/20260907T090221-d9617806505c41579145df19abada8b9/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "counter-stage",
+      "report": "docs/validation/canary/20260907T090402-1664e48d45bf4fb4b40a06248153eaae/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T090510-e0640bf3c1ac48fbae25dfec4392a7a6/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T090511-1d644c627ac6479dbfa323b649a9bb6d/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "release-stale",
+      "report": "docs/validation/canary/20260907T090530-8f214a23399848a3b4e5bfd00ce66e79/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "release-stale",
+      "report": "docs/validation/canary/20260907T090734-5a79df1e185a46bcad525e9c43c587c4/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "release-ready",
+      "report": "docs/validation/canary/20260907T090809-a85a02a17fe74b68bf03def1c9aa7633/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "release-ready",
+      "report": "docs/validation/canary/20260907T091010-8abdb359ca2c44e6a59b742d2318f826/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T091520-f558fdf21f704b13899de1b3ced023db/report.json",
+      "status": "inconclusive",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T091521-da4eaa6b572249c799fbd2cf584406ed/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T091649-590685ee4d3e4c9dacdd263de0b9df5f/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T091901-572ec8619c5e4a5cbc4d498974adf8f6/report.json",
+      "status": "fail",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T092120-d4908cd5b1644a87a7a76c9256532b0a/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T092121-a318b5119df04b77ba3dce80b64d3aa8/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "route-local",
+      "report": "docs/validation/canary/20260907T092254-3a1bdf049263492fa6187448aeaa6f20/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "route-local",
+      "report": "docs/validation/canary/20260907T092402-902583d3cfff40e1a88c63d6eddaf926/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "route-uncertain",
+      "report": "docs/validation/canary/20260907T092638-683623eb6f06406d933109d885c55227/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "route-uncertain",
+      "report": "docs/validation/canary/20260907T092807-ff5642a36e9c4a34a5a5f7b9b414b010/report.json",
+      "status": "pass",
+      "baseline_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28"
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T093307-869a3e1aa79842b79d2b32ba9949675b/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T093636-3a4ef47ec46145019ae85aa54bc79a53/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T094228-9cae63d40af941b8be555400028d4817/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T094228-a4fb5fdf8c1b492bae4eb21af911f9a2/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T094228-afb6fd48e3bd4286b96869f7a69a114d/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "bounded-investigation",
+      "report": "docs/validation/canary/20260907T094659-6d7b7192d2a2449db9a83b7544abde58/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "existing-intake",
+      "report": "docs/validation/canary/20260907T094757-ce99b6e7a1b7402e93107e3d2f08145a/report.json",
+      "status": "fail",
+      "baseline_ref": null
+    },
+    {
+      "case": "review-ready",
+      "report": "docs/validation/canary/20260907T095019-40c382652b654e9b9caacd747e731b3f/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "review-defective",
+      "report": "docs/validation/canary/20260907T095057-9357aca7b7fc4ef28d0ae9607ccac1d7/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "route-local",
+      "report": "docs/validation/canary/20260907T095225-753790f4724147848b81bfc711a55bbf/report.json",
+      "status": "pass",
+      "baseline_ref": null
+    },
+    {
+      "case": "route-uncertain",
+      "report": "docs/validation/canary/20260907T095332-493e3b8bc66140ac95e4a579b481e4cc/report.json",
+      "status": "inconclusive",
+      "baseline_ref": null
+    }
+  ]
+}

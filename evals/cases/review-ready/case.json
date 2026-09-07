@@ -1,0 +1,50 @@
+{
+  "id": "review-ready",
+  "version": 1,
+  "tier": "heavy",
+  "title": "Review an inventory ordering design and increment",
+  "skills": [
+    "feature-design",
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-review",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "local-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "preserved-baseline",
+      "kind": "unchanged",
+      "paths": [
+        ".gitignore",
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "README.md",
+        "docs/DESIGN.md",
+        "docs/ORIGINAL.md",
+        "docs/PLAN.md",
+        "examples/stock.csv",
+        "inventory.py",
+        "qa/check_inventory.py",
+        "quality.ini",
+        "tools/check.py"
+      ]
+    },
+    {
+      "id": "review-boundary",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

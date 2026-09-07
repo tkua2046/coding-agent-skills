@@ -1,5 +1,15 @@
 # Design: four portable workflow skills
 
+Current increment: [outcome-driven revision](proposals/outcome-workflow.md), independently reviewed and under real baseline/candidate evaluation. Its goal is understandable decisions and correct delivery at proportionate effort. Human acceptance remains pending.
+
+## Task depth and completion
+
+Select depth using material uncertainty, failure consequences/reversibility and affected boundaries. A local understood change may combine design and planning in a short note and one document review; normal code review and checks still apply. A consequential change expands relevant risk analysis. An unknown first needs a bounded evidence-gathering step. A one-sentence reason is enough; the skills do not require a classification artifact or another routing framework.
+
+Each operation ends at a useful outcome: sufficient decisions to implement, an actionable next increment, verified resolution of material findings, or an identified pending decision. Review preferences are optional; repeated disagreement calls for evidence or a decision rather than cosmetic rounds. A time budget cannot manufacture approval. Existing user authorization and project gates remain authoritative.
+
+The [goal map](../evals/GOALS.md) connects these decisions to actual canaries. A restricted reader tests whether document openings convey the required facts; full artifacts remain subject to correctness/usability review. Paired elapsed time and unnecessary review/document work inform a separate benefit decision. The prescribed multi-role delivery scaffold does not prove autonomous phase selection, and machine comprehension does not replace owner reading.
+
 Status: original design retained; authorized workflow refinement and canary added below. Original validation and current limitations: [validation](VALIDATION.md). Requirements: [SPEC](SPEC.md).
 
 ## At a glance

@@ -1,0 +1,84 @@
+{
+  "criteria": [
+    {
+      "id": "scope-history",
+      "status": "pass",
+      "reason": "P2 preserves the original command model, blocked full-pose behavior, continuation, confirmed YAML extension and completed S0. Original requests and historical acceptance remain supplied.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/ORIGINAL.md",
+          "quote": "Return final pose and per-command success. Reject unknown commands."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Design P2 (document-only): reuse the existing pose and command model. F computes target first; occupied target returns False without changing x, y or heading. Later commands continue; L/R turn in place and unknown commands remain rejected."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Load YAML starting pose and about 200,000 occupied cells once."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "S0 remains completed historical movement work."
+        },
+        {
+          "path": "artifacts/docs/history/completed.md",
+          "quote": "Synthetic historical acceptance of D1: movement and turning delivered."
+        }
+      ]
+    },
+    {
+      "id": "decisions-next-action",
+      "status": "pass",
+      "reason": "The plan explains lookup cost and memory, requires complete structural validation before movement, exposes unresolved duplicate and value policies, and orders implementation after those decisions.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "A coordinate set uses O(n) memory/build time and expected O(1) membership, avoiding O(n) scans per move. Parse safely, validate the complete mapping, pose fields and coordinate pairs before initializing movement; errors identify the offending field."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Open decisions before implementation: should duplicate YAML keys be rejected rather than last-value-wins? Should duplicate occupied coordinates be rejected or deduplicated? Should True be rejected as a coordinate despite Python's integer relationship? Propose integer-only non-bool coordinates and explicit heading range validation; these stricter value policies require confirmation."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Pending plan: first settle those policies and implement complete input validation, then integrate membership lookup with pose ownership; this dependency prevents partial invalid input from moving."
+        }
+      ]
+    },
+    {
+      "id": "verification-closure",
+      "status": "pass",
+      "reason": "Proposed acceptance covers invalid input before movement, False with unchanged full pose, subsequent commands and existing navigation behavior. Implementation remains pending.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Acceptance must reject malformed structure before any movement and exercise the confirmed duplicate/value policies. At (2,3,1) facing east with (3,3) occupied, F returns False and (2,3,1); subsequent R still turns in place. Recheck original movement, L/R and unknown-command rejection."
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "YAML and obstacle implementation remain pending."
+        }
+      ]
+    },
+    {
+      "id": "evidence-boundaries",
+      "status": "pass",
+      "reason": "The deliverable identifies proposed revision P2, distinguishes planned acceptance from execution, and explicitly leaves independent review and human acceptance unperformed. Historical acceptance is bounded to earlier movement work.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "Design P2 (document-only)"
+        },
+        {
+          "path": "artifacts/docs/PLAN.md",
+          "quote": "This is proposed acceptance, not executed tests; no independent review or human acceptance has occurred."
+        },
+        {
+          "path": "artifacts/docs/history/completed.md",
+          "quote": "This record predates obstacle support; it is not evidence of a new trial."
+        }
+      ]
+    }
+  ]
+}

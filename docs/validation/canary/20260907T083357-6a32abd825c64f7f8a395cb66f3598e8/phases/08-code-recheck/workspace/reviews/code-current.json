@@ -1,0 +1,157 @@
+{
+  "verdict": "ready",
+  "findings": [],
+  "open_finding_ids": [],
+  "next_action": "Owner reviews the candidate and decides human acceptance. No code correction or contract decision is required by this review.",
+  "review_mode": "Independent review in the fresh reviewer context; reviewer did not implement or edit the candidate.",
+  "reviewed_at": "2026-09-07T08:43:24.852822+00:00",
+  "reviewed_content": {
+    "base_commit": "abcfcd12d06342c980498a2b137d78514cd2fab7",
+    "candidate": "Working-tree candidate, including staged modifications and existing new review/evidence files; exact diff against HEAD and status captured before this report.",
+    "implementation": [
+      "inventory.py",
+      "batch.py",
+      "command_codec.py",
+      "tests/test_inventory.py",
+      "README.md",
+      "hooks/pre-commit"
+    ],
+    "authority_and_context": [
+      "AGENTS.md",
+      "docs/REQUEST.md",
+      "docs/ORIGINAL.md",
+      "docs/SPEC.md",
+      "docs/DESIGN.md",
+      "docs/PLAN.md",
+      "DEVNOTES.md",
+      "docs/history/completed.md",
+      "reviews/design-current.json",
+      "reviews/stage-s1.md"
+    ],
+    "sha256_snapshot": "reviews/code-evidence/snapshot.json",
+    "candidate_diff": "reviews/code-evidence/candidate-diff.txt",
+    "git_status": "reviews/code-evidence/status.txt",
+    "stability": "reviews/code-evidence/stability.json"
+  },
+  "assessment": [
+    "inventory.py:6-11 preflights each validated unique SKU against current batch-local remaining stock, deducts only after whole-order success, and appends one boolean result in input order. Rejection preserves prior successes and every current quantity; empty orders pass all() and exact fits use >=.",
+    "Only the initial stock copy is mutated. Integer subtraction preserves integer counts, validated uniqueness makes per-item preflight sufficient, and the trusted Python API receives no new validation policies. Complexity remains linear in total items plus the initial stock copy.",
+    "batch.py and command_codec.py have no diff against HEAD. Entire-batch JSON validation still finishes before reserve executes, with existing malformed-shape, duplicate ID/SKU, unknown SKU and invalid quantity errors intact.",
+    "Tests retain the six baseline cases and add explicit expectations for late shortage, standalone rejection, continuation, prior depletion, exact fit, zero stock, empty order/batch, deep input preservation and boolean/integer types through both APIs. The invalid-later-order test verifies the engine is never called. These cases detect partial spending, stopping at rejection, comparing with original inventory and rejecting exact exhaustion.",
+    "README describes the implemented acceptance behavior. Independent inspection of current D2, SPEC and S1 against REQUEST and ORIGINAL finds consistent scope, concrete decisive examples and a feasible single-stage implementation/check boundary. Historical baseline descriptions are preserved as history; human acceptance remains pending."
+  ],
+  "checks": [
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/tests.txt"
+    },
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "hooks/pre-commit"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/gate.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/candidate-diff.txt"
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/status.txt"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/base.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/whitespace.txt"
+    },
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "reviews/code-evidence/crosscheck.py"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "evidence": "reviews/code-evidence/crosscheck.txt"
+    }
+  ],
+  "check_results": {
+    "unit_suite": "PASS: 13 tests, exit 0.",
+    "local_gate": "PASS: 13 tests, exit 0; inspected nonempty-discovery guard.",
+    "independent_crosscheck": "PASS: 6,561 three-order batches / 13,122 evaluations across both APIs against a tentative-copy reference. Covered stock 0..2, requests absent/1/2 for two SKUs, alternating item order, deep input preservation and exact result types.",
+    "whitespace": "git diff HEAD --check exited 0.",
+    "baseline": "Prior baseline evidence reports six passing tests and gate; original six cases remain and passed in this run. Historical baseline was inspected, not independently rerun.",
+    "git_diagnostics": "Git commands exited 0 and returned requested content, with denied cache/config access diagnostics retained in raw evidence."
+  },
+  "prior_finding_dispositions": [
+    {
+      "id": "DOC-1",
+      "source": "reviews/stage-s1.md#review-status",
+      "original_concern": "Prior design-current.json classified its review as self-review after separate-context creation failed; this did not satisfy the plan independent document review dependency.",
+      "disposition": "resolved by independent reviewer verification in this round",
+      "verification": "This fresh reviewer inspected the actual current D2/S1/SPEC documents, request, original behavior and exact diff. Preflight on unique SKUs, continuation, API and validation preservation, edge cases and concrete acceptance are consistent; S1 keeps the bounded code/tests/README change together and specifies the actual working suite and gate. No unresolved design or plan finding. The prior self-review is preserved and is not retroactively reclassified.",
+      "reviewed_version": "Current hashes in reviews/code-evidence/snapshot.json"
+    }
+  ],
+  "limitations": [
+    "The independent generated cross-check is bounded, not an exhaustive proof over all integer counts or batch lengths. Validated input shapes, positive quantities and known unique SKUs are contractual preconditions.",
+    "Persistence, concurrency and external infrastructure are outside scope and were not tested. No packages were installed or external services used.",
+    "Ready means ready for owner review. Human acceptance, commit and release approval are not established."
+  ],
+  "preservation": "Only new review/evidence files were written. Existing reports, production code, tests, specifications, plan and index were preserved."
+}

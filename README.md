@@ -2,6 +2,8 @@
 
 Four reusable English skills for taking a feature from requirements to reviewed code and delivery. Each skill is independently copyable and includes its own prompts and templates.
 
+Current status: a revised candidate awaiting owner review. [Actual agent-test results](docs/validation/canary/INDEX.md) include unresolved failures; this is not a release-ready claim.
+
 ## Choose an operation
 
 | Skill | Use it for |
@@ -27,12 +29,23 @@ Example requests:
 
 > Use $dev-workflow to adapt the existing checks and documentation layout. Keep current tools where they work.
 
-For a small follow-up, ask for a local design amendment and update only affected pending stages. Plans describe outcomes, dependencies and acceptance; code/tests retain implementation detail. Review records keep current open findings first and distinguish an author's fix claim from a reviewer's verification.
+## Choose the amount of process
+
+| Task | Useful default |
+|---|---|
+| Local, understood and easy to reverse | A short design/implementation note and one combined document review, then implementation, checks and the agreed code review |
+| A feature with consequential design choices | Concise design reasoning and outcome-based stages, with the relevant reviews |
+| High-consequence change or multiple affected owners/interfaces | Deeper analysis of the actual compatibility, recovery or coordination risks |
+| A material unknown | A bounded investigation or experiment, then choose the next step from evidence |
+
+For example: “Use $feature-design and $implementation-plan for this local extension. Choose appropriate depth; a combined note/review is fine. Then use $stage-development to implement with the existing checks and independent code review. Leave human acceptance pending for me.”
+
+Existing repository/user requirements take precedence. Plans own outcomes, dependencies and acceptance; code/tests own implementation detail. Update only affected decisions and pending work. Reviews can accept sufficient work; material findings need a concrete consequence and an affected recheck. Existing gates and real authorization remain in force on the short route.
 
 ## Limits and references
 
 Skills guide agent behavior; they are not an automatic approval or release system. Independent review needs a separate context. Installation in your VS Code UI should be checked locally; see [validation](docs/VALIDATION.md) for what was actually tested.
 
-Skill changes have [versioned canary cases](evals/README.md) and retained evidence. Normal commits/PRs run fast checks; expensive agent trials are required before release. The new heavy suite is **pending**, not a claim that these prompt changes already passed behavioral evaluation.
+The [goal-based canaries](evals/GOALS.md) check document comprehension, maintainability, useful review, actual implementation and development setup. Normal commits/PRs run fast checks; expensive agent trials run before release or when explicitly requested. See [actual results](docs/validation/canary/INDEX.md) for quality, observed benefit and remaining limits. A passing machine-reader check does not establish human readability.
 
 [Developer notes](DEVNOTES.md) · [Changelog](CHANGELOG.md) · [Design](docs/DESIGN.md) · [Justification](docs/JUSTIFICATION.md)

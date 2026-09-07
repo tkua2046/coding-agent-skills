@@ -1,0 +1,30 @@
+# Design: YAML initialization and fixed occupied cells
+
+Status: YAML and occupied-cell scope confirmed; extension proposed, implementation
+and reviews pending. D1 remains accepted. Load and validate the entire YAML input
+before exposing a starting pose and immutable occupancy; reuse a hash lookup during
+movement. At about 200,000 cells this trades memory for expected O(1) queries and
+avoids repeated parsing or scans. Next: resolve the [open contracts](#open-contract-decisions),
+then deliver the revised [pending plan](PLAN.md). No YAML dependency is selected or installed.
+
+Sources and behavior: [current spec](SPEC.md), [YAML request](YAML_REQUEST.md),
+[occupied request](OCCUPIED_REQUEST.md), and [example](../examples/start.yaml).
+Sections below cover preserved behavior, loading/lookup rationale, open contracts,
+and acceptance. The earlier per-run copy proposal is revised for reusable loaded
+occupancy; its malformed-input exclusion no longer applies to YAML initialization.
+
+## Accepted design D1 (preserved)
+
+Keep state local to each run; no global session. A caller supplies pose and commands.
+A direction lookup supports translation; turns only affect heading. Unbounded
+coordinates avoid imposing a board size. Unknown commands are programmer errors.
+
+## Movement and compatibility
+
+Inspection of [navigator.py](../navigator.py) shows `_target` already computes a
+candidate pose without mutation. For F, check its coordinates before replacing
+pose. A blocked move appends False and continues; accepted F and L/R append True.
+Unknown commands still raise `ValueError("unknown command")`.
+
+Propose retaining `run(pose, commands, occupied=())`: old two-argument calls retain
+existing behavior. Mutable or one-pass caller collections are normalized once

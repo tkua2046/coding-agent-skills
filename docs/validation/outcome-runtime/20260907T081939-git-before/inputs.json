@@ -1,0 +1,6 @@
+{
+  "engine": "c0c9aaffc64db5bc97cd93cdf67cb94efb04a3adf7a80353025920feca945ca4",
+  "purpose": "Real bounded sandbox Git init/status/add/commit infrastructure control; no model invocation",
+  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "git": "/usr/bin/git"
+}

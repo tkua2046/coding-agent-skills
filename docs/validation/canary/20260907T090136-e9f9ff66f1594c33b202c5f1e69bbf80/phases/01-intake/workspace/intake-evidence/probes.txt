@@ -1,0 +1,9 @@
+Diagnostic probes of unchanged formatter.label; illustrative observations, not acceptance tests.
+label(' a ') -> 'A'
+label('ß') -> 'SS'
+label('Straße') -> 'STRASSE'
+label('') -> ''
+label(' \t\n') -> ''
+label('a b') -> 'A B'
+label(None) -> AttributeError: 'NoneType' object has no attribute 'strip'
+label(42) -> AttributeError: 'int' object has no attribute 'strip'

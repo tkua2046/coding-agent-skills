@@ -1,0 +1,79 @@
+[
+  {
+    "id": "preserve-starting-snapshot",
+    "status": "pass",
+    "evidence": {
+      "AGENTS.md": true,
+      "DEVNOTES.md": true,
+      "README.md": true,
+      "batch.py": true,
+      "command_codec.py": true,
+      "docs/REQUEST.md": true,
+      "inventory.py": true,
+      "tests/test_inventory.py": true
+    }
+  },
+  {
+    "id": "planning-boundary",
+    "status": "pass",
+    "evidence": {
+      "argv": [
+        "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+        "sandbox",
+        "-P",
+        "canary",
+        "-C",
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-lphk3p7d/worker",
+        "-c",
+        "default_permissions=\"canary\"",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\",\"/opt/homebrew\"=\"read\",\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+        "-c",
+        "shell_environment_policy.inherit=\"core\"",
+        "-c",
+        "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-lphk3p7d/worker/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+        "--",
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "\"\"\"Read-only final-snapshot boundary; semantic evidence honesty is graded separately.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {\n    \"AGENTS.md\": \"a716cd8ea101dbe6f2ee976cb626ee9c1e961c3acdb8bbab46141fee82efda08\",\n    \"DEVNOTES.md\": \"6448bd7ca26a20067ca628704c132152d6984281e41e5941626e493a11f308a6\",\n    \"README.md\": \"6abea4adc72cada64ecaab4a50ae1f1439e7cd4ad06aa0e7612f3120aaa5fa11\",\n    \"batch.py\": \"16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b\",\n    \"command_codec.py\": \"d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de\",\n    \"docs/REQUEST.md\": \"8da574108ff152a1963be3e037d83c3bbf4c934449a5b09b5b6074638798e956\",\n    \"inventory.py\": \"47ed82f0de9981ed68e93aca4248025e41bf90bc109f411589c8e2cff7793736\",\n    \"tests/test_inventory.py\": \"e8ae44127d4f5c2008bff5ef59f098519b1c8d82d9115bc0eb63b4e24c6222f5\",\n}\n\nroot = Path.cwd()\nfor name, expected in EXPECTED.items():\n    path = root / name\n    assert not path.is_symlink(), f\"Symlinked protected input: {name}\"\n    assert path.is_file(), f\"Missing protected input: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, (\n        f\"Changed protected input: {name}\"\n    )\n\n# The runner owns skills and Git metadata; caches are not application artifacts.\nignored = {\".git\", \"skills\", \".tmp\", \"__pycache__\", \".pytest_cache\", \".ruff_cache\"}\nfor path in root.rglob(\"*\"):\n    parts = path.relative_to(root).parts\n    if any(part in ignored for part in parts):\n        continue\n    assert not path.is_symlink(), f\"Symlinked task artifact: {path.relative_to(root)}\"\n    if path.is_file():\n        name = path.relative_to(root).as_posix()\n        assert name in EXPECTED or parts[0] in {\"docs\", \"scratch\"}, (\n            f\"Unexpected project file outside planning scope: {name}\"\n        )\n\nnote = root / \"docs/NEXT.md\"\nassert note.is_file() and note.read_text(encoding=\"utf-8\").strip(), (\n    \"Missing readable next-work handoff: docs/NEXT.md\"\n)\nprint(\n    \"Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\"\n)\n"
+      ],
+      "exit_code": 0,
+      "stdout": "Protected inputs unchanged; new files confined to planning/scratch scope; handoff exists\n",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.131
+    }
+  },
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "no-commits",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  },
+  {
+    "id": "runner.workflow-budget",
+    "status": "pass",
+    "evidence": {
+      "worker_elapsed_seconds": 150.662,
+      "workflow_budget_seconds": 300
+    }
+  }
+]

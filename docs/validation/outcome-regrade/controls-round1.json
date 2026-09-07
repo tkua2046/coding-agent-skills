@@ -1,0 +1,24 @@
+{
+  "kind": "NO-MODEL one-off recovery controls; scratch records only",
+  "created_at": "2026-09-07T09:05:03.124406+00:00",
+  "argv": [
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "artifacts/test_regrade_outcome.py"
+  ],
+  "exit_code": 0,
+  "stdout": ".............................                                            [100%]\n29 passed in 30.59s\n",
+  "stderr": "",
+  "elapsed_seconds": 30.733,
+  "inputs": {
+    "artifacts/regrade_outcome.py": "3b2efdf5bb4693ef4e64fc8353b91a154dbf74fd620ec502a02d863bc1538d3e",
+    "artifacts/test_regrade_outcome.py": "5f57143eeebab479df52d2bc96e27b4f107ef571697a57ce8acc70ab24c21f93"
+  },
+  "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2"
+}

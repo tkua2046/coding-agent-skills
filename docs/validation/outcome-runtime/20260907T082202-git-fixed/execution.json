@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+    "sandbox",
+    "-P",
+    "canary",
+    "-C",
+    "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-git-0rowdwn3/workspace",
+    "-c",
+    "default_permissions=\"canary\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\",\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+    "-c",
+    "shell_environment_policy.inherit=\"core\"",
+    "-c",
+    "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-git-0rowdwn3/workspace/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+    "--",
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-I",
+    "-c",
+    "import json, pathlib, subprocess\npathlib.Path('sample.txt').write_text('git sandbox smoke\\n')\ncommands = [['git', 'init', '-q', '-b', 'main'], ['git', 'status', '--porcelain'], ['git', 'add', 'sample.txt'], ['git', '-c', 'user.name=Canary Smoke', '-c', 'user.email=smoke@example.invalid', '-c', 'commit.gpgsign=false', 'commit', '-qm', 'Sandbox smoke'], ['git', 'log', '-1', '--format=%H'], ['git', 'status', '--porcelain']]\nresults=[]\nfor command in commands:\n    result=subprocess.run(command, text=True, capture_output=True, timeout=10)\n    results.append({'argv':command,'exit_code':result.returncode,'stdout':result.stdout,'stderr':result.stderr})\n    if result.returncode:\n        break\nprint(json.dumps(results, indent=2))\nraise SystemExit(any(r['exit_code'] for r in results))\n"
+  ],
+  "exit_code": 0,
+  "stdout": "[\n  {\n    \"argv\": [\n      \"git\",\n      \"init\",\n      \"-q\",\n      \"-b\",\n      \"main\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-MSVLu3Qt' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-GJf3Y83S' (errno=Operation not permitted)\\n\"\n  },\n  {\n    \"argv\": [\n      \"git\",\n      \"status\",\n      \"--porcelain\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"?? sample.txt\\n\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-J0zrRTgT' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-1dVUpTmM' (errno=Operation not permitted)\\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\\n\"\n  },\n  {\n    \"argv\": [\n      \"git\",\n      \"add\",\n      \"sample.txt\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-QhumRyyT' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-ep8xy47R' (errno=Operation not permitted)\\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\\n\"\n  },\n  {\n    \"argv\": [\n      \"git\",\n      \"-c\",\n      \"user.name=Canary Smoke\",\n      \"-c\",\n      \"user.email=smoke@example.invalid\",\n      \"-c\",\n      \"commit.gpgsign=false\",\n      \"commit\",\n      \"-qm\",\n      \"Sandbox smoke\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-YV28DoNU' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-vpp5gkEX' (errno=Operation not permitted)\\n\"\n  },\n  {\n    \"argv\": [\n      \"git\",\n      \"log\",\n      \"-1\",\n      \"--format=%H\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"20ec83e4a543f0376176e356138b24a229ba9016\\n\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-NrUdehns' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-bSlCZGpl' (errno=Operation not permitted)\\n\"\n  },\n  {\n    \"argv\": [\n      \"git\",\n      \"status\",\n      \"--porcelain\"\n    ],\n    \"exit_code\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-MZ8abOYL' (errno=Operation not permitted)\\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-elIK8sKW' (errno=Operation not permitted)\\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\\n\"\n  }\n]\n",
+  "stderr": "",
+  "timed_out": false,
+  "interrupted": false,
+  "elapsed_seconds": 0.187
+}

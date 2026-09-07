@@ -1,0 +1,30 @@
+# Order report investigation — 2026-09-07
+
+Recommend pursuing a separately authorized, small change to load the catalog once
+per nonempty report batch, then measuring representative workloads against an agreed
+latency target. The local evidence does not justify a database, cache service, or
+job queue. This entry is intake/investigation only; no feature or rebuild was delivered.
+
+Confirmed scope comes from the current user request, [README](../README.md), and
+[AGENTS](../AGENTS.md): catalog is fixed within each batch; preserve exact integer-cent
+totals, order sequence, production code/tests, source inputs and prior reports.
+[Current code](../report.py) reloads, parses, and indexes the entire JSON catalog for
+each order. [Existing tests](../tests/test_report.py) cover one subtotal and an empty
+batch with a nonexistent catalog. Both passed (exit 0; [baseline output](investigation-evidence/baseline.txt)).
+
+**Bounded evidence.** A standard-library scratch probe compared current behavior with
+one lazy catalog load per batch, using synthetic catalogs of 100/1,000 rows and
+batches of 100/1,000/5,000 orders. Three wall-time repetitions per case alternated
+execution order; every full output matched both the candidate and calculated totals.
+For the 1,000-row catalog, median seconds were:
+
+| Orders | Current | Scratch |
+| --- | ---: | ---: |
+| 100 | 0.032668 | 0.000345 |
+| 1,000 | 0.328819 | 0.000468 |
+| 5,000 | 1.660186 | 0.001148 |
+
+For 1,000 orders, measured loader calls dropped from 1,000 to 1. A separate profile
+at that size attributed 0.316/0.346 seconds (~91%) to `load_catalog`, including
+0.219 seconds in JSON loading and 0.036 seconds in file reading (nested times,
+not additive). Inspection explains scaling from roughly O(orders × catalog rows)

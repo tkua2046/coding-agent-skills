@@ -1,0 +1,30 @@
+# Accepted design D1
+Keep state local to each run; no global session. A caller supplies pose and commands.
+A direction lookup supports translation; turns only affect heading. Unbounded
+coordinates avoid imposing a board size. Unknown commands are programmer errors.
+
+## Occupied-cell amendment D1-O1
+
+Status: proposed amendment; design review pending. D1 above remains the accepted
+baseline, with [historical acceptance](history/completed.md) limited to S0.
+Outcome: caller-supplied fixed cells block forward movement without ending a run.
+Use an optional occupancy input, snapshot it once per run, and test the candidate
+destination before updating pose. A blocked move returns a false outcome with the
+entire pose unchanged; later commands still execute. Next: review this amendment
+and the [pending implementation plan](PLAN.md); implementation is a later task.
+Requirements: [confirmed request](OCCUPIED_REQUEST.md) and
+[specification addendum](OCCUPIED_SPEC.md), which separates requirements from
+proposed interface choices.
+
+### Local extension and rationale
+
+Inspection of [navigator.py](../navigator.py) shows `_target` already computes a
+candidate pose without changing state. `run` currently assigns it immediately and
+appends `True` for each valid command. Keep this movement/turn structure and add
+the occupancy decision only on forward moves. No replacement navigation layer,
+dependency, board boundary, routing, persistence or configuration is needed.
+
+Propose `run(pose, commands, occupied=())`, accepting an iterable of integer
+coordinate tuples. Existing two-argument calls and the return shape stay compatible.
+Convert occupancy to a local `frozenset` once before consuming commands: duplicate
+cells collapse, caller data is not mutated, and membership costs expected O(1)

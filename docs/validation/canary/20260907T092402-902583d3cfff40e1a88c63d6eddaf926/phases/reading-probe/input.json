@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/NEXT.md",
+      "text": "# Next developer work: atomic order reservation\n\nStatus: **planned; implementation has not started**. Implement one coherent change: reject insufficient orders without any deductions, then continue processing later orders. Both APIs must expose identical behavior. No blocking clarification is outstanding.\n\nAuthority: [REQUEST.md](REQUEST.md). Proposed behavior and acceptance examples: [DESIGN.md](DESIGN.md). Verified baseline: **6 existing tests pass**, but both APIs currently accept an insufficient mixed batch and produce negative stock; [evidence and commands](EVIDENCE.md).\n\n| Stage | Outcome and bounded scope | Dependencies / risk | Acceptance and done condition | Intended boundary |\n|---|---|---|---|---|\n| S1 \u2014 planned | Add per-order availability checks before deductions in `inventory.py`; preserve signatures, tuple/result shape, ordering and input ownership. Add regressions in `tests/test_inventory.py` for both entry points. Update README's obsolete caller-sufficiency statement in the subsequent implementation task. | Existing adapter and codec can remain as they are. Main risks are partial deductions on rejection and checking initial stock instead of the current balance. | [Design examples](DESIGN.md#decisive-acceptance-examples) pass through both APIs; verify rejection has no effects, earlier deductions persist, later orders run, exact depletion and empty orders work, nested inputs are preserved, counts remain integers, and JSON validation still raises. Full local suite passes and final diff is reviewed. | One coherent future implementation commit containing behavior, regression tests and README update; no commit in this planning pass. |\n\nStart by adding regressions that demonstrate the observed failure, then implement the order-level check and deduction. Keep implementation and tests together in the review boundary. Do not add a new public API, codec validation rules, rollback framework, dependencies, or concurrency machinery.\n\nUse the [contributor check](."
+    }
+  ],
+  "questions": [
+    "What work should the developer do next, and why does it follow from the available evidence?",
+    "What has actually been established, what remains uncertain or unperformed, and what result would justify moving forward?"
+  ]
+}

@@ -1,0 +1,72 @@
+Maintenance candidate base: a9edbba59e6747bf57f33355ba9d9a2abbcd4499
+
+Baseline: unittest discover ran 4 tests, all passed before edits.
+
+SHA256 navigator.py: 9fe50251aa7069ebe61b8616a2bbce146cc4a29f7ea413405161b75f22396899
+
+SHA256 tests/test_navigator.py: 5dabbe7266b3e9dc2d41ee6328fc7c6fbfcfadd1abb435b6cc3bae3b0a1723f6
+
+$ /Users/tk/Documents/coding-agent-skills/.venv/bin/python -m unittest discover -s tests -v
+
+test_block_preserves_pose_and_continues (test_navigator.NavigationTests.test_block_preserves_pose_and_continues) ... ok
+test_blocked_forward_west_at_negative_coordinate (test_navigator.NavigationTests.test_blocked_forward_west_at_negative_coordinate) ... ok
+test_left_wraps (test_navigator.NavigationTests.test_left_wraps) ... ok
+test_turn_and_forward (test_navigator.NavigationTests.test_turn_and_forward) ... ok
+test_unknown_command (test_navigator.NavigationTests.test_unknown_command) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+
+Exit: 0
+
+$ git diff --check
+
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-4hyhl2eY' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-zTO3Lppr' (errno=Operation not permitted)
+
+Exit: 0
+
+$ git diff -- navigator.py tests/test_navigator.py
+
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-GDNzqvPS' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-AjnH7aRY' (errno=Operation not permitted)
+diff --git a/navigator.py b/navigator.py
+index efc5eb0..bce51f3 100644
+--- a/navigator.py
++++ b/navigator.py
+@@ -1,7 +1,7 @@
+ DIRECTIONS = ((0, 1), (1, 0), (0, -1), (-1, 0))
+ 
+ 
+-def _target(pose):
++def _next_pose(pose):
+     x, y, heading = pose
+     dx, dy = DIRECTIONS[heading]
+     return x + dx, y + dy, heading
+@@ -13,7 +13,7 @@ def run(pose, commands, occupied=()):
+     for command in commands:
+         x, y, heading = pose
+         if command == "F":
+-            candidate = _target(pose)
++            candidate = _next_pose(pose)
+             if candidate[:2] in occupied:
+                 outcomes.append(False)
+                 continue
+diff --git a/tests/test_navigator.py b/tests/test_navigator.py
+index 75ad7ea..e6288eb 100644
+--- a/tests/test_navigator.py
++++ b/tests/test_navigator.py
+@@ -19,3 +19,9 @@ class NavigationTests(unittest.TestCase):
+             run((0, 0, 0), "FRF", {(0, 1)}),
+             ((1, 0, 1), [False, True, True]),
+         )
++
++    def test_blocked_forward_west_at_negative_coordinate(self):
++        self.assertEqual(
++            run((-2, -3, 3), "F", {(-3, -3)}),
++            ((-2, -3, 3), [False]),
++        )
+
+Exit: 0

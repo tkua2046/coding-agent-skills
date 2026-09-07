@@ -1,0 +1,27 @@
+Coverage unavailable; running the stdlib unittest gate only. No coverage reports will be generated.
+test_failure (check_gate_probe.GateProbe.test_failure) ... FAIL
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+======================================================================
+FAIL: test_failure (check_gate_probe.GateProbe.test_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-oi10n16c/worker/gate-probes-u_vq378a/tools/check.py", line 30, in main
+    import coverage
+ModuleNotFoundError: No module named 'coverage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-oi10n16c/worker/gate-probes-u_vq378a/qa/check_gate_probe.py", line 4, in test_failure
+    self.fail("intentional gate probe")
+AssertionError: intentional gate probe
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.005s
+
+FAILED (failures=1)

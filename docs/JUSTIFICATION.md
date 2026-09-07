@@ -32,6 +32,10 @@ The Markdown parser adds one pinned development dependency. This is preferable t
 
 ## Workflow refinement and canary
 
+The subsequent [outcome-driven revision](proposals/outcome-workflow.md) changes how much process a task receives. Adding another instruction to “be concise” would leave the original sequence and review incentives intact. The short route therefore permits combined design/planning and removes conflicting leaf/template prerequisites, while preserving the normal code review and actual commit gate. Investigation resolves important unknowns before architecture is expanded.
+
+This is a hypothesis under evaluation, not a demonstrated speedup. [Goals](../evals/GOALS.md) include first-screen comprehension, plan maintenance, review restraint/convergence, meaningful runtime checks and workflow adaptation. Known faulty outputs test the scoring prompt separately. Real runs retain failures and original artifacts; the final judgment distinguishes acceptable results from reduced developer effort. High-risk migration checks prevent a superficially shorter workflow from winning by omitting necessary reasoning.
+
 The [research](research/workflow/RESEARCH.md) supports a practical distinction: designs explain consequential choices, plans explain delivery order and acceptance, and code/tests retain implementation detail. A new test should not force synchronized prose edits. Local extensions amend affected work while preserving completed history; substantial migration risk still needs explicit preservation, activation and retry decisions.
 
 The [approved proposal](proposals/workflow-proposal.md) applies these rules to the four existing bundles rather than adding a workflow framework. Current verdict/open IDs plus append-only recheck evidence make review closure readable without erasing failed rounds. The plan template uses one overview, with detail only where a dependency or risk needs explanation.

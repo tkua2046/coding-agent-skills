@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/INVESTIGATION.md",
+      "text": "# Order report investigation \u2014 2026-09-07\n\nRecommend pursuing a separately authorized, small change to load the catalog once\nper nonempty report batch, then measuring representative workloads against an agreed\nlatency target. The local evidence does not justify a database, cache service, or\njob queue. This entry is intake/investigation only; no feature or rebuild was delivered.\n\nConfirmed scope comes from the current user request, [README](../README.md), and\n[AGENTS](../AGENTS.md): catalog is fixed within each batch; preserve exact integer-cent\ntotals, order sequence, production code/tests, source inputs and prior reports.\n[Current code](../report.py) reloads, parses, and indexes the entire JSON catalog for\neach order. [Existing tests](../tests/test_report.py) cover one subtotal and an empty\nbatch with a nonexistent catalog. Both passed (exit 0; [baseline output](investigation-evidence/baseline.txt)).\n\n**Bounded evidence.** A standard-library scratch probe compared current behavior with\none lazy catalog load per batch, using synthetic catalogs of 100/1,000 rows and\nbatches of 100/1,000/5,000 orders. Three wall-time repetitions per case alternated\nexecution order; every full output matched both the candidate and calculated totals.\nFor the 1,000-row catalog, median seconds were:\n\n| Orders | Current | Scratch |\n| --- | ---: | ---: |\n| 100 | 0.032668 | 0.000345 |\n| 1,000 | 0.328819 | 0.000468 |\n| 5,000 | 1.660186 | 0.001148 |\n\nFor 1,000 orders, measured loader calls dropped from 1,000 to 1. A separate profile\nat that size attributed 0.316/0.346 seconds (~91%) to `load_catalog`, including\n0.219 seconds in JSON loading and 0.036 seconds in file reading (nested times,\nnot additive). Inspection explains scaling from roughly O(orders \u00d7 catalog rows)\n"
+    }
+  ],
+  "questions": [
+    "What was investigated and what did the observed evidence establish?",
+    "What is the next recommended action and what remains uncertain?"
+  ]
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "local-commits",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "preserved-baseline",
+    "status": "pass",
+    "evidence": {
+      "settings.py": true,
+      "tests": true,
+      "data": true,
+      "docs/ORIGINAL.md": true
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  }
+]

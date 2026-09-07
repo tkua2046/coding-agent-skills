@@ -1,0 +1,23 @@
+"""Read-only inspection of original run records; not a replacement grader."""
+import argparse,json,sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from tools import canary
+root=Path(__file__).resolve().parents[1]
+p=argparse.ArgumentParser();p.add_argument('--output',type=Path);args=p.parse_args()
+rows=[]
+for path in sorted((root/'docs/validation/canary').glob('*/report.json')):
+ r=json.loads(path.read_text())
+ if r.get('kind')!='behavior':continue
+ row={'record':str(path.relative_to(root)),'case':r.get('case_id'),'baseline_ref':r.get('source_ref'),'identity':r.get('identity'),'status':r.get('status'),'error':r.get('error'),'observations':r.get('observations'),'deterministic':[{k:c[k] for k in ['id','status'] if k in c} for c in r.get('deterministic',[])]}
+ grade=path.parent/'grade.json'
+ if grade.exists():row['criteria']=json.loads(grade.read_text()).get('criteria')
+ reader=path.parent/'phases/reading-probe/reply.md'
+ if reader.exists():row['reader_answer']=reader.read_text()
+ elapsed={}
+ for label,execution in [('grader',path.parent/'grade-reply.execution.json'),('reader',path.parent/'phases/reading-probe/execution.json')]:
+  if execution.exists():elapsed[label]=json.loads(execution.read_text()).get('elapsed_seconds')
+ row['evaluation_elapsed_seconds']=elapsed;rows.append(row)
+value={'purpose':'Derived index of real behavior records; consult originals. No quality or benefit verdict is invented here.','runs':rows}
+if args.output:canary.save(args.output,value)
+else:print(json.dumps(value,indent=2))

@@ -1,0 +1,7 @@
+test_empty (test_app.SummaryTests.test_empty) ... ok
+test_populated (test_app.SummaryTests.test_populated) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

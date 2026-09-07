@@ -1,0 +1,57 @@
+{
+  "purpose": "Current fast mechanical validation after reviewed repairs; not LLM skill quality. Not the final staged pre-commit gate.",
+  "inputs": {
+    "tools/canary.py": "67809f836022b29e0d23d580538f078907f9e4425dd1e0a2c449cf6bc4483596",
+    "tools/canary_runtime.py": "d528b02654d1cd1440d80b38dba3caae229659e31c1ea00883b965fd3a586ac2",
+    "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+    "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+    "skills/dev-workflow/prompts/setup-dev-workflow.md": "02fde3310ea8360106b8b36fde2314903a82012193b9d9dfb62c2145fb0463b1"
+  },
+  "results": [
+    {
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "tools/check.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Skill metadata, bundle resources, discovery links and documentation links pass.\n",
+      "stderr": "",
+      "elapsed_seconds": 0.6608748747967184
+    },
+    {
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "tools.canary",
+        "validate"
+      ],
+      "exit_code": 0,
+      "stdout": "17 versioned canary cases validate. No model calls made by this validation; heavy evidence is assessed by release-gate.\n",
+      "stderr": "",
+      "elapsed_seconds": 0.08148141577839851
+    },
+    {
+      "argv": [
+        ".venv/bin/ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": "",
+      "elapsed_seconds": 0.01469104178249836
+    },
+    {
+      "argv": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 1,
+      "stdout": "unformatted: File would be reformatted\n  --> docs/reviews/outcome-setup-review.md:28:35\n   |\n27 | ```python\n   - changed = subprocess.check_output(\n   -     [\"git\", \"diff\", \"--name-only\", \"HEAD\"], text=True\n   - )\n28 + changed = subprocess.check_output([\"git\", \"diff\", \"--name-only\", \"HEAD\"], text=True)\n29 | if not any(name.endswith(\".py\") for name in changed.splitlines()):\n   |\n\n1 file would be reformatted, 84 files already formatted\n",
+      "stderr": "",
+      "elapsed_seconds": 0.019207957666367292
+    }
+  ]
+}

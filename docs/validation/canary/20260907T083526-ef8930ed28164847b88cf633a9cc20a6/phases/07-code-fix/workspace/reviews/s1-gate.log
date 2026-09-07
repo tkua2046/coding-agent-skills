@@ -1,0 +1,16 @@
+Command: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', 'hooks/pre-commit']
+test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
+test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
+test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
+test_empty (test_inventory.InventoryTests.test_empty) ... ok
+test_invalid_json_batch_never_reaches_reservation (test_inventory.InventoryTests.test_invalid_json_batch_never_reaches_reservation) ... ok
+test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
+test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
+test_whole_order_rejection_through_both_apis (test_inventory.InventoryTests.test_whole_order_rejection_through_both_apis) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK
+
+Exit: 0

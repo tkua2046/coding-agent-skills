@@ -1,0 +1,84 @@
+{
+  "criteria": [
+    {
+      "id": "scope-history",
+      "status": "pass",
+      "reason": "The review assesses current revision D2 against the original full-pose requirement and preserves R1 and the supplied D2 history.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Current status: needs changes; R1 remains open at D2."
+        },
+        {
+          "path": "artifacts/docs/history/R1.md",
+          "quote": "Required correction: preserve the entire pose."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Original R1 and D2 remain available in docs/history/."
+        }
+      ]
+    },
+    {
+      "id": "decisions-next-action",
+      "status": "pass",
+      "reason": "The review gives a concrete coordinate counterexample, explains the resulting state corruption, and specifies an actionable correction and recheck.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/DESIGN.md",
+          "quote": "If occupied, assign x/y to that target,\nretain the original heading and emit False."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "For (2,3,1) facing east and occupied (3,3), blocked F produces (3,3,1), not (2,3,1). Heading is preserved but position still advances, corrupting caller state."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Next action: author must preserve x and y as well as heading; then recheck all three components, False and continuation at the new revision."
+        }
+      ]
+    },
+    {
+      "id": "verification-closure",
+      "status": "pass",
+      "reason": "The static recheck covers the full pose, failure output and continuation at D2. It correctly keeps the partial correction open and retains earlier finding evidence.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/DESIGN.md",
+          "quote": "If occupied, assign x/y to that target,\nretain the original heading and emit False. Otherwise assign target and emit True.\nContinue accepting later commands."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Current status: needs changes; R1 remains open at D2."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "False and continuation are specified but do not repair the pose invariant."
+        },
+        {
+          "path": "artifacts/docs/history/R1.md",
+          "quote": "Reviewed D1, movement transition: a blocked F advances x/y and changes heading."
+        }
+      ]
+    },
+    {
+      "id": "evidence-boundaries",
+      "status": "pass",
+      "reason": "The report identifies D2 and its exact inspected transition, limits its conclusion to static document review, and explicitly leaves runtime verification and human acceptance unestablished.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Static review of D2, exact transition: \"If occupied, assign x/y to that target,\nretain the original heading and emit False.\""
+        },
+        {
+          "path": "artifacts/docs/DESIGN.md",
+          "quote": "If occupied, assign x/y to that target,\nretain the original heading and emit False."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "This verdict verifies document content only. No runtime tests were run; human acceptance remains pending."
+        }
+      ]
+    }
+  ]
+}

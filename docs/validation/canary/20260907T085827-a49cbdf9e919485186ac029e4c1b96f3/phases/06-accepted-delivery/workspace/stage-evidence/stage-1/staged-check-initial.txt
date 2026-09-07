@@ -1,0 +1,3 @@
+{
+  "captured_output": "Command: git diff --cached --check\nExit: 2\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-CaWg3RXf' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-v3q1bNDU' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\nstage-evidence/stage-1/candidate.patch:7: trailing whitespace.\n+ \nstage-evidence/stage-1/candidate.patch:11: trailing whitespace.\n+ \nstage-evidence/stage-1/candidate.patch:42: trailing whitespace.\n+ \n"
+}

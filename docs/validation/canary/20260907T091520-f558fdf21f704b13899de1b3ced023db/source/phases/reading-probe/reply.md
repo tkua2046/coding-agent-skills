@@ -1,0 +1,7 @@
+1. **Changing behavior:** The proposed feature lets callers supply fixed occupied cells. A blocked forward move preserves pose and returns `False`; subsequent commands still run. Preserve existing two-argument calls, heading-only turns, unbounded coordinates, per-run state, and `ValueError("unknown command")` for unknown commands.
+
+2. **Main technical decision:** Snapshot the supplied occupied coordinates into a local `frozenset` once per run, then reject occupied forward targets before changing pose. This avoids retaining mutable caller occupancy and keeps state local. The scope is movement blocking; routing and moving obstacles are excluded.
+
+3. **Next uncompleted outcome:** S1 adds optional occupancy to `navigator.run`, navigation tests, and README usage with a blocked-session example. It depends on D1.1 design review, plan review, and later implementation authorization; it is not implemented, tested, or reviewed. A decisive exposed example: starting at `(0, 0, 1)` with `(1, 0)` occupied, `FRF` must finish at `(0, -1, 2)` with results `[False, True, True]`. The linked acceptance examples and complete fixture-specific check command are not supplied in the excerpts.
+
+These answers reflect first-screen machine comprehension, not human usability proof.

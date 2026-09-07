@@ -30,3 +30,11 @@ Repository documentation is English. Original user requirements retain their ori
 The owner approved execution of the [reviewed proposal](proposals/workflow-proposal.md) with “执行”. The original clarification “implementation plan不是拿自然语言把整个实现和test一个一个都说一遍” requires plans to own delivery decisions, not a duplicate implementation/test inventory. Local changes must preserve accepted work and keep current review closure easy to inspect. This is one material requirement among scope fidelity, consequential design, stage execution and evidence quality.
 
 The [validation contract](proposals/workflow-validation.md) preserves the owner's request to standardize important tests, grading and original results as a safeguard for future skill changes. Its cadence is explicit: “当然太过heavy的测试也不能每次小改动都跑。在最后release之前跑就行。” Fast checks apply to normal commits/PRs; the required heavy suite and baseline comparison apply before release. Missing/inconclusive heavy results may not be reported as passing. No release or global installation was requested.
+
+## Outcome-driven refinement
+
+The subsequent [original authorization](sources/user-workflow.md#outcome-driven-revision-7-september-2026) requests task-appropriate workflow selection and actual canary-driven iteration now. The user will review the completed candidate afterward; autonomous implementation and independent-agent review are authorized for this increment.
+
+Design and planning retain distinct purposes. For a local, understood and reversible change, a combined short note and combined document review can satisfy both; separate documents and separate serial reviews are no longer universal requirements. Significant uncertainty calls for bounded investigation, and consequential failures call for deeper analysis. Preserve meaningful tests, existing gates and real authorization in every route.
+
+Required outcomes include readable document entrypoints, a usable next stage, low maintenance burden, review convergence, appropriate engineering effort and current evidence. [Goal-to-test coverage](../evals/GOALS.md) defines observable success/failure. Passing the suite does not by itself demonstrate lower developer effort or human readability. The [reviewed increment](proposals/outcome-workflow.md) defines baseline comparison, iteration bounds and separate global benefit decisions.

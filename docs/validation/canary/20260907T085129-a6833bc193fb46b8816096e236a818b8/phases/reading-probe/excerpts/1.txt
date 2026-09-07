@@ -1,0 +1,13 @@
+# Implementation plan: settings migration
+
+Status: proposed; plan review pending. [Requirements](ORIGINAL.md) · [proposed design](DESIGN.md). Design review also remains pending; this plan does not treat proposed decisions as approved.
+
+Next action: resolve the design's input, persistence, completion and ownership decisions, then obtain design and plan reviews. Implementation belongs to a later task. No stages or commits are executed here.
+
+## Stages at a glance
+
+| Stage | Observable outcome / scope | Dependencies and boundary reason | Acceptance / material risk | State / intended boundary |
+|---|---|---|---|---|
+| S0: review readiness | Settle [open design decisions](DESIGN.md#validation-and-open-decisions), document supported filesystem guarantees and review the resulting design/plan | Required before implementation; original crash requirement cannot be weakened by assumption | Explicit review of lossy ID coercion, malformed-input compatibility, activation commit and host-crash scope; preserve historical review records tied to their reviewed revision | Pending design and plan reviews; no implementation commit |
+| S1: compatible reader and validated conversion | Extend `settings.py` to read v2 and validate/convert v1 without activating files; add relevant reader/conversion tests and README usage | S0; yields a runnable reader for both representations while v1 remains selected | Normal/duplicate fixtures, empty and nested values, strict malformed-input cases, non-string IDs, exact type-sensitive equality from [acceptance](DESIGN.md#acceptance). Existing reader behavior on valid v1 retained | Planned; one coherent reader/validation commit, if later authorized |
+| S2: durable activation and retry | Add explicit migration and selector handling, exclusive candidate creation, persisted validation, ordered sync and atomic selector replacement, caller success semantics; include crash/error/retry tests and usage/operations docs | S1; writing, activation and recovery ship tog

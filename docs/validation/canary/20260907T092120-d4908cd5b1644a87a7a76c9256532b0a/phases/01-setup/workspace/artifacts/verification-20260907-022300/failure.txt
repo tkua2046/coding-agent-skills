@@ -1,0 +1,24 @@
+test_failure (check_gate_probe.GateProbe.test_failure) ... FAIL
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+======================================================================
+FAIL: test_failure (check_gate_probe.GateProbe.test_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-znrhxi11/worker/.tmp/tmpi9_mg13h/qa/check_gate_probe.py", line 4, in test_failure
+    self.fail("intentional gate probe")
+AssertionError: intentional gate probe
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.011s
+
+FAILED (failures=1)
+Name           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------
+inventory.py      58      1     18      2    96%   59->exit, 81
+----------------------------------------------------------
+TOTAL             58      1     18      2    96%

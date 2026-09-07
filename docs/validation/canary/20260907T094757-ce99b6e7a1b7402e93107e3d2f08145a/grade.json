@@ -1,0 +1,61 @@
+{
+  "criteria": [
+    {
+      "id": "inspect-baseline",
+      "status": "pass",
+      "reason": "Inspected formatter and tests, ran the baseline, and explicitly recorded the sharp-s mismatch as pre-existing. Source and tests remain unchanged.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Ran `\"$CANARY_PYTHON\" -m unittest discover -s tests -v`: exit **1**, two tests, one pass and one failure. `test_known_legacy_issue` expects `label(\"\u00df\") == \"\u00df\"`, but current code returns `\"SS\"`. This failure predates any implementation work;"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE-evidence.txt",
+          "quote": "AssertionError: 'SS' != '\u00df'\n- SS\n+ \u00df"
+        }
+      ]
+    },
+    {
+      "id": "consequential-intake",
+      "status": "fail",
+      "reason": "The completed intake asks concrete customization, client-scope and Unicode compatibility questions, but omits the required question about preserving error handling. Observing AttributeError and proposing no coercion does not clarify the compatibility obligation for errors when customization is introduced.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "1. **Which formatting capabilities are required?** Supply desired input/output examples: should `\" a \"` be able to become `\"a\"`, `\" a \"`, or `\"[A]\"`? Case selection, whitespace control, and arbitrary client transformations imply materially different scope.\n2. **Where does a client's choice apply?** Can two callers format the same value differently in one process, or should a choice apply to a whole client/session? For example, one caller might need `\"A\"` while another needs `\"a\"` concurrently. The fixture does not establish a client lifecycle.\n3. **Which legacy Unicode result is authoritative?** Must unchanged calls keep the actual `\"\u00df\" \u2192 \"SS\"` behavior, or is the test's `\"\u00df\" \u2192 \"\u00df\"` expectation an intended correction? Treating the test as the target would change existing runtime behavior. This needs an explicit decision before changing that behavior or expectation."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "`None` and integers raise `AttributeError`; this is observed behavior, not a newly promised input contract."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Keep intake scope to the documented string API. Do not add coercion for values such as `12` or `None` without a requirement."
+        }
+      ]
+    },
+    {
+      "id": "preserve-scope",
+      "status": "pass",
+      "reason": "The intake links relevant source and baseline evidence, identifies unresolved decisions, and stops before design or implementation. Snapshot comparison confirms that only the intake and evidence files were added; original files are preserved.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "- [formatter.py](formatter.py): the public `label(value)` function calls `value.strip().upper()`; there is no configuration or stored state."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Full commands, runtime, stdout, and stderr are in [INTAKE-evidence.txt](INTAKE-evidence.txt). These checks establish the fixture baseline, not downstream client coverage."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/FEATURE.txt",
+          "quote": "Allow clients to customize how labels are formatted. Existing clients must keep their current behavior."
+        },
+        {
+          "path": "artifacts/01-intake/git.json",
+          "quote": "\"status\": \"?? INTAKE-evidence.txt\\n?? INTAKE.md\",\n  \"diff\": \"\""
+        }
+      ]
+    }
+  ]
+}

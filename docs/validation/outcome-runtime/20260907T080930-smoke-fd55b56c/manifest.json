@@ -1,0 +1,17 @@
+{
+  "sha256": {
+    "checks.json": "a802f41e62fa8297a1625d6783e63ec32b5db10235e0390ae4a13a214ee18164",
+    "execution.json": "8ccc71db501973b6e8cc9cff8fcd994ba8161890b0a8f80e4bb9968f6682ad0c",
+    "initial/input.txt": "6e2ae11dad0616f66bbb2b6e6556f580bb987fd911d7132aa6bee2bfc7cc7b52",
+    "inputs.json": "ea3a4e9015e16b195d5be5e7702bd7a334e4e909c4de947aebda57284de75a92",
+    "isolation.json": "29963f7074a4a0bb477a5709cc3253e7e802411fd3f224d1cb759687f03da390",
+    "prompt.txt": "c081df7191c801c6818177510b590430a8f8d47aded1fd325685997162791f10",
+    "reply.json": "6f34538efe7949388ea310f7eb5142e0242ee52f14fe39aac24402f55fbcc1aa",
+    "runtime-input.py": "9552afda317177f4dfe72b2c3903acbb4256472365bfca362ce12dbe9a0180e5",
+    "stderr.txt": "73d007bb9cc242e26d5e808948c8b6c18743736cb5bd5c54a42eaee0440f2184",
+    "stdout.jsonl": "378191b5cc935c868a0d0f3c02006446bdb0ec7911115425ba18548258d007ff",
+    "workspace/input.txt": "6e2ae11dad0616f66bbb2b6e6556f580bb987fd911d7132aa6bee2bfc7cc7b52",
+    "workspace/observed.txt": "643492b9257da6aafef00b0c8ede4386a064975d04ee609546420de3859a37d8",
+    "workspace/response-schema.json": "75347120961476c0b5ba1e305eb5779cecd4279fb046317cb210f5a28a85b1da"
+  }
+}

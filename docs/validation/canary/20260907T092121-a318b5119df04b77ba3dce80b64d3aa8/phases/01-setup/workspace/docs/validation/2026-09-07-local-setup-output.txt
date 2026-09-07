@@ -1,0 +1,132 @@
+## Installed hook, documentation filename (full suite)
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.git/hooks/pre-commit', 'README.md']
+Exit: 0
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
+OK
+Name           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------
+inventory.py      58      1     18      2    96%   59->exit, 81
+----------------------------------------------------------
+TOTAL             58      1     18      2    96%
+
+
+JSON validated: inventory.py only, branch_coverage true.
+
+## Copied installed hook from outside repository
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit', 'README.md']
+Exit: 0
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
+OK
+Name           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------
+inventory.py      58      1     18      2    96%   59->exit, 81
+----------------------------------------------------------
+TOTAL             58      1     18      2    96%
+
+
+## Assertion failure propagates through hook
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit', 'README.md']
+Exit: 1
+test_failure (check_gate_probe.GateProbe.test_failure) ... FAIL
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+======================================================================
+FAIL: test_failure (check_gate_probe.GateProbe.test_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/qa/check_gate_probe.py", line 4, in test_failure
+    self.fail("intentional gate verification")
+AssertionError: intentional gate verification
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.010s
+
+FAILED (failures=1)
+
+
+## Empty custom discovery fails hook
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit']
+Exit: 1
+Checks failed: no tests discovered
+/Users/tk/Documents/coding-agent-skills/.venv/lib/python3.12/site-packages/coverage/inorout.py:558: CoverageWarning: Module inventory was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-module-not-imported
+  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")
+/Users/tk/Documents/coding-agent-skills/.venv/lib/python3.12/site-packages/coverage/control.py:967: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-no-data-collected
+  self._warn("No data was collected.", slug="no-data-collected")
+
+
+## Coverage unavailable, installed hook stdlib fallback
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit']
+Exit: 0
+Coverage unavailable: running stdlib unittest gate only; no coverage reports generated.
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.005s
+
+OK
+
+
+## Stdlib fallback propagates test failure
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit']
+Exit: 1
+Coverage unavailable: running stdlib unittest gate only; no coverage reports generated.
+test_failure (check_gate_probe.GateProbe.test_failure) ... FAIL
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+======================================================================
+FAIL: test_failure (check_gate_probe.GateProbe.test_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/tools/check.py", line 30, in main
+    import coverage
+ModuleNotFoundError: No module named 'coverage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/qa/check_gate_probe.py", line 4, in test_failure
+    self.fail("intentional fallback verification")
+AssertionError: intentional fallback verification
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.005s
+
+FAILED (failures=1)
+
+
+## Stdlib fallback rejects empty discovery
+Command: ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-bnrbufi2/worker/.tmp/tmp7a0s_mz5/.git/hooks/pre-commit']
+Exit: 1
+Coverage unavailable: running stdlib unittest gate only; no coverage reports generated.
+Checks failed: no tests discovered
+
+
+Protected application, tests, sample, configurations, wrappers and Git index unchanged; temporary fixture removed.

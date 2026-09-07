@@ -1,0 +1,62 @@
+Python: 3.12.4 platform: macOS-26.5.2-arm64-arm-64bit
+Method: perf_counter wall seconds; 3 repeats; alternate execution order;
+synthetic local JSON, exact full-output equality each run; median reported.
+SHA256 report.py 56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608
+SHA256 tests/test_report.py ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6
+{"catalog_rows": 100, "orders": 100, "catalog_bytes": 3890, "seconds": {"current": [0.005387458018958569, 0.0053680832497775555, 0.005283915903419256], "scratch": [6.750039756298065e-05, 6.975000724196434e-05, 6.78342767059803e-05]}, "median_seconds": {"current": 0.0053680832497775555, "scratch": 6.78342767059803e-05}, "ratio_current_to_scratch": 79.13526185360362}
+{"catalog_rows": 100, "orders": 1000, "catalog_bytes": 3890, "seconds": {"current": [0.05333449970930815, 0.053499083034694195, 0.05321045918390155], "scratch": [0.0006075827404856682, 0.00019225012511014938, 0.0001854579895734787]}, "median_seconds": {"current": 0.05333449970930815, "scratch": 0.00019225012511014938}, "ratio_current_to_scratch": 277.42244473833364}
+{"catalog_rows": 100, "orders": 5000, "catalog_bytes": 3890, "seconds": {"current": [0.2685110419988632, 0.26607133401557803, 0.2687022499740124], "scratch": [0.0007811659015715122, 0.0006708749569952488, 0.0007752906531095505]}, "median_seconds": {"current": 0.2685110419988632, "scratch": 0.0007752906531095505}, "ratio_current_to_scratch": 346.3359720924198}
+{"catalog_rows": 1000, "orders": 100, "catalog_bytes": 40015, "seconds": {"current": [0.03561483370140195, 0.03266800008714199, 0.032655291724950075], "scratch": [0.00034516723826527596, 0.000349957961589098, 0.00033674994483590126]}, "median_seconds": {"current": 0.03266800008714199, "scratch": 0.00034516723826527596}, "ratio_current_to_scratch": 94.64397679027469}
+{"catalog_rows": 1000, "orders": 1000, "catalog_bytes": 40015, "seconds": {"current": [0.3277196669951081, 0.3288190411403775, 0.32976000010967255], "scratch": [0.0004682079888880253, 0.0004709591157734394, 0.000466667115688324]}, "median_seconds": {"current": 0.3288190411403775, "scratch": 0.0004682079888880253}, "ratio_current_to_scratch": 702.2926753584645}
+{"catalog_rows": 1000, "orders": 5000, "catalog_bytes": 40015, "seconds": {"current": [1.658704041969031, 1.6709912079386413, 1.6601861668750644], "scratch": [0.0011491659097373486, 0.0009926250204443932, 0.0011484581045806408]}, "median_seconds": {"current": 1.6601861668750644, "scratch": 0.0011484581045806408}, "ratio_current_to_scratch": 1445.578345656136}
+load_catalog calls: current 1000 for 1000 orders
+PROFILE current          61002 function calls in 0.346 seconds
+
+   Ordered by: cumulative time
+   List reduced from 43 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.030    0.030    0.346    0.346 report.py:9(summarize)
+     1000    0.060    0.000    0.316    0.000 report.py:5(load_catalog)
+     1000    0.001    0.000    0.219    0.000 __init__.py:299(loads)
+     1000    0.001    0.000    0.218    0.000 decoder.py:332(decode)
+     1000    0.216    0.000    0.216    0.000 decoder.py:343(raw_decode)
+     1000    0.001    0.000    0.036    0.000 pathlib.py:1022(read_text)
+     1000    0.000    0.000    0.026    0.000 pathlib.py:1005(open)
+     1000    0.017    0.000    0.026    0.000 {built-in method _io.open}
+     1000    0.000    0.000    0.009    0.000 pathlib.py:447(__fspath__)
+     1000    0.001    0.000    0.009    0.000 pathlib.py:437(__str__)
+     1000    0.006    0.000    0.008    0.000 {method 'read' of '_io.TextIOWrapper' objects}
+     1000    0.001    0.000    0.007    0.000 pathlib.py:551(drive)
+
+
+
+load_catalog calls: scratch 1 for 1000 orders
+PROFILE scratch          1062 function calls in 0.001 seconds
+
+   Ordered by: cumulative time
+   List reduced from 43 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.001    0.001 probe.py:21(once_per_batch)
+        1    0.000    0.000    0.000    0.000 report.py:5(load_catalog)
+        1    0.000    0.000    0.000    0.000 __init__.py:299(loads)
+        1    0.000    0.000    0.000    0.000 decoder.py:332(decode)
+        1    0.000    0.000    0.000    0.000 decoder.py:343(raw_decode)
+     1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 pathlib.py:1022(read_text)
+        1    0.000    0.000    0.000    0.000 pathlib.py:1005(open)
+        1    0.000    0.000    0.000    0.000 {built-in method _io.open}
+        1    0.000    0.000    0.000    0.000 pathlib.py:447(__fspath__)
+        1    0.000    0.000    0.000    0.000 pathlib.py:437(__str__)
+        1    0.000    0.000    0.000    0.000 pathlib.py:551(drive)
+
+
+
+compatibility PASS: empty missing catalog ('result', [])
+compatibility PASS: missing catalog ('FileNotFoundError', "[Errno 2] No such file or directory: '/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-e2x9q04n/worker/.investigation-tmp/tmprr214t1s/missing.json'")
+compatibility PASS: missing sku ('KeyError', "'absent'")
+compatibility PASS: missing quantity ('KeyError', "'quantity'")
+compatibility PASS: duplicates, signed and zero quantities ('result', [{'sku': 'sku-1', 'subtotal_cents': 0}, {'sku': 'sku-0', 'subtotal_cents': -250}, {'sku': 'sku-1', 'subtotal_cents': 630}])
+compatibility PASS: malformed JSON
+All experiment assertions passed.

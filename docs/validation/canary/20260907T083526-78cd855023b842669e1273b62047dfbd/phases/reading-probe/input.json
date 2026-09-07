@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/INVESTIGATION.md",
+      "text": "# Order report investigation \u2014 2026-09-07\n\n**Recommendation:** Defer the proposed database, cache service and job queue. Repeated catalog loading dominates this local workload. Next, seek authorization to evaluate a small change that loads the catalog once per nonempty batch, then validate against representative batch/catalog sizes and an agreed latency target. This investigation delivers no production change or rebuild design.\n\n**Scope and current behavior:** The current user request authorizes a five-minute, fixture-only investigation and confirms that the catalog is fixed within each batch. [README](../README.md) requires integer-cent totals in order sequence; [report.py](../report.py) reloads, parses and indexes the same JSON catalog for every order. [Existing tests](../tests/test_report.py) also require an empty batch to return `[]` even for a missing catalog. The proposed scratch variant initializes lazily on the first order and keeps state only for that call. Exact totals, order, and the empty-batch behavior must remain compatible. No cross-batch cache is needed by this hypothesis.\n\n**Evidence:** Baseline: 2 existing tests passed, exit 0. A standard-library scratch probe compared current code with a once-per-batch variant using fixed synthetic catalogs of 100/1,000 rows and batches of 100/1,000/5,000 orders. Three paired, alternating-order timing trials per case checked exact results against independently calculated expected lists, including repeated SKUs and zero/negative quantities. All passed; empty input with a missing catalog also passed.\n\n| Catalog rows | Orders | Current median | Scratch median |\n| --- | --- | --- | --- |\n| 1,000 | 100 | 32.744 ms | 0.378 ms |\n| 1,000 | 1,000 | 331.790 ms | 0.504 ms |\n| 1,000 | 5,000 | 1,692.616 ms | 1.257 ms |\n\nSeparate instrumentation counted 5,000 catalog loads versus 1 for the largest case. Its current-code profile attributed 1.598 of 1.756 seconds (~91%) to `load_catalog`, including 1.110 seconds in JSON loading a"
+    }
+  ],
+  "questions": [
+    "What was investigated and what did the observed evidence establish?",
+    "What is the next recommended action and what remains uncertain?"
+  ]
+}

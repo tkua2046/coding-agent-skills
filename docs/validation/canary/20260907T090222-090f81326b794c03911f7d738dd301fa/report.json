@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T090222-090f81326b794c03911f7d738dd301fa",
+  "kind": "supplemental-grader-controls",
+  "created_at": "2026-09-07T09:02:22.377699+00:00",
+  "status": "pass",
+  "grader": "17f84dbcc760a443f99076038e60faf52daa3c000f22d2b50f2f92d963244012",
+  "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2",
+  "settings": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "purpose": "Two known-output handoff scoring controls, not worker quality or a real reader.",
+  "control_source": "docs/validation/outcome-contract/handoff-controls.json",
+  "calibration": "docs/validation/canary/20260907T082604-813e3ca009e44d6cbd680a50b29f49a7/report.json",
+  "matched_controls": [
+    true,
+    true
+  ],
+  "finished_at": "2026-09-07T09:03:24.614490+00:00",
+  "evidence": {
+    "0-grade.json": "6f8b13c718e40c5026b628016a76981eaecfd97eff9b805e0a9e8769320333a7",
+    "0-isolation.json": "c9264fb48836ddc2676974eeb35929d4771b3a445542c31373cd14e96b366f65",
+    "0-reply.execution.json": "9194954b692a4a31ff88ab866f6d031ae38f77447f2b70e12aa2b6828abaf2d7",
+    "0-reply.json": "97967ca891c6485020e784d10416409851a8127969e225b7b6fc7b0bd792c60a",
+    "1-grade.json": "4761127dc63efd7aae94a0e55523b116b78c633a1379771d7df225de33b60641",
+    "1-isolation.json": "b1c531bedbeedf5bbb63de7daa4dfbfe624d30956f7d22ab4b8209f2aef86e52",
+    "1-reply.execution.json": "88c5827eddbbda4f924e821d201dbd2dee112837b2b873570583e259ca1c1750",
+    "1-reply.json": "c783a365c853ffb90705fca4fcb5e1c4a3af546690f3f76b283b8b89ee825894",
+    "attempt.json": "a576a5c77b876860c1e2f2c32f2acc07f395afe9a43494e95f9864bd40387812",
+    "inputs.json": "16c33d55b7ef58f9ebbeede7289fa452f47efe98a7383d98fba4e87c02ed8a10",
+    "orchestration.py.txt": "6b7846bc64e330ecadc54cb19d1b4410f497db5bb441b359a6861f3d67a484fc"
+  }
+}

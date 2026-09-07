@@ -1,0 +1,18 @@
+test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
+test_adapter_validation_finishes_before_execution (test_inventory.InventoryTests.test_adapter_validation_finishes_before_execution) ... ok
+test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
+test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
+test_empty (test_inventory.InventoryTests.test_empty) ... ok
+test_empty_batch_both_apis (test_inventory.InventoryTests.test_empty_batch_both_apis) ... ok
+test_empty_order_on_empty_stock (test_inventory.InventoryTests.test_empty_order_on_empty_stock) ... ok
+test_late_shortage_rejects_whole_order_and_continues (test_inventory.InventoryTests.test_late_shortage_rejects_whole_order_and_continues) ... ok
+test_rejection_alone_leaves_every_quantity_unchanged (test_inventory.InventoryTests.test_rejection_alone_leaves_every_quantity_unchanged) ... ok
+test_rejection_preserves_prior_success_and_remaining_stock (test_inventory.InventoryTests.test_rejection_preserves_prior_success_and_remaining_stock) ... ok
+test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
+test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
+test_zero_stock_rejects (test_inventory.InventoryTests.test_zero_stock_rejects) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.002s
+
+OK

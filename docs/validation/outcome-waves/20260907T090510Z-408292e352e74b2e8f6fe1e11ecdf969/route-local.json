@@ -1,0 +1,8 @@
+{
+  "case": "route-local",
+  "report": "docs/validation/canary/20260907T092402-902583d3cfff40e1a88c63d6eddaf926/report.json",
+  "status": "pass",
+  "worker_elapsed_seconds": 150.662,
+  "wave_elapsed_seconds": 245.083,
+  "error": null
+}

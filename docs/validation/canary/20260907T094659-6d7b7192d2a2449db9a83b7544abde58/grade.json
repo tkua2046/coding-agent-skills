@@ -1,0 +1,81 @@
+{
+  "criteria": [
+    {
+      "id": "resolve-uncertainty",
+      "status": "pass",
+      "reason": "The recorded probe completed successfully, checked exact outputs and compatibility, and measured repeated catalog loading and parsing before recommending changes. The 151.976-second investigation stayed within budget and explicitly limited its performance conclusions.",
+      "evidence": [
+        {
+          "path": "artifacts/01-investigate/workspace/docs/investigation-evidence/results.txt",
+          "quote": "load_catalog calls: current 1000 for 1000 orders"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/investigation-evidence/results.txt",
+          "quote": "     1000    0.060    0.000    0.316    0.000 report.py:5(load_catalog)\n     1000    0.001    0.000    0.219    0.000 __init__.py:299(loads)"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/investigation-evidence/probe.py",
+          "quote": "assert results[\"current\"] == results[\"scratch\"]\n                assert results[\"current\"] == [\n                    {\"sku\": o[\"sku\"], \"subtotal_cents\":\n                     (125 + i % catalog_size) * o[\"quantity\"]}\n                    for i, o in enumerate(orders)]"
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/investigation-evidence/results.txt",
+          "quote": "All experiment assertions passed."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "The evidence isolates redundant loading in\nthis fixture, not every cause of real batch slowness."
+        }
+      ]
+    },
+    {
+      "id": "proportionate-next-action",
+      "status": "pass",
+      "reason": "The recommendation is a separately authorized once-per-nonempty-batch optimization under the fixed-catalog premise, followed by representative benchmarking and compatibility review. Production code and tests remain unchanged; no rebuild was delivered.",
+      "evidence": [
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "Recommend pursuing a separately authorized, small change to load the catalog once\nper nonempty report batch, then measuring representative workloads against an agreed\nlatency target. The local evidence does not justify a database, cache service, or\njob queue."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "catalog is fixed within each batch; preserve exact integer-cent\ntotals, order sequence, production code/tests, source inputs and prior reports."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "Before implementation, obtain typical\nand largest order/catalog sizes and an acceptable latency target, then validate the\nsmall change on that workload with compatibility review."
+        },
+        {
+          "path": "artifacts/01-investigate/git.json",
+          "quote": "\"status\": \"?? docs/\",\n  \"diff\": \"\",\n  \"log\": \"211cb2d Fixture baseline\""
+        }
+      ]
+    },
+    {
+      "id": "readable-findings",
+      "status": "pass",
+      "reason": "The executed restricted reader correctly identified the measured cause, bounded synthetic evidence, next action, and unresolved representative performance from the exposed excerpt. Raw commands, probe source, and results are available separately.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Recommend pursuing a separately authorized, small change to load the catalog once\nper nonempty report batch, then measuring representative workloads against an agreed\nlatency target."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "**Bounded evidence.** A standard-library scratch probe compared current behavior with\none lazy catalog load per batch, using synthetic catalogs of 100/1,000 rows and\nbatches of 100/1,000/5,000 orders."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "For 1,000 orders, loader calls fell from 1,000 to 1; a separate profile attributed about 91% of runtime to `load_catalog`."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Performance on representative workloads and satisfaction of a latency target remain unestablished; the excerpt supplies no agreed target."
+        },
+        {
+          "path": "artifacts/01-investigate/workspace/docs/INVESTIGATION.md",
+          "quote": "[Reproduction commands and exit statuses](investigation-evidence/commands.md),\n[probe source](investigation-evidence/probe.py), and\n[raw timings/profile/assertions](investigation-evidence/results.txt) retain the evidence."
+        }
+      ]
+    }
+  ]
+}

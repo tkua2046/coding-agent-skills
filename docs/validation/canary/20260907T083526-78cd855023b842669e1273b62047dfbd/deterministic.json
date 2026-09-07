@@ -1,0 +1,38 @@
+[
+  {
+    "id": "preserve-application",
+    "status": "pass",
+    "evidence": {
+      "report.py": true,
+      "tests": true,
+      "README.md": true
+    }
+  },
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "no-commits",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  },
+  {
+    "id": "runner.workflow-budget",
+    "status": "pass",
+    "evidence": {
+      "worker_elapsed_seconds": 130.807,
+      "workflow_budget_seconds": 300
+    }
+  }
+]

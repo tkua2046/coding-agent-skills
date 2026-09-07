@@ -1,0 +1,327 @@
+"""One-off NO-MODEL recovery controls; all behavior records stay in scratch clones."""
+
+import importlib.util
+import json
+import shutil
+import subprocess
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parents[1]
+spec = importlib.util.spec_from_file_location(
+    "regrade_outcome", REPO / "artifacts/regrade_outcome.py"
+)
+h = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(h)
+c = h.c
+RUNS = list(h.SOURCES)
+
+
+@pytest.fixture(scope="module")
+def seed(tmp_path_factory):
+    root = tmp_path_factory.mktemp("regrade-seed") / "repo"
+    subprocess.run(
+        ["git", "clone", "--shared", "--no-checkout", "-q", str(REPO), str(root)],
+        check=True,
+    )
+    for name in (
+        "evals/graders",
+        "evals/cases/v1-small-feature",
+        "skills/feature-design",
+        "skills/implementation-plan",
+    ):
+        c.write_files(root / name, c.files(REPO / name))
+    for name in ("tools/canary.py", "tools/canary_runtime.py", "requirements-dev.txt"):
+        c.write_files(root, {name: (REPO / name).read_bytes()})
+    for name in RUNS:
+        c.write_files(
+            root / "docs/validation/canary" / name,
+            c.files(REPO / "docs/validation/canary" / name),
+        )
+    return root
+
+
+@pytest.fixture
+def trial(seed, tmp_path, monkeypatch):
+    root = tmp_path / "repo"
+    shutil.copytree(seed, root)
+    calls = []
+
+    def probe(workspace, private):
+        assert private.is_file() and not private.is_relative_to(workspace)
+        return {
+            "passed": True,
+            "exit_code": 0,
+            "timed_out": False,
+            "interrupted": False,
+            "stdout": json.dumps(
+                {
+                    "workspace_io": True,
+                    "private_read_denied": True,
+                    "network_denied": True,
+                }
+            ),
+            "control": "SYNTHETIC probe; no sandbox claim",
+        }
+
+    def score(workspace, prompt, output, config, schema=None):
+        assert schema is not None, "No fresh worker/reader permitted"
+        assert config == h.CONFIG
+        assert prompt == (root / "evals/graders/review.md").read_text()
+        assert not any(p.startswith("source/") for p in c.files(workspace))
+        rubric = c.read_json(workspace / "rubric.json")
+        (workspace / "response-schema.json").write_text(json.dumps(schema))
+        quote = (workspace / "artifacts/reading-probe/reply.md").read_text()[:50]
+        reply = json.dumps(
+            {
+                "criteria": [
+                    {
+                        "id": item["id"],
+                        "status": "pass",
+                        "reason": "SYNTHETIC plumbing control, not semantic grading",
+                        "evidence": [
+                            {"path": "artifacts/reading-probe/reply.md", "quote": quote}
+                        ],
+                    }
+                    for item in rubric["criteria"]
+                ]
+            }
+        )
+        output.write_text(reply)
+        calls.append(c.hashes(c.files(workspace)))
+        return {
+            "completed": True,
+            "exit_code": 0,
+            "timed_out": False,
+            "interrupted": False,
+            "stdout": "SYNTHETIC grader; NO MODEL",
+            "stderr": "",
+            "reply": reply,
+            "elapsed_seconds": 0.75,
+        }
+
+    monkeypatch.setattr(c.runtime, "probe", probe)
+    monkeypatch.setattr(c.runtime, "execute", score)
+    return root, calls, score
+
+
+def source(root, i=0):
+    return root / "docs/validation/canary" / RUNS[i] / "report.json"
+
+
+def reseal(path, monkeypatch):
+    # Stronger fault controls: exercise semantic validation past manifest checks.
+    row = c.read_json(path)
+    row["evidence"] = c.hashes(
+        {p: b for p, b in c.files(path.parent).items() if p != "report.json"}
+    )
+    path.write_text(json.dumps(row, indent=2) + "\n")
+    pins = dict(h.SOURCES)
+    pins[row["run_id"]] = c.digest(path.read_bytes())
+    monkeypatch.setattr(h, "SOURCES", pins)
+    return pins[row["run_id"]]
+
+
+def change_json(path, change):
+    row = c.read_json(path)
+    change(row)
+    path.write_text(json.dumps(row, indent=2) + "\n")
+
+
+def test_positive_pair_uses_two_scores_zero_workers_and_canonical_gate(trial):
+    root, calls, _ = trial
+    results = []
+    for i in range(2):
+        original = source(root, i)
+        before = c.files(original.parent)
+        result = h.regrade(root, original, h.SOURCES[RUNS[i]])
+        assert c.files(original.parent) == before
+        row = h.verify_regrade(root, result)
+        assert row["status"] == "pass"
+        assert row["observations"] == c.read_json(original)["observations"]
+        assert (
+            row["regrade"]["fresh_worker_calls"]
+            == row["regrade"]["fresh_reader_calls"]
+            == 0
+        )
+        assert row["regrade"]["fresh_grader_calls"] == 1
+        assert row["regrade"]["new_grader_elapsed_seconds"] == 0.75
+        assert c.files(result.parent / "source") == before
+        assert c.read_json(result.parent / "regrade-packet-hashes.json") == calls[-1]
+        results.append(result)
+    assert len(calls) == 2
+    baseline = c.read_json(source(root))["source_ref"]
+    gate = c.release_gate(root, results, baseline)
+    assert gate["status"] == "pass", gate
+    assert len(gate["cases"]) == 1  # Scratch catalog, never the real release gate.
+
+
+@pytest.mark.parametrize(
+    "fault",
+    ["source-hash", "source-link", "reuse-claim", "worker-time", "source-bytes"],
+)
+def test_child_lineage_tampering_rejects_even_after_resealed_manifest(trial, fault):
+    root, _, _ = trial
+    result = h.regrade(root, source(root), h.SOURCES[RUNS[0]])
+    row = c.read_json(result)
+    if fault == "source-hash":
+        row["regrade"]["source_report_sha256"] = "0" * 64
+    elif fault == "source-link":
+        row["regrade"]["source_report_path"] = "/invented/report.json"
+    elif fault == "reuse-claim":
+        row["regrade"]["fresh_worker_calls"] = 1
+    elif fault == "worker-time":
+        row["observations"]["worker_elapsed_seconds"] = 0
+    else:
+        (result.parent / "source/phases/01-plan/reply.md").write_text("changed")
+    row["evidence"] = c.hashes(
+        {p: b for p, b in c.files(result.parent).items() if p != "report.json"}
+    )
+    result.write_text(json.dumps(row, indent=2) + "\n")
+    with pytest.raises(ValueError):
+        h.verify_regrade(root, result)
+
+
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "source-sha",
+        "source-report",
+        "missing-evidence",
+        "changed-evidence",
+        "extra-evidence",
+        "worker-incomplete",
+        "reader-timeout",
+        "worker-preservation",
+        "reader-excerpt",
+        "deterministic-fail",
+        "semantic-fail",
+        "settings",
+        "environment",
+        "engine",
+        "grader",
+        "calibration",
+    ],
+)
+def test_source_fault_rejects_before_any_model_or_new_attempt(
+    trial, monkeypatch, fault
+):
+    root, calls, _ = trial
+    p = source(root)
+    expected = h.SOURCES[RUNS[0]]
+    before = set((root / "docs/validation/canary").iterdir())
+    if fault == "source-sha":
+        expected = "0" * 64
+    elif fault == "source-report":
+        p.write_text(p.read_text() + " ")
+    elif fault == "missing-evidence":
+        (p.parent / "phases/01-plan/reply.md").unlink()
+    elif fault == "changed-evidence":
+        (p.parent / "phases/01-plan/reply.md").write_text("changed")
+    elif fault == "extra-evidence":
+        (p.parent / "unexpected.txt").write_text("unmanifested")
+    elif fault == "engine":
+        (root / "tools/canary.py").write_text("changed")
+    elif fault in {"grader", "calibration"}:
+        (
+            root
+            / "evals/graders"
+            / ("review.md" if fault == "grader" else "calibration.json")
+        ).write_text("changed")
+    else:
+        if fault == "worker-incomplete":
+            change_json(
+                p.parent / "phases/01-plan/execution.json",
+                lambda x: x.update(completed=False, interrupted=True),
+            )
+        elif fault == "reader-timeout":
+            change_json(
+                p.parent / "phases/reading-probe/execution.json",
+                lambda x: x.update(completed=False, timed_out=True),
+            )
+        elif fault == "worker-preservation":
+            (p.parent / "phases/01-plan/workspace/navigator.py").write_text("changed")
+        elif fault == "reader-excerpt":
+            (p.parent / "phases/reading-probe/excerpts/0.txt").write_text(
+                "invented answer"
+            )
+        elif fault == "deterministic-fail":
+            change_json(
+                p.parent / "deterministic.json", lambda x: x[0].update(status="fail")
+            )
+        elif fault == "semantic-fail":
+            execution = c.read_json(p.parent / "grade-reply.execution.json")
+            grade = json.loads(execution["reply"])
+            grade["criteria"][0]["status"] = "fail"
+            execution["reply"] = json.dumps(grade)
+            (p.parent / "grade-reply.json").write_text(execution["reply"])
+            (p.parent / "grade-reply.execution.json").write_text(json.dumps(execution))
+        elif fault == "settings":
+            change_json(
+                p, lambda x: x["settings"]["grader"].update(timeout_seconds=599)
+            )
+        elif fault == "environment":
+            change_json(p, lambda x: x.update(environment={"changed": True}))
+        expected = reseal(p, monkeypatch)
+    with pytest.raises((ValueError, OSError)):
+        h.regrade(root, p, expected)
+    assert not calls
+    assert set((root / "docs/validation/canary").iterdir()) == before
+
+
+@pytest.mark.parametrize(
+    "fault,expected",
+    [
+        ("invalid-quote", "inconclusive"),
+        ("malformed", "inconclusive"),
+        ("timeout", "inconclusive"),
+        ("interrupt", "inconclusive"),
+        ("packet-change", "inconclusive"),
+        ("semantic-fail", "fail"),
+        ("semantic-inconclusive", "inconclusive"),
+    ],
+)
+def test_new_score_failure_is_retained_and_not_retried(
+    trial, monkeypatch, fault, expected
+):
+    root, calls, score = trial
+
+    def faulty(workspace, prompt, output, config, schema=None):
+        result = score(workspace, prompt, output, config, schema)
+        if fault in {"invalid-quote", "semantic-fail", "semantic-inconclusive"}:
+            grade = json.loads(result["reply"])
+            if fault == "invalid-quote":
+                grade["criteria"][0]["evidence"][0]["quote"] = "SYNTHETIC absent quote"
+            else:
+                grade["criteria"][0]["status"] = fault.removeprefix("semantic-")
+            result["reply"] = json.dumps(grade)
+        elif fault == "malformed":
+            result["reply"] = "{invalid SYNTHETIC json"
+        elif fault in {"timeout", "interrupt"}:
+            result.update(completed=False, exit_code=-9)
+            result["timed_out" if fault == "timeout" else "interrupted"] = True
+        else:
+            (workspace / "artifacts/reading-probe/reply.md").write_text("changed")
+        output.write_text(result["reply"])
+        return result
+
+    monkeypatch.setattr(c.runtime, "execute", faulty)
+    p = source(root, 1)
+    before = c.files(p.parent)
+    result = h.regrade(root, p, h.SOURCES[RUNS[1]])
+    row = c.verified_record(result)
+    assert row["status"] == expected
+    assert row["regrade"]["fresh_grader_calls"] == len(calls) == 1
+    assert (result.parent / "grade-reply.execution.json").is_file()
+    assert c.files(p.parent) == before
+    retained = c.files(result.parent)
+    with pytest.raises(ValueError, match="already exists"):
+        h.regrade(root, p, h.SOURCES[RUNS[1]])
+    assert len(calls) == 1 and c.files(result.parent) == retained
+    assert (
+        c.release_gate(root, [result], c.read_json(source(root))["source_ref"])[
+            "status"
+        ]
+        == "fail"
+    )

@@ -1,0 +1,8 @@
+{
+  "case": "v6-execution-handoff",
+  "report": "docs/validation/canary/20260907T090136-e7b5b89b7a6a49568535a0ecf379ecdd/report.json",
+  "status": "fail",
+  "worker_elapsed_seconds": 937.84,
+  "wave_elapsed_seconds": 1056.74,
+  "error": null
+}

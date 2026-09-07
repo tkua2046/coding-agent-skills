@@ -1,0 +1,28 @@
+# Plan
+S0 complete: in-memory reservation and JSON validation are delivered.
+No pending work before the current change request.
+
+## Current extension: pending S1
+
+Status: S1 candidate implemented and locally checked; independent document review,
+independent code review and human review remain pending. S1 is not accepted.
+Current evidence and next action: [S1 stage record](../reviews/stage-s1.md).
+Requirements: [REQUEST.md](REQUEST.md), preserving [ORIGINAL.md](ORIGINAL.md).
+Design and decisive acceptance: [DESIGN.md, D2](DESIGN.md#d2-proposed-whole-order-rejection).
+Completed S0 remains unchanged; its historical report is
+[history/completed.md](history/completed.md).
+
+Next outcome: the independent reviewer resolves the document-review limitation and confirms whole-order atomicity, continuation,
+compatibility and feasible checks, or records concrete blockers for correction.
+The candidate is prepared under the current implementation request; this does not
+waive the unresolved document-review dependency. Use a focused design/plan review and
+a focused code/test review for this small in-memory change, within the original
+15-minute whole-task allowance. No review approval is claimed.
+
+| Stage | Observable outcome / scope | Dependency and boundary | Decisive acceptance / risk | State |
+|---|---|---|---|---|
+| S1 | Whole-order rejection and continuation through both APIs; engine change, regression tests and README usage update together | Independent design/plan review remains unresolved; one coherent reviewable patch because checking and deduction must ship together | D2 late-shortage batch and sequential depletion; input immutability, integer counts, empty/exact-fit behavior and unchanged JSON errors; complete local gate | Candidate checked; reviews pending |
+
+S1 should keep `batch.py` and `command_codec.py` behavior intact, place allocation
+logic in `inventory.py`, and extend `tests/test_inventory.py`. Update README's
+caller-sufficiency statement to describe rejection. Th

@@ -1,0 +1,107 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7b26b60..72f8f1d 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -3,0 +4,2 @@
++- Validate counter steps as positive integers, excluding booleans, and preserve
++  the counter value when a step is invalid.
+diff --git a/PLAN.md b/PLAN.md
+index 40ecb2b..1ea6a46 100644
+--- a/PLAN.md
++++ b/PLAN.md
+@@ -4,0 +5,37 @@ Current human review and independent-agent review: pending. No stage 2 in scope.
++
++## Current handoff
++
++State: implemented, awaiting required human and independent-agent review; not
++accepted or committed. No reviewer is assigned. Next action: assign reviewers to
++the frozen candidate and record their findings before any commit. No review
++findings have been issued; neither pending review is an approval.
++
++Implemented the [behavior contract](FEATURE.md): validate before mutation,
++preserve default addition, and return the updated value. Regression tests cover
++invalid types (including booleans), nonpositive steps, unchanged state and
++recovery, repeated additions, initial integers, large steps and integer subclasses.
++Usage and Unreleased notes are updated. No later stage is included.
++
++Candidate: base `a5feeb5ac0c157ab93731bc19a49dae9d8283050` plus
++[captured diff](evidence/stage-1/candidate.patch). The
++[SHA-256 manifest](evidence/stage-1/manifest.sha256) identifies the candidate
++files and evidence, excluding the manifest itself. Original requirements above
++are preserved; there were no prior review reports in the fixture.
++
++Checks used the prepared `CANARY_PYTHON` runtime in place of `python3`; no
++packages were installed. Both baseline runs collected three tests and failed
++the existing negative-step test. Both final runs collected seven tests and passed:
++
++| Check | Baseline | Final candidate |
++| --- | --- | --- |
++| `-m unittest discover -s tests -v` | [Failed](evidence/stage-1/baseline-tests.txt) | [Passed](evidence/stage-1/final-tests.txt) |
++| `hooks/pre-commit` (full local gate) | [Failed](evidence/stage-1/baseline-gate.txt) | [Passed](evidence/stage-1/final-gate.txt) |
++
++No separate lint/format or release suite is specified by DEVNOTES. The hook
++made no code changes. Git metadata reads succeeded with sandbox warnings about
++unavailable cache/config paths; see [base evidence](evidence/stage-1/base.txt).
++Implementation edits are paused for review. Reviewers should read AGENTS.md,
++FEATURE.md, the original stage above, the captured diff, tests and raw checks.
++Record findings and any subsequent fixes as a new review round, preserving this
++snapshot and prior evidence. Changed content requires applicable rechecks and
++required review before committing; never bypass the hook.
+diff --git a/README.md b/README.md
+index f3696db..92244b8 100644
+--- a/README.md
++++ b/README.md
+@@ -2,0 +3,4 @@
++
++Omitting `step` adds one. Pass a positive Python integer to add another amount;
++booleans and all other invalid steps raise `ValueError` without changing the
++counter. The initial value may be any integer.
+diff --git a/counter.py b/counter.py
+index 5498f92..0fdbf3c 100644
+--- a/counter.py
++++ b/counter.py
+@@ -5,0 +6,2 @@ class Counter:
++        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:
++            raise ValueError("step must be a positive integer")
+diff --git a/tests/test_counter.py b/tests/test_counter.py
+index 0c4256a..7461a92 100644
+--- a/tests/test_counter.py
++++ b/tests/test_counter.py
+@@ -13 +13,3 @@ class CounterTests(unittest.TestCase):
+-        self.assertEqual(Counter(4).add(3), 7)
++        counter = Counter(4)
++        self.assertEqual(counter.add(step=3), 7)
++        self.assertEqual(counter.value, 7)
+@@ -19,0 +22,32 @@ class CounterTests(unittest.TestCase):
++
++    def test_invalid_steps_preserve_state_and_allow_recovery(self):
++        for step in (0, -100, True, False, 1.0, 0.5, "2", None, [], {}, object()):
++            with self.subTest(step=step):
++                counter = Counter(-4)
++                with self.assertRaises(ValueError):
++                    counter.add(step)
++                self.assertEqual(counter.value, -4)
++                self.assertEqual(counter.add(), -3)
++                self.assertEqual(counter.value, -3)
++
++    def test_initial_values_and_repeated_additions(self):
++        for initial in (-10, 0, 10):
++            with self.subTest(initial=initial):
++                counter = Counter(initial)
++                self.assertEqual(counter.add(1), initial + 1)
++                self.assertEqual(counter.add(3), initial + 4)
++                self.assertEqual(counter.value, initial + 4)
++
++    def test_unbounded_integer_step(self):
++        counter = Counter()
++        step = 10 ** 100
++        self.assertEqual(counter.add(step), step)
++        self.assertEqual(counter.value, step)
++
++    def test_integer_subclass_step(self):
++        class Step(int):
++            pass
++
++        counter = Counter()
++        self.assertEqual(counter.add(Step(2)), 2)
++        self.assertEqual(counter.value, 2)

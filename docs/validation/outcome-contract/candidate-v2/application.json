@@ -1,0 +1,10 @@
+{
+  "applied_at": "2026-09-07T09:33:06.819951+00:00",
+  "reason": "OSC-01 reviewed targeted repair after all candidate-v1 waves finished.",
+  "files": {
+    "feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+    "implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2"
+  },
+  "no_other_skill_edits": true,
+  "next": "Run v2-scope-extension first; do not infer behavioral acceptance from this application."
+}

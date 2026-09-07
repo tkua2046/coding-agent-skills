@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "material-review-and-restraint",
+      "required": true,
+      "requirement": "Recognize a sufficient design and coherent next increment through actual static inspection.",
+      "pass_when": "Explains that D1 validates the whole file before selection and retains the existing writer/default, while P1 delivers that contract and regressions together. Concludes ready for the separately assigned implementation absent a substantiated material defect. Does not demand streaming, dependencies, more stages, a function inventory or extra review rounds.",
+      "fail_when": "Manufactures a blocker from a preference, treats unimplemented proposed behavior as a defect, postpones a supported verdict for fictional permission, or overlooks the actual proposal while offering generic approval."
+    },
+    {
+      "id": "reading-cost",
+      "required": true,
+      "requirement": "Assess usability from the document entrypoints without inventing a readability blocker.",
+      "pass_when": "Recognizes the opening outcome/choice/next action and bounded P1 as usable. Optional concrete improvements can be nonblocking. No heading, length or template quota is used as a readiness condition.",
+      "fail_when": "Requires expanded paperwork, copied tests or a redesign of already usable documents without a concrete reader consequence, or calls the clear validate-then-select order buried/ambiguous without evidence."
+    },
+    {
+      "id": "actionable-static-verdict",
+      "required": true,
+      "requirement": "Produce a concise combined report tied to the reviewed content and authorized scope.",
+      "pass_when": "The report opens with verdict, D1/P1 scope and next action, grounds its conclusions in identifiable excerpts/locations and the inspected baseline, and clearly limits assurance to static design/plan review. Findings if any are actionable, prioritized and nonblocking when appropriate. Report-only changes; no extra permissions requested.",
+      "fail_when": "No clear verdict or next action, ungrounded boilerplate, product edits, a sprawling paraphrase of every document, or false claims of runtime tests, independent review, human approval or feature implementation."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Design: v1 to v2 settings migration
+
+Status: proposed; design review pending. Authority: [original requirement](ORIGINAL.md), preserved unchanged.
+
+Outcome: preserve every stable ID and value while moving entries into the v2
+`settings` object. Main choice: retain v1, publish a validated separate v2 file,
+then atomically replace the active selector. This needs additional disk space,
+but an interrupted attempt leaves v1 usable. For example, interruption before
+selector replacement leaves `theme=dark` and `timeout=30` selected from v1.
+Implementation is deferred. Next: resolve the open contract decisions below and
+complete the requested design review; the [plan](PLAN.md) is provisional.
+
+Outline: [baseline](#baseline-and-compatibility), [choices](#decisions-and-consequences),
+[protocol](#state-and-failure-protocol), [acceptance](#decisive-acceptance),
+[open decisions](#validation-and-open-decisions).
+
+## Baseline and compatibility
+
+Historical design, retained verbatim:
+
+> The caller reads data/active.json and loads the selected v1 file. Stable IDs are
+> unique; duplicate IDs are errors. No migration or recovery protocol exists yet.
+
+Inspection: `settings.load(path)` checks version 1, rejects duplicate entry IDs,
+and returns an ID-to-value dictionary. It does not implement selector resolution,
+migration, or strict schema validation. The historical caller behavior is context,
+not an implemented caller found in this fixture. `active.json` selects format 1
+and `settings-v1.json`. The valid data yields `{"theme":"dark","timeout":30}`;
+the duplicate fixture repeats `theme`. Both existing tests passed; see
+[local evidence](evidence/migration-planning-baseline-2026-09-07.md).

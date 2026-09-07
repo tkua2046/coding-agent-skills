@@ -1,0 +1,7 @@
+1. The proposed change adds caller-supplied fixed occupied cells. A blocked forward command returns `False`, leaves the entire pose unchanged, and allows subsequent commands to execute. Preserve existing two-argument behavior, per-run local state, unbounded coordinates, heading-only turns, and programmer errors for unknown commands.
+
+2. The main proposed decision is `run(pose, commands, occupied=())`, snapshotting occupied coordinates into a local `frozenset` once per run and checking destinations before changing pose. This prevents caller mutation or one-shot iterable consumption from affecting successive membership checks. The excerpts do not supply a complete tradeoff discussion.
+
+3. The next implementation outcome is S1: occupancy input and collision behavior in `navigator.py`, regression tests, and README usage documentation. It depends on design-amendment review, then plan review, followed by later implementation authorization. Neither review nor implementation has occurred. A decisive acceptance case supported by the excerpts is a blocked forward move returning `False`, preserving position and heading, and continuing subsequent commands. The specific linked addendum examples are not exposed.
+
+These answers reflect only the exposed text; this machine-comprehension probe does not establish human usability.

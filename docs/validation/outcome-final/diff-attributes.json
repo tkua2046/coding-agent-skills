@@ -1,0 +1,16 @@
+{
+  "command": [
+    "git",
+    "check-attr",
+    "linguist-generated",
+    "--",
+    "docs/validation/canary/20260907T093307-869a3e1aa79842b79d2b32ba9949675b/report.json",
+    "docs/validation/canary/INDEX.md",
+    "docs/validation/outcome-final/README.md",
+    "skills/feature-design/SKILL.md"
+  ],
+  "exit_code": 0,
+  "stdout": "docs/validation/canary/20260907T093307-869a3e1aa79842b79d2b32ba9949675b/report.json: linguist-generated: set\ndocs/validation/canary/INDEX.md: linguist-generated: unset\ndocs/validation/outcome-final/README.md: linguist-generated: unset\nskills/feature-design/SKILL.md: linguist-generated: unspecified\n",
+  "stderr": "",
+  "scope": "Actual local pattern check only; does not establish live GitHub rendering or override diff limits."
+}

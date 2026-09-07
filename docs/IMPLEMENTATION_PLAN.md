@@ -1,9 +1,19 @@
 # Implementation plan
 
-Status: original S1–S3 completed and preserved. C1/C2 are implemented, fast-verified and independently reviewed; heavy acceptance is deferred until release. Next action: feature PR delivery. Review policy: authorized autonomous work with independent-agent review; human review is not claimed.
+Status: the four task-appropriate skills have completed a bounded baseline comparison and one evidence-driven repair wave. [Results](validation/canary/INDEX.md) retain unresolved failures; this candidate is for owner review, not release. Full local checks and independent review passed; draft-PR delivery is pending. Earlier S1–S3 and C1/C2 records below are historical.
 Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
 
-## Current increment
+## Outcome-driven increment
+
+| Stage | Outcome | Dependency and acceptance | State |
+|---|---|---|---|
+| O1 | Each skill goal has an executable or independently assessable test, with original evidence retained | Reviewed [contract](proposals/outcome-workflow.md), concrete cases, effective scoring controls and a working real-model adapter | complete; review findings verified closed, 12 scoring checks passed |
+| O2 | Task-appropriate skills tested against the frozen previous version | O1; run paired trials, fix demonstrated failures, assess global benefit separately from grades | bounded iteration complete; two targeted repairs pass; final failures/inconclusive/deferred cases and unproven broader benefit retained |
+| O3 | A reviewable candidate with an honest result index and concise user guidance | Final affected runs/checks and independent review; owner acceptance remains pending | complete locally; full fast gate and independent review passed; draft-PR delivery pending |
+
+Keep this increment on the feature branch. No main update, merge, tag, release or global installation. The historical bootstrap description below records past behavior; it is not current delivery authorization. Commit boundaries follow coherent reviewed outcomes, not each prompt edit. [Goals](../evals/GOALS.md) · [Proposal review](reviews/outcome-proposal-review.md) · [Recheck](reviews/outcome-proposal-recheck.md).
+
+## Historical C1/C2 increment
 
 | Stage | Observable outcome | Dependency / boundary | Acceptance / state |
 |---|---|---|---|
@@ -12,7 +22,7 @@ Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
 
 Delivery may combine C1/C2 in one reviewed feature PR. Commit/review policy: [DEVNOTES](../DEVNOTES.md). [Proposal](proposals/workflow-proposal.md) · [Current evidence](validation/canary/INDEX.md). The table owns outcomes/dependencies; implementation and tests own the detailed changes.
 
-## Stages at a glance
+## Historical S1–S3 stages
 
 | Stage | Observable result | Acceptance | Commit boundary |
 |---|---|---|---|

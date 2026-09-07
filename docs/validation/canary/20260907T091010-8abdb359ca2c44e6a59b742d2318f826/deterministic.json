@@ -1,0 +1,36 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "local-commits",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "preserved-baseline",
+    "status": "pass",
+    "evidence": {
+      "AGENTS.md": true,
+      "DEVNOTES.md": true,
+      ".gitignore": true,
+      "app.py": true,
+      "tests/test_app.py": true,
+      "VERSION": true,
+      "README.md": true,
+      "CHANGELOG.md": true,
+      "delivery-state.json": true
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  }
+]

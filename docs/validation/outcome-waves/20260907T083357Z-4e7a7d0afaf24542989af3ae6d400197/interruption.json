@@ -1,0 +1,21 @@
+{
+  "status": "interrupted-orchestration",
+  "cause": "The one-off wave launcher validates every case before each run. A newly authored route-local/case.json became visible briefly before its rubric.json, so preflight raised FileNotFoundError. This happened before the affected worker/model attempts were created. Existing completed canary reports are retained and are not worker failures.",
+  "observed_exception": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/tk/Documents/coding-agent-skills/evals/cases/route-local/rubric.json'",
+  "tool_evidence": "PTY session 98020 exit 1; captured tool output in current task. Derived record, not a replacement for a worker transcript.",
+  "completed_but_launcher_did_not_print": [
+    {
+      "case": "v5-review-recheck",
+      "report": "../../canary/20260907T085347-299c66b0e85c450cabe6663088366c86/report.json",
+      "status": "pass"
+    }
+  ],
+  "never_started": [
+    "v6-execution-handoff",
+    "existing-intake",
+    "counter-stage",
+    "release-stale",
+    "release-ready"
+  ],
+  "correction": "Completed case resources now validate. Future cases are assembled outside discovery then moved into place. Resume only these five unstarted baseline cases in a new linked wave; no automatic retries."
+}

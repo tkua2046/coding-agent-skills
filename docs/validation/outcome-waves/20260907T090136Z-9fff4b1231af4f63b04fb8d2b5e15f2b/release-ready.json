@@ -1,0 +1,8 @@
+{
+  "case": "release-ready",
+  "report": "docs/validation/canary/20260907T091010-8abdb359ca2c44e6a59b742d2318f826/report.json",
+  "status": "inconclusive",
+  "worker_elapsed_seconds": 80.959,
+  "wave_elapsed_seconds": 145.297,
+  "error": "ValueError: Grader cited missing evidence or an invented quote"
+}

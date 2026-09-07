@@ -1,0 +1,13 @@
+test_default (test_counter.CounterTests.test_default) ... ok
+test_integer_initial_values_and_large_steps (test_counter.CounterTests.test_integer_initial_values_and_large_steps) ... ok
+test_integer_subclass_step (test_counter.CounterTests.test_integer_subclass_step) ... ok
+test_invalid_steps_preserve_value (test_counter.CounterTests.test_invalid_steps_preserve_value) ... ok
+test_negative_preserves_value (test_counter.CounterTests.test_negative_preserves_value) ... ok
+test_positive_step (test_counter.CounterTests.test_positive_step) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK
+
+Exit: 0

@@ -1,0 +1,9 @@
+class Counter:
+    def __init__(self, value=0):
+        self.value = value
+
+    def add(self, step=1):
+        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:
+            raise ValueError("step must be a positive integer")
+        self.value += step
+        return self.value

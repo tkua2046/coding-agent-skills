@@ -1,0 +1,3 @@
+Command: /Library/Developer/CommandLineTools/usr/bin/git diff --cached --check
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+Exit code: 0

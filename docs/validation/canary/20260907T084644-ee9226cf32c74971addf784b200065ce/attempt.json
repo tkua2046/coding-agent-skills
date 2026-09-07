@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T084644-ee9226cf32c74971addf784b200065ce",
+  "kind": "behavior",
+  "created_at": "2026-09-07T08:46:44.627153+00:00",
+  "status": "inconclusive",
+  "case_id": "v3-maintenance",
+  "identity": {
+    "case": "55347f7ebd65f946d3c554558dfdb52a4735f2a8406fbfaa11ae6568dd90e106",
+    "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2",
+    "grader": "17f84dbcc760a443f99076038e60faf52daa3c000f22d2b50f2f92d963244012",
+    "skills": {
+      "skills/feature-design/SKILL.md": "2b8bd4e19b0511a26cc6685ee7436cd3cb63635be65ce9aaab600103848571e3",
+      "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+      "skills/feature-design/assets/design.template.md": "76edf19a1075de9709ff4d9dbbd8a2c4c6aa87d602a8c72a7470ca847980e633",
+      "skills/feature-design/assets/review.template.md": "65e4f470e5a9c867ef855ddacdf27cfaf0e8ddb1bb17bf2cf72147707beb0bd7",
+      "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+      "skills/feature-design/prompts/draft-design.md": "d1290ed4d975778307b7bdba6818d3fd8794bfef6360e33bb3d8273d39d02dcb",
+      "skills/feature-design/prompts/intake-feature.md": "a204f71ef2e2907146f17f7110efd3f84cde727f59c99008866ff3b76482f91d",
+      "skills/feature-design/prompts/review-design.md": "4cfa2518b3534f5e2c611eab60ae11280b0ed429783ae023521d4162d0556ad7",
+      "skills/implementation-plan/SKILL.md": "92df55b108c5b54508eb2d56324136ff77fe231d409ffa31dff308e171d8ba0e",
+      "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+      "skills/implementation-plan/assets/implementation-plan.template.md": "8660d20652d864bc06a683a5b7489e173010cdda11cdf2f2fe852bb43f455e84",
+      "skills/implementation-plan/prompts/plan-implementation.md": "ab362ee67343afb9dc02328addd1d34f6857430d17bdd4f3becf3d21a46018b9",
+      "skills/implementation-plan/prompts/review-implementation.md": "6d9321c4ed1b25d9ee1b3a2d275c326ebf2bd5a3e160773f5a5877b9ae1f5260",
+      "skills/stage-development/SKILL.md": "d6453bb770dcf31fa17f7c6a5c5ce5310dea1169d7f9a1554cde19bf9649a0fd",
+      "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+      "skills/stage-development/assets/stage-record.template.md": "ca44100c1ad5d23a07ecf2210f16cb3b54d13a0478c528f7802d33fbe10a7c10",
+      "skills/stage-development/prompts/execute-stage.md": "62f1355877362a03b8cb41fbe8670dcb1a065f12b450cda25be1eb8335ba27ad",
+      "skills/stage-development/prompts/review-stage.md": "0ffa6771a8dcd4195d67f2b7a6e6607faf22f85ed2fbce94a633f1a7eae734b2"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": "b9087c56f2b136aff7c4b3495fffeccdfe760a28",
+  "requested_calibration": "docs/validation/canary/20260907T082604-813e3ca009e44d6cbd680a50b29f49a7/report.json"
+}

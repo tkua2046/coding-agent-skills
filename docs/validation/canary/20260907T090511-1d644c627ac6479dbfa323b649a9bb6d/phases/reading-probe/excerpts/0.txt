@@ -1,0 +1,30 @@
+# Design: whole-order inventory rejection
+
+D2 passed [independent document review](../reviews/design-current.json); S1 is
+implemented with [independent code review](../reviews/code-current.json) ready and
+no open findings. Owner review and human acceptance remain pending; see the
+[current handoff](../reviews/stage-current.md).
+Fulfill
+[REQUEST.md](REQUEST.md) by checking every item against current batch-local stock
+before deducting anything for that order. An insufficient order returns
+`accepted=False`, changes no stock, and does not stop later orders. The next action
+is owner review of S1; see [PLAN.md](PLAN.md).
+
+This local, in-memory change needs a short design amendment and one delivery stage;
+one independent review can assess both documents. Original requirements and the
+accepted D1 below remain historical authorities; D2 supersedes only the caller's
+responsibility to guarantee sufficient inventory.
+
+## D2: implemented behavior and rationale
+
+Keep `inventory.reserve(stock, orders)` and `batch.execute(stock, text)`, including
+their `(remaining, outcomes)` return shape. Copy stock once per batch as today.
+For each order in input order, accept exactly when every requested quantity is at
+most the corresponding current remaining quantity. On acceptance, deduct all items;
+on rejection, deduct none. Append exactly one `{"order_id": id, "accepted": bool}`
+result and continue. An empty order is accepted without mutation; an empty batch
+still returns a stock copy and no outcomes. Exact-stock requests succeed.
+
+Use a read-only sufficiency pass followed by deduction only on success. Validated
+unique SKUs make per-item checks sufficient; aggregation is unnecessary. This avoids
+rollback state and partial deductions when a later item is insufficient. Two passes

@@ -1,0 +1,8 @@
+{
+  "case": "existing-intake",
+  "report": "docs/validation/canary/20260907T085955-103af1a0949e4c15ba7939bede897d81/report.json",
+  "status": "pass",
+  "worker_elapsed_seconds": 93.075,
+  "wave_elapsed_seconds": 145.883,
+  "error": null
+}

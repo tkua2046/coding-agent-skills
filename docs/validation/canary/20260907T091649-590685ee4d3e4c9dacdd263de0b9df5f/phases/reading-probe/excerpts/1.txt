@@ -1,0 +1,16 @@
+# Implementation plan: settings v2 migration
+
+Status: planned; plan review pending, design review pending. No stages executed.
+Authority: [original](ORIGINAL.md), [proposed contract](SPEC.md),
+[proposed design](DESIGN.md). Next action: resolve the design's consequential open
+decisions in design review, then review this plan. Implementation is a later task.
+
+Historical progress, preserved from the preceding plan:
+> Complete: v1 reading. Pending: design and review v2 migration before execution.
+
+## Delivery boundaries
+
+| Stage and observable outcome | Dependencies and boundary reason | Acceptance and material risks | Status / intended boundary |
+|---|---|---|---|
+| S1: Read either selected format safely. Extend `settings.py` with v2 and marker reading, reusable strict migration validation, and relevant tests. Update README for the implemented read APIs. | Design and plan reviews resolved, later implementation authorized. An independently usable read-only stage prepares callers before activation can occur. No migration API or write behavior advertised yet. | Existing v1 tests pass; v2 fixture mapping, malformed/duplicate-key rejection, marker/version mismatch, and relative path resolution match SPEC. Review distinction between legacy v1 reads and strict migration preflight. | Planned; one coherent reader/validation/test/documentation change for review and eventual commit. |
+| S2: Explicit migration publishes validated v2 and supports safe retry. Implement the complete publication protocol with tests, migration usage in README, and recovery instructions in DEVNOTES. | S1. Keep source preservation, destination validation, marker activation and retry together: a partial migration writer would lack a safe usable contract. Resolve filesystem durability requirements before claiming them. | All SPEC acceptance examples, deterministic I/O/validation failures, subprocess interruption before/after activation, and repeated retries pass on temporary fixture copies. Source bytes ne

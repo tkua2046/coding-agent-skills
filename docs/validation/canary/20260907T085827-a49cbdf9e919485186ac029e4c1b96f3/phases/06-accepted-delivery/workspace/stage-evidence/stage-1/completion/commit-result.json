@@ -1,0 +1,6 @@
+{
+  "stage_commit": "8619b4540ff1a3d1fecd2dafdac71c1c8927aa79",
+  "tree": "31a73ed4c963ce3d8c35c87b3ac3133aeb7d3f1b",
+  "hook": "Passed: six tests; installed hook was not bypassed",
+  "committed_tree_matches_pre_hook_index": true
+}

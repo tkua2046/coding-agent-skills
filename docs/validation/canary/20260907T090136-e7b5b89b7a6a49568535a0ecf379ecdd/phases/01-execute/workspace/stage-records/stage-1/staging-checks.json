@@ -1,0 +1,27 @@
+{
+  "staged-check": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 2,
+    "stdout": "stage-records/stage-1/candidate-1/patch.stdout:7: trailing whitespace.\n+ \nstage-records/stage-1/candidate-1/patch.stdout:11: trailing whitespace.\n+ \nstage-records/stage-1/candidate-1/patch.stdout:42: trailing whitespace.\n+ \nstage-records/stage-1/candidate-1/patch.stdout:54: trailing whitespace.\n+ \nstage-records/stage-1/candidate-1/patch.stdout:60: trailing whitespace.\n+ \n",
+    "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-vfxMm8lo' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-CcB8p43f' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+  },
+  "staged-source-check": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check",
+      "--",
+      ".",
+      ":(exclude)stage-records/stage-1/candidate-1/patch.stdout"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-No2FLAj6' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-Zxc5qEY3' (errno=Operation not permitted)\nwarning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+  }
+}

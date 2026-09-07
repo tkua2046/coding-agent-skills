@@ -1,0 +1,65 @@
+{
+  "utc": "20260907-092440",
+  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "python_version": "3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "coverage_version": "7.16.0",
+  "TMPDIR": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-znrhxi11/worker/.tmp",
+  "results": [
+    {
+      "case": "normal",
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "tools/check.py"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "installed-hook-docs",
+      "command": [
+        ".git/hooks/pre-commit",
+        "README.md"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "stdlib-fallback",
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-S",
+        "tools/check.py"
+      ],
+      "exit": 0
+    }
+  ],
+  "hook_executable": true,
+  "hook_matches_wrapper": true,
+  "sha256": {
+    "README.md": "7db8371466cb45f3364083a5b701ec43c27d5e7bc0476890d0e4c2be3907c0fc",
+    "DEVNOTES.md": "da5863558c758fa4ab11e6d1386732d47c3c87d9586359b0d2676ea187a3aaf6",
+    "tools/check.py": "9942cc671387b4924f7a342ea16de0c8623153e29ef7d0762ff3e7f1249e90dd",
+    "inventory.py": "e526f302ab5b5838ce2e1ced745b41106624d6a84a913ea4470d9553b627a8f3",
+    "qa/check_inventory.py": "dadde4ee365a6aea2f78f33d6ed068e8fe78ab0e2c9b146c4132606b7fe641e9",
+    "quality.ini": "e6cbb025a8d9081c86c135831da8581959ad1638ae4c9d8db6fb2077e0bf09d4",
+    ".coveragerc": "b61dbf6129265ebefc5dd157e745a672dc9387104f305cd5bce4a32edf6a88e6",
+    "hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1",
+    ".git/hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1",
+    "docs/development-history.md": "abaa24ab3dc2dbb06845b673b319bf642acb67d6d78b714da7e005b99f3f0dae",
+    "docs/workflow-verification.md": "00b0cd6c60caf2ad21b9bbb376ea474f4de732f71d8ecc6fbe7426902a26068a",
+    "artifacts/verification-20260907-022300/installed-hook-docs.txt": "e86fcfb3c35e611f25d772c39b1c551686134dd33e95ac70da425fe958822dc9",
+    "artifacts/verification-20260907-022300/stdlib-failure.txt": "f56ebac79c0c4f819e0e3b2ab0f1c1470b3b4c55d327a86e3d4950738f5c55e2",
+    "artifacts/verification-20260907-022300/zero-.coverage": "cae7965f058d1cc8de062bfbef94ade7e68689367cef2c2d5ef477993243dfee",
+    "artifacts/verification-20260907-022300/stdlib-zero.txt": "246d4492a546321e1b2fa17d2051ba4f7d71a13c5694f2260d00e5f64beca039",
+    "artifacts/verification-20260907-022300/failure-.coverage": "27c64c64092ec55bd4cd556ea23bb52da1bd8ecf7596aa4e1df31177995a4b84",
+    "artifacts/verification-20260907-022300/zero.txt": "cdeaf0e141a2c1569496eb2d8f44842242a2d6fe3bf8ebc687afa76a54b717b6",
+    "artifacts/verification-20260907-022300/installed-hook-docs-.coverage": "059b721a07c463e38fae7be8322484948aeab8cd16e90f4c0053e0dd6a27e67a",
+    "artifacts/verification-20260907-022300/results.json": "6a1c9a732c2fae83ab025c72fb80b463aa8fef50e3ee7b4437d1fe3365b88cf5",
+    "artifacts/verification-20260907-022300/failure.txt": "a59aa55fad8eb1d0ec3a3720a085e085e441b9effa28f490aaeecef0c969bb00",
+    "artifacts/verification-20260907-022300/normal-coverage.json": "f7fdfdc8d6f437601c4603b07def632017b00eb52fc106d8b0d9ba96bfe1d56b",
+    "artifacts/verification-20260907-022300/stdlib-pass.txt": "9e9be95bb4079199d497fdd3376c3ae85d32f2a42491d35b43b54854bc57b819",
+    "artifacts/verification-20260907-022300/normal-.coverage": "059b721a07c463e38fae7be8322484948aeab8cd16e90f4c0053e0dd6a27e67a",
+    "artifacts/verification-20260907-022300/installed-hook-docs-coverage.json": "3cc61dc7cebf1d5619d2916b44465af37a68e7a082cb58cdcad0d9b0681f1c30",
+    "artifacts/verification-20260907-022300/failure-coverage.json": "4de95ec0a799747c1544d283f6501284b7d1ef844120bcf2e9885bf2da5626dd",
+    "artifacts/verification-20260907-022300/normal.txt": "e86fcfb3c35e611f25d772c39b1c551686134dd33e95ac70da425fe958822dc9"
+  },
+  "inputs_and_prior_evidence_unchanged": true
+}

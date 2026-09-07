@@ -1,0 +1,5 @@
+1. **Behavior and preserved state:** Each order is checked against remaining batch-local stock. All items are deducted only if every item is available; otherwise, the order is rejected, stock remains unchanged, and later orders continue. Equality and empty orders succeed. Inputs, both API interfaces, and existing result keys and ordering remain unchanged.
+
+2. **Technical choice and consequence:** Use a preflight pass followed by deduction only when every comparison succeeds. Unique SKUs per order and single-process, in-memory execution make this sufficient. It prevents partial deduction without rollback or per-order stock copies; both passes are linear in order size.
+
+3. **Completion and remaining acceptance:** S1 implementation is complete through both APIs, with regression coverage and README usage. Independent document and code reviews report `ready` with no findings; recorded checks passed, including 11 tests. Next is owner review against SPEC and REQUEST. Human review and acceptance remain pending; no implementation fix is pending. The excerpts do not provide human acceptance evidence, and this comprehension probe is not human usability proof.

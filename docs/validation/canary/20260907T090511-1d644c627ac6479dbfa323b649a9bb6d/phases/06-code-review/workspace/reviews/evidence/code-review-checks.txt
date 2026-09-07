@@ -1,0 +1,39 @@
+All 19 author snapshot hashes verified before checks.
+$ /Users/tk/Documents/coding-agent-skills/.venv/bin/python -m unittest discover -s tests -v
+exit: 0
+
+test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
+test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
+test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
+test_empty (test_inventory.InventoryTests.test_empty) ... ok
+test_empty_batch_returns_copy_through_both_apis (test_inventory.InventoryTests.test_empty_batch_returns_copy_through_both_apis) ... ok
+test_invalid_json_and_invalid_order_after_shortage_still_raise (test_inventory.InventoryTests.test_invalid_json_and_invalid_order_after_shortage_still_raise) ... ok
+test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
+test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
+test_whole_order_rejection_and_continuation (test_inventory.InventoryTests.test_whole_order_rejection_and_continuation) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.000s
+
+OK
+
+$ /Users/tk/Documents/coding-agent-skills/.venv/bin/python hooks/pre-commit
+exit: 0
+
+test_adapter (test_inventory.InventoryTests.test_adapter) ... ok
+test_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok
+test_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok
+test_empty (test_inventory.InventoryTests.test_empty) ... ok
+test_empty_batch_returns_copy_through_both_apis (test_inventory.InventoryTests.test_empty_batch_returns_copy_through_both_apis) ... ok
+test_invalid_json_and_invalid_order_after_shortage_still_raise (test_inventory.InventoryTests.test_invalid_json_and_invalid_order_after_shortage_still_raise) ... ok
+test_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok
+test_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok
+test_whole_order_rejection_and_continuation (test_inventory.InventoryTests.test_whole_order_rejection_and_continuation) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.000s
+
+OK
+
+Independent proposed-state oracle: 140625 three-order batches, 281250 API calls passed. Stocks 0..2 for two SKUs, quantities 1..3, empty/single/two-item orders in both item orders, plus untouched SKU; checked outcomes, stock, types and deep input preservation.
+All author snapshot hashes still match after checks.

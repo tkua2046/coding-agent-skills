@@ -1,0 +1,16 @@
+import json
+from pathlib import Path
+from inventory import reserve
+from batch import execute
+orders=[{"id":"reject","items":[["a",1],["b",3]]},{"id":"accept","items":[["a",2],["b",1]]}]
+stock={"a":2,"b":1}
+expected=({"a":0,"b":0},[{"order_id":"reject","accepted":False},{"order_id":"accept","accepted":True}])
+assert reserve(stock,orders)==expected
+assert execute(stock,json.dumps(orders))==expected
+assert stock=={"a":2,"b":1} and orders[0]["items"]==[["a",1],["b",3]]
+assert reserve({"a":0},[{"id":"r","items":[["a",1]]}])==({"a":0},[{"order_id":"r","accepted":False}])
+assert reserve({"a":1},[{"id":"empty","items":[]}])==({"a":1},[{"order_id":"empty","accepted":True}])
+assert reserve({"a":1},[])==({"a":1},[])
+for p in ["reviews/design-current.json","reviews/code-current.json"]:
+    assert json.loads(Path(p).read_text())["verdict"]=="ready", p
+print("All-or-nothing rejection, continuation, APIs, input preservation, empty order and review readiness verified")
