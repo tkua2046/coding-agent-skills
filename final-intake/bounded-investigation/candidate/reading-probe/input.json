@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/INVESTIGATION.md",
+      "text": "# Order report investigation\n\n## 2026-09-07 \u2014 large batches\n\n**Conclusion / next action:** Do not replace the report with a database, cache\nservice, or job queue based on the current evidence. The local experiment isolates\nrepeated catalog loading as a sufficient explanation for the observed batch-size\nscaling, but it is synthetic and does not establish production latency. Next,\npropose and review the smallest compatible change: reuse one loaded catalog within\neach non-empty `summarize` batch, retaining order sequence, exact integer-cent\ntotals, and the existing empty-batch behavior (which does not access the catalog\npath). Add multi-order equivalence/one-load coverage and measure a representative\nproduction batch before considering infrastructure.\n\n**Evidence:** With a fixed 1,000-row JSON catalog and five median-timed repeats,\nthe current implementation took 0.003182s, 0.031965s, and 0.327907s for 10, 100,\nand 1,000 orders. A scratch load-once equivalent took 0.000319s, 0.000334s, and\n0.000483s (10.0x, 95.6x, and 679.1x faster); outputs matched for all generated\ncases. The baseline tests also passed. Commands and full output are in\n[`order-report-evidence.txt`](order-report-evidence.txt); the reproducible harness\nis [`../investigations/benchmark_report.py`](../investigations/benchmark_report.py).\n\n**Limits:** This is a short synthetic benchmark on one machine and warm local\nfilesystem caches, using valid SKUs, one catalog size, at most 1,000 orders, and no\nconcurrency. It demonstrates the cost and scaling of repeated local parse/read\nwork; it does not quantify production latency, prove behavior for every input/error\ncase, or rule out additional production bottlenecks.\n"
+    }
+  ],
+  "questions": [
+    "What was investigated and what did the observed evidence establish?",
+    "What is the next recommended action and what remains uncertain?"
+  ]
+}

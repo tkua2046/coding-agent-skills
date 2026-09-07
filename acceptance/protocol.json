@@ -1,0 +1,18 @@
+{
+  "baseline": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "cases": [
+    "smoke-plan-maintenance",
+    "smoke-review-partial",
+    "smoke-stage-stale",
+    "smoke-transfer-pr",
+    "smoke-intake-conflict",
+    "bounded-investigation"
+  ],
+  "scope": "paired worker runs; independent semantic assessment, not calibrated release grading",
+  "runtime_sha256": "d528b02654d1cd1440d80b38dba3caae229659e31c1ea00883b965fd3a586ac2"
+}

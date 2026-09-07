@@ -1,0 +1,48 @@
+{
+  "verified_at_utc": "2026-09-07T19:53:41.332887+00:00",
+  "source": "artifacts/repair/packet-fix/workspace",
+  "source_files_sha256": {
+    "packet_import.py": "9da82da8d8169d14138f08426791c424321a2f21acd99ca7aa2a2534fb31b14f",
+    "README.md": "0c84e78b24e0a4d6158647ee0d050330989eae78ace2381e4fe8e31f64a7517a",
+    "REQUEST.md": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e",
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "tests/test_packet_import.py": "25afe883f72d44a95d686ec7a305f93e372df9bd66684a1e65591a3273bde91a",
+    "reviews/R1.md": "a60256d2cc7325ed100439a8b552e8499556b1e1b5eaa8de58ade27ab25f6e3a"
+  },
+  "source_record_sha256": "6b091ca8865981ebaa61a6408878b764ee7eadcef52e403a8da51fc12db1d24a",
+  "source_implementation_sha256": "9da82da8d8169d14138f08426791c424321a2f21acd99ca7aa2a2534fb31b14f",
+  "source_tests_sha256": "25afe883f72d44a95d686ec7a305f93e372df9bd66684a1e65591a3273bde91a",
+  "canonical_v2_checker_sha256": "a68091478899e5f0a39b3c0af0456b0e926c6c82c349635da47bc379a2133dbc",
+  "stage_skill_hashes": {
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d"
+  },
+  "stage_skill_matches_original_candidate_snapshot": true,
+  "original_review_snapshot_sha256": "3eb1791472150fdf01d2b418b525aa41eb217aec11fb0aa4b28bf5f2786f5f78",
+  "original_outputs_and_failure_records_unchanged": true,
+  "checks": [
+    {
+      "name": "affected-project-unittest",
+      "exit_code": 0,
+      "elapsed_seconds": 0.302132
+    },
+    {
+      "name": "canonical-v2-checker",
+      "exit_code": 0,
+      "elapsed_seconds": 0.249026
+    },
+    {
+      "name": "original-R1-R2-and-atomicity-probe",
+      "exit_code": 0,
+      "elapsed_seconds": 0.128907
+    }
+  ],
+  "check_execution_seconds": 0.680065,
+  "proof_directory_ignored": true,
+  "model_runs_performed_by_reviewer": 0
+}

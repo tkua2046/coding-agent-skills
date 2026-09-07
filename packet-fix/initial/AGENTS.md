@@ -1,0 +1,1 @@
+Local code changes, tests, and useful documentation updates are authorized. Use standard-library Python 3.10+ and the existing unittest gate. Preserve REQUEST.md. Work only in this supplied project; no network, packages, commits, push, tags, or publishing. Report any unavailable required check or reviewer as pending; do not invent approval.

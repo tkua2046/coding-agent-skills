@@ -1,0 +1,120 @@
+{
+  "case": "smoke-pr-scope",
+  "side": "baseline",
+  "completed": true,
+  "elapsed_seconds": 162.174,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "originals-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "DEVNOTES.md": true,
+        "FEATURE.md": true,
+        "examples/tasks.json": true,
+        "evidence": true
+      }
+    },
+    {
+      "id": "completed-feature-preserved",
+      "status": "pass",
+      "evidence": {
+        "argv": [
+          "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+          "sandbox",
+          "-P",
+          "canary",
+          "-C",
+          "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-acceptance-v49v_3b9",
+          "-c",
+          "default_permissions=\"canary\"",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\",\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+          "-c",
+          "shell_environment_policy.inherit=\"core\"",
+          "-c",
+          "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-acceptance-v49v_3b9/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+          "--",
+          "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "\"\"\"Keep PR preparation from rewriting the completed feature or its required example.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {'task_report.py': 'a64f2160b0b11cb8c7fa8bb73c8d679569d5cd1f72a2d2c4d5ecafd5f5c4067c', 'tests/test_task_report.py': '6e881b6f8d9ff68c9d9da7ad01b2cf05eea6dccc8daa0fba01729bf66b1f7e92', 'examples/open-tasks.csv': 'ab4690ef4a9498f093d3857aadbd401ff06e39b34d2d36aa703414a5bed53cea'}\n\nfor name, expected in EXPECTED.items():\n    path = Path(name)\n    assert path.is_file(), f\"Missing required feature file: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f\"Feature changed during PR preparation: {name}\"\n"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false,
+        "interrupted": false,
+        "elapsed_seconds": 0.12
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "d5a1bbcd42522179102433c09c80fce559ce60f99b786cb92952a22188bf2118",
+    "DEVNOTES.md": "f17947fcf11b7715f549db7eb11d5ddad6f4664f661b5015cb5708ae5ece1d78",
+    "FEATURE.md": "acc3d6745038ccffa13832497e6215dd31cc7f08c786d51991a07423273528d7",
+    "README.md": "ae3b53fdc4c201d8ab8772a4995b932126edd295e5c7121f327fab98fc40b861",
+    "evidence/layout-trial.json": "bea8ea36fa979e251410e3d1bf9ca0f5505184d1df168657d336b352a63815ed",
+    "examples/tasks.json": "0e6bf214b6651db85bb4c303e3cb42a6adc6eca72f3b1b8ed45709d9b6c6c5bc",
+    "task_report.py": "dfdb54bb7530121c2651cf4fddc80455a7132f3866bacf50cf77f0e01fe6bb87",
+    "tests/test_task_report.py": "fb16abb9656b46512e7065461568bee043d0bbf11c272d8db0e891e035fd1f5e"
+  },
+  "final": {
+    "AGENTS.md": "d5a1bbcd42522179102433c09c80fce559ce60f99b786cb92952a22188bf2118",
+    "DEVNOTES.md": "f17947fcf11b7715f549db7eb11d5ddad6f4664f661b5015cb5708ae5ece1d78",
+    "FEATURE.md": "acc3d6745038ccffa13832497e6215dd31cc7f08c786d51991a07423273528d7",
+    "PR.md": "6b5514674766f6fff78928405ebcfdb782c37057bb5b8706390123c096ccd7ce",
+    "README.md": "2b4c0bd1a322a38c68ddaa21baa3a98540f54da125b3b2c68f3451b083696a0b",
+    "evidence/layout-trial.json": "bea8ea36fa979e251410e3d1bf9ca0f5505184d1df168657d336b352a63815ed",
+    "examples/open-tasks.csv": "ab4690ef4a9498f093d3857aadbd401ff06e39b34d2d36aa703414a5bed53cea",
+    "examples/tasks.json": "0e6bf214b6651db85bb4c303e3cb42a6adc6eca72f3b1b8ed45709d9b6c6c5bc",
+    "generated/layout-preview.html": "9885a3b7ec62d0f7469bf5da5689e1b21e9e7658c37e41565b32927b3ed590da",
+    "task_report.py": "a64f2160b0b11cb8c7fa8bb73c8d679569d5cd1f72a2d2c4d5ecafd5f5c4067c",
+    "tests/test_task_report.py": "6e881b6f8d9ff68c9d9da7ad01b2cf05eea6dccc8daa0fba01729bf66b1f7e92"
+  },
+  "skills": {
+    "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+    "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+    "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+    "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+    "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+    "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+    "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+    "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+    "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+    "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+    "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+    "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+    "skills/dev-workflow/prompts/setup-dev-workflow.md": "8f3a0cad579cb52cf748e420cd26f072033c9f7c5e99d951c26a34375af4ecdc",
+    "skills/dev-workflow/references/delivery-checks.md": "199b3c93bb70b51af8c7d3a45a8dc07f956da56286f8f3e9916f75233367458f",
+    "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+  }
+}

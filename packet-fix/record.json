@@ -1,0 +1,62 @@
+{
+  "completed": true,
+  "elapsed_seconds": 242.382,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    [
+      "project-tests",
+      0
+    ],
+    [
+      "original-behavior",
+      0
+    ]
+  ],
+  "initial": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "0c84e78b24e0a4d6158647ee0d050330989eae78ace2381e4fe8e31f64a7517a",
+    "REQUEST.md": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e",
+    "packet_import.py": "50b32af0cdaf868dbf121283fe8452e0c47320fa3e486841171dbaa6d08fb56e",
+    "reviews/R1.md": "a60256d2cc7325ed100439a8b552e8499556b1e1b5eaa8de58ade27ab25f6e3a",
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d",
+    "tests/test_packet_import.py": "df91f0c0296d047fc0398f66d9632fa17eda2f13badbad758a30da6a950fdbd2"
+  },
+  "final": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "0c84e78b24e0a4d6158647ee0d050330989eae78ace2381e4fe8e31f64a7517a",
+    "REQUEST.md": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e",
+    "packet_import.py": "9da82da8d8169d14138f08426791c424321a2f21acd99ca7aa2a2534fb31b14f",
+    "reviews/R1.md": "a60256d2cc7325ed100439a8b552e8499556b1e1b5eaa8de58ade27ab25f6e3a",
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d",
+    "tests/test_packet_import.py": "25afe883f72d44a95d686ec7a305f93e372df9bd66684a1e65591a3273bde91a"
+  },
+  "skills": {
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d"
+  },
+  "source": "acceptance/packet-import/candidate-r2",
+  "review_recheck": "pending",
+  "requirements_preserved": true,
+  "review_preserved": true
+}

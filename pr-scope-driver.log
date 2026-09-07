@@ -1,0 +1,2 @@
+{"case": "smoke-pr-scope", "side": "baseline", "completed": true, "seconds": 162.174, "checks": ["pass", "pass", "pass", "pass", "pass"]}
+{"case": "smoke-pr-scope", "side": "candidate", "completed": true, "seconds": 205.182, "checks": ["pass", "pass", "pass", "pass", "pass"]}

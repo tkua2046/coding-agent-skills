@@ -1,0 +1,14 @@
+{
+  "reason": "IC-01 compatibility conflict treated as confirmed precedence; generic intake correction and no-conflict neighbor",
+  "original_failure": "acceptance/smoke-intake-conflict/candidate",
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "baseline": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+  "cases": [
+    "smoke-intake-conflict",
+    "smoke-intake-preserve"
+  ]
+}

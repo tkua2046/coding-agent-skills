@@ -1,0 +1,12 @@
+{"case": "smoke-plan-maintenance", "side": "baseline", "completed": true, "seconds": 77.149, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-plan-maintenance", "side": "candidate", "completed": true, "seconds": 78.509, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-review-partial", "side": "baseline", "completed": true, "seconds": 147.25, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-review-partial", "side": "candidate", "completed": true, "seconds": 116.907, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-stage-stale", "side": "baseline", "completed": true, "seconds": 175.891, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-stage-stale", "side": "candidate", "completed": true, "seconds": 115.061, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-transfer-pr", "side": "baseline", "completed": true, "seconds": 123.046, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-transfer-pr", "side": "candidate", "completed": true, "seconds": 132.296, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-conflict", "side": "baseline", "completed": true, "seconds": 250.076, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-conflict", "side": "candidate", "completed": true, "seconds": 203.334, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "bounded-investigation", "side": "baseline", "completed": true, "seconds": 217.692, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "bounded-investigation", "side": "candidate", "completed": true, "seconds": 271.695, "checks": ["pass", "pass", "pass", "pass"]}

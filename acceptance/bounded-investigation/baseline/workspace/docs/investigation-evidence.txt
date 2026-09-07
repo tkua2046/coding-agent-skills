@@ -1,0 +1,86 @@
+Order report investigation evidence — 2026-09-07
+
+Baseline command:
+  TMPDIR="$PWD" "$CANARY_PYTHON" -m unittest discover -s tests -v
+
+Baseline exit status: 0
+Baseline stdout/stderr:
+  test_empty (test_report.ReportTests.test_empty) ... ok
+  test_subtotals (test_report.ReportTests.test_subtotals) ... ok
+
+  ----------------------------------------------------------------------
+  Ran 2 tests in 0.001s
+
+  OK
+
+Experiment command:
+  TMPDIR="$PWD" "$CANARY_PYTHON" - <<'PY'
+  import json
+  import statistics
+  import tempfile
+  import time
+  from pathlib import Path
+  from unittest.mock import patch
+
+  from report import load_catalog, summarize
+
+  CATALOG_SIZE = 1000
+  BATCH_SIZES = (100, 1000, 5000)
+  REPEATS = 5
+
+  def summarize_load_once(orders, catalog_path):
+      catalog = load_catalog(catalog_path)
+      return [
+          {
+              "sku": order["sku"],
+              "subtotal_cents": catalog[order["sku"]]["price_cents"] * order["quantity"],
+          }
+          for order in orders
+      ]
+
+  with tempfile.TemporaryDirectory(dir=".") as directory:
+      path = Path(directory) / "catalog.json"
+      catalog = [
+          {"sku": f"sku-{index}", "price_cents": index + 1}
+          for index in range(CATALOG_SIZE)
+      ]
+      path.write_text(json.dumps(catalog))
+
+      print(f"python: scratch benchmark; catalog_rows={CATALOG_SIZE}; repeats={REPEATS}")
+      print("batch,current_reads,load_once_reads,current_median_s,load_once_median_s,speedup,equal")
+      for size in BATCH_SIZES:
+          orders = [
+              {"sku": f"sku-{index % CATALOG_SIZE}", "quantity": index % 7 + 1}
+              for index in range(size)
+          ]
+          read_counts = []
+          timings = {"current": [], "once": []}
+          outputs = {}
+          for name, function in (("current", summarize), ("once", summarize_load_once)):
+              calls = 0
+              original = Path.read_text
+              def counted_read_text(self, *args, **kwargs):
+                  global calls
+                  calls += 1
+                  return original(self, *args, **kwargs)
+              with patch.object(Path, "read_text", counted_read_text):
+                  start = time.perf_counter()
+                  outputs[name] = function(orders, path)
+                  timings[name].append(time.perf_counter() - start)
+              read_counts.append(calls)
+              for _ in range(REPEATS - 1):
+                  start = time.perf_counter()
+                  function(orders, path)
+                  timings[name].append(time.perf_counter() - start)
+          current = statistics.median(timings["current"])
+          once = statistics.median(timings["once"])
+          print(f"{size},{read_counts[0]},{read_counts[1]},{current:.6f},{once:.6f},{current / once:.1f}x,{outputs['current'] == outputs['once']}")
+  PY
+
+Experiment exit status: 0
+Experiment stdout:
+  python: scratch benchmark; catalog_rows=1000; repeats=5
+  batch,current_reads,load_once_reads,current_median_s,load_once_median_s,speedup,equal
+  100,100,1,0.033815,0.000336,100.6x,True
+  1000,1000,1,0.354122,0.000560,631.8x,True
+  5000,5000,1,1.786199,0.001070,1669.3x,True

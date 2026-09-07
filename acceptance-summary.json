@@ -1,0 +1,475 @@
+{
+  "method": "Observable worker records plus independent artifact review; not blind calibrated release grading",
+  "records": [
+    {
+      "wave": "acceptance",
+      "case": "bounded-investigation",
+      "version": "baseline",
+      "record": "acceptance/bounded-investigation/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 217.692,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 13,
+      "usage": {
+        "input_tokens": 141292,
+        "cached_input_tokens": 119552,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5856,
+        "reasoning_output_tokens": 1278
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "bounded-investigation",
+      "version": "candidate",
+      "record": "acceptance/bounded-investigation/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 271.695,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 12,
+      "usage": {
+        "input_tokens": 221618,
+        "cached_input_tokens": 199808,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5869,
+        "reasoning_output_tokens": 1680
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "packet-import",
+      "version": "baseline",
+      "record": "acceptance/packet-import/baseline-r2/record.json",
+      "completed": true,
+      "worker_seconds": 547.683,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 12,
+      "usage": {
+        "input_tokens": 428163,
+        "cached_input_tokens": 357120,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15967,
+        "reasoning_output_tokens": 6152
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "packet-import",
+      "version": "candidate",
+      "record": "acceptance/packet-import/candidate-r2/record.json",
+      "completed": true,
+      "worker_seconds": 504.598,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 11,
+      "usage": {
+        "input_tokens": 461250,
+        "cached_input_tokens": 419456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14729,
+        "reasoning_output_tokens": 4039
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-intake-conflict",
+      "version": "baseline",
+      "record": "acceptance/smoke-intake-conflict/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 250.076,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 13,
+      "usage": {
+        "input_tokens": 181478,
+        "cached_input_tokens": 158336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7147,
+        "reasoning_output_tokens": 2592
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-intake-conflict",
+      "version": "candidate",
+      "record": "acceptance/smoke-intake-conflict/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 203.334,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 8,
+      "usage": {
+        "input_tokens": 118700,
+        "cached_input_tokens": 100480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5818,
+        "reasoning_output_tokens": 2743
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-plan-maintenance",
+      "version": "baseline",
+      "record": "acceptance/smoke-plan-maintenance/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 77.149,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 6,
+      "usage": {
+        "input_tokens": 86695,
+        "cached_input_tokens": 63232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1899,
+        "reasoning_output_tokens": 542
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-plan-maintenance",
+      "version": "candidate",
+      "record": "acceptance/smoke-plan-maintenance/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 78.509,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 5,
+      "usage": {
+        "input_tokens": 81220,
+        "cached_input_tokens": 64384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1974,
+        "reasoning_output_tokens": 638
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-pr-scope",
+      "version": "baseline",
+      "record": "acceptance/smoke-pr-scope/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 162.174,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 14,
+      "usage": {
+        "input_tokens": 192842,
+        "cached_input_tokens": 150016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4346,
+        "reasoning_output_tokens": 1772
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-pr-scope",
+      "version": "candidate",
+      "record": "acceptance/smoke-pr-scope/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 205.182,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 13,
+      "usage": {
+        "input_tokens": 256199,
+        "cached_input_tokens": 219392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5379,
+        "reasoning_output_tokens": 2576
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-review-partial",
+      "version": "baseline",
+      "record": "acceptance/smoke-review-partial/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 147.25,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 10,
+      "usage": {
+        "input_tokens": 171087,
+        "cached_input_tokens": 141184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3750,
+        "reasoning_output_tokens": 1384
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-review-partial",
+      "version": "candidate",
+      "record": "acceptance/smoke-review-partial/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 116.907,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 9,
+      "usage": {
+        "input_tokens": 127246,
+        "cached_input_tokens": 110976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3050,
+        "reasoning_output_tokens": 726
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-stage-stale",
+      "version": "baseline",
+      "record": "acceptance/smoke-stage-stale/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 175.891,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 24,
+      "usage": {
+        "input_tokens": 196500,
+        "cached_input_tokens": 157824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4727,
+        "reasoning_output_tokens": 1410
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-stage-stale",
+      "version": "candidate",
+      "record": "acceptance/smoke-stage-stale/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 115.061,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 8,
+      "usage": {
+        "input_tokens": 133425,
+        "cached_input_tokens": 122368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2996,
+        "reasoning_output_tokens": 807
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-transfer-pr",
+      "version": "baseline",
+      "record": "acceptance/smoke-transfer-pr/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 123.046,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 9,
+      "usage": {
+        "input_tokens": 147886,
+        "cached_input_tokens": 111872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3268,
+        "reasoning_output_tokens": 1088
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "smoke-transfer-pr",
+      "version": "candidate",
+      "record": "acceptance/smoke-transfer-pr/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 132.296,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 10,
+      "usage": {
+        "input_tokens": 161714,
+        "cached_input_tokens": 147200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3372,
+        "reasoning_output_tokens": 1244
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "transcript-search",
+      "version": "baseline",
+      "record": "acceptance/transcript-search/baseline-r2/record.json",
+      "completed": true,
+      "worker_seconds": 328.308,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 15,
+      "usage": {
+        "input_tokens": 331030,
+        "cached_input_tokens": 296704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9158,
+        "reasoning_output_tokens": 3584
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "acceptance",
+      "case": "transcript-search",
+      "version": "candidate",
+      "record": "acceptance/transcript-search/candidate-r2/record.json",
+      "completed": true,
+      "worker_seconds": 298.723,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 17,
+      "usage": {
+        "input_tokens": 329668,
+        "cached_input_tokens": 290816,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8509,
+        "reasoning_output_tokens": 2363
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "intake-repair",
+      "case": "smoke-intake-conflict",
+      "version": "baseline",
+      "record": "intake-repair/smoke-intake-conflict/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 250.975,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 15,
+      "usage": {
+        "input_tokens": 188431,
+        "cached_input_tokens": 155136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7141,
+        "reasoning_output_tokens": 3715
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "intake-repair",
+      "case": "smoke-intake-conflict",
+      "version": "candidate",
+      "record": "intake-repair/smoke-intake-conflict/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 196.186,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 7,
+      "usage": {
+        "input_tokens": 108945,
+        "cached_input_tokens": 88832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5565,
+        "reasoning_output_tokens": 2344
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "intake-repair",
+      "case": "smoke-intake-preserve",
+      "version": "baseline",
+      "record": "intake-repair/smoke-intake-preserve/baseline/record.json",
+      "completed": true,
+      "worker_seconds": 230.368,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 16,
+      "usage": {
+        "input_tokens": 204808,
+        "cached_input_tokens": 185856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6366,
+        "reasoning_output_tokens": 2236
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "intake-repair",
+      "case": "smoke-intake-preserve",
+      "version": "candidate",
+      "record": "intake-repair/smoke-intake-preserve/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 228.416,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 10,
+      "usage": {
+        "input_tokens": 177568,
+        "cached_input_tokens": 152576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6514,
+        "reasoning_output_tokens": 3146
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "final-intake",
+      "case": "bounded-investigation",
+      "version": "candidate",
+      "record": "final-intake/bounded-investigation/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 221.37,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 11,
+      "usage": {
+        "input_tokens": 212340,
+        "cached_input_tokens": 196480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6144,
+        "reasoning_output_tokens": 2018
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "final-intake",
+      "case": "smoke-intake-conflict",
+      "version": "candidate",
+      "record": "final-intake/smoke-intake-conflict/candidate/record.json",
+      "completed": false,
+      "worker_seconds": 300.008,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 13,
+      "usage": null,
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "final-intake",
+      "case": "smoke-intake-preserve",
+      "version": "candidate",
+      "record": "final-intake/smoke-intake-preserve/candidate/record.json",
+      "completed": true,
+      "worker_seconds": 159.692,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 8,
+      "usage": {
+        "input_tokens": 130837,
+        "cached_input_tokens": 93440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4328,
+        "reasoning_output_tokens": 1360
+      },
+      "semantic_review": "See independent behavior-review.md or transfer-review.md; never inferred from mechanical pass"
+    },
+    {
+      "wave": "packet-fix",
+      "case": "packet-import",
+      "version": "candidate-followup",
+      "record": "packet-fix/record.json",
+      "completed": true,
+      "worker_seconds": 242.382,
+      "mechanical_checks_pass": true,
+      "completed_command_calls": 18,
+      "usage": {
+        "input_tokens": 313384,
+        "cached_input_tokens": 268160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6831,
+        "reasoning_output_tokens": 2013
+      },
+      "semantic_review": "Independent closure in transfer-review.md; original first-attempt failure remains unchanged"
+    }
+  ],
+  "worker_seconds_total": 5784.971,
+  "limits": [
+    "Per-case required quality judgments live in independent reviews, including failures and dispositions.",
+    "Single paired observations with concurrent calls do not establish stable speedup.",
+    "Original transfer and bounded tasks used the pre-intake-fix candidate; final intake checks identify later bytes.",
+    "Transfer duplicate-/tmp evaluator limitation is recorded in transfer-isolation-disposition.md.",
+    "Full release-gate acceptance remains pending."
+  ]
+}

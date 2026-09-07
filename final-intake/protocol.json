@@ -1,0 +1,19 @@
+{
+  "reason": "Combined generic intake fixes: real conflicting commitments stay unresolved; conclusions and next action first",
+  "baseline_reuse": {
+    "smoke-intake-conflict": "acceptance/smoke-intake-conflict/baseline",
+    "smoke-intake-preserve": "intake-repair/smoke-intake-preserve/baseline",
+    "bounded-investigation": "acceptance/bounded-investigation/baseline"
+  },
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "cases": [
+    "smoke-intake-conflict",
+    "smoke-intake-preserve",
+    "bounded-investigation"
+  ],
+  "scope": "candidate-only affected checks; original baseline/task/settings unchanged; no timing speedup claim from cross-wave comparison"
+}

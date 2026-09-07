@@ -1,0 +1,23 @@
+{
+  "case_version": 2,
+  "v1_adapted_sha256": "c8fbae423c906accd1689927997563d5914c54ba6a384512d463e5739853f90b",
+  "v2_sha256": "a68091478899e5f0a39b3c0af0456b0e926c6c82c349635da47bc379a2133dbc",
+  "review_sha256": "3eb1791472150fdf01d2b418b525aa41eb217aec11fb0aa4b28bf5f2786f5f78",
+  "results": [
+    {
+      "side": "baseline-r2",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "elapsed_seconds": 0.258582
+    },
+    {
+      "side": "candidate-r2",
+      "exit_code": 1,
+      "expected_rejection": true,
+      "elapsed_seconds": 0.251925
+    }
+  ],
+  "protected_inputs_unchanged": true,
+  "original_worker_outputs_unchanged": true,
+  "positive_repair_validation": "pending"
+}

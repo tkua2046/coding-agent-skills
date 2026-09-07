@@ -1,0 +1,87 @@
+[
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/IMPLEMENTATION_PLAN.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/continuation-repair.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/outcome-workflow.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/small-change-workflow.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/smoke-contracts.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/workflow-proposal.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/proposals/workflow-validation.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/reviews",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/reviews/outcome-dispositions.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/reviews/outcome-final-review.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/reviews/outcome-routing-review.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/reviews/outcome-scope-checkpoint.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/validation/canary",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/validation/canary/INDEX.md",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/validation/continuation-checks/pre-commit-20260907T182959Z.json",
+    "exists": true
+  },
+  {
+    "commit": "a24b140ddda594bec61ae42ac272d3225892cfb5",
+    "path": "docs/validation/outcome-runtime",
+    "exists": true
+  }
+]

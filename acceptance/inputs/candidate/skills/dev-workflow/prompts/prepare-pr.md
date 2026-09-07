@@ -1,0 +1,19 @@
+# Prepare or revise a pull request
+
+Read the original goal and requirements, repository contribution rules, existing delivery state and complete proposed deliverable. Inspect the branch diff and intended new files, including documentation, configuration, generated artifacts and evidence that will ship. Follow relevant review/check links; consult older records to resolve discrepancies. Confirm that every included change serves the authorized outcome and that required deliverables are present.
+
+Assess whether the final behavior achieves the original goal and whether the whole result is proportionate and human-reviewable. Passing checks alone do not establish either. Consider the combined maintenance and review burden of code, documents, tooling and evidence. Simplify unnecessary structure or remove redundant material within scope; expose an unresolved mismatch as a readiness issue. Expected generated artifacts can be legitimate deliverables: inspect their purpose, provenance and usable result instead of rejecting them because they are generated. Keep disposable output out of the candidate and link retained original evidence rather than recopying it.
+
+Compare the final behavior, requirements, check configuration, relevant inputs/runtime and freshness needs with the latest verified candidate. Reuse applicable results; run newly affected checks and the repository's mandatory final gate. Code equality alone does not establish applicability. Inspect actual final content after fixes, formatting or conflicts. Local hooks and remote CI establish their own observed checks; do not imply remote validation from a local result.
+
+Apply the project's agreed test tiers and established user/repository review policy. Record release-only expensive checks as pending or tied to their previously tested inputs. Passing fast checks satisfies that part of PR readiness; scope, goal fulfillment, reviewability and required review must also hold. Update regression coverage where behavior changes need it. Do not promote historic/self-reported output to current evidence.
+
+Update affected README usage, DEVNOTES operations and significant Unreleased changes. Reuse existing delivery status when maintained; a PR request does not require new design, plan or review documents. Keep relevant original evidence at its existing immutable location, subject to actual repository retention policy. If this PR is also agreed release preparation, include the chosen version and notes together; otherwise leave the feature version unchanged.
+
+Write a concise PR title/body around the final problem and resulting behavior, with a useful example, material tradeoffs, actual validation and limits. Explain how to review substantial generated material or evidence using its authoritative entrypoint. Identify incomplete goals or pending reviews clearly. This describes the identified revision; it does not create another live status record. Include only claims supported by the actual task evidence.
+
+When authorized, push the intended branch and open or update the PR. Do not create a new PR for each stage commit. Follow CI/review results; verify findings, fix with regression checks, and re-review changed content. Merge only within the user's authorized scope and repository rules. If asked only to prepare, return the reviewable artifacts without publishing them.
+
+For a newly created empty remote, an authorized initial commit/push may establish the default branch; do not create an artificial empty-base PR. Record exactly which remote/branch/PR actions happened rather than implying approval or merge from a successful push.
+
+After preparing the PR/handoff, load [delivery checks](../references/delivery-checks.md). Correct supported issues; disclose unresolved conditions. Otherwise remain silent, without a self-check report or another review round.

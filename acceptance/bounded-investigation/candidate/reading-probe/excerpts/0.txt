@@ -1,0 +1,30 @@
+# Order report investigation (2026-09-07)
+
+Question: do slow large batches justify replacing the report with a database,
+cache service, and job queue? The catalog is fixed within a batch; exact totals and
+order sequence are compatibility requirements. Empty batches must also continue to
+return `[]` without reading the catalog (covered by the existing test).
+
+## Evidence
+
+`summarize` currently calls `load_catalog` once per order. A bounded synthetic probe
+used a 1,000-row JSON catalog, deterministic orders, Python 3.12.4, and three timings
+per case (median reported). The one-load comparison retained sequence and integer
+calculation, and explicitly retained the empty/missing-catalog behavior.
+
+| Orders | Current | One load/batch | Ratio | Equal output |
+| ---: | ---: | ---: | ---: | :---: |
+| 100 | 0.034026 s | 0.000328 s | 103.7x | yes |
+| 500 | 0.172309 s | 0.000399 s | 432.0x | yes |
+| 2,000 | 0.704396 s | 0.000656 s | 1,074.2x | yes |
+
+Instrumentation of one 500-order current run observed 500 catalog loads consuming
+0.156547 of 0.171087 seconds (91.5%). Baseline tests passed (2/2).
+
+Commands:
+
+```sh
+TMPDIR="$PWD/.task-tmp" "$CANARY_PYTHON" -m unittest discover -s tests -v
+TMPDIR="$PWD/.task-tmp" PYTHONPATH="$PWD" "$CANARY_PYTHON" experiments/order_report_probe.py
+```
+

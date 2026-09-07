@@ -1,0 +1,1 @@
+Work on the requested local PR preparation. Preserve the feature implementation, tests, original requirements and evidence. Use the existing standard-library tools and documented gate. Do not commit, push, publish, install dependencies or contact external services.

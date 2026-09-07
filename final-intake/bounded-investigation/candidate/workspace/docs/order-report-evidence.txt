@@ -1,0 +1,33 @@
+Order report investigation evidence — 2026-09-07
+
+Runtime command:
+  "$CANARY_PYTHON" --version
+Result:
+  Python 3.12.4
+
+Baseline command (TMPDIR was kept inside the project sandbox):
+  TMPDIR="$PWD/.tmp" "$CANARY_PYTHON" -m unittest discover -s tests -v
+Result:
+  test_empty (test_report.ReportTests.test_empty) ... ok
+  test_subtotals (test_report.ReportTests.test_subtotals) ... ok
+
+  ----------------------------------------------------------------------
+  Ran 2 tests in 0.001s
+
+  OK
+
+Benchmark command:
+  TMPDIR="$PWD/.tmp" "$CANARY_PYTHON" -m investigations.benchmark_report "$PWD/.tmp/order-report-investigation"
+Result:
+  catalog_rows=1000 repeats=5 statistic=median_wall_seconds
+  orders baseline_s preloaded_s speedup outputs_equal
+  10 0.003182 0.000319 10.0x True
+  100 0.031965 0.000334 95.6x True
+  1000 0.327907 0.000483 679.1x True
+
+Method:
+  Both paths read the same generated catalog and receive the same generated orders.
+  The baseline calls production summarize. The scratch comparison preserves its
+  subtotal expression and row order but loads the batch-fixed catalog once. Each
+  reported duration is the median of five sequential wall-clock measurements.
+  Equality compares the complete returned lists before timing.

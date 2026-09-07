@@ -1,0 +1,36 @@
+[
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_cli_commands_print_the_sorted_success_listing (test_packet_import.PacketTests.test_cli_commands_print_the_sorted_success_listing) ... ok\ntest_cli_failure_has_no_traceback_or_success_listing (test_packet_import.PacketTests.test_cli_failure_has_no_traceback_or_success_listing) ... ok\ntest_corrupt_data_leaves_no_destination_or_temporary_folder (test_packet_import.PacketTests.test_corrupt_data_leaves_no_destination_or_temporary_folder) ... ok\ntest_destination_appears_only_after_all_files_are_written (test_packet_import.PacketTests.test_destination_appears_only_after_all_files_are_written) ... ok\ntest_duplicate_and_conflicting_paths_are_rejected (test_packet_import.PacketTests.test_duplicate_and_conflicting_paths_are_rejected) ... ok\ntest_entries_without_unix_file_type_metadata_are_valid (test_packet_import.PacketTests.test_entries_without_unix_file_type_metadata_are_valid) ... ok\ntest_existing_destinations_are_not_overwritten (test_packet_import.PacketTests.test_existing_destinations_are_not_overwritten) ... ok\ntest_import_preserves_content_and_names (test_packet_import.PacketTests.test_import_preserves_content_and_names) ... ok\ntest_invalid_member_paths_are_rejected (test_packet_import.PacketTests.test_invalid_member_paths_are_rejected) ... ok\ntest_preview_lists_sorted_files_without_extracting (test_packet_import.PacketTests.test_preview_lists_sorted_files_without_extracting) ... ok\ntest_unix_symlinks_and_special_files_are_rejected (test_packet_import.PacketTests.test_unix_symlinks_and_special_files_are_rejected) ... ok\ntest_write_and_final_placement_failures_are_cleaned_up_and_retryable (test_packet_import.PacketTests.test_write_and_final_placement_failures_are_cleaned_up_and_retryable) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.139s\n\nOK\n",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.236,
+    "name": "project-tests"
+  },
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "/Users/tk/Documents/coding-agent-skills/artifacts/repair/transfer-packet/packet-import/accept.py",
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-transfer-97lpstoq"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: packet content, path boundary, rejection cleanup, retry and CLI behavior\n",
+    "stderr": "",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.203,
+    "name": "independent-behavior"
+  }
+]

@@ -1,0 +1,3 @@
+1. The investigation asked whether slow large batches justify replacing the report with a database, cache service, and job queue. The evidence established that repeated catalog loading dominated runtime: in a 500-order run, 500 loads consumed 91.5% of execution time. Loading once per batch produced equal output and improved the measured cases by 103.7×–1,074.2×, while retaining order sequence, integer calculations, and empty/missing-catalog behavior. Baseline tests passed.
+
+2. The exposed text does not explicitly recommend a next action. It also does not establish whether a database, cache service, or job queue is warranted beyond the bounded synthetic probe; that remains unanswered by the excerpt.

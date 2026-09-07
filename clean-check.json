@@ -1,0 +1,94 @@
+{
+  "source_tree": "33896cf560cc70492f0caa391160952b063461b6",
+  "workspace": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-clean-2xken6aj",
+  "steps": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-q",
+        "-b",
+        "codex/clean-check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.019
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.305
+    },
+    {
+      "argv": [
+        "uv",
+        "venv",
+        "--python",
+        "python3.12",
+        ".venv"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.4 interpreter at: /opt/homebrew/opt/python@3.12/bin/python3.12\nCreating virtual environment at: .venv\nActivate with: source .venv/bin/activate\n",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.068
+    },
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        ".venv/bin/python",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Resolved 20 packages in 126ms\nInstalled 20 packages in 26ms\n + cfgv==3.5.0\n + coverage==7.16.0\n + distlib==0.4.3\n + filelock==3.32.5\n + identify==2.6.19\n + iniconfig==2.3.0\n + markdown-it-py==4.0.0\n + mdurl==0.1.2\n + nodeenv==1.10.0\n + packaging==26.3\n + platformdirs==4.11.7\n + pluggy==1.6.0\n + pre-commit==4.6.2\n + pygments==2.21.0\n + pytest==9.1.1\n + pytest-cov==7.1.0\n + python-discovery==1.6.0\n + pyyaml==6.0.3\n + ruff==0.16.6\n + virtualenv==21.7.8\n",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.238
+    },
+    {
+      "argv": [
+        ".venv/bin/pre-commit",
+        "install",
+        "--install-hooks"
+      ],
+      "exit_code": 0,
+      "stdout": "pre-commit installed at .git/hooks/pre-commit\n",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.855
+    },
+    {
+      "argv": [
+        ".venv/bin/pre-commit",
+        "run",
+        "--all-files"
+      ],
+      "exit_code": 0,
+      "stdout": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...............................................................Passed\ncheck toml...............................................................Passed\ncheck for merge conflicts................................................Passed\nruff check...............................................................Passed\nruff format..............................................................Passed\nSkill bundle and documentation validation................................Passed\nRepository tests with coverage...........................................Passed\n- hook id: tests-with-coverage\n- duration: 76.63s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-clean-2xken6aj\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 250 items\n\ntests/test_canary.py ................................................... [ 20%]\n........................................................................ [ 49%]\n............................................                             [ 66%]\ntests/test_canary_runtime.py ...................                         [ 74%]\ntests/test_check.py ..............................                       [ 86%]\ntests/test_continuation_eval.py ...............................          [ 98%]\ntests/test_evidence.py ...                                               [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName                      Stmts   Miss Branch BrPart  Cover   Missing\n---------------------------------------------------------------------\ntools/__init__.py             0      0      0      0   100%\ntools/canary.py             738     45    318     33    93%   74, 85, 229, 233, 242, 258, 323, 328-329, 391, 415, 452, 497, 532-533, 580, 591, 596, 661, 701, 735, 751, 871, 892, 895, 996-999, 1004, 1058, 1096, 1140, 1164, 1188, 1206, 1222, 1454, 1460, 1468-1472, 1477\ntools/canary_runtime.py      74      2     16      3    94%   76->78, 119, 190\ntools/check.py              107      0     54      0   100%\ntools/evidence.py            12      0      0      0   100%\n---------------------------------------------------------------------\nTOTAL                       931     47    388     36    94%\nCoverage XML written to file coverage.xml\n======================== 250 passed in 76.37s (0:01:16) ========================\n\nVersioned canary inputs (no model calls).................................Passed\n",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 77.828
+    }
+  ],
+  "scope": "fresh source export, documented setup and installed complete fast gate; no historical archives restored",
+  "passed": true
+}

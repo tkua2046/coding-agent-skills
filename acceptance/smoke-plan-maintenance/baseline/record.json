@@ -1,0 +1,68 @@
+{
+  "case": "smoke-plan-maintenance",
+  "side": "baseline",
+  "completed": true,
+  "elapsed_seconds": 77.149,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "source-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "docs/DESIGN.md": true,
+        "docs/PLAN.md": true,
+        "reviews/S1.md": true,
+        "REQUEST.md": true
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "REQUEST.md": "951c0a6d42ba21e8f8952fe86995d1004af2352452b8f05f98f6aca070f07a3c",
+    "docs/DESIGN.md": "5cb8206422476eebc5165b9c72552d1898e2666e8210bfeef988851cfb92f517",
+    "docs/PLAN.md": "0a74c5b13fdaa48f6aa6e297ec87a3fc4f94852e013d876e938e178859c79fa6",
+    "reviews/S1.md": "f4cbbb6bf433bad1eec2e127577f4909d7105830ed07bee242ccffb87a880357"
+  },
+  "final": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "REQUEST.md": "951c0a6d42ba21e8f8952fe86995d1004af2352452b8f05f98f6aca070f07a3c",
+    "RESULT.md": "498391bb345299860c2b2f2b45df3e2483f27845eab7b932f906f69a74de22a3",
+    "docs/DESIGN.md": "5cb8206422476eebc5165b9c72552d1898e2666e8210bfeef988851cfb92f517",
+    "docs/PLAN.md": "0a74c5b13fdaa48f6aa6e297ec87a3fc4f94852e013d876e938e178859c79fa6",
+    "reviews/S1.md": "f4cbbb6bf433bad1eec2e127577f4909d7105830ed07bee242ccffb87a880357"
+  },
+  "skills": {
+    "skills/implementation-plan/SKILL.md": "ff3be914e72d5202eab032bf3add2df6ed13adc01debec023d25328caf81c647",
+    "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+    "skills/implementation-plan/assets/implementation-plan.template.md": "81fdc2be489508f95f1eccc0a82d2e254c20713fca86927fef39ca76339bb536",
+    "skills/implementation-plan/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+    "skills/implementation-plan/prompts/plan-implementation.md": "9547d3b1a3c80be95dd3669efd7a291b5730861a79015b126e9e8062b6c9baf8",
+    "skills/implementation-plan/prompts/review-implementation.md": "9bdb1d93bd67b97291bbf42f0cc223acfde46c42f68366a263ff57ad7e0f643c",
+    "skills/implementation-plan/references/artifact-checks.md": "650b84e7ab03d583af18ea2f708f07688fdee0c0f7217764f96c94c48ff64aad"
+  }
+}

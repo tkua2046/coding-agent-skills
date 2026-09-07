@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/INVESTIGATION.md",
+      "text": "# Order report performance investigation\n\nDate: 2026-09-07. Scope: investigation only; no production or test changes.\n\nThe existing contract is `summarize(orders, catalog_path)`, which returns exact\ninteger-cent subtotals in input order. The catalog is fixed within a batch\n([README.md](../README.md)); an empty batch currently does not access its catalog\n(`tests/test_report.py`). `summarize` currently calls `load_catalog` inside the\nper-order loop (`report.py`).\n\nBaseline: `TMPDIR=\"$PWD\" \"$CANARY_PYTHON\" -m unittest discover -s tests -v`\npassed both existing tests (2/2, exit 0).\n\nA bounded scratch experiment used a generated 1,000-row JSON catalog, batches of\n100/1,000/5,000 orders, and five timings per implementation. It compared current\nbehavior with loading the same catalog once per batch. Outputs were equal at every\nsize. Current/once catalog-read counts were 100/1, 1,000/1, and 5,000/1; median\ntimes were 0.033815/0.000336s, 0.354122/0.000560s, and\n1.786199/0.001070s, respectively. Exact commands and stdout are in\n[investigation-evidence.txt](investigation-evidence.txt).\n\nFinding: repeated file reads and JSON decoding are sufficient to reproduce the\nlarge-batch slowdown locally. For the 5,000-order case, eliminating repeated loads\nwas about 1,669x faster. A database, cache service, or job queue is not justified\nby the evidence and would add operational complexity without addressing a need\nestablished here.\n\nRecommendation: if implementation is later authorized, first make the smallest\nchange: reuse one in-process catalog mapping for a report batch. Preserve exact\ntotals, order, exceptions, and the empty-batch behavior (a missing catalog must\n"
+    }
+  ],
+  "questions": [
+    "What was investigated and what did the observed evidence establish?",
+    "What is the next recommended action and what remains uncertain?"
+  ]
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_cli_find_with_context_uses_existing_rendering (test_transcript.TranscriptTests.test_cli_find_with_context_uses_existing_rendering) ... ok\ntest_cli_no_matches_succeeds_silently (test_transcript.TranscriptTests.test_cli_no_matches_succeeds_silently) ... ok\ntest_cli_rejects_invalid_search_options_cleanly (test_transcript.TranscriptTests.test_cli_rejects_invalid_search_options_cleanly) ... ok\ntest_cli_without_search_still_renders_full_transcript (test_transcript.TranscriptTests.test_cli_without_search_still_renders_full_transcript) ... ok\ntest_find_cues_does_not_match_across_cues (test_transcript.TranscriptTests.test_find_cues_does_not_match_across_cues) ... ok\ntest_find_cues_merges_context_in_source_order_without_mutation (test_transcript.TranscriptTests.test_find_cues_merges_context_in_source_order_without_mutation) ... ok\ntest_find_cues_uses_unicode_casefold_and_literal_phrase (test_transcript.TranscriptTests.test_find_cues_uses_unicode_casefold_and_literal_phrase) ... ok\ntest_find_cues_validates_arguments_before_searching (test_transcript.TranscriptTests.test_find_cues_validates_arguments_before_searching) ... ok\ntest_load_preserves_order_and_text (test_transcript.TranscriptTests.test_load_preserves_order_and_text) ... ok\ntest_rejects_backward_interval (test_transcript.TranscriptTests.test_rejects_backward_interval) ... ok\ntest_rendering (test_transcript.TranscriptTests.test_rendering) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.270s\n\nOK\n",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.327,
+    "name": "project-tests"
+  },
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "/Users/tk/Documents/coding-agent-skills/artifacts/repair/transfer-packet/transcript-search/accept.py",
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-transfer-r_ayljnd"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: transcript search behavior and existing CLI compatibility\n",
+    "stderr": "",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.456,
+    "name": "independent-behavior"
+  }
+]

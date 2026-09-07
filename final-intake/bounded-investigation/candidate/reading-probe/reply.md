@@ -1,0 +1,3 @@
+1. The investigation examined order-report performance for large batches. A synthetic benchmark established that repeatedly loading the catalog sufficiently explains the observed batch-size scaling: loading it once produced matching outputs and was 10.0× to 679.1× faster across 10–1,000 orders.
+
+2. The recommended next action is to propose and review a minimal change that reuses one loaded catalog per non-empty `summarize` batch, while preserving order sequence, exact integer-cent totals, and empty-batch behavior. Add equivalence and one-load tests, then measure a representative production batch. Production latency, behavior across all inputs/errors, concurrency effects, and other possible production bottlenecks remain uncertain.

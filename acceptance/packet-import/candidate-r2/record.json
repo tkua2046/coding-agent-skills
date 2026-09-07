@@ -1,0 +1,38 @@
+{
+  "case": "packet-import",
+  "side": "candidate",
+  "completed": true,
+  "seconds": 504.598,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 900
+  },
+  "checks": [
+    [
+      "project-tests",
+      0
+    ],
+    [
+      "independent-behavior",
+      0
+    ]
+  ],
+  "request_preserved": true,
+  "skills_preserved": true,
+  "initial": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "2f7a1a7cc2ffcea2003382317b296ac747727512c071296510c3a98b304f8fb7",
+    "REQUEST.md": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e",
+    "packet_import.py": "a3fe1af6585b078acbc09b3b2b352a853f85bb5e608895f1e685e1fc185c61fe",
+    "tests/test_packet_import.py": "20e1cd6dc63d852d3a2199a2231fd0657e03427f8e36f096818f4ec7a4f31483"
+  },
+  "final": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "0c84e78b24e0a4d6158647ee0d050330989eae78ace2381e4fe8e31f64a7517a",
+    "REQUEST.md": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e",
+    "packet_import.py": "50b32af0cdaf868dbf121283fe8452e0c47320fa3e486841171dbaa6d08fb56e",
+    "tests/test_packet_import.py": "df91f0c0296d047fc0398f66d9632fa17eda2f13badbad758a30da6a950fdbd2"
+  },
+  "semantic_assessment": "pending independent review"
+}

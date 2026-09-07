@@ -1,0 +1,75 @@
+{
+  "case": "smoke-stage-stale",
+  "side": "candidate",
+  "completed": true,
+  "elapsed_seconds": 115.061,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "source-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "session.py": true,
+        "tests/test_session.py": true,
+        "REQUEST.md": true,
+        "reviews/round1.md": true,
+        "reviews/round2.md": true,
+        "DEVNOTES.md": true
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "DEVNOTES.md": "699ab90570f753b49c4550a9f674f9a1d542c0656411d6e9ecfb2ed5a76dc87e",
+    "HANDOFF.md": "dab39fed82ee60058af97e37b1c31904cb68929b19c5da9efa33c04ee1400b5f",
+    "REQUEST.md": "14e8b404144ef3f59142d1274e0f2b25158be2e060149e2521a1121b194d5882",
+    "reviews/round1.md": "8e756f5b301e51b00fc87917c18956dba7a5620b2b37cfd28fed75edfaf2ba29",
+    "reviews/round2.md": "83ebb98be3910d17a64b65d7b4a0e78f06556eb62ff4214402fa54593511a757",
+    "session.py": "7654b1339a08de19e1c8ccf999d7cc6b8bd44fc3e4ec05937d65df5cd071f7e6",
+    "tests/test_session.py": "38e1190859b65dc80a0b05642e76af6dba2345bff1eec88211b8b75a9bc2e0e6"
+  },
+  "final": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "DEVNOTES.md": "699ab90570f753b49c4550a9f674f9a1d542c0656411d6e9ecfb2ed5a76dc87e",
+    "HANDOFF.md": "7da5614223911f7fbc224ddf647eb9002b1eadf241cb5e1406c745bab2bb996b",
+    "REQUEST.md": "14e8b404144ef3f59142d1274e0f2b25158be2e060149e2521a1121b194d5882",
+    "reviews/round1.md": "8e756f5b301e51b00fc87917c18956dba7a5620b2b37cfd28fed75edfaf2ba29",
+    "reviews/round2.md": "83ebb98be3910d17a64b65d7b4a0e78f06556eb62ff4214402fa54593511a757",
+    "session.py": "7654b1339a08de19e1c8ccf999d7cc6b8bd44fc3e4ec05937d65df5cd071f7e6",
+    "tests/test_session.py": "38e1190859b65dc80a0b05642e76af6dba2345bff1eec88211b8b75a9bc2e0e6"
+  },
+  "skills": {
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d"
+  }
+}

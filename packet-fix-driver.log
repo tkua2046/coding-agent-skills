@@ -1,0 +1,1 @@
+{"completed": true, "elapsed_seconds": 242.382, "settings": {"model": "gpt-5.6-sol", "effort": "medium", "timeout_seconds": 300}, "checks": [["project-tests", 0], ["original-behavior", 0]], "source": "acceptance/packet-import/candidate-r2", "review_recheck": "pending", "requirements_preserved": true, "review_preserved": true}

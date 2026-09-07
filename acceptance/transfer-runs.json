@@ -1,0 +1,26 @@
+[
+  {
+    "task": "transcript-search",
+    "side": "baseline",
+    "completed": false,
+    "reason": "isolation failed"
+  },
+  {
+    "task": "transcript-search",
+    "side": "candidate",
+    "completed": false,
+    "reason": "isolation failed"
+  },
+  {
+    "task": "packet-import",
+    "side": "baseline",
+    "completed": false,
+    "reason": "isolation failed"
+  },
+  {
+    "task": "packet-import",
+    "side": "candidate",
+    "completed": false,
+    "reason": "isolation failed"
+  }
+]

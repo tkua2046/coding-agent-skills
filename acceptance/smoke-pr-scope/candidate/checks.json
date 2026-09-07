@@ -1,0 +1,68 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "no-commit",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "originals-preserved",
+    "status": "pass",
+    "evidence": {
+      "AGENTS.md": true,
+      "DEVNOTES.md": true,
+      "FEATURE.md": true,
+      "examples/tasks.json": true,
+      "evidence": true
+    }
+  },
+  {
+    "id": "completed-feature-preserved",
+    "status": "pass",
+    "evidence": {
+      "argv": [
+        "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+        "sandbox",
+        "-P",
+        "canary",
+        "-C",
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-acceptance-0k9n78ua",
+        "-c",
+        "default_permissions=\"canary\"",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\",\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+        "-c",
+        "shell_environment_policy.inherit=\"core\"",
+        "-c",
+        "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-acceptance-0k9n78ua/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+        "--",
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "\"\"\"Keep PR preparation from rewriting the completed feature or its required example.\"\"\"\n\nimport hashlib\nfrom pathlib import Path\n\nEXPECTED = {'task_report.py': 'a64f2160b0b11cb8c7fa8bb73c8d679569d5cd1f72a2d2c4d5ecafd5f5c4067c', 'tests/test_task_report.py': '6e881b6f8d9ff68c9d9da7ad01b2cf05eea6dccc8daa0fba01729bf66b1f7e92', 'examples/open-tasks.csv': 'ab4690ef4a9498f093d3857aadbd401ff06e39b34d2d36aa703414a5bed53cea'}\n\nfor name, expected in EXPECTED.items():\n    path = Path(name)\n    assert path.is_file(), f\"Missing required feature file: {name}\"\n    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f\"Feature changed during PR preparation: {name}\"\n"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.116
+    }
+  },
+  {
+    "id": "supplied-skills-unchanged",
+    "status": "pass"
+  }
+]

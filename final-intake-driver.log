@@ -1,0 +1,3 @@
+{"case": "smoke-intake-preserve", "side": "candidate", "completed": true, "seconds": 159.692, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-conflict", "side": "candidate", "completed": false, "seconds": 300.008, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "bounded-investigation", "side": "candidate", "completed": true, "seconds": 221.37, "checks": ["pass", "pass", "pass", "pass"]}

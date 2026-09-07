@@ -1,0 +1,38 @@
+{
+  "task": "packet-import",
+  "attempt": "author-baseline",
+  "at": "2026-09-07T19:20:11.198426+00:00",
+  "request_preserved": true,
+  "mechanical_pass": false,
+  "semantic_review": "pending",
+  "checks": [
+    {
+      "name": "unittest",
+      "command": [
+        "/opt/homebrew/opt/python@3.12/bin/python3.12",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_existing_destination_is_not_overwritten (test_packet_import.PacketTests.test_existing_destination_is_not_overwritten) ... ok\ntest_import_preserves_content (test_packet_import.PacketTests.test_import_preserves_content) ... ok\ntest_preview_lists_files (test_packet_import.PacketTests.test_preview_lists_files) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "name": "independent-behavior",
+      "command": [
+        "/opt/homebrew/opt/python@3.12/bin/python3.12",
+        "-B",
+        "/private/tmp/coding-skills-transfer-20260907/packet-import/accept.py",
+        "/private/tmp/coding-skills-transfer-20260907/runs/author-baseline/packet-import/project"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/coding-skills-transfer-20260907/packet-import/accept.py\", line 91, in <module>\n    rejects(lambda: module.preview(source), ValueError, f\"unsafe preview accepted: {index}\")\n  File \"/private/tmp/coding-skills-transfer-20260907/packet-import/accept.py\", line 29, in rejects\n    raise AssertionError(message)\nAssertionError: unsafe preview accepted: 0\n"
+    }
+  ]
+}

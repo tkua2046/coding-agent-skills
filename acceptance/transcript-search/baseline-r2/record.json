@@ -1,0 +1,40 @@
+{
+  "case": "transcript-search",
+  "side": "baseline",
+  "completed": true,
+  "seconds": 328.308,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 900
+  },
+  "checks": [
+    [
+      "project-tests",
+      0
+    ],
+    [
+      "independent-behavior",
+      0
+    ]
+  ],
+  "request_preserved": true,
+  "skills_preserved": true,
+  "initial": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "3abf3f404a918eb8aad30cc7388b6c60c3cd97ffcc999541180b0ebe7b508057",
+    "REQUEST.md": "a0d8147046ecfc018c4ba0355320c1333c97321be623116beb9f4f3d58d7f250",
+    "examples/interview.tsv": "76ac1e701099ac8110467ebe2333103d74474d08d205f9f8864819fbee56e0e2",
+    "tests/test_transcript.py": "41867ed977eaf4ce84e94f093989c6eea443c4fd08233d2ef56f44c96ab98098",
+    "transcript.py": "381212a652789e189885354add3cabb9e57f75ba75fede57d25830b812fe8524"
+  },
+  "final": {
+    "AGENTS.md": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258",
+    "README.md": "b4dc49300a9d58e7a400b0488b2640389733b56cf3cf89646bc23d229e8c7e1d",
+    "REQUEST.md": "a0d8147046ecfc018c4ba0355320c1333c97321be623116beb9f4f3d58d7f250",
+    "examples/interview.tsv": "76ac1e701099ac8110467ebe2333103d74474d08d205f9f8864819fbee56e0e2",
+    "tests/test_transcript.py": "bfe12df3ec191af7d856ce0a178782ec860fea7bb7d0a8dd00281846dc97a866",
+    "transcript.py": "f687af6c82e4e29a6b8c8408d25c5625700da6f29ce2e966145066d6ef920dd8"
+  },
+  "semantic_assessment": "pending independent review"
+}

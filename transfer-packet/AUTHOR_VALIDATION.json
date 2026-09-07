@@ -1,0 +1,30 @@
+{
+  "at": "2026-09-07T19:20:10.834634+00:00",
+  "python": "3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "tasks": {
+    "transcript-search": {
+      "original_gate": "pass",
+      "independent_check_on_unfinished_baseline": "expected failure",
+      "expected_gap": "missing requested find_cues API",
+      "evidence": "runs/author-baseline/transcript-search/evidence/check-78c0916d0ccc448cb82031b09a19b3e5.json",
+      "fixture_total_lines": 118,
+      "fixture_python_lines": 91
+    },
+    "packet-import": {
+      "original_gate": "pass",
+      "independent_check_on_unfinished_baseline": "expected failure",
+      "expected_gap": "unsafe preview accepted: 0",
+      "evidence": "runs/author-baseline/packet-import/evidence/check-f0121d9222634ba5869a1d21df9e2c21.json",
+      "fixture_total_lines": 107,
+      "fixture_python_lines": 80
+    }
+  },
+  "syntax": "all Python files parse",
+  "corrupt_archive_control": "CRC corruption deterministically identifies late.txt",
+  "limitations": [
+    "Fixture-author checks only; no skill worker, independent reviewer, or prior/candidate model trials ran.",
+    "The independent check rejects each unfinished baseline at its first behavior gap; this is not positive-path validation of every acceptance branch.",
+    "Filesystem atomic visibility and write/final-placement failure reasoning require the predeclared semantic review; the behavioral script alone is insufficient."
+  ],
+  "finalization_note": "Original requests copied into fixture roots for direct runtime.execute use; implementation/tests unchanged since baseline checks. Development-time prepare/check helpers removed; direct runtime, unittest and evaluator checks are documented."
+}

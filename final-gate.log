@@ -1,0 +1,45 @@
+trim trailing whitespace.................................................Passed
+fix end of files.........................................................Passed
+check yaml...............................................................Passed
+check toml...............................................................Passed
+check for merge conflicts................................................Passed
+ruff check...............................................................Passed
+ruff format..............................................................Passed
+Skill bundle and documentation validation................................Passed
+Repository tests with coverage...........................................Failed
+- hook id: tests-with-coverage
+- duration: 74.95s
+- files were modified by this hook
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/tk/Documents/coding-agent-skills
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 250 items
+
+tests/test_canary.py ................................................... [ 20%]
+........................................................................ [ 49%]
+............................................                             [ 66%]
+tests/test_canary_runtime.py ...................                         [ 74%]
+tests/test_check.py ..............................                       [ 86%]
+tests/test_continuation_eval.py ...............................          [ 98%]
+tests/test_evidence.py ...                                               [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.12.4-final-0 _______________
+
+Name                      Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------
+tools/__init__.py             0      0      0      0   100%
+tools/canary.py             738     45    318     33    93%   74, 85, 229, 233, 242, 258, 323, 328-329, 391, 415, 452, 497, 532-533, 580, 591, 596, 661, 701, 735, 751, 871, 892, 895, 996-999, 1004, 1058, 1096, 1140, 1164, 1188, 1206, 1222, 1454, 1460, 1468-1472, 1477
+tools/canary_runtime.py      74      2     16      3    94%   76->78, 119, 190
+tools/check.py              107      0     54      0   100%
+tools/evidence.py            12      0      0      0   100%
+---------------------------------------------------------------------
+TOTAL                       931     47    388     36    94%
+Coverage XML written to file coverage.xml
+======================== 250 passed in 74.68s (0:01:14) ========================
+
+Versioned canary inputs (no model calls).................................Passed

@@ -1,0 +1,5 @@
+{
+  "command_events_checked": 110,
+  "evaluator_path_matches": [],
+  "scope": "Audit of recorded command strings; not universal OS-isolation attestation"
+}

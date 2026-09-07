@@ -1,0 +1,36 @@
+[
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_context_zero_without_find_is_allowed (test_transcript.CommandLineTests.test_context_zero_without_find_is_allowed) ... ok\ntest_find_with_context_uses_existing_rendering (test_transcript.CommandLineTests.test_find_with_context_uses_existing_rendering) ... ok\ntest_find_with_no_matches_has_empty_stdout (test_transcript.CommandLineTests.test_find_with_no_matches_has_empty_stdout) ... ok\ntest_full_transcript_command_is_unchanged (test_transcript.CommandLineTests.test_full_transcript_command_is_unchanged) ... ok\ntest_invalid_search_arguments_are_clean_errors (test_transcript.CommandLineTests.test_invalid_search_arguments_are_clean_errors) ... ok\ntest_find_adds_context_once_in_source_order (test_transcript.TranscriptTests.test_find_adds_context_once_in_source_order) ... ok\ntest_find_does_not_span_cues (test_transcript.TranscriptTests.test_find_does_not_span_cues) ... ok\ntest_find_is_unicode_case_insensitive_and_literal (test_transcript.TranscriptTests.test_find_is_unicode_case_insensitive_and_literal) ... ok\ntest_find_keeps_equal_cues_at_different_positions (test_transcript.TranscriptTests.test_find_keeps_equal_cues_at_different_positions) ... ok\ntest_find_preserves_significant_phrase_whitespace (test_transcript.TranscriptTests.test_find_preserves_significant_phrase_whitespace) ... ok\ntest_find_rejects_invalid_context_even_with_no_cues (test_transcript.TranscriptTests.test_find_rejects_invalid_context_even_with_no_cues) ... ok\ntest_find_rejects_invalid_phrase_even_with_no_cues (test_transcript.TranscriptTests.test_find_rejects_invalid_phrase_even_with_no_cues) ... ok\ntest_find_returns_empty_for_no_matches (test_transcript.TranscriptTests.test_find_returns_empty_for_no_matches) ... ok\ntest_load_preserves_order_and_text (test_transcript.TranscriptTests.test_load_preserves_order_and_text) ... ok\ntest_rejects_backward_interval (test_transcript.TranscriptTests.test_rejects_backward_interval) ... ok\ntest_rendering (test_transcript.TranscriptTests.test_rendering) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.006s\n\nOK\n",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.082,
+    "name": "project-tests"
+  },
+  {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-B",
+      "/Users/tk/Documents/coding-agent-skills/artifacts/repair/transfer-packet/transcript-search/accept.py",
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-transfer-ds9vyzv2"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: transcript search behavior and existing CLI compatibility\n",
+    "stderr": "",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 0.342,
+    "name": "independent-behavior"
+  }
+]

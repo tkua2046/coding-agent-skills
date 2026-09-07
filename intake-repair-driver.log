@@ -1,0 +1,4 @@
+{"case": "smoke-intake-conflict", "side": "candidate", "completed": true, "seconds": 196.186, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-conflict", "side": "baseline", "completed": true, "seconds": 250.975, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-preserve", "side": "baseline", "completed": true, "seconds": 230.368, "checks": ["pass", "pass", "pass", "pass"]}
+{"case": "smoke-intake-preserve", "side": "candidate", "completed": true, "seconds": 228.416, "checks": ["pass", "pass", "pass", "pass"]}

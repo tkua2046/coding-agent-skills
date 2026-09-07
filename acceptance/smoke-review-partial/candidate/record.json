@@ -1,0 +1,65 @@
+{
+  "case": "smoke-review-partial",
+  "side": "candidate",
+  "completed": true,
+  "elapsed_seconds": 116.907,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "source-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "session.py": true,
+        "REQUEST.md": true,
+        "reviews/round1.md": true
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "REQUEST.md": "9043cb4e9bb1d4733cd9af847d413f2c1cd28b6cb1123cc329dc5cfcdce86fe0",
+    "reviews/round1.md": "0648684b49aef0d411c7bdb3329c074a2e5216f498bdefa155f1fbe65e5e4bfa",
+    "session.py": "a2e28ac4bfc03a0a481453930578a6f659a933ec5663c86cdfdd8a02bf931921"
+  },
+  "final": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "REQUEST.md": "9043cb4e9bb1d4733cd9af847d413f2c1cd28b6cb1123cc329dc5cfcdce86fe0",
+    "REVIEW.md": "315dbe58d88c9c9f6581a1134190f2f0cd921d04cc856a662acacecf9b56f172",
+    "reviews/round1.md": "0648684b49aef0d411c7bdb3329c074a2e5216f498bdefa155f1fbe65e5e4bfa",
+    "session.py": "a2e28ac4bfc03a0a481453930578a6f659a933ec5663c86cdfdd8a02bf931921"
+  },
+  "skills": {
+    "skills/stage-development/SKILL.md": "aae9abc87fa9d057e7c7e8368e79144a722adf5cfe3f1d7fdc5e071e2ddea284",
+    "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+    "skills/stage-development/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/stage-development/assets/stage-record.template.md": "d2f063d140f80bdfe0a1ce18608763ea3b8e5744156b0e3a5b5fd685606d5a0b",
+    "skills/stage-development/prompts/execute-stage.md": "da355536e7cec3a8bbca6383d2a384afafbdc9b49961d39290955e2d21b2f50f",
+    "skills/stage-development/prompts/review-stage.md": "6c265f6754e89eb49ae8d11ffb57e309db5768280d2d286b77121bd32eaebf9e",
+    "skills/stage-development/references/artifact-checks.md": "c2c85d9ef76191db89d3e6d30fd63fb7ced84a49f0f93e3191c1f6710dad5d1d"
+  }
+}

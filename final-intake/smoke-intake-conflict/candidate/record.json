@@ -1,0 +1,67 @@
+{
+  "case": "smoke-intake-conflict",
+  "side": "candidate",
+  "completed": false,
+  "elapsed_seconds": 300.008,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "source-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "labels.py": true,
+        "README.md": true,
+        "REQUEST.md": true
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "README.md": "528e1568091634c9b7f3cc41f889ceb3235ae172d8c854973a585ac6295af733",
+    "REQUEST.md": "f85947ee762d8b31d0f099e8afe43c0c55fae9efef0ada025bb6daf2f60d4b74",
+    "labels.py": "5e276dfb52f769689690183e614631220f31049e3a6e462029c83a18197f8d03"
+  },
+  "final": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "INTAKE.md": "d0945fa9df36e4ef97d8df73b03fc155a0a8c7cd0a757b0000bb74dc48665ae9",
+    "README.md": "528e1568091634c9b7f3cc41f889ceb3235ae172d8c854973a585ac6295af733",
+    "REQUEST.md": "f85947ee762d8b31d0f099e8afe43c0c55fae9efef0ada025bb6daf2f60d4b74",
+    "labels.py": "5e276dfb52f769689690183e614631220f31049e3a6e462029c83a18197f8d03"
+  },
+  "skills": {
+    "skills/feature-design/SKILL.md": "7aaa42371448e233c286ec6b4ce79a2c1f467cf7a45f6ac3a2d12095f2ae6778",
+    "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+    "skills/feature-design/assets/design.template.md": "f497b1b75a10b01642e900372364622c14eab1348c5025e8cc046de56ebb6820",
+    "skills/feature-design/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/feature-design/assets/spec-addendum.template.md": "90fbe37ec8e153e1e72b120c9e5479904e8784faa3f54b1390f8ac83f9243a0a",
+    "skills/feature-design/prompts/draft-design.md": "5546b299a400769d0b6a07b690ab65086e24250f900cce05d0066c1646be9d91",
+    "skills/feature-design/prompts/intake-feature.md": "40577a53516e74fcfd54dce1f05baa87d20f30679dd2f5e9293f8ed0a523e1b2",
+    "skills/feature-design/prompts/review-design.md": "777c7f7880bb438d7c23a3d6903da74ad1107908072adbb9e2d1dc80198f3242",
+    "skills/feature-design/references/artifact-checks.md": "3638ec2e1f16346d354e7e0bd9912a751275eb21aac7cccc949e267e9a2b0962"
+  }
+}

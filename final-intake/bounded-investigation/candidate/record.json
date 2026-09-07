@@ -1,0 +1,70 @@
+{
+  "case": "bounded-investigation",
+  "side": "candidate",
+  "completed": true,
+  "elapsed_seconds": 221.37,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "preserve-application",
+      "status": "pass",
+      "evidence": {
+        "report.py": true,
+        "tests": true,
+        "README.md": true
+      }
+    },
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commits",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "4da1c49814482d484175708b6ab2409abe993c0833a8a44ad99dd702b6606248",
+    "DEVNOTES.md": "2e0997359c867e16c1889866bc7024e53b37fc341551f1168def8087f15e52bf",
+    "README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6"
+  },
+  "final": {
+    "AGENTS.md": "4da1c49814482d484175708b6ab2409abe993c0833a8a44ad99dd702b6606248",
+    "DEVNOTES.md": "2e0997359c867e16c1889866bc7024e53b37fc341551f1168def8087f15e52bf",
+    "README.md": "b096889b2c911bc3722a1c0d02abcc8c33c16177d36ffead3146f2bae0d3a755",
+    "docs/INVESTIGATION.md": "7f484b8bf7d0e5e0570591157d3f63b6812d6c29060312d09243d9b50f39ea18",
+    "docs/order-report-evidence.txt": "b43d64be3445ed2c8352a0b79462122c5a7689501563d0b554fc0a30f7de58c6",
+    "investigations/benchmark_report.py": "7a47ad9d3acc5f9afc9c7593af31637ef38cc0586af7a33afb6fa609ca4e18a2",
+    "report.py": "56fe93f8b9deb092918a8d53c256def63cd9a372774648ac2f0e7f351650d608",
+    "tests/test_report.py": "ab9eb2ec02e5467cb356054657bc76fc64e09e562afc4e00f1be4b1118e2f2b6"
+  },
+  "skills": {
+    "skills/feature-design/SKILL.md": "7aaa42371448e233c286ec6b4ce79a2c1f467cf7a45f6ac3a2d12095f2ae6778",
+    "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+    "skills/feature-design/assets/design.template.md": "f497b1b75a10b01642e900372364622c14eab1348c5025e8cc046de56ebb6820",
+    "skills/feature-design/assets/review.template.md": "f3d130b63f4e8850bcb14536c8ec45b528d83ddb40119522d2aa84aa56de4dfd",
+    "skills/feature-design/assets/spec-addendum.template.md": "90fbe37ec8e153e1e72b120c9e5479904e8784faa3f54b1390f8ac83f9243a0a",
+    "skills/feature-design/prompts/draft-design.md": "5546b299a400769d0b6a07b690ab65086e24250f900cce05d0066c1646be9d91",
+    "skills/feature-design/prompts/intake-feature.md": "40577a53516e74fcfd54dce1f05baa87d20f30679dd2f5e9293f8ed0a523e1b2",
+    "skills/feature-design/prompts/review-design.md": "777c7f7880bb438d7c23a3d6903da74ad1107908072adbb9e2d1dc80198f3242",
+    "skills/feature-design/references/artifact-checks.md": "3638ec2e1f16346d354e7e0bd9912a751275eb21aac7cccc949e267e9a2b0962"
+  }
+}

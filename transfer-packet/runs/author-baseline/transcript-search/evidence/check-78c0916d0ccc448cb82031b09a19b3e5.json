@@ -1,0 +1,38 @@
+{
+  "task": "transcript-search",
+  "attempt": "author-baseline",
+  "at": "2026-09-07T19:20:11.004565+00:00",
+  "request_preserved": true,
+  "mechanical_pass": false,
+  "semantic_review": "pending",
+  "checks": [
+    {
+      "name": "unittest",
+      "command": [
+        "/opt/homebrew/opt/python@3.12/bin/python3.12",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_load_preserves_order_and_text (test_transcript.TranscriptTests.test_load_preserves_order_and_text) ... ok\ntest_rejects_backward_interval (test_transcript.TranscriptTests.test_rejects_backward_interval) ... ok\ntest_rendering (test_transcript.TranscriptTests.test_rendering) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "independent-behavior",
+      "command": [
+        "/opt/homebrew/opt/python@3.12/bin/python3.12",
+        "-B",
+        "/private/tmp/coding-skills-transfer-20260907/transcript-search/accept.py",
+        "/private/tmp/coding-skills-transfer-20260907/runs/author-baseline/transcript-search/project"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/coding-skills-transfer-20260907/transcript-search/accept.py\", line 33, in <module>\n    check(hasattr(module, \"find_cues\"), \"missing requested find_cues API\")\n  File \"/private/tmp/coding-skills-transfer-20260907/transcript-search/accept.py\", line 22, in check\n    raise AssertionError(message)\nAssertionError: missing requested find_cues API\n"
+    }
+  ]
+}

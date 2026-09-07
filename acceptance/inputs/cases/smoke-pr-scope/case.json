@@ -1,0 +1,43 @@
+{
+  "id": "smoke-pr-scope",
+  "version": 1,
+  "tier": "smoke",
+  "title": "Goal-based regression: assess the whole PR for a completed CSV export",
+  "skills": [
+    "dev-workflow"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md",
+      "overlay": "overlays/proposal"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "originals-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "FEATURE.md",
+        "examples/tasks.json",
+        "evidence"
+      ]
+    },
+    {
+      "id": "completed-feature-preserved",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

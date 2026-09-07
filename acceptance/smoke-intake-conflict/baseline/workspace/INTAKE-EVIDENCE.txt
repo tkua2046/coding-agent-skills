@@ -1,0 +1,48 @@
+Environment
+Command: "$CANARY_PYTHON" -c 'import platform, unicodedata; print(platform.python_version()); print(unicodedata.unidata_version)'
+Exit status: 0
+stdout:
+3.12.4
+15.0.0
+stderr: empty
+
+Baseline test discovery
+Command: "$CANARY_PYTHON" -m unittest discover -v
+Exit status: 5
+stdout: empty
+stderr:
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+
+NO TESTS RAN
+
+Syntax baseline
+Command: "$CANARY_PYTHON" -m py_compile labels.py
+Exit status: 0
+stdout: empty
+stderr: empty
+
+Behavior probe
+Command:
+"$CANARY_PYTHON" -c 'from labels import label
+for value in ["abc", "ß", "ﬃ", "ΐ", "é"]:
+ result = label(value)
+ source_points = ["U+%04X" % ord(c) for c in value]
+ result_points = ["U+%04X" % ord(c) for c in result]
+ print(f"{value!r} {source_points} -> {result!r} ({len(result)} code points: {result_points})")
+for args in [("abc", "pre:"), ("ß", "pre:"), (1,), ("abc", None)]:
+ try: print(f"label{args!r} -> {label(*args)!r}")
+ except Exception as exc: print(f"label{args!r} !! {type(exc).__name__}: {exc}")'
+Exit status: 0
+stdout:
+'abc' ['U+0061', 'U+0062', 'U+0063'] -> 'ABC' (3 code points: ['U+0041', 'U+0042', 'U+0043'])
+'ß' ['U+00DF'] -> 'SS' (2 code points: ['U+0053', 'U+0053'])
+'ﬃ' ['U+FB03'] -> 'FFI' (3 code points: ['U+0046', 'U+0046', 'U+0049'])
+'ΐ' ['U+0390'] -> 'Ϊ́' (3 code points: ['U+0399', 'U+0308', 'U+0301'])
+'é' ['U+00E9'] -> 'É' (1 code points: ['U+00C9'])
+label('abc', 'pre:') -> 'pre:ABC'
+label('ß', 'pre:') -> 'pre:SS'
+label(1,) !! AttributeError: 'int' object has no attribute 'upper'
+label('abc', None) !! TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+stderr: empty

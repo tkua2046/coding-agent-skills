@@ -1,0 +1,3 @@
+Created [INTAKE.md](</private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-acceptance-fljbzmgz/INTAKE.md>).
+
+It documents current behavior, baseline probes, compatibility-preserving defaults, and the remaining decision: whether expanding uppercase mappings should preserve the original character or use a single-code-point uppercase equivalent when available. No design or implementation changes were made. Baseline checks pass.

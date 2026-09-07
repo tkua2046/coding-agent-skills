@@ -1,0 +1,9 @@
+# Delivery repair — original evidence
+
+These are raw records, separate from the source PR. Failed isolation preparations remain beside completed repetitions; no worker ran before its successful designated-path probe. The transfer-isolation disposition records the exposed-duplicate limitation; these trials are not a broad OS-isolation attestation. `acceptance-summary.json` and the independent review files explain scope and limits. Passing mechanical checks are not skill-quality grades.
+
+`acceptance/inputs/` contains each frozen skill version once plus original existing case inputs. `transfer-packet/` retains the independently authored original transfer requests, criteria, checkers and fixture-author records. Each run retains prompts, model output, produced files, actual checks, Git state, elapsed time and usage where available. Ephemeral fixture commit IDs identify the tested workspace; corresponding initial bytes are in the preserved case inputs, not public production Git commits.
+
+`manifest.json` maps retained evidence files to SHA-256. This is integrity metadata, not an independent attestation. The original pre-repair history remains separately pinned at a24b140ddda594bec61ae42ac272d3225892cfb5 in the source repository.
+
+Reproduction: check out the source revision linked from the PR, restore these files under its ignored artifacts/repair/, and use the recorded scripts/settings in a fresh output directory. The one-wave scripts reuse tools.canary_runtime and tools.canary; they are experiment records rather than a second supported runner. Maintained versions of the new cases are in evals/cases. Relative report links beginning ../../evals reflect the original artifacts/repair location and resolve after restoration; the source evidence index also links the maintained cases. The raw reports retain their original bytes. Formal calibrated release runs use that documented runner and remain a separate acceptance requirement.

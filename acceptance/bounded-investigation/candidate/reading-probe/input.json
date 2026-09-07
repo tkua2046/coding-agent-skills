@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "path": "docs/INVESTIGATION.md",
+      "text": "# Order report investigation (2026-09-07)\n\nQuestion: do slow large batches justify replacing the report with a database,\ncache service, and job queue? The catalog is fixed within a batch; exact totals and\norder sequence are compatibility requirements. Empty batches must also continue to\nreturn `[]` without reading the catalog (covered by the existing test).\n\n## Evidence\n\n`summarize` currently calls `load_catalog` once per order. A bounded synthetic probe\nused a 1,000-row JSON catalog, deterministic orders, Python 3.12.4, and three timings\nper case (median reported). The one-load comparison retained sequence and integer\ncalculation, and explicitly retained the empty/missing-catalog behavior.\n\n| Orders | Current | One load/batch | Ratio | Equal output |\n| ---: | ---: | ---: | ---: | :---: |\n| 100 | 0.034026 s | 0.000328 s | 103.7x | yes |\n| 500 | 0.172309 s | 0.000399 s | 432.0x | yes |\n| 2,000 | 0.704396 s | 0.000656 s | 1,074.2x | yes |\n\nInstrumentation of one 500-order current run observed 500 catalog loads consuming\n0.156547 of 0.171087 seconds (91.5%). Baseline tests passed (2/2).\n\nCommands:\n\n```sh\nTMPDIR=\"$PWD/.task-tmp\" \"$CANARY_PYTHON\" -m unittest discover -s tests -v\nTMPDIR=\"$PWD/.task-tmp\" PYTHONPATH=\"$PWD\" \"$CANARY_PYTHON\" experiments/order_report_probe.py\n```\n\n"
+    }
+  ],
+  "questions": [
+    "What was investigated and what did the observed evidence establish?",
+    "What is the next recommended action and what remains uncertain?"
+  ]
+}

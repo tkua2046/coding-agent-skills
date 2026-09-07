@@ -1,0 +1,82 @@
+{
+  "case": "smoke-transfer-pr",
+  "side": "candidate",
+  "completed": true,
+  "elapsed_seconds": 132.296,
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "effort": "medium",
+    "timeout_seconds": 300
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "status": "pass",
+      "evidence": {
+        "tags": ""
+      }
+    },
+    {
+      "id": "no-commit",
+      "status": "pass",
+      "evidence": {
+        "added_commits": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "source-preserved",
+      "status": "pass",
+      "evidence": {
+        "AGENTS.md": true,
+        "serializer.py": true,
+        "tests/test_serializer.py": true,
+        "CHANGE.md": true,
+        "DEVNOTES.md": true,
+        "previous-report.md": true,
+        "CHANGELOG.md": true
+      }
+    },
+    {
+      "id": "supplied-skills-unchanged",
+      "status": "pass"
+    }
+  ],
+  "semantic_assessment": "pending independent review",
+  "initial": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "CHANGE.md": "9bb4ad83ed6c12379f82fe8430d910157e043963fa2645ffb0d3ec10eaf6aec6",
+    "CHANGELOG.md": "5e06e9653689dce3c26b1182a16be296e42084306b71ed7b581335516ae9c815",
+    "DEVNOTES.md": "ce3cd035123743b659c0c47568acfa0d906e14e2e7060f09d5751e88d458589b",
+    "previous-report.md": "6e62175470d7432ca1a228cdb6f72be81c658c120641cfeae93589e7ba861281",
+    "serializer.py": "8405a6cf99685b7d36dc65c3bedad911c9eaea1cbe918e6794e43da51d71184a",
+    "tests/test_serializer.py": "baf7fa14780d2cb21594b93197f180c246283c3138c4270e09185e086d8921ae"
+  },
+  "final": {
+    "AGENTS.md": "6fd8825d3ec9838d3ee79e68e96f707f507ab605e6bdb5ade9fd7fca08ea103b",
+    "CHANGE.md": "9bb4ad83ed6c12379f82fe8430d910157e043963fa2645ffb0d3ec10eaf6aec6",
+    "CHANGELOG.md": "5e06e9653689dce3c26b1182a16be296e42084306b71ed7b581335516ae9c815",
+    "DEVNOTES.md": "ce3cd035123743b659c0c47568acfa0d906e14e2e7060f09d5751e88d458589b",
+    "PR.md": "c57d983550fa5713de22b224c54e8f6a3ba6d34d0448a0aab67645e0d1c651c5",
+    "previous-report.md": "6e62175470d7432ca1a228cdb6f72be81c658c120641cfeae93589e7ba861281",
+    "serializer.py": "8405a6cf99685b7d36dc65c3bedad911c9eaea1cbe918e6794e43da51d71184a",
+    "tests/test_serializer.py": "baf7fa14780d2cb21594b93197f180c246283c3138c4270e09185e086d8921ae"
+  },
+  "skills": {
+    "skills/dev-workflow/SKILL.md": "5931504b6f9f341354449a85c34a6437ab26e7a7598e7231daa5b8e2cb06a6ed",
+    "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+    "skills/dev-workflow/assets/AGENTS.template.md": "5fe6031aaf6e4f83e6d3e5918cf26eda0d8fb456ae255d65ea97a5b1be6fadcb",
+    "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+    "skills/dev-workflow/assets/DEVNOTES.template.md": "d58497686cf340402625101eb0075096f9c5a0bb1e95b317aabbdc7a99709dbb",
+    "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+    "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+    "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+    "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+    "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+    "skills/dev-workflow/prompts/prepare-pr.md": "847e9e085a6612eaa48b0b83d469ddcbe9ff8f39c060fd59a6bfb78d497aa229",
+    "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+    "skills/dev-workflow/prompts/setup-dev-workflow.md": "34a42c73f8fbab4d674707becd42c35e444ce272064785e45f8806c023978920",
+    "skills/dev-workflow/references/delivery-checks.md": "864f0353262200bb179ffc7a43a3029dda34cf2b0d47e3e16b1aff9e1d3cac7b",
+    "skills/dev-workflow/references/documents.md": "233758f06d3302dc07df204925f788aebb6080ae167f02062121f74de9aac4ea"
+  }
+}
