@@ -1,0 +1,310 @@
+check	Set up job	﻿2026-09-07T20:00:20.4901417Z Current runner version: '2.337.0'
+check	Set up job	2026-09-07T20:00:20.4926849Z ##[group]Runner Image Provisioner
+check	Set up job	2026-09-07T20:00:20.4927839Z Hosted Compute Agent
+check	Set up job	2026-09-07T20:00:20.4928482Z Version: 20260828.587
+check	Set up job	2026-09-07T20:00:20.4929609Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+check	Set up job	2026-09-07T20:00:20.4930421Z Build Date: 2026-08-28T16:44:25Z
+check	Set up job	2026-09-07T20:00:20.4931120Z Worker ID: {b34c66dd-62e0-462a-9efd-f82c6c484710}
+check	Set up job	2026-09-07T20:00:20.4932006Z Azure Region: westus2
+check	Set up job	2026-09-07T20:00:20.4932619Z ##[endgroup]
+check	Set up job	2026-09-07T20:00:20.4934161Z ##[group]Operating System
+check	Set up job	2026-09-07T20:00:20.4934849Z Ubuntu
+check	Set up job	2026-09-07T20:00:20.4935379Z 24.04.4
+check	Set up job	2026-09-07T20:00:20.4935946Z LTS
+check	Set up job	2026-09-07T20:00:20.4936503Z ##[endgroup]
+check	Set up job	2026-09-07T20:00:20.4937033Z ##[group]Runner Image
+check	Set up job	2026-09-07T20:00:20.4937694Z Image: ubuntu-24.04
+check	Set up job	2026-09-07T20:00:20.4938257Z Version: 20260831.293.1
+check	Set up job	2026-09-07T20:00:20.4939837Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260831.293/images/ubuntu/Ubuntu2404-Readme.md
+check	Set up job	2026-09-07T20:00:20.4941652Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260831.293
+check	Set up job	2026-09-07T20:00:20.4942766Z ##[endgroup]
+check	Set up job	2026-09-07T20:00:20.4943967Z ##[group]GITHUB_TOKEN Permissions
+check	Set up job	2026-09-07T20:00:20.4946264Z Contents: read
+check	Set up job	2026-09-07T20:00:20.4947004Z Metadata: read
+check	Set up job	2026-09-07T20:00:20.4947724Z ##[endgroup]
+check	Set up job	2026-09-07T20:00:20.4950106Z Secret source: Actions
+check	Set up job	2026-09-07T20:00:20.4951251Z Prepare workflow directory
+check	Set up job	2026-09-07T20:00:20.6340200Z Prepare all required actions
+check	Set up job	2026-09-07T20:00:20.6411463Z Getting action download info
+check	Set up job	2026-09-07T20:00:20.9985855Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+check	Set up job	2026-09-07T20:00:21.1436735Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+check	Set up job	2026-09-07T20:00:21.4435405Z Complete job name: check
+check	Run actions/checkout@v4	﻿2026-09-07T20:00:21.8761116Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8769949Z ##[group]Run actions/checkout@v4
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8770811Z with:
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8771357Z   repository: tkua2046/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8775406Z   token: ***
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8775913Z   ssh-strict: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8776411Z   ssh-user: git
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8776919Z   persist-credentials: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8777461Z   clean: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8777965Z   sparse-checkout-cone-mode: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8778542Z   fetch-depth: 1
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8779478Z   fetch-tags: false
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8780018Z   show-progress: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8780542Z   lfs: false
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8781021Z   submodules: false
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8781615Z   set-safe-directory: true
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8782191Z   allow-unsafe-pr-checkout: false
+check	Run actions/checkout@v4	2026-09-07T20:00:21.8783107Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9784884Z Syncing repository: tkua2046/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9799300Z ##[group]Getting Git version info
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9800542Z Working directory is '/home/runner/work/coding-agent-skills/coding-agent-skills'
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9802198Z [command]/usr/bin/git version
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9858466Z git version 2.55.0
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9884809Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9900747Z Temporarily overriding HOME='/home/runner/work/_temp/428778e4-68fb-416b-8365-01d62254af41' before making global git config changes
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9903231Z Adding repository directory to the temporary git global config as a safe directory
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9910696Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/coding-agent-skills/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9955502Z Deleting the contents of '/home/runner/work/coding-agent-skills/coding-agent-skills'
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9959048Z ##[group]Initializing the repository
+check	Run actions/checkout@v4	2026-09-07T20:00:21.9963454Z [command]/usr/bin/git init /home/runner/work/coding-agent-skills/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0049343Z hint: Using 'master' as the name for the initial branch. This default branch name
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0051689Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0053776Z hint: to use in all of your new repositories, which will suppress this warning,
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0055382Z hint: call:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0056329Z hint:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0057658Z hint: 	git config --global init.defaultBranch <name>
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0059448Z hint:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0060881Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0062819Z hint: 'development'. The just-created branch can be renamed via this command:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0064502Z hint:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0065624Z hint: 	git branch -m <name>
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0066863Z hint:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0068359Z hint: Disable this message with "git config set advice.defaultBranchName false"
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0071280Z Initialized empty Git repository in /home/runner/work/coding-agent-skills/coding-agent-skills/.git/
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0075378Z [command]/usr/bin/git remote add origin https://github.com/tkua2046/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0114351Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0115976Z ##[group]Disabling automatic garbage collection
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0119495Z [command]/usr/bin/git config --local gc.auto 0
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0152118Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0153835Z ##[group]Setting up auth
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0160375Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0195822Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0551462Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0593713Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0830761Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.0866514Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check	Run actions/checkout@v4	2026-09-07T20:00:22.1090894Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+check	Run actions/checkout@v4	2026-09-07T20:00:22.1130997Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.1132707Z ##[group]Fetching the repository
+check	Run actions/checkout@v4	2026-09-07T20:00:22.1142111Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +646f5b9d791fe52533eb5069eac08344dc9884d6:refs/remotes/pull/1/merge
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4336863Z From https://github.com/tkua2046/coding-agent-skills
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4340167Z  * [new ref]         646f5b9d791fe52533eb5069eac08344dc9884d6 -> pull/1/merge
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4345930Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4348373Z ##[group]Determining the checkout info
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4351305Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4353403Z [command]/usr/bin/git sparse-checkout disable
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4423827Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4461470Z ##[group]Checking out the ref
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4464594Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4825174Z Note: switching to 'refs/remotes/pull/1/merge'.
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4826805Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4828252Z You are in 'detached HEAD' state. You can look around, make experimental
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4831264Z changes and commit them, and you can discard any commits you make in this
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4833451Z state without impacting any branches by switching back to a branch.
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4834870Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4835616Z If you want to create a new branch to retain commits you create, you may
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4837366Z do so (now or later) by using -c with the switch command. Example:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4838484Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4839635Z   git switch -c <new-branch-name>
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4840483Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4841358Z Or undo this operation with:
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4842489Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4843268Z   git switch -
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4843881Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4845350Z Turn off this advice by setting config variable advice.detachedHead to false
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4846786Z 
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4848539Z HEAD is now at 646f5b9 Merge 7212632d0aafd6795478e58611d21cbe63d62c0b into d384cddd080c881a56bc9d9ba378c4e69a1d31d3
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4854014Z ##[endgroup]
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4882202Z [command]/usr/bin/git log -1 --format=%H
+check	Run actions/checkout@v4	2026-09-07T20:00:22.4909047Z 646f5b9d791fe52533eb5069eac08344dc9884d6
+check	Run actions/setup-python@v5	﻿2026-09-07T20:00:22.7503936Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7509952Z ##[group]Run actions/setup-python@v5
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7511043Z with:
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7511814Z   python-version: 3.12
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7512719Z   check-latest: false
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7529484Z   token: ***
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7530394Z   update-environment: true
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7531434Z   allow-prereleases: false
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7532443Z   freethreaded: false
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.7533316Z ##[endgroup]
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.8864346Z ##[group]Installed versions
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.8979613Z (node:2262) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.8983987Z (Use `node --trace-deprecation ...` to show where the warning was created)
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.8986801Z Successfully set up CPython (3.12.14)
+check	Run actions/setup-python@v5	2026-09-07T20:00:22.8996655Z ##[endgroup]
+check	Run python -m pip install -r requirements-dev.txt	﻿2026-09-07T20:00:22.9853351Z ##[group]Run python -m pip install -r requirements-dev.txt
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9855081Z ^[[36;1mpython -m pip install -r requirements-dev.txt^[[0m
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9908982Z shell: /usr/bin/bash -e {0}
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9910018Z env:
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9911032Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9912754Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9914500Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9916076Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9917661Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9919551Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:22.9920925Z ##[endgroup]
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:23.8114608Z Collecting pre-commit==4.6.2 (from -r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:23.8696244Z   Downloading pre_commit-4.6.2-py2.py3-none-any.whl.metadata (1.2 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.2352010Z Collecting ruff==0.16.6 (from -r requirements-dev.txt (line 2))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.2425878Z   Downloading ruff-0.16.6-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (26 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.2799583Z Collecting pytest==9.1.1 (from -r requirements-dev.txt (line 3))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.2872318Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.3057018Z Collecting pytest-cov==7.1.0 (from -r requirements-dev.txt (line 4))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.3130917Z   Downloading pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.7366058Z Collecting coverage==7.16.0 (from -r requirements-dev.txt (line 5))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.7444976Z   Downloading coverage-7.16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.6 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8123010Z Collecting PyYAML==6.0.3 (from -r requirements-dev.txt (line 6))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8202020Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8447532Z Collecting markdown-it-py==4.0.0 (from -r requirements-dev.txt (line 7))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8523896Z   Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8710127Z Collecting cfgv>=2.0.0 (from pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.8778976Z   Downloading cfgv-3.5.0-py2.py3-none-any.whl.metadata (8.9 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9141499Z Collecting identify>=1.0.0 (from pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9229934Z   Downloading identify-2.6.19-py2.py3-none-any.whl.metadata (4.4 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9403067Z Collecting nodeenv>=0.11.1 (from pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9472151Z   Downloading nodeenv-1.10.0-py2.py3-none-any.whl.metadata (24 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9881924Z Collecting virtualenv>=20.10.0 (from pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:24.9954588Z   Downloading virtualenv-21.7.8-py3-none-any.whl.metadata (3.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0115752Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1->-r requirements-dev.txt (line 3))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0184375Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0366626Z Collecting packaging>=22 (from pytest==9.1.1->-r requirements-dev.txt (line 3))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0438358Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0593662Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1->-r requirements-dev.txt (line 3))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0662359Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0873660Z Collecting pygments>=2.7.2 (from pytest==9.1.1->-r requirements-dev.txt (line 3))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.0958983Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1146800Z Collecting mdurl~=0.1 (from markdown-it-py==4.0.0->-r requirements-dev.txt (line 7))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1217041Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1409479Z Collecting distlib<1,>=0.3.7 (from virtualenv>=20.10.0->pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1478252Z   Downloading distlib-0.4.3-py2.py3-none-any.whl.metadata (5.3 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1734299Z Collecting filelock<4,>=3.24.2 (from virtualenv>=20.10.0->pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.1805584Z   Downloading filelock-3.32.5-py3-none-any.whl.metadata (2.0 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2017556Z Collecting platformdirs<5,>=3.9.1 (from virtualenv>=20.10.0->pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2089380Z   Downloading platformdirs-4.11.7-py3-none-any.whl.metadata (5.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2247462Z Collecting python-discovery>=1.6 (from virtualenv>=20.10.0->pre-commit==4.6.2->-r requirements-dev.txt (line 1))
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2316406Z   Downloading python_discovery-1.6.0-py3-none-any.whl.metadata (5.1 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2462155Z Downloading pre_commit-4.6.2-py2.py3-none-any.whl (226 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.2763474Z Downloading ruff-0.16.6-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.3 MB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5316859Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.3/10.3 MB 42.8 MB/s  0:00:00
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5389658Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5512276Z Downloading pytest_cov-7.1.0-py3-none-any.whl (22 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5607351Z Downloading coverage-7.16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (257 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5712003Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5818080Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 67.5 MB/s  0:00:00
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5898880Z Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.5990801Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6081214Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6171616Z Downloading cfgv-3.5.0-py2.py3-none-any.whl (7.4 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6262681Z Downloading identify-2.6.19-py2.py3-none-any.whl (99 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6356220Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6445606Z Downloading nodeenv-1.10.0-py2.py3-none-any.whl (23 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6543391Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6636846Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6791656Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 78.8 MB/s  0:00:00
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.6863833Z Downloading virtualenv-21.7.8-py3-none-any.whl (5.3 MB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.7296361Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 125.1 MB/s  0:00:00
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.7363751Z Downloading distlib-0.4.3-py2.py3-none-any.whl (470 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.7473944Z Downloading filelock-3.32.5-py3-none-any.whl (100 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.7565883Z Downloading platformdirs-4.11.7-py3-none-any.whl (23 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.7659527Z Downloading python_discovery-1.6.0-py3-none-any.whl (38 kB)
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:25.8880824Z Installing collected packages: distlib, ruff, PyYAML, pygments, pluggy, platformdirs, packaging, nodeenv, mdurl, iniconfig, identify, filelock, coverage, cfgv, python-discovery, pytest, markdown-it-py, virtualenv, pytest-cov, pre-commit
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:27.7752189Z 
+check	Run python -m pip install -r requirements-dev.txt	2026-09-07T20:00:27.7776727Z Successfully installed PyYAML-6.0.3 cfgv-3.5.0 coverage-7.16.0 distlib-0.4.3 filelock-3.32.5 identify-2.6.19 iniconfig-2.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 nodeenv-1.10.0 packaging-26.3 platformdirs-4.11.7 pluggy-1.6.0 pre-commit-4.6.2 pygments-2.21.0 pytest-9.1.1 pytest-cov-7.1.0 python-discovery-1.6.0 ruff-0.16.6 virtualenv-21.7.8
+check	Run pre-commit run --all-files	﻿2026-09-07T20:00:27.8672428Z ##[group]Run pre-commit run --all-files
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8672798Z ^[[36;1mpre-commit run --all-files^[[0m
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8711291Z shell: /usr/bin/bash -e {0}
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8711545Z env:
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8711813Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8712252Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8712675Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8713056Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8713429Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8713885Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+check	Run pre-commit run --all-files	2026-09-07T20:00:27.8714215Z ##[endgroup]
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.0464856Z [INFO] Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.4654524Z [INFO] Initializing environment for https://github.com/astral-sh/ruff-pre-commit.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8649300Z [INFO] Initializing environment for local:PyYAML==6.0.3,markdown-it-py==4.0.0.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8694695Z [INFO] Initializing environment for local:pytest==9.1.1,pytest-cov==7.1.0,coverage==7.16.0,PyYAML==6.0.3,markdown-it-py==4.0.0.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8729375Z [INFO] Initializing environment for local.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8764251Z [INFO] Installing environment for https://github.com/pre-commit/pre-commit-hooks.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8765222Z [INFO] Once installed this environment will be reused.
+check	Run pre-commit run --all-files	2026-09-07T20:00:28.8765791Z [INFO] This may take a few minutes...
+check	Run pre-commit run --all-files	2026-09-07T20:00:32.4059121Z [INFO] Installing environment for https://github.com/astral-sh/ruff-pre-commit.
+check	Run pre-commit run --all-files	2026-09-07T20:00:32.4059933Z [INFO] Once installed this environment will be reused.
+check	Run pre-commit run --all-files	2026-09-07T20:00:32.4060271Z [INFO] This may take a few minutes...
+check	Run pre-commit run --all-files	2026-09-07T20:00:35.4147326Z [INFO] Installing environment for local.
+check	Run pre-commit run --all-files	2026-09-07T20:00:35.4148093Z [INFO] Once installed this environment will be reused.
+check	Run pre-commit run --all-files	2026-09-07T20:00:35.4148453Z [INFO] This may take a few minutes...
+check	Run pre-commit run --all-files	2026-09-07T20:00:38.0281104Z [INFO] Installing environment for local.
+check	Run pre-commit run --all-files	2026-09-07T20:00:38.0281872Z [INFO] Once installed this environment will be reused.
+check	Run pre-commit run --all-files	2026-09-07T20:00:38.0282497Z [INFO] This may take a few minutes...
+check	Run pre-commit run --all-files	2026-09-07T20:00:42.3228987Z [INFO] Installing environment for local.
+check	Run pre-commit run --all-files	2026-09-07T20:00:42.3229463Z [INFO] Once installed this environment will be reused.
+check	Run pre-commit run --all-files	2026-09-07T20:00:42.3229805Z [INFO] This may take a few minutes...
+check	Run pre-commit run --all-files	2026-09-07T20:00:44.7893339Z trim trailing whitespace.................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:44.8472324Z fix end of files.........................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:44.9174170Z check yaml...............................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:44.9692232Z check toml...............................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:45.0396118Z check for merge conflicts................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:45.0612385Z ruff check...............................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:45.0857207Z ruff format..............................................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:00:45.3553239Z Skill bundle and documentation validation................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7012612Z Repository tests with coverage...........................................Passed
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7013485Z - hook id: tests-with-coverage
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7014030Z - duration: 48.34s
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7014289Z 
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7014583Z ============================= test session starts ==============================
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7015367Z platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7016185Z rootdir: /home/runner/work/coding-agent-skills/coding-agent-skills
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7016881Z configfile: pyproject.toml
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7017358Z testpaths: tests
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7017750Z plugins: cov-7.1.0
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7018648Z collected 250 items
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7019132Z 
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7019472Z tests/test_canary.py ................................................... [ 20%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7020049Z ........................................................................ [ 49%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7020467Z ............................................                             [ 66%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7021027Z tests/test_canary_runtime.py ...................                         [ 74%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7021809Z tests/test_check.py ..............................                       [ 86%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7022279Z tests/test_continuation_eval.py ...............................          [ 98%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7022755Z tests/test_evidence.py ...                                               [100%]
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7023024Z 
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7023165Z ================================ tests coverage ================================
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7023612Z _______________ coverage: platform linux, python 3.12.14-final-0 _______________
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7023907Z 
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7024060Z Name                      Stmts   Miss Branch BrPart  Cover   Missing
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7024457Z ---------------------------------------------------------------------
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7024835Z tools/__init__.py             0      0      0      0   100%
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7025632Z tools/canary.py             738     45    318     33    93%   74, 85, 229, 233, 242, 258, 323, 328-329, 391, 415, 452, 497, 532-533, 580, 591, 596, 661, 701, 735, 751, 871, 892, 895, 996-999, 1004, 1058, 1096, 1140, 1164, 1188, 1206, 1222, 1454, 1460, 1468-1472, 1477
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7026496Z tools/canary_runtime.py      74      3     16      3    93%   72, 119, 190
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7026900Z tools/check.py              107      0     54      0   100%
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7027260Z tools/evidence.py            12      0      0      0   100%
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7027831Z ---------------------------------------------------------------------
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7028188Z TOTAL                       931     48    388     36    94%
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7028507Z Coverage XML written to file coverage.xml
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7029086Z ============================= 250 passed in 47.94s =============================
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.7029338Z 
+check	Run pre-commit run --all-files	2026-09-07T20:01:33.9053620Z Versioned canary inputs (no model calls).................................Passed
+check	Post Run actions/setup-python@v5	﻿2026-09-07T20:01:33.9857773Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+check	Post Run actions/setup-python@v5	2026-09-07T20:01:33.9859225Z Post job cleanup.
+check	Post Run actions/setup-python@v5	2026-09-07T20:01:34.1065290Z (node:5250) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+check	Post Run actions/setup-python@v5	2026-09-07T20:01:34.1066203Z (Use `node --trace-deprecation ...` to show where the warning was created)
+check	Post Run actions/checkout@v4	﻿2026-09-07T20:01:34.2236818Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.2238074Z Post job cleanup.
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3113604Z [command]/usr/bin/git version
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3157087Z git version 2.55.0
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3198229Z Temporarily overriding HOME='/home/runner/work/_temp/2f0ea51d-4bb6-4f46-a697-4c20a4d93eb9' before making global git config changes
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3200011Z Adding repository directory to the temporary git global config as a safe directory
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3204610Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/coding-agent-skills/coding-agent-skills
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3253506Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3310635Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3630188Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3669505Z http.https://github.com/.extraheader
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3691079Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.3732489Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.4099672Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check	Post Run actions/checkout@v4	2026-09-07T20:01:34.4180228Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check	Complete job	﻿2026-09-07T20:01:34.4506590Z Cleaning up orphan processes
+check	Complete job	2026-09-07T20:01:34.4785151Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

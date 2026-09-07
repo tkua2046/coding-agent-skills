@@ -1,0 +1,61 @@
+{
+  "source_commit": "7212632d0aafd6795478e58611d21cbe63d62c0b",
+  "pr": {
+    "additions": 18001,
+    "baseRefName": "main",
+    "changedFiles": 556,
+    "deletions": 0,
+    "headRefOid": "7212632d0aafd6795478e58611d21cbe63d62c0b",
+    "isDraft": true,
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-07T20:01:37Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/tkua2046/coding-agent-skills/actions/runs/34157715832/job/101852888076",
+        "name": "check",
+        "startedAt": "2026-09-07T20:00:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Check skills"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-07T20:01:20Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/tkua2046/coding-agent-skills/actions/runs/34157711465/job/101852874185",
+        "name": "check",
+        "startedAt": "2026-09-07T20:00:15Z",
+        "status": "COMPLETED",
+        "workflowName": "Check skills"
+      }
+    ],
+    "title": "Add proportionate coding workflow skills and behavioral regression tests",
+    "url": "https://github.com/tkua2046/coding-agent-skills/pull/1"
+  },
+  "ci_runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 34157715832,
+      "event": "pull_request",
+      "headSha": "7212632d0aafd6795478e58611d21cbe63d62c0b",
+      "status": "completed",
+      "url": "https://github.com/tkua2046/coding-agent-skills/actions/runs/34157715832"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 34157711465,
+      "event": "push",
+      "headSha": "7212632d0aafd6795478e58611d21cbe63d62c0b",
+      "status": "completed",
+      "url": "https://github.com/tkua2046/coding-agent-skills/actions/runs/34157711465"
+    }
+  ],
+  "remote_refs": {
+    "refs/heads/codex/workflow-canary": "7212632d0aafd6795478e58611d21cbe63d62c0b",
+    "refs/heads/main": "d384cddd080c881a56bc9d9ba378c4e69a1d31d3"
+  },
+  "worktree_clean": true,
+  "delivery_scope": "Draft PR only; no main merge, release/tag or global skill installation.",
+  "local_frozen_gate": "pass: 250 tests, 94% tooling coverage",
+  "commit_hook": "pass: 250 tests, 94% tooling coverage"
+}
