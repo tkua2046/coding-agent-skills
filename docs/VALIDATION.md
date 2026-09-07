@@ -1,6 +1,6 @@
 # Validation
 
-Status: packaging, real hook trials, fresh-agent follow-ups and independent implementation reviews passed. Initial remote delivery is pending. Date: 2026-09-06.
+Status: packaging, real hook trials, fresh-agent follow-ups and independent implementation reviews passed. Initial commit `0ac5b7b` is pushed and its remote CI passed. This documentation update records that observed result; later commits have their own CI runs. Date: 2026-09-06.
 
 ## Observed results
 
@@ -8,6 +8,7 @@ Status: packaging, real hook trials, fresh-agent follow-ups and independent impl
 |---|---|---|
 | Bundled skill-creator validation | Four skill entrypoints valid | [Original validator outputs](validation/skill-format/20260907T045525345635Z-7bbb3abe57ef46edbc2efb7144672c86.json) |
 | Repository regression suite | 32 tests pass; checker/evidence code line and branch coverage 100% | [Full local gate: original output and candidate hashes](validation/local-gates/20260907T050102905544Z-ef4ead676e86439bbef96354e941fa6c.json) |
+| Initial GitHub delivery | Remote main matched `0ac5b7b`; Linux CI passed | [Remote result](validation/delivery/20260907T050238512030Z-f3470935aff4464d91833bbc44bd6f57.json), [CI run](https://github.com/tkua2046/coding-agent-skills/actions/runs/34085252696), [commit-time hook output](validation/bootstrap-commit.log.txt) |
 | Independent copies | All four folders validate outside the source repository | test_standalone_copy_preserves_all_skill_resources |
 | Python sample through real commits | Eight required outcomes pass | [Raw commands/results](validation/hook-trials.json), [reproducible trial](../tests/manual/hook_trials.py) |
 | Codex CLI discovery | Repository-local feature-design and its resources found | [Actual final response](validation/cli-discovery.txt) |

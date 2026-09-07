@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: S1/S2 completed; S3 final local gate and remote delivery in progress. Review policy for this authorized bootstrap: independent-agent review; human review is not claimed.
+Status: S1–S3 completed. The initial library commit passed local hooks and remote CI; this documentation update records the observed delivery. Review policy for this authorized bootstrap: independent-agent review; human review is not claimed.
 Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
 
 ## Stages at a glance
@@ -29,6 +29,6 @@ Use `.venv/bin/pre-commit run --all-files` after staging the intended files. The
 
 - S1: complete locally. Design/plan findings resolved; four bundles and the working validation gate are implemented.
 - S2: complete locally. Copied-bundle tests, real hook trials and fresh-agent behavior trials ran. Intake presentation and checker/evidence defects were fixed; targeted implementation reviews are complete with all material findings resolved.
-- S3: entry documents and evidence ready; independent review complete; final commit gate and initial push pending.
+- S3: complete. Initial commit `0ac5b7b` was pushed to main and its [GitHub CI](https://github.com/tkua2046/coding-agent-skills/actions/runs/34085252696) passed. Original commit-time checks and remote verification are retained in [VALIDATION](VALIDATION.md).
 
-Actual commit boundary: S1/S2 and the S3 entry documents are combined into one coherent initial library commit so the first delivered tree includes usable skills, checks, reviewed design and the original validation evidence. A subsequent documentation commit will record observed remote verification. Earlier stages did not produce separate commits. Git history records the actual delivery; these stage names do not imply additional commits or PRs.
+Actual commit boundary: S1/S2 and the S3 entry documents are combined into one coherent initial library commit so the first delivered tree includes usable skills, checks, reviewed design and the original validation evidence. This subsequent documentation commit records observed remote verification; it does not change the reviewed skills or checker. Earlier stages did not produce separate commits. Git history records the actual delivery; these stage names do not imply additional commits or PRs.
