@@ -1,0 +1,5 @@
+label(' a ') -> 'A'
+label(' MiXeD Label ') -> 'MIXED LABEL'
+label('ß') -> 'SS'
+label('  ') -> ''
+label('hello  world') -> 'HELLO  WORLD'

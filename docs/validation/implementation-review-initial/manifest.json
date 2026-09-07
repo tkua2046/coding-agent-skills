@@ -1,0 +1,11 @@
+{
+  "authority-manifest.json": "dc52a17885019ac26f78dec306699938974a1c166a75ee12250ca82706ce64a2",
+  "candidate-gate.log": "9293803d66df7e4dcbc108a253b87bb949b35ca3c93ab70ac8bf5702e32e4489",
+  "candidate-manifest.json": "c45af5398397a5f92cffc9811395c78c0fe7ddce5f37479a1cd746578d0566ca",
+  "evidence-overwrite-probe.json": "eb10d43cd2a78905f41a1f70cd440d220f35c35dc05ad98dfa51a5ec3d43b631",
+  "manual-hook-trials.log": "416522718a504ff4836762352eda74407e08b1478a6adbdd57bbbba4454fb02e",
+  "overwrite-failed-report-backup.json": "6e1d4a019ec5b138a44a8d79fdb3040fb050dcee40e347b28cbf5eda94b1593e",
+  "overwrite-failed-run.log": "f34b30f1c44bc164db39d36020d7ae40e48567e496d4ee4cc84e28dd52fd5db3",
+  "overwrite-passing-run.log": "77f2c92a22cb3b20a572df2ad44e67f9307ce5e1c13a2f10db7b83f64a19af5b",
+  "portability-probes.json": "4c9af02d882f096dbb16eaaec7ef6da5b3a6fdcc521b6597287d6735208dc075"
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "real local Git/hook execution in an isolated fixture",
+  "status": "failed",
+  "cwd": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-xbxc9b4o",
+  "commands": [],
+  "outcomes": {},
+  "error": {
+    "type": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/hook-retention-negative-dv1e8jxx/deliberately-missing-sample'"
+  }
+}

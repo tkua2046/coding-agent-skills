@@ -1,0 +1,34 @@
+# Trial follow-up: 0.2.0
+
+**Result: READY for subsequent authorized tagging of the current 0.2.0 source candidate.** Fresh evidence resolves the prior assessment's blockers. The dry run is complete upon verification and delivery of these reports; no tag or publication is authorized or performed here.
+
+## Exact candidate and metadata
+
+- Repository: `/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/coding-agent-skills-trials-u9dxxc0y/delivery`.
+- Branch: `main`.
+- Current HEAD and authoritative exported merged commit: `84ad5a9c740cb2f488709fa7d36b56374668f829`.
+- Candidate tree: `d6e8c6970ad6e543c8b71cce85509b15857d8195`.
+- Parent / prior assessed candidate: `4ecb0a5687da15a60688a3c505b99ad00267fb6e`.
+- Requested and actual VERSION: `0.2.0`.
+- Current changelog: retained Unreleased; `[0.2.0] - 2026-09-06`; “Optional label transformations preserve the trim-and-uppercase default.”
+- Further proposed version/notes changes: **none**. The current committed metadata accurately describes the inspected implementation.
+
+## Current evidence and readiness
+
+The freshly read authoritative `delivery-state.json` supplies required `tests: success`, required `integration: success`, and review `approved`, all on `84ad5a9c740cb2f488709fa7d36b56374668f829`. No current check is pending or tied only to the parent. The export's requested version and merged commit match the actual VERSION and Git HEAD.
+
+Complete Git diffs confirm that the latest commit changes only version and release notes together. The cumulative change from the original baseline adds the optional transform API. Actual code was inspected; its default trim-and-uppercase behavior remains, and `app.py` is byte-identical to the prior locally tested implementation. Current working product bytes equal committed content, with no tracked/index changes.
+
+Fresh isolated local assertions verified export identities/statuses, committed-file equality, version/notes alignment, retained Unreleased, and unchanged application bytes. They passed. The earlier 17 behavior assertions remain historical evidence and were not rerun or represented as fresh CI. Current CI/review readiness is established by the new authoritative export. No further PR/review cycle is required by the evidence supplied for this exercise.
+
+The source candidate is ready for tagging when authorized. No tag or artifact was produced, no artifact smoke test was run, and no published release is claimed. The dated changelog alone does not establish publication.
+
+## Preservation and next operation
+
+Used dev-workflow's PR/release/document-ownership guidance. Preserved the original [RELEASE_ASSESSMENT.md](RELEASE_ASSESSMENT.md) and [TRIAL_RESULT.md](TRIAL_RESULT.md); their earlier outcome remains tied to their earlier candidate/export. Wrote only `RELEASE_FOLLOWUP.md` and `TRIAL_FOLLOWUP.md`. No other fixtures or canonical authoring repository were inspected; the `.venv` symlink was not followed. No product/version/changelog/export edits, staging, commits, network calls, tags, or publication occurred.
+
+Current authorization permits report verification and delivery, then stopping. The next delivery operation, if tagging is subsequently authorized, is to inspect existing intended tag/release state and tag **exactly `84ad5a9c740cb2f488709fa7d36b56374668f829`** for 0.2.0. No extra metadata bump or stale-evidence repair is needed. Build and validate an artifact from the tagged content if applicable, then publish only when authorized.
+
+[RELEASE_FOLLOWUP.md](RELEASE_FOLLOWUP.md) contains the full candidate/blob identities, current gate matrix, validation details, and preservation fingerprints.
+
+Final preservation verification: **PASS**. All six recorded input/original-report SHA-256 values, HEAD, tree, refs, tracked files, and index are unchanged. Git status contains only the three pre-existing untracked files and the two requested follow-up reports.

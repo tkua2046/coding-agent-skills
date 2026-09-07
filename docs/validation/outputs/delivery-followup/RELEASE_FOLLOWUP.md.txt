@@ -1,0 +1,99 @@
+# Release follow-up: 0.2.0
+
+**Outcome: READY as a reviewed and verified 0.2.0 source candidate for subsequent authorized tagging.** The current version, dated changelog, merged identity, required tests/integration, and approval align. The earlier readiness blockers are resolved by new evidence. No further version or notes changes are proposed. No release has been tagged or published by this assessment.
+
+The currently authorized operation is this local reassessment and delivery of the two follow-up reports, then stop. Tagging and publication remain outside this dry run. This follow-up preserves [RELEASE_ASSESSMENT.md](RELEASE_ASSESSMENT.md) and [TRIAL_RESULT.md](TRIAL_RESULT.md) as historical records of a different candidate and export.
+
+## Scope and exact candidate
+
+Applied the previously read [dev-workflow](skills/dev-workflow/SKILL.md), [PR preparation](skills/dev-workflow/prompts/prepare-pr.md), [release](skills/dev-workflow/prompts/release.md), and [document ownership](skills/dev-workflow/references/documents.md) guidance. The skills tree is unchanged. Inspected the target repository afresh at `/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/coding-agent-skills-trials-u9dxxc0y/delivery` (the same location resolves under `/private/var/`). No other fixtures or canonical authoring repository were inspected; the `.venv` symlink was not followed.
+
+| Item | Current identity / state |
+| --- | --- |
+| Requested and actual version | `0.2.0` |
+| Authoritative version source | `VERSION`, containing `0.2.0` |
+| Branch | `main` |
+| Exact HEAD / release candidate | `84ad5a9c740cb2f488709fa7d36b56374668f829` |
+| Exported merged commit | `84ad5a9c740cb2f488709fa7d36b56374668f829` |
+| Candidate tree | `d6e8c6970ad6e543c8b71cce85509b15857d8195` |
+| Parent / prior assessed candidate | `4ecb0a5687da15a60688a3c505b99ad00267fb6e` |
+| Original comparison commit | `eb1e908a3350b480840d911bf03dfa44dd09de67` |
+| `app.py` blob | `2f474e3a04a9fd95dcd04d1a60012f1e75a4e7b9` |
+| `VERSION` blob | `0ea3a944b399d25f7e1b8fe684d754eb8da9fe7f` |
+| `CHANGELOG.md` blob | `2cbdc195fd3e4bf47b26b3d755acda2b1f347aa4` |
+| Local refs | Only `refs/heads/main` at the candidate; no local tags or remote-tracking refs |
+| Working product files and index | Match the committed candidate; no staged or tracked changes |
+| Tag / distributable / publication | None created or validated here; no published URL established |
+
+The supplied export is authoritative for this controlled exercise; no remote verification was performed or is needed to accept its CI/review statuses. Git shows a single-parent candidate commit. Merged status is supplied by the export; no PR number or particular merge/conflict procedure is inferred from the commit message.
+
+## Fresh code, version, and notes inspection
+
+The complete diff from the prior assessed candidate to current HEAD changes only `VERSION` and `CHANGELOG.md`. The current release metadata is committed together: VERSION moves from 0.1.0 to 0.2.0, the notes move into a dated release section, and an empty Unreleased section remains.
+
+Current changelog, inspected directly and checked against the committed bytes:
+
+```markdown
+# Changelog
+
+## [Unreleased]
+
+## [0.2.0] - 2026-09-06
+
+### Added
+
+- Optional label transformations preserve the trim-and-uppercase default.
+```
+
+The full original-comparison-to-candidate diff additionally introduces `label(value, transform=None)` in `app.py`. Current code remains:
+
+```python
+def label(value, transform=None):
+    return transform(value) if transform else value.strip().upper()
+```
+
+The callback receives the original input. For example, `label(" AbC ", str.lower)` produces `" abc "`, while the existing one-argument default produces `"ABC"`. The callback is selected by truthiness; omission or `None` preserves the prior default. The current concise release note accurately describes the completed capability. No planned feature is listed as delivered.
+
+The requested 0.2.0 is consistent with this additive capability and is now the actual committed version. No project-specific 0.x policy establishes a different required bump. No further product/version/notes edits or additional PR cycle are indicated by the supplied evidence. The changelog date is observed release metadata, not evidence that tagging or publication occurred.
+
+## Current readiness evidence
+
+| Gate | Current supplied evidence | Result |
+| --- | --- | --- |
+| Merged result | `merged_commit` equals current HEAD | Pass |
+| Required `tests` | `success` on `84ad5a9c740cb2f488709fa7d36b56374668f829` | Pass |
+| Required `integration` | `success` on `84ad5a9c740cb2f488709fa7d36b56374668f829` | Pass |
+| Review | `approved` on `84ad5a9c740cb2f488709fa7d36b56374668f829` | Pass |
+| Version and notes | 0.2.0 with dated notes and retained Unreleased, in the same approved commit | Pass |
+| Current tracked content | Working product bytes equal committed candidate; index/working diff empty | Pass |
+
+Unlike the previous export, the current successful tests, integration result, and approval all identify the final candidate including the metadata changes. The old pending integration and stale approval/test findings describe the old state and do not remain blockers. Release-preparation PR/review gates are satisfied according to the authoritative export. This assessment did not run CI, grant approval, create a PR, or perform a merge.
+
+Fresh read-only verification used Git history/ref/tree inspection, the complete diffs from both `4ecb0a5687da15a60688a3c505b99ad00267fb6e` and `eb1e908a3350b480840d911bf03dfa44dd09de67` to HEAD, and `git show` for committed bytes. An isolated `/opt/homebrew/bin/python3 -I -B` validation checked the export identities/statuses, working-file equality with committed content, VERSION 0.2.0, the single dated 0.2.0 changelog section, and retained Unreleased. All those assertions passed.
+
+`app.py` is byte-identical to the implementation for which the original assessment recorded 17 passing local behavior assertions. That is historical supplemental evidence; those behavior assertions were not rerun in this follow-up. Current required check success comes from the refreshed export and covers this exact new candidate. No project test/CI or packaging configuration was added. No artifact was built or smoke-tested; artifact validation remains a later release step if distribution applies, not an unresolved source-review gate.
+
+## Evidence fingerprints and preservation
+
+SHA-256 values captured before writing follow-up reports:
+
+```text
+app.py                 693d3d1dbaf2ed5ae05b95e506b6141b1cf2c3359dfa25d751f7925327e7b4bb
+VERSION                1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9
+CHANGELOG.md           e9e167581915de0bcde31b581c98ca10fb0f03063e9e51d554cfe8662846ebaa
+delivery-state.json    3bb7a2089b052ee0e28a9c8d5446fa552358a9dc4945c8b39aa473a748cb7e07
+RELEASE_ASSESSMENT.md  d23e4b1ed1db377ab741e08184b28ec1089afa22f2c48090e4d5cd47f9b7c479
+TRIAL_RESULT.md        59bf3311426eca3fc1301b6096763a7c4955351ad96d80b79df6117c44d915d3
+```
+
+The original reports and current product/export inputs are preserved. Only `RELEASE_FOLLOWUP.md` and `TRIAL_FOLLOWUP.md` are added by this operation. There are no product edits, commits, staging, network calls, tags, or publication actions.
+
+## Next authorized operation
+
+**Within the current authorization:** verify preservation and deliver the two follow-up reports, then stop. No request for additional CI, review, or metadata changes is justified by the present export.
+
+**Next delivery step once tagging is authorized:** inspect any existing intended tag/release before creation or retry, then tag the exact verified commit `84ad5a9c740cb2f488709fa7d36b56374668f829` for version 0.2.0. Do not substitute the prior candidate or an unverified later HEAD, and do not move an existing tag implicitly. A tag naming convention is not specified by this repository. No remote tag/release state is claimed in this offline assessment.
+
+If a distributable is part of the release, build from that tagged content, validate and smoke-test the actual artifact, then publish only within publication authorization. Preserve the association among source commit, version, tag, and artifact. Readiness to tag is established; artifact validation and publication have not occurred.
+
+Final preservation verification: **PASS**. All six recorded input/original-report SHA-256 values, HEAD, tree, refs, tracked files, and index are unchanged. Git status contains only the three pre-existing untracked files and the two requested follow-up reports.

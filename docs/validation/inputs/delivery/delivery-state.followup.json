@@ -1,0 +1,21 @@
+{
+  "kind": "controlled local fixture, no remote API involved",
+  "merged_commit": "84ad5a9c740cb2f488709fa7d36b56374668f829",
+  "required_checks": [
+    {
+      "name": "tests",
+      "commit": "84ad5a9c740cb2f488709fa7d36b56374668f829",
+      "status": "success"
+    },
+    {
+      "name": "integration",
+      "commit": "84ad5a9c740cb2f488709fa7d36b56374668f829",
+      "status": "success"
+    }
+  ],
+  "review": {
+    "commit": "84ad5a9c740cb2f488709fa7d36b56374668f829",
+    "status": "approved"
+  },
+  "requested_release": "0.2.0"
+}

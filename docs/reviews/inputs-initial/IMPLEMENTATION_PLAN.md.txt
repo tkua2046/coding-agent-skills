@@ -1,0 +1,30 @@
+# Implementation plan
+
+Status: implementing S1. Review policy for this authorized bootstrap: independent-agent review; human review is not claimed.
+Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
+
+## Stages at a glance
+
+| Stage | Observable result | Acceptance | Commit boundary |
+|---|---|---|---|
+| S1 | Four complete portable skill bundles and their design | Independent design/plan review; metadata and local-resource validation | Add usable workflow skills and design rationale |
+| S2 | Checks and templates behave correctly in isolated projects | Packaging regressions, Ruff, test/coverage hook trials, independent fresh-agent scenarios | Validate skills and fix observed workflow gaps |
+| S3 | Usable repository entry documents and remote delivery | Documentation links, complete local gate, final independent review, push verification | Finalize usage and validation evidence |
+
+## Execution details
+
+S1 includes each SKILL.md, ten operation prompts, owned templates, local-discovery symlinks, and requirements/design/justification documents. The first two skill entrypoints were bootstrapped to make self-use possible; this fact is not retroactively described as an independent design process.
+
+S2 uses the skills on this repository and isolated fixtures. Keep reviewers' inputs separate from expected results. Preserve actual findings before fixes and record the follow-up. Commit only coherent complete bundles, not empty scaffold directories. If a stage is already combined with another in a coherent initial commit, record that actual boundary rather than inventing earlier commits.
+
+S3 keeps README focused on using skills and DEVNOTES on maintaining them. CHANGELOG records delivered capabilities. Version starts at 0.1.0 as an unreleased library baseline; no tag or release is requested. An empty remote may receive the initial main commit directly; no artificial empty-base PR is needed.
+
+## Commit gate and evidence
+
+Use `.venv/bin/pre-commit run --all-files` after staging the intended files. The gate validates bundles and runs the full repository test suite with coverage plus Ruff. Tests and relevant reviews must apply to final content. Record raw command evidence separately and summarize actual results in VALIDATION; do not label a missing human review completed.
+
+## Progress
+
+- S1: in progress; independently reviewed design and plan pending.
+- S2: planned.
+- S3: planned.

@@ -1,0 +1,135 @@
+[
+  {
+    "case": "asset-missing",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/asset-missing/assets/example-skill/assets/design.template.md",
+    "content": "[rules](missing.md)\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/asset-missing/assets/example-skill/assets/design.template.md: missing resource: missing.md"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "asset-escape",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/asset-escape/assets/example-skill/assets/design.template.md",
+    "content": "[rules](../../outside.md)\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/asset-escape/assets/example-skill/assets/design.template.md: resource escapes bundle: ../../outside.md"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "asset-valid",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/asset-valid/assets/example-skill/assets/design.template.md",
+    "content": "[rules](../rules.md#behavior)\n",
+    "expected_error": false,
+    "errors": [],
+    "matched_expectation": true
+  },
+  {
+    "case": "missing-reference",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/missing-reference/assets/example-skill/guide.md",
+    "content": "[rules][r]\n\n[r]: missing.md\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/missing-reference/assets/example-skill/guide.md: missing resource: missing.md"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "reference-image",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/reference-image/assets/example-skill/guide.md",
+    "content": "![diagram][d]\n\n[d]: missing.png\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/reference-image/assets/example-skill/guide.md: missing resource: missing.png"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "linked-image",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/linked-image/assets/example-skill/guide.md",
+    "content": "[![diagram](missing.png)](https://example.com)\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/linked-image/assets/example-skill/guide.md: missing resource: missing.png"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "file-uri",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/file-uri/assets/example-skill/guide.md",
+    "content": "[rules](file:///nonexistent/rules.md)\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/file-uri/assets/example-skill/guide.md: nonportable local resource: file:///nonexistent/rules.md"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "absolute-in-bundle",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/absolute-in-bundle/assets/example-skill/guide.md",
+    "content": "[rules](/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/absolute-in-bundle/assets/example-skill/rules.md)\n",
+    "expected_error": true,
+    "errors": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/absolute-in-bundle/assets/example-skill/guide.md: nonportable local resource: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/absolute-in-bundle/assets/example-skill/rules.md"
+    ],
+    "matched_expectation": true
+  },
+  {
+    "case": "encoded-absolute-in-bundle",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/encoded-absolute-in-bundle/assets/example-skill/guide.md",
+    "content": "[rules](%2Fprivate%2Fvar%2Ffolders%2F7w%2F2jmyflc53t3fhsxzmf590wk80000gn%2FT%2Fskills-targeted-followup-ndxrflmo%2Fprobes%2Fencoded-absolute-in-bundle%2Fassets%2Fexample-skill%2Frules.md)\n",
+    "expected_error": true,
+    "errors": [],
+    "matched_expectation": false
+  },
+  {
+    "case": "valid-reference-and-web",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/valid-reference-and-web/assets/example-skill/guide.md",
+    "content": "[rules][r]\n\n[r]: rules.md#behavior\n\n[web](https://example.com)\n",
+    "expected_error": false,
+    "errors": [],
+    "matched_expectation": true
+  },
+  {
+    "case": "inert-examples",
+    "file": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/probes/inert-examples/assets/example-skill/guide.md",
+    "content": "`[rules](missing.md)`\n\n```md\n[bad](file:///tmp/missing)\n```\n\n~~~md\n![x][m]\n\n[m]: missing.png\n~~~\n",
+    "expected_error": false,
+    "errors": [],
+    "matched_expectation": true
+  },
+  {
+    "case": "unchanged-initial-report",
+    "expected_error": false,
+    "errors": [],
+    "matched_expectation": true
+  },
+  {
+    "case": "harness-exception-1",
+    "exit": 1,
+    "reason": "Sample directory deliberately absent from scoped copy",
+    "report_count": 1,
+    "statuses": [
+      "failed"
+    ],
+    "prior_reports_unchanged": true,
+    "legacy_unchanged": true,
+    "matched_expectation": true
+  },
+  {
+    "case": "harness-exception-2",
+    "exit": 1,
+    "reason": "Sample directory deliberately absent from scoped copy",
+    "report_count": 2,
+    "statuses": [
+      "failed",
+      "failed"
+    ],
+    "prior_reports_unchanged": true,
+    "legacy_unchanged": true,
+    "matched_expectation": true
+  }
+]

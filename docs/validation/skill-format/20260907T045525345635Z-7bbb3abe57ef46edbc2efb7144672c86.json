@@ -1,0 +1,29 @@
+{
+  "validator": "/Users/tk/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+  "results": [
+    {
+      "skill": "dev-workflow",
+      "returncode": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "skill": "feature-design",
+      "returncode": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "skill": "implementation-plan",
+      "returncode": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "skill": "stage-development",
+      "returncode": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    }
+  ]
+}

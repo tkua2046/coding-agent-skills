@@ -1,0 +1,7 @@
+# Changelog
+
+## [Unreleased]
+
+### Added
+
+- Configurable labels preserve existing defaults.

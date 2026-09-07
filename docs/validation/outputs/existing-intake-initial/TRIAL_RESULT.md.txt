@@ -1,0 +1,9 @@
+# Intake trial result
+
+Completed intake only using [feature-design](skills/feature-design/SKILL.md) and its [intake prompt](skills/feature-design/prompts/intake-feature.md). Produced [INTAKE.md](INTAKE.md) and this report. The original request remains unchanged in [FEATURE.txt](FEATURE.txt) and is reproduced verbatim in the intake.
+
+Observed baseline: `label(value)` trims then uppercases. The existing pytest suite ran with bytecode/cache writes disabled and exited **1**: **1 passed, 1 failed**. The failure is pre-existing: `label("ß")` returns `"SS"`, but `test_known_legacy_issue` expects `"ß"`. Full captured output, the exact command, baseline commit, source locations, and additional observed calls are recorded in the intake.
+
+Pending answers: desired customization examples; which legacy behavior is authoritative and whether fixing the mismatch is in scope; customization scope across calls/clients; and interaction with trimming/uppercasing. Failure handling may need clarification once the capability is known. No intended answer or API was selected.
+
+No application code, tests, original request, skill files, or other repository were changed. No network or delegation was used. Design and implementation were not performed. Next step is clarification before design.

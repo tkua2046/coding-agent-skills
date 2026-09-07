@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/tests/manual/hook_trials.py", line 167, in <module>
+    main()
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/tests/manual/hook_trials.py", line 86, in main
+    run("install-hooks", [hook, "install", "--install-hooks"], "pass")
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/tests/manual/hook_trials.py", line 51, in run
+    assert result.returncode == 0, records[-1]
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'label': 'install-hooks', 'argv': ['/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/.venv/bin/pre-commit', 'install', '--install-hooks'], 'exit_code': 1, 'stdout': 'pre-commit installed at .git/hooks/pre-commit\nAn error has occurred: InvalidConfigError: \n=====> .pre-commit-config.yaml is not a file\nCheck the log at /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/pre-commit-cache/pre-commit.log\n', 'stderr': ''}

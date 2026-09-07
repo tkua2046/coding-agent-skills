@@ -1,0 +1,6 @@
+{
+  "fixture": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/coding-agent-skills-trials-u9dxxc0y/existing-intake-followup",
+  "skill_file": "skills/feature-design/prompts/intake-feature.md",
+  "sha256": "a204f71ef2e2907146f17f7110efd3f84cde727f59c99008866ff3b76482f91d",
+  "harness_change": "Allow local evidence files in addition to the two named reports; no document layout or preferred behavioral answer is supplied in the request."
+}

@@ -1,0 +1,484 @@
+{
+  "kind": "real local Git/hook execution in an isolated fixture",
+  "status": "passed",
+  "cwd": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq",
+  "commands": [
+    {
+      "label": "init",
+      "argv": [
+        "git",
+        "init",
+        "-q",
+        "-b",
+        "main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "identity",
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "Skill Trial"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "identity",
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "skill-trial@example.invalid"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "prepare-format",
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/ruff",
+        "check",
+        "--fix",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "Found 2 errors (2 fixed, 0 remaining).\n",
+      "stderr": ""
+    },
+    {
+      "label": "prepare-format",
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/ruff",
+        "format",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "2 files reformatted, 2 files left unchanged\n",
+      "stderr": ""
+    },
+    {
+      "label": "install-hooks",
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/pre-commit",
+        "install",
+        "--install-hooks"
+      ],
+      "exit_code": 0,
+      "stdout": "pre-commit installed at .git/hooks/pre-commit\n",
+      "stderr": ""
+    },
+    {
+      "label": "stage-baseline",
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "passing-baseline",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Baseline"
+      ],
+      "exit_code": 0,
+      "stdout": "[main (root-commit) 0c48d61] Baseline\n 8 files changed, 91 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 .pre-commit-config.yaml\n create mode 100644 README.md\n create mode 100644 app.py\n create mode 100644 pyproject.toml\n create mode 100644 requirements-dev.txt\n create mode 100644 tests/test_changed.py\n create mode 100644 tests/test_existing.py\n",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...............................................................Passed\ncheck toml...............................................................Passed\ncheck for merge conflicts................................................Passed\nruff check...............................................................Passed\nruff format..............................................................Passed\nFull test suite with coverage............................................Passed\n- hook id: tests-with-coverage\n- duration: 0.3s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py ..                                                [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n============================== 3 passed in 0.03s ===============================\n\n"
+    },
+    {
+      "label": "stage-passing-test",
+      "argv": [
+        "git",
+        "add",
+        "tests/test_changed.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "unchanged-failure",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Must reject unchanged failing test"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...............................................................Passed\nruff format..............................................................Failed\n- hook id: ruff-format\n- files were modified by this hook\n\n1 file reformatted\n\nFull test suite with coverage............................................Failed\n- hook id: tests-with-coverage\n- duration: 0.25s\n- exit code: 1\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py .F                                                [100%]\n\n=================================== FAILURES ===================================\n___________________________ test_unchanged_can_fail ____________________________\n\n    def test_unchanged_can_fail():\n>       assert not Path(\".fail\").exists()\nE       AssertionError: assert not True\nE        +  where True = exists()\nE        +    where exists = PosixPath('.fail').exists\nE        +      where PosixPath('.fail') = Path('.fail')\n\ntests/test_existing.py:11: AssertionError\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n=========================== short test summary info ============================\nFAILED tests/test_existing.py::test_unchanged_can_fail - AssertionError: asse...\n========================= 1 failed, 2 passed in 0.03s ==========================\n\n"
+    },
+    {
+      "label": "restore-test",
+      "argv": [
+        "git",
+        "restore",
+        "--staged",
+        "--worktree",
+        "tests/test_changed.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "stage-docs",
+      "argv": [
+        "git",
+        "add",
+        "README.md"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "docs-only-failure",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Docs only"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...........................................(no files to check)Skipped\nruff format..............................................................Passed\nFull test suite with coverage............................................Failed\n- hook id: tests-with-coverage\n- duration: 0.25s\n- exit code: 1\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py .F                                                [100%]\n\n=================================== FAILURES ===================================\n___________________________ test_unchanged_can_fail ____________________________\n\n    def test_unchanged_can_fail():\n>       assert not Path(\".fail\").exists()\nE       AssertionError: assert not True\nE        +  where True = exists()\nE        +    where exists = PosixPath('.fail').exists\nE        +      where PosixPath('.fail') = Path('.fail')\n\ntests/test_existing.py:11: AssertionError\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n=========================== short test summary info ============================\nFAILED tests/test_existing.py::test_unchanged_can_fail - AssertionError: asse...\n========================= 1 failed, 2 passed in 0.03s ==========================\n\n"
+    },
+    {
+      "label": "passing-control",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Docs pass"
+      ],
+      "exit_code": 0,
+      "stdout": "[main 3c92c94] Docs pass\n 1 file changed, 2 insertions(+)\n",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...........................................(no files to check)Skipped\nruff format..............................................................Passed\nFull test suite with coverage............................................Passed\n- hook id: tests-with-coverage\n- duration: 0.24s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py ..                                                [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n============================== 3 passed in 0.03s ===============================\n\n"
+    },
+    {
+      "label": "stage-empty-suite",
+      "argv": [
+        "git",
+        "add",
+        "-u"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "zero-tests",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Must reject no tests"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "trim trailing whitespace.............................(no files to check)Skipped\nfix end of files.....................................(no files to check)Skipped\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts............................(no files to check)Skipped\nruff check...........................................(no files to check)Skipped\nruff format..........................................(no files to check)Skipped\nFull test suite with coverage............................................Failed\n- hook id: tests-with-coverage\n- duration: 0.23s\n- exit code: 5\n\n/Users/tk/.cache/pre-commit/repo4sozoea3/py_env-python3.12/lib/python3.12/site-packages/coverage/inorout.py:558: CoverageWarning: Module app was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-module-not-imported\n  self.warn(f\"Module {pkg} was never imported.\", slug=\"module-not-imported\")\n/Users/tk/.cache/pre-commit/repo4sozoea3/py_env-python3.12/lib/python3.12/site-packages/coverage/control.py:967: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-no-data-collected\n  self._warn(\"No data was collected.\", slug=\"no-data-collected\")\n/Users/tk/.cache/pre-commit/repo4sozoea3/py_env-python3.12/lib/python3.12/site-packages/pytest_cov/plugin.py:366: CovReportWarning: Failed to generate report: No data to report.\n\n  warnings.warn(CovReportWarning(message), stacklevel=1)\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\nplugins: cov-7.1.0\ncollected 0 items\n\nWARNING: Failed to generate report: No data to report.\n\n\n=============================== warnings summary ===============================\n../../../../../../../Users/tk/.cache/pre-commit/repo4sozoea3/py_env-python3.12/lib/python3.12/site-packages/_pytest/config/__init__.py:1624\n  /Users/tk/.cache/pre-commit/repo4sozoea3/py_env-python3.12/lib/python3.12/site-packages/_pytest/config/__init__.py:1624: PytestConfigWarning: No files were found in testpaths; consider removing or adjusting your testpaths configuration. Searching recursively from the current directory instead.\n    self.args, self.args_source = self._decide_args(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n============================== 1 warning in 0.01s ==============================\n\n"
+    },
+    {
+      "label": "restore-suite",
+      "argv": [
+        "git",
+        "add",
+        "tests"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "stage-lint-fix",
+      "argv": [
+        "git",
+        "add",
+        "app.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "ruff-fix-needs-restage",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Lint trial"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...............................................................Failed\n- hook id: ruff-check\n- files were modified by this hook\n\nFound 1 error (1 fixed, 0 remaining).\n\nruff format..............................................................Failed\n- hook id: ruff-format\n- files were modified by this hook\n\n1 file reformatted\n\nFull test suite with coverage............................................Passed\n- hook id: tests-with-coverage\n- duration: 0.24s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py ..                                                [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n============================== 3 passed in 0.03s ===============================\n\n"
+    },
+    {
+      "label": "restage",
+      "argv": [
+        "git",
+        "add",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "final-control",
+      "argv": [
+        "git",
+        "commit",
+        "-m",
+        "Reviewed fixes"
+      ],
+      "exit_code": 0,
+      "stdout": "[main 3ed2255] Reviewed fixes\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "stderr": "trim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...........................................(no files to check)Skipped\ncheck toml...........................................(no files to check)Skipped\ncheck for merge conflicts................................................Passed\nruff check...........................................(no files to check)Skipped\nruff format..............................................................Passed\nFull test suite with coverage............................................Passed\n- hook id: tests-with-coverage\n- duration: 0.24s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-nf3eddlq\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 3 items\n\ntests/test_changed.py .                                                  [ 33%]\ntests/test_existing.py ..                                                [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName     Stmts   Miss Branch BrPart  Cover   Missing\n----------------------------------------------------\napp.py       6      1      2      0    88%   8\n----------------------------------------------------\nTOTAL        6      1      2      0    88%\nCoverage XML written to file coverage.xml\n============================== 3 passed in 0.03s ===============================\n\n"
+    },
+    {
+      "label": "coverage-json",
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "coverage.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Wrote JSON report to coverage.json\n"
+    }
+  ],
+  "outcomes": {
+    "passing_baseline": true,
+    "unchanged_failure_blocks_commit": true,
+    "docs_only_runs_suite": true,
+    "passing_control": true,
+    "zero_tests_block_commit": true,
+    "ruff_fix_changes_candidate": true,
+    "restaged_commit_passes": true,
+    "source_branches_and_missing_code_reported": true
+  },
+  "sample_hashes": {
+    ".pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+    "pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+    "requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+    ".gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b"
+  },
+  "coverage": {
+    "meta": {
+      "format": 3,
+      "version": "7.16.0",
+      "timestamp": "2026-09-06T21:54:18.292191",
+      "branch_coverage": true,
+      "show_contexts": false
+    },
+    "files": {
+      "app.py": {
+        "executed_lines": [
+          1,
+          2,
+          3,
+          4,
+          7
+        ],
+        "summary": {
+          "covered_lines": 5,
+          "num_statements": 6,
+          "percent_covered": 87.5,
+          "percent_covered_display": "88",
+          "missing_lines": 1,
+          "excluded_lines": 0,
+          "percent_statements_covered": 83.33333333333333,
+          "percent_statements_covered_display": "83",
+          "num_branches": 2,
+          "num_partial_branches": 0,
+          "covered_branches": 2,
+          "missing_branches": 0,
+          "percent_branches_covered": 100.0,
+          "percent_branches_covered_display": "100"
+        },
+        "missing_lines": [
+          8
+        ],
+        "excluded_lines": [],
+        "executed_branches": [
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "missing_branches": [],
+        "functions": {
+          "classify": {
+            "executed_lines": [
+              2,
+              3,
+              4
+            ],
+            "summary": {
+              "covered_lines": 3,
+              "num_statements": 3,
+              "percent_covered": 100.0,
+              "percent_covered_display": "100",
+              "missing_lines": 0,
+              "excluded_lines": 0,
+              "percent_statements_covered": 100.0,
+              "percent_statements_covered_display": "100",
+              "num_branches": 2,
+              "num_partial_branches": 0,
+              "covered_branches": 2,
+              "missing_branches": 0,
+              "percent_branches_covered": 100.0,
+              "percent_branches_covered_display": "100"
+            },
+            "missing_lines": [],
+            "excluded_lines": [],
+            "start_line": 1,
+            "executed_branches": [
+              [
+                2,
+                3
+              ],
+              [
+                2,
+                4
+              ]
+            ],
+            "missing_branches": []
+          },
+          "unused": {
+            "executed_lines": [],
+            "summary": {
+              "covered_lines": 0,
+              "num_statements": 1,
+              "percent_covered": 0.0,
+              "percent_covered_display": "0",
+              "missing_lines": 1,
+              "excluded_lines": 0,
+              "percent_statements_covered": 0.0,
+              "percent_statements_covered_display": "0",
+              "num_branches": 0,
+              "num_partial_branches": 0,
+              "covered_branches": 0,
+              "missing_branches": 0,
+              "percent_branches_covered": 100.0,
+              "percent_branches_covered_display": "100"
+            },
+            "missing_lines": [
+              8
+            ],
+            "excluded_lines": [],
+            "start_line": 7,
+            "executed_branches": [],
+            "missing_branches": []
+          },
+          "": {
+            "executed_lines": [
+              1,
+              7
+            ],
+            "summary": {
+              "covered_lines": 2,
+              "num_statements": 2,
+              "percent_covered": 100.0,
+              "percent_covered_display": "100",
+              "missing_lines": 0,
+              "excluded_lines": 0,
+              "percent_statements_covered": 100.0,
+              "percent_statements_covered_display": "100",
+              "num_branches": 0,
+              "num_partial_branches": 0,
+              "covered_branches": 0,
+              "missing_branches": 0,
+              "percent_branches_covered": 100.0,
+              "percent_branches_covered_display": "100"
+            },
+            "missing_lines": [],
+            "excluded_lines": [],
+            "start_line": 1,
+            "executed_branches": [],
+            "missing_branches": []
+          }
+        },
+        "classes": {
+          "": {
+            "executed_lines": [
+              1,
+              2,
+              3,
+              4,
+              7
+            ],
+            "summary": {
+              "covered_lines": 5,
+              "num_statements": 6,
+              "percent_covered": 87.5,
+              "percent_covered_display": "88",
+              "missing_lines": 1,
+              "excluded_lines": 0,
+              "percent_statements_covered": 83.33333333333333,
+              "percent_statements_covered_display": "83",
+              "num_branches": 2,
+              "num_partial_branches": 0,
+              "covered_branches": 2,
+              "missing_branches": 0,
+              "percent_branches_covered": 100.0,
+              "percent_branches_covered_display": "100"
+            },
+            "missing_lines": [
+              8
+            ],
+            "excluded_lines": [],
+            "start_line": 1,
+            "executed_branches": [
+              [
+                2,
+                3
+              ],
+              [
+                2,
+                4
+              ]
+            ],
+            "missing_branches": []
+          }
+        }
+      }
+    },
+    "totals": {
+      "covered_lines": 5,
+      "num_statements": 6,
+      "percent_covered": 87.5,
+      "percent_covered_display": "88",
+      "missing_lines": 1,
+      "excluded_lines": 0,
+      "percent_statements_covered": 83.33333333333333,
+      "percent_statements_covered_display": "83",
+      "num_branches": 2,
+      "num_partial_branches": 0,
+      "covered_branches": 2,
+      "missing_branches": 0,
+      "percent_branches_covered": 100.0,
+      "percent_branches_covered_display": "100"
+    }
+  }
+}

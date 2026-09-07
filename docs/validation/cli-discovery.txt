@@ -1,0 +1,9 @@
+Name: `feature-design`, read through [.agents/skills/feature-design/SKILL.md](/Users/tk/Documents/coding-agent-skills/.agents/skills/feature-design/SKILL.md).
+
+Operation paths relative to that entrypoint:
+
+- `prompts/intake-feature.md` — exists
+- `prompts/draft-design.md` — exists
+- `prompts/review-design.md` — exists
+
+All three referenced templates also exist: `assets/spec-addendum.template.md`, `assets/design.template.md`, and `assets/review.template.md`.

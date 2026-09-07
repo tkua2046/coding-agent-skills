@@ -1,0 +1,37 @@
+{
+  "base_commit": "d97cf63b5347053b0db62b07ed62d0b27efdb643",
+  "scope": "Stage 1 implementation, tests, requirements, and configured checks. Handoff documents and check transcripts are not implementation inputs.",
+  "files": {
+    "FEATURE.md": {
+      "sha256": "ddada50b49abed07a09f4978cbcc8369c2d3256067285099f733f6713fbb9f1a",
+      "content": "# Counter step\n\nCounter.add(step=1) accepts positive Python integers, excluding booleans. Invalid values raise ValueError without mutation. Existing add() calls still add one. Stage 1 implements this behavior and tests.\n"
+    },
+    "PLAN.md": {
+      "sha256": "1c48dd26a81e82dc350348f298dff71996fc623d88f3e670ad0ad5c57bb26fa2",
+      "content": "# Stage 1\n\nAdd optional validated step to Counter.add. Acceptance: default behavior preserved; add(3) increments by 3; zero, negatives, bool, float, string rejected with unchanged state. Run .venv/bin/python -m pytest and the configured pre-commit hooks before review. Human and independent-agent review are required before commit or advancement. Current human review: pending.\n"
+    },
+    ".pre-commit-config.yaml": {
+      "sha256": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+      "content": "minimum_pre_commit_version: \"4.6.2\"\ndefault_language_version:\n  python: python3.12\nrepos:\n  - repo: https://github.com/pre-commit/pre-commit-hooks\n    rev: v6.0.0\n    hooks:\n      - id: trailing-whitespace\n      - id: end-of-file-fixer\n      - id: check-yaml\n      - id: check-toml\n      - id: check-merge-conflict\n        args: [--assume-in-merge]\n  - repo: https://github.com/astral-sh/ruff-pre-commit\n    rev: v0.16.6\n    hooks:\n      - id: ruff-check\n        args: [--fix]\n      - id: ruff-format\n  - repo: local\n    hooks:\n      - id: tests-with-coverage\n        name: Full test suite with coverage\n        entry: python -m pytest\n        language: python\n        # Add required application dependencies or use the project's environment.\n        additional_dependencies: [pytest==9.1.1, pytest-cov==7.1.0, coverage==7.16.0]\n        pass_filenames: false\n        always_run: true\n        require_serial: true\n        verbose: true\n"
+    },
+    "pyproject.toml": {
+      "sha256": "827acd318ea7bcffd1671dd7bdb1489a52ceff25d6eae5f13b06cfe80d405e19",
+      "content": "# Example for a standard-library counter.py with tests/. Adapt source paths first.\n[tool.ruff]\ntarget-version = \"py312\"\nline-length = 88\n\n[tool.ruff.lint]\nselect = [\"E4\", \"E7\", \"E9\", \"F\", \"I\", \"UP\", \"B\"]\n\n[tool.pytest.ini_options]\ntestpaths = [\"tests\"]\naddopts = \"--cov --cov-config=pyproject.toml --cov-report=term-missing --cov-report=xml:coverage.xml\"\n\n[tool.coverage.run]\nsource = [\"counter\"]\nbranch = true\npatch = [\"subprocess\"]\n\n[tool.coverage.report]\nshow_missing = true\n"
+    },
+    "counter.py": {
+      "sha256": "7e7512e3f9f09c2eba9b51482c69959ebb7d8ce2c5cc8a25e5c7175be3db4da7",
+      "content": "class Counter:\n    def __init__(self):\n        self.value = 0\n\n    def add(self, step=1):\n        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:\n            raise ValueError(\"step must be a positive integer\")\n        self.value += step\n        return self.value\n"
+    },
+    "tests/test_counter.py": {
+      "sha256": "68743af1552c06d34e6888d852721bb05075baf614f344a8b97286adb3ad119b",
+      "content": "import pytest\n\nfrom counter import Counter\n\n\ndef test_default_add():\n    counter = Counter()\n    assert counter.add() == 1\n    assert counter.add() == 2\n\n\n@pytest.mark.parametrize(\"step\", [1, 3, 10**100])\ndef test_positive_step(step):\n    counter = Counter()\n\n    assert counter.add(step) == step\n    assert counter.value == step\n\n\ndef test_steps_accumulate_with_default_and_keyword_calls():\n    counter = Counter()\n\n    assert counter.add() == 1\n    assert counter.add(step=3) == 4\n    assert counter.add(2) == 6\n    assert counter.add() == 7\n    assert counter.value == 7\n\n\n@pytest.mark.parametrize(\"initial_value\", [0, 7])\n@pytest.mark.parametrize(\"step\", [0, -1, True, False, 1.0, 0.0, \"3\", None])\ndef test_invalid_step_does_not_mutate_counter(initial_value, step):\n    counter = Counter()\n    for _ in range(initial_value):\n        counter.add()\n\n    with pytest.raises(ValueError):\n        counter.add(step)\n\n    assert counter.value == initial_value\n    assert counter.add() == initial_value + 1\n"
+    }
+  },
+  "implementation_diff": "diff --git a/counter.py b/counter.py\nindex 81a72d29bc609073079be801d616b584826d01ae..399b54e7b38dbcfa7f8b8e0979df7cf717f14637 100644\n--- a/counter.py\n+++ b/counter.py\n@@ -2,6 +2,8 @@ class Counter:\n     def __init__(self):\n         self.value = 0\n \n-    def add(self):\n-        self.value += 1\n+    def add(self, step=1):\n+        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:\n+            raise ValueError(\"step must be a positive integer\")\n+        self.value += step\n         return self.value\ndiff --git a/tests/test_counter.py b/tests/test_counter.py\nindex 74945f8b8036e572f3f593c20c1553b9e0ba2a67..31419e8f56b8914d0124a33db10b604de0487945 100644\n--- a/tests/test_counter.py\n+++ b/tests/test_counter.py\n@@ -1,6 +1,41 @@\n+import pytest\n+\n from counter import Counter\n \n+\n def test_default_add():\n     counter = Counter()\n     assert counter.add() == 1\n     assert counter.add() == 2\n+\n+\n+@pytest.mark.parametrize(\"step\", [1, 3, 10**100])\n+def test_positive_step(step):\n+    counter = Counter()\n+\n+    assert counter.add(step) == step\n+    assert counter.value == step\n+\n+\n+def test_steps_accumulate_with_default_and_keyword_calls():\n+    counter = Counter()\n+\n+    assert counter.add() == 1\n+    assert counter.add(step=3) == 4\n+    assert counter.add(2) == 6\n+    assert counter.add() == 7\n+    assert counter.value == 7\n+\n+\n+@pytest.mark.parametrize(\"initial_value\", [0, 7])\n+@pytest.mark.parametrize(\"step\", [0, -1, True, False, 1.0, 0.0, \"3\", None])\n+def test_invalid_step_does_not_mutate_counter(initial_value, step):\n+    counter = Counter()\n+    for _ in range(initial_value):\n+        counter.add()\n+\n+    with pytest.raises(ValueError):\n+        counter.add(step)\n+\n+    assert counter.value == initial_value\n+    assert counter.add() == initial_value + 1\n",
+  "implementation_diff_sha256": "55c50ee618f410f7e0fd59c706c1f8db085b0fb2836b644c19b643a84032f53b",
+  "new_implementation_files": [],
+  "check_evidence": [
+    "candidate-pytest.json",
+    "candidate-pre-commit.json"
+  ]
+}

@@ -1,0 +1,261 @@
+[
+  {
+    "path": ".agents/skills/dev-workflow",
+    "kind": "symlink",
+    "target": "../../skills/dev-workflow",
+    "sha256": "4a521cc68fd3564b6bf779a38812e79b330ecd83bdeab8fffef426e4829c3e54"
+  },
+  {
+    "path": ".agents/skills/feature-design",
+    "kind": "symlink",
+    "target": "../../skills/feature-design",
+    "sha256": "8c152e08b630643a04463cdab3e9eb6ea2113e4da6fcad02c2939416a8ac68b9"
+  },
+  {
+    "path": ".agents/skills/implementation-plan",
+    "kind": "symlink",
+    "target": "../../skills/implementation-plan",
+    "sha256": "dad14c8d74ba6a689b35394b376d7d71269f15bc49006db2fd3555d92e3a242e"
+  },
+  {
+    "path": ".agents/skills/stage-development",
+    "kind": "symlink",
+    "target": "../../skills/stage-development",
+    "sha256": "69e5b484cae1eb2d4c03c96c00e3607c3f2b7bb5787fb91fb36aab503b43f930"
+  },
+  {
+    "path": ".gitignore",
+    "kind": "file",
+    "sha256": "6c8055812ee82cebf0fdbfaa643e85518f9bc59544786a0661da4ad7f3e71738"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "kind": "file",
+    "sha256": "dbdc45bdf9a1682098855d8ee881365c05526634abecbe42d3e8028aa7d16e2c"
+  },
+  {
+    "path": "AGENTS.md",
+    "kind": "file",
+    "sha256": "5f208d20a5edb9489b38eaa967e47e475044ae676d26b32428ac06f6cfe06174"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "kind": "file",
+    "sha256": "d33979422628a86d44b8e845947455d4e641cd6ec1f37f978e16d4499166dc22"
+  },
+  {
+    "path": "DEVNOTES.md",
+    "kind": "file",
+    "sha256": "073fe01c825302904d841e399d76f97dee553df2cefd25ae8895d584b30bbe75"
+  },
+  {
+    "path": "README.md",
+    "kind": "file",
+    "sha256": "105c02e93b7076a5e84f694944e110b20662bc181a2f3f9685a2a2e50020e181"
+  },
+  {
+    "path": "VERSION",
+    "kind": "file",
+    "sha256": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67"
+  },
+  {
+    "path": "pyproject.toml",
+    "kind": "file",
+    "sha256": "bcf473a5e2f348ca97f8102762a428e197ad1f842c63e2d2162a441d2006057c"
+  },
+  {
+    "path": "requirements-dev.txt",
+    "kind": "file",
+    "sha256": "d70d2075e66397b2966e80c356ad33c8af50eee807f60243bddc15e07b0ac404"
+  },
+  {
+    "path": "skills/dev-workflow/SKILL.md",
+    "kind": "file",
+    "sha256": "1ad6784270d94f61f889bb308a97eb4855316c4e62ee84c24fedd948920ee962"
+  },
+  {
+    "path": "skills/dev-workflow/agents/openai.yaml",
+    "kind": "file",
+    "sha256": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a"
+  },
+  {
+    "path": "skills/dev-workflow/assets/AGENTS.template.md",
+    "kind": "file",
+    "sha256": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e"
+  },
+  {
+    "path": "skills/dev-workflow/assets/CHANGELOG.template.md",
+    "kind": "file",
+    "sha256": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693"
+  },
+  {
+    "path": "skills/dev-workflow/assets/DEVNOTES.template.md",
+    "kind": "file",
+    "sha256": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106"
+  },
+  {
+    "path": "skills/dev-workflow/assets/README.template.md",
+    "kind": "file",
+    "sha256": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/.gitignore",
+    "kind": "file",
+    "sha256": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/.pre-commit-config.yaml",
+    "kind": "file",
+    "sha256": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/.ruff_cache/.gitignore",
+    "kind": "file",
+    "sha256": "9e3a60f1e6ec4ae60215c11d54b171392745ec25e9dded433d5bd921363af316"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/.ruff_cache/CACHEDIR.TAG",
+    "kind": "file",
+    "sha256": "5953156d7e0c564a427251316eaf26f8870e6483ae2197f916b630e4f93e31ae"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/pyproject.toml",
+    "kind": "file",
+    "sha256": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9"
+  },
+  {
+    "path": "skills/dev-workflow/assets/python/requirements-dev.txt",
+    "kind": "file",
+    "sha256": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747"
+  },
+  {
+    "path": "skills/dev-workflow/prompts/prepare-pr.md",
+    "kind": "file",
+    "sha256": "f0d6378816325a5c899f387b54e345d7ef8263701adc7219fa3011c739299a77"
+  },
+  {
+    "path": "skills/dev-workflow/prompts/release.md",
+    "kind": "file",
+    "sha256": "8dde75600df5d31df9aeebb9e065c761160c5cee0b513340b9ec4534aed7d0cd"
+  },
+  {
+    "path": "skills/dev-workflow/prompts/setup-dev-workflow.md",
+    "kind": "file",
+    "sha256": "b03ce35b5b693b4974249003f284fa19b12e24bc33ebdc213c5cde537f994e5f"
+  },
+  {
+    "path": "skills/dev-workflow/references/documents.md",
+    "kind": "file",
+    "sha256": "f2557f82931406e67241957769cd0e7e3d63e3719ced9d862f7e30909e2b75e8"
+  },
+  {
+    "path": "skills/feature-design/SKILL.md",
+    "kind": "file",
+    "sha256": "50a18f13bc8eff518003360c587af01c1f186a3bdf712922b8c9f8e7a6acc6e0"
+  },
+  {
+    "path": "skills/feature-design/agents/openai.yaml",
+    "kind": "file",
+    "sha256": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8"
+  },
+  {
+    "path": "skills/feature-design/assets/design.template.md",
+    "kind": "file",
+    "sha256": "76edf19a1075de9709ff4d9dbbd8a2c4c6aa87d602a8c72a7470ca847980e633"
+  },
+  {
+    "path": "skills/feature-design/assets/review.template.md",
+    "kind": "file",
+    "sha256": "046adeb78bb104cd3d7d357619189fe68a4e78a04ace93b6c8dbdfe6d80582e7"
+  },
+  {
+    "path": "skills/feature-design/assets/spec-addendum.template.md",
+    "kind": "file",
+    "sha256": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04"
+  },
+  {
+    "path": "skills/feature-design/prompts/draft-design.md",
+    "kind": "file",
+    "sha256": "5dd5f1796792b450ae0ec3cae9dee14c4f0207ab89464b8149fbc5578f961bd9"
+  },
+  {
+    "path": "skills/feature-design/prompts/intake-feature.md",
+    "kind": "file",
+    "sha256": "50bb1db115d8473218c4bad7acc125f0c7cb8b729dbd9b8f87a4b73474ddfcb8"
+  },
+  {
+    "path": "skills/feature-design/prompts/review-design.md",
+    "kind": "file",
+    "sha256": "2cbfa664c01d4963c516bd6f42de29f861277e1b409e9ba7f396e421457b24d8"
+  },
+  {
+    "path": "skills/implementation-plan/SKILL.md",
+    "kind": "file",
+    "sha256": "80bfe6f7330791e5b74498256af140b02a3f1a8fb33bc8adc9fddee2e291deb1"
+  },
+  {
+    "path": "skills/implementation-plan/agents/openai.yaml",
+    "kind": "file",
+    "sha256": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495"
+  },
+  {
+    "path": "skills/implementation-plan/assets/implementation-plan.template.md",
+    "kind": "file",
+    "sha256": "85206c6d9915e5f46199b81d32f293b3d95dd2e679f5fc49892d6f7c7f76b39f"
+  },
+  {
+    "path": "skills/implementation-plan/prompts/plan-implementation.md",
+    "kind": "file",
+    "sha256": "31c2e16fd6cf51d08b32d59adbf995988734db1be235bb090aa9836026156ac5"
+  },
+  {
+    "path": "skills/implementation-plan/prompts/review-implementation.md",
+    "kind": "file",
+    "sha256": "3f16da430e37fd585571154cf94a997fc7d8c325b810c34e22bc8a76fd82f506"
+  },
+  {
+    "path": "skills/stage-development/SKILL.md",
+    "kind": "file",
+    "sha256": "d6453bb770dcf31fa17f7c6a5c5ce5310dea1169d7f9a1554cde19bf9649a0fd"
+  },
+  {
+    "path": "skills/stage-development/agents/openai.yaml",
+    "kind": "file",
+    "sha256": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21"
+  },
+  {
+    "path": "skills/stage-development/assets/stage-record.template.md",
+    "kind": "file",
+    "sha256": "50762c6b4fa46bb4f6655fba937ac3bb6bdbc7870ca17a46a222ab2b1f32b76d"
+  },
+  {
+    "path": "skills/stage-development/prompts/execute-stage.md",
+    "kind": "file",
+    "sha256": "1c95d847591b242c27e595a209abd60894f8db516d963f457dd2ade7f2e8e687"
+  },
+  {
+    "path": "skills/stage-development/prompts/review-stage.md",
+    "kind": "file",
+    "sha256": "cd4a53a0ab7208708739221ebad5a657553ee79dfeffd6cbfa768c37bf891e21"
+  },
+  {
+    "path": "tests/manual/hook_trials.py",
+    "kind": "file",
+    "sha256": "73225657eb1a6c087acf1a6c05a97568294f1487c3fb5d0de7f70f31f181e473"
+  },
+  {
+    "path": "tests/test_check.py",
+    "kind": "file",
+    "sha256": "efd0ffa8f3d8fc986639b5a64de2835732da3970d65fc789de45d5415adef91d"
+  },
+  {
+    "path": "tools/__init__.py",
+    "kind": "file",
+    "sha256": "76f14fd7c8343652459119320cb53b7e919dac7435e7ba7bb66ef7d1c4f4426d"
+  },
+  {
+    "path": "tools/check.py",
+    "kind": "file",
+    "sha256": "d0fa54d90cd8d2b9ec9ce7dd41b79919467b70f73041a89a42dfe2e43fdd93ad"
+  }
+]

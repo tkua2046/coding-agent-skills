@@ -1,0 +1,16 @@
+argv=['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'tests.manual.hook_trials']
+cwd=/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate
+exit=1
+Evidence: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate/docs/validation/hook-trials/20260907T045614023290Z-975394426b8941a8b2b3c296d06f760b.json
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate/tests/manual/hook_trials.py", line 175, in <module>
+    main()
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate/tests/manual/hook_trials.py", line 55, in main
+    report["sample_hashes"] = {
+                              ^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 1056, in iterdir
+    for name in os.listdir(self):
+                ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate/skills/dev-workflow/assets/python'

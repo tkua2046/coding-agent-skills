@@ -1,0 +1,32 @@
+{
+  "working_directory": "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/coding-agent-skills-trials-u9dxxc0y/existing-intake-followup",
+  "git_head": "9cdb0c966c73ea386a4619109928ad443f3143ab",
+  "environment_override": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "baseline": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "exit_status": 1,
+    "stdout": "baseline.stdout.txt",
+    "stderr": "baseline.stderr.txt"
+  },
+  "probe": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-c",
+      "from formatter import label\nfor value in [\" a \", \" MiXeD Label \", \"\u00df\", \"  \", \"hello  world\"]:\n    print(f\"label({value!r}) -> {label(value)!r}\")\n"
+    ],
+    "exit_status": 0,
+    "source": "probe.py",
+    "stdout": "probe.stdout.txt",
+    "stderr": "probe.stderr.txt"
+  }
+}

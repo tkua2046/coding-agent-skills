@@ -1,0 +1,23 @@
+{
+  "failed_exit": 1,
+  "passing_exit": 0,
+  "report_path": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/docs/validation/hook-trials.json",
+  "before_sha256": "6e1d4a019ec5b138a44a8d79fdb3040fb050dcee40e347b28cbf5eda94b1593e",
+  "after_sha256": "0e2d291ad877e9328b52df6ce4f9d6d6577ce9c013e78ef0b2910f313e045528",
+  "first_fixture": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-oxq80ml4",
+  "second_fixture": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-b0k3vy1i",
+  "failure_fixture_still_referenced": false,
+  "files_in_report_directory": [
+    "hook-trials.json"
+  ],
+  "passing_outcomes": {
+    "passing_baseline": true,
+    "unchanged_failure_blocks_commit": true,
+    "docs_only_runs_suite": true,
+    "passing_control": true,
+    "zero_tests_block_commit": true,
+    "ruff_fix_changes_candidate": true,
+    "restaged_commit_passes": true,
+    "source_branches_and_missing_code_reported": true
+  }
+}

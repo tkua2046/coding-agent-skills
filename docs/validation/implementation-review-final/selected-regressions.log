@@ -1,0 +1,13 @@
+argv=['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'pytest', 'tests/test_check.py', '-o', 'addopts=', '-k', 'existing_absolute_dependency_is_nonportable_even_inside_bundle or percent_encoded_relative_filename_remains_portable']
+cwd=/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-path-final-jgznvifn
+exit=0
+============================= test session starts ==============================
+platform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-path-final-jgznvifn
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collected 29 items / 26 deselected / 3 selected
+
+tests/test_check.py ...                                                  [100%]
+
+======================= 3 passed, 26 deselected in 0.05s =======================

@@ -1,0 +1,33 @@
+# Trial result: 0.2.0 release-readiness dry run
+
+**Assessment complete; release NOT READY.** Proposed version 0.2.0 is reasonable for the observed additive transform API, but metadata preparation, candidate-specific required CI, and review remain incomplete. The next delivery operation is release preparation and verification, not a tag or publication.
+
+## Candidate and proposed changes
+
+- Repository: `/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/coding-agent-skills-trials-u9dxxc0y/delivery`.
+- Branch: `main`.
+- Exact assessed HEAD and authoritative exported merged commit: `4ecb0a5687da15a60688a3c505b99ad00267fb6e`.
+- Candidate tree: `bdce283df5f76a6b6051973f4411bc47c87fb851`.
+- Earlier reviewed/tested commit and current parent: `eb1e908a3350b480840d911bf03dfa44dd09de67`.
+- Actual version: `0.1.0`. Proposed version: `0.2.0`; no new release commit exists.
+- Proposed notes: retain Unreleased and add a 0.2.0 section dated with the actual release date, describing the optional `label(value, transform=None)` transform, original input passed to the transform, and preserved trim/uppercase defaults when omitted or `None`. Apply version and notes together for review in a future authorized operation. No metadata edits were made.
+
+The exact proposed changelog and PR wording, full identities, source diff, evidence fingerprints, and gate analysis are in [RELEASE_ASSESSMENT.md](RELEASE_ASSESSMENT.md).
+
+## Evidence and readiness
+
+`delivery-state.json` was treated as the supplied authoritative CI/review export, without contacting a network service. It reports required `tests` success and review approval only for `eb1e908a3350b480840d911bf03dfa44dd09de67`; required `integration` is **pending** for `4ecb0a5687da15a60688a3c505b99ad00267fb6e`. The earlier commit lacks the new transform implementation, so its approval/test result does not establish readiness for the actual candidate. Pending integration is unresolved, not a pass.
+
+Actual Git inspection confirms that the complete parent-to-candidate diff changes only `app.py`, adding the optional transform while retaining the prior default expression. VERSION remains 0.1.0 and the feature notes remain Unreleased. No project-specific 0.x release policy was found, so the requested minor version is a justified proposal, not an asserted mandatory policy.
+
+**Verified locally:** 17/17 isolated Python 3.12.4 behavior assertions passed on code read from the exact candidate commit and checked against working-file bytes. These cover six default-compatibility inputs, six explicit-None cases, original-input/call-count behavior, empty transform output, non-string custom input, exception propagation, and the unchanged default non-string error. These local checks do not change or replace the authoritative CI/review statuses. No configured project suite, artifact build, smoke test, or coverage measurement was performed.
+
+**PR/release judgment:** ready to present the assessment and proposed release-preparation change for review; not ready to claim final PR approval or release clearance. The export identifies the current result as already merged, but no approval of its changed content is supplied. Future metadata edits will require a new exact candidate identity and corresponding checks/review. No release tag, artifact, or publication was produced.
+
+## Scope compliance and next operation
+
+Used the requested dev-workflow skill and its PR, release, and document-ownership guidance. Inspected only the target repository and supplied export; did not inspect other fixtures or the canonical authoring repository, and did not follow the repository's `.venv` symlink. Wrote only `RELEASE_ASSESSMENT.md` and `TRIAL_RESULT.md`. No product/version/changelog/export edits, staging, commits, branch changes, network calls, tags, or publishing occurred.
+
+Final verification passed: tracked files and the index still match HEAD; HEAD, its tree, and refs are unchanged; all four product/export SHA-256 fingerprints match the assessment. Git status lists exactly the two requested untracked reports plus the pre-existing untracked `delivery-state.json`.
+
+Next, in a separately authorized delivery operation, prepare version 0.2.0 and dated notes together, review all final content including the merged integration changes, and obtain successful required tests/integration plus approval for the final candidate. Verify the exact resulting merged commit before any authorized tagging. Build and validate a distributable from tagged content if applicable before authorized publication. For this dry run, stop after verifying and delivering the reports.

@@ -1,0 +1,11 @@
+{
+  "kind": "real local Git/hook execution in an isolated fixture",
+  "status": "failed",
+  "cwd": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-_3ga95eb",
+  "commands": [],
+  "outcomes": {},
+  "error": {
+    "type": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate/skills/dev-workflow/assets/python'"
+  }
+}

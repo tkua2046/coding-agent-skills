@@ -1,0 +1,3 @@
+# Counter step
+
+Counter.add(step=1) accepts positive Python integers, excluding booleans. Invalid values raise ValueError without mutation. Existing add() calls still add one. Stage 1 implements this behavior and tests.

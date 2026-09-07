@@ -1,0 +1,13 @@
+argv=['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'pytest', 'tests/test_check.py', 'tests/test_evidence.py', '-o', 'addopts=', '-k', 'literal_template or nonportable_and_missing or reference_links or cli_rejects_a_missing_asset or examples_do_not or failed_then_passing or name_collision or invalid_payload']
+exit=0
+============================= test session starts ==============================
+platform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-targeted-followup-ndxrflmo/candidate
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collected 29 items / 16 deselected / 13 selected
+
+tests/test_check.py ..........                                           [ 76%]
+tests/test_evidence.py ...                                               [100%]
+
+====================== 13 passed, 16 deselected in 0.18s =======================

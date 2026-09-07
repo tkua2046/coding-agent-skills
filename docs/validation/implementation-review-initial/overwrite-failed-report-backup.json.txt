@@ -1,0 +1,83 @@
+{
+  "kind": "real local Git/hook execution in an isolated fixture",
+  "sample_hashes": {
+    "pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+    "requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+    ".gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b"
+  },
+  "cwd": "/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skill-hook-trial-oxq80ml4",
+  "commands": [
+    {
+      "label": "init",
+      "argv": [
+        "git",
+        "init",
+        "-q",
+        "-b",
+        "main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "identity",
+      "argv": [
+        "git",
+        "config",
+        "user.name",
+        "Skill Trial"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "identity",
+      "argv": [
+        "git",
+        "config",
+        "user.email",
+        "skill-trial@example.invalid"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "prepare-format",
+      "argv": [
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/.venv/bin/ruff",
+        "check",
+        "--fix",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "Found 2 errors (2 fixed, 0 remaining).\n",
+      "stderr": ""
+    },
+    {
+      "label": "prepare-format",
+      "argv": [
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/.venv/bin/ruff",
+        "format",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "2 files reformatted, 2 files left unchanged\n",
+      "stderr": ""
+    },
+    {
+      "label": "install-hooks",
+      "argv": [
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/evidence-overwrite/.venv/bin/pre-commit",
+        "install",
+        "--install-hooks"
+      ],
+      "exit_code": 1,
+      "stdout": "pre-commit installed at .git/hooks/pre-commit\nAn error has occurred: InvalidConfigError: \n=====> .pre-commit-config.yaml is not a file\nCheck the log at /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/skills-stage-review-9wkwb_kn/pre-commit-cache/pre-commit.log\n",
+      "stderr": ""
+    }
+  ],
+  "outcomes": {}
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "source": "docs/DESIGN.md",
+    "archive": "docs/reviews/inputs-initial/DESIGN.md.txt",
+    "sha256": "bf5996d7aefacbb77762615dfd0ca5fe7f71fb1177beba7b9b024cdb438fc530"
+  },
+  {
+    "source": "docs/IMPLEMENTATION_PLAN.md",
+    "archive": "docs/reviews/inputs-initial/IMPLEMENTATION_PLAN.md.txt",
+    "sha256": "2d312605b841186e19f5d3899519778aa4664d648ddf5c0f2ce2cf7a04d4d1cc"
+  },
+  {
+    "source": "docs/SPEC.md",
+    "archive": "docs/reviews/inputs-initial/SPEC.md.txt",
+    "sha256": "c6ccfca7c06e6e23e59b9ce5426a98e7b37988345634e73c52317cbb7aafebf0"
+  },
+  {
+    "source": "docs/JUSTIFICATION.md",
+    "archive": "docs/reviews/inputs-initial/JUSTIFICATION.md.txt",
+    "sha256": "4bb7ae8fc5a6b1edd30830c0eb7b176d9da45ac78f77fabcaffff17e57b94a6e"
+  },
+  {
+    "source": "docs/sources/user-workflow.md",
+    "archive": "docs/reviews/inputs-initial/sources--user-workflow.md.txt",
+    "sha256": "f8bd2d7207152a20d52d106b3ba6b75e08b8aaf88f28ffab285510a59ea0a0f1"
+  }
+]

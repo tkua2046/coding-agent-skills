@@ -1,0 +1,30 @@
+# Stage 1 trial result
+
+Implemented and locally checked; awaiting required human and independent-agent review. Stage 1 is not accepted, committed, or advanced.
+
+## Actual changes
+
+- `counter.py`: added optional `step=1`; accepts positive integers, explicitly excludes booleans, raises `ValueError` before mutation for invalid inputs, and returns the accumulated value.
+- `tests/test_counter.py`: preserved the default behavior test and added positive-step, keyword/positional accumulation, large-integer, invalid-type, unchanged-state, and recovery coverage. Retained Ruff's baseline spacing fix.
+- [Stage record](stage-records/stage-1.md) and [evidence directory](stage-records/stage-1-evidence): actual check transcripts and a frozen snapshot containing requirements, configuration, implementation, tests, hashes, and the full implementation diff.
+
+## Actual checks
+
+| Command | Result |
+|---|---|
+| `.venv/bin/python -m pytest` before changes | 1 passed; exit 0 |
+| `.venv/bin/python -m pre_commit run --all-files --show-diff-on-failure` before changes | Exit 1: Ruff automatically fixed an existing missing blank line; all other hooks passed |
+| `.venv/bin/python -m pytest` after implementation | 21 passed; 100% line and branch coverage; exit 0 |
+| `.venv/bin/python -m pre_commit run --all-files --show-diff-on-failure` after implementation | All 8 configured hooks passed, including the full 21-test suite; exit 0; no automatic changes |
+
+Raw results are linked from the stage record. [Handoff hook output](stage-records/stage-1-evidence/handoff-pre-commit.json) records the subsequent all-files run with the handoff documents and snapshot staged. Check-generated environments and caches stay under this fixture's `.git/stage-check-cache`. The supplied `.venv` was used without modification; no hooks were bypassed or checks weakened.
+
+## Review and handoff
+
+Candidate: baseline `d97cf63b5347053b0db62b07ed62d0b27efdb643` plus [candidate-snapshot.json](stage-records/stage-1-evidence/candidate-snapshot.json), SHA-256 `25a82b2dab97939a543aea987af4f5d3a3696efcd88366fa64e4ef4c34e5c564`.
+
+Human review is pending. Independent-agent review was not performed because no independent reviewer tool was exposed in this session; it remains required and pending. Executor inspection is self-review only and does not satisfy that requirement. No external reviewer findings were received.
+
+The intended changes and evidence are staged for inspection. No commit, advancement, or release was performed. No canonical skills files, other fixtures, remote repositories, or global settings were modified.
+
+Next action: obtain both required reviews of the frozen candidate, resolve any findings with renewed checks and review, and only then assess acceptance and commit authorization under [PLAN.md](PLAN.md).

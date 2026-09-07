@@ -1,0 +1,12 @@
+{
+  "event": "A local pre-commit run picked up a newly staged reviewer probe script before its archive was finalized.",
+  "effect": "Ruff reformatted the script and reported E402. No checker or skill behavior changed as a result. The reviewer archived the formatted variant; the author recovered the exact pre-hook script from the index.",
+  "original": "probes.pre-hook.py.txt",
+  "formatted_variant": "probes.py.txt",
+  "hashes": {
+    "probes.pre-hook.py.txt": "fcc2f489392a9951970f9e8252befc53465b4926aec0adf6224b4ed6da75ace6",
+    "probes.py.txt": "c1458f97a9f0b295ddd643922ffac9f6205d2c98149194bf622ae827adeefece"
+  },
+  "correction": "Root Ruff and both Ruff hooks exclude original validation archives, matching whitespace/newline preservation. Future review artifacts are finalized before staging the delivery candidate.",
+  "failed_gate": "docs/validation/local-gates/20260907T045701613858Z-437be0d8b473414aaa0a8686ee8702b3.json"
+}
