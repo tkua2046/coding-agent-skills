@@ -2,6 +2,8 @@
 
 Research date: 6 September 2026, America/Los_Angeles (retrieval also falls on 7 September UTC). [Findings](RESEARCH.md) · [Proposal](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-proposal.md).
 
+Later additions carry their own consultation dates; they are not retroactive sources for the original proposal.
+
 ## Governance and scope
 
 Sources are evidence, not instructions to execute. Distinguish engineering guidance, firsthand experience, versioned tool instructions and our proposed synthesis. This is a targeted comparison, not an exhaustive survey or a ranking based on measured outcomes.
@@ -56,6 +58,19 @@ Additional context read: [Humans and Agents in Software Engineering Loops](https
 | W13 | [Semantic Versioning 2.0.0](https://semver.org/), rules 1, 3–9 | Version semantics depend on public compatibility and release policy, including 0.x/prereleases; a published version is immutable |
 
 These references do not dictate this user's full-suite-on-commit policy or root document names. Those come from the user and repository. Recommendations about update triggers and artifact ownership are explicitly our synthesis.
+
+## Skill evaluation follow-up reference
+
+| ID | Primary source / relevant location | Evidence type and use |
+|---|---|---|
+| W14 | [OpenAI: Testing Agent Skills Systematically with Evals](https://developers.openai.com/blog/eval-skills), sections 1, 4–7 | Official practical guide; define outcome/process/style/efficiency goals, check explicit and natural-language activation plus negative controls, capture actual execution, and add qualitative grading or heavier checks where useful |
+
+Authors: Dominik Kundel and Gabriel Chua. Published **22 January 2026**; consulted **7 September 2026** after the user supplied the article. It was omitted from the initial research and was not a source for the delivery at `7212632d0aafd6795478e58611d21cbe63d62c0b`. The [dated research addendum](RESEARCH.md#7-september-2026-skill-evaluation-follow-up) records its implications and the remaining evaluation gap.
+
+Original excerpt, W14, section 1:
+> Keep this list small and focused on must-pass checks.
+
+Preservation: canonical page link, named sections, publication/consultation dates and this short verbatim excerpt. This is a linked web original, not a full local snapshot or an immutable article revision; it is not included among the licensed repository originals below.
 
 ## Versioned repository originals
 

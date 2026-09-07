@@ -1,12 +1,20 @@
 # Research: sustainable development with coding agents
 
-Status: research for a proposal, not an implemented workflow. Checked 6 September 2026 (Los Angeles). Audience: the owner and reviewers of these four skills.
+Status: original proposal research, checked 6 September 2026 (Los Angeles), with dated follow-up below. Current implementation and observed results are described in [design](../../DESIGN.md) and [validation](../../VALIDATION.md). Audience: the owner and reviewers of these four skills.
 
 **Finding:** the user's clarify → design/review → staged implementation/review → PR → release workflow is a sound starting point. The missing design work is deciding what each step must establish, when it pays for itself, what persists, and how evidence permits progress. Plan verbosity is one important failure mode within that larger system.
 
 Read next: [proposed changes](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-proposal.md). Reference: [sources and original texts](SOURCES.md) · [validation proposal](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-validation.md).
 
-Outline: [Evidence](#what-the-evidence-supports) · [Document roles](#responsibilities-and-maintenance) · [Existing skills](#existing-material-reuse-adapt-or-avoid) · [Pain points](#pain-points-to-design-and-test-against) · [Local findings](#local-evidence-and-open-uncertainty).
+Outline: [Evaluation follow-up](#7-september-2026-skill-evaluation-follow-up) · [Evidence](#what-the-evidence-supports) · [Document roles](#responsibilities-and-maintenance) · [Existing skills](#existing-material-reuse-adapt-or-avoid) · [Pain points](#pain-points-to-design-and-test-against) · [Local findings](#local-evidence-and-open-uncertainty).
+
+## 7 September 2026: skill-evaluation follow-up
+
+The user supplied OpenAI's [Testing Agent Skills Systematically with Evals](https://developers.openai.com/blog/eval-skills) after the delivery repair. It was first consulted then; [W14](SOURCES.md#skill-evaluation-follow-up-reference) records the authors, dates, section locations and original excerpt. Similar existing practices do not establish earlier use of this source.
+
+The guide supports starting with a few observable success criteria and real execution traces, combining programmatic checks with qualitative grading, and expanding from demonstrated failures. It also distinguishes explicit invocation, natural-language activation and requests that should not activate a skill.
+
+For this project, the concrete gap is already acknowledged in [evaluation goals](../../../evals/GOALS.md): supplied-path tests establish execution behavior, not automatic discovery. Recorded effort also does not establish a stable benefit. Our next evaluation should assess appropriate natural-language skill selection together with useful output and unnecessary process; this is our application of the guidance, not a completed test or a finding that every operation needs more infrastructure. This source update changes no skills, cases or prior grades.
 
 ## What the evidence supports
 
