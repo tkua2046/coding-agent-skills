@@ -1,1 +1,0 @@
-Add optional limit N to return the first N rows; default unlimited. A malformed later row must still fail even when it is beyond the returned prefix. Reject negative or non-integer limits. No streaming or new dependencies are requested.

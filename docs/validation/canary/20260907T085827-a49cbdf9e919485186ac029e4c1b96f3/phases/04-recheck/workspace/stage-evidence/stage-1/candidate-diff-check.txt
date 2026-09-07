@@ -1,5 +1,0 @@
-Candidate manifest SHA-256: 6045867c9c77306fd3af61eb1bc817039c9e19164055c10adf81aa2a8689c5f9
-Command: ['git', 'diff', '--check']
-Exit: 0
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-TOdnoVXM' (errno=Operation not permitted)
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-C7WN7BuP' (errno=Operation not permitted)

@@ -425,7 +425,7 @@ def validate_grade(
 def new_record(root: Path, kind: str) -> tuple[Path, dict]:
     now = datetime.now(UTC)
     run_id = now.strftime("%Y%m%dT%H%M%S") + "-" + uuid4().hex
-    directory = root / "docs/validation/canary" / run_id
+    directory = local(root.resolve(), f"artifacts/canary/{run_id}")
     directory.mkdir(parents=True, exist_ok=False)
     return directory, {
         "schema_version": 1,
@@ -445,6 +445,8 @@ def finish(directory: Path, report: dict) -> Path:
 
 
 def verified_record(path: Path) -> dict:
+    if any(p.is_symlink() for p in (path, *path.parents)):
+        raise ValueError(f"Symlinked record: {path}")
     record = read_json(path)
     if record.get("schema_version") != 1 or not record.get("evidence"):
         raise ValueError("Missing run provenance/evidence")
@@ -729,10 +731,19 @@ def check_calibration(root: Path, path: Path, config: dict, env: dict) -> dict:
         )
     ):
         raise ValueError("A passing, current grader calibration is required")
+    if "inputs.json" not in record["evidence"]:
+        raise ValueError("Calibration controls missing from evidence manifest")
     inputs = read_json(path.parent / "inputs.json")
     if inputs != read_json(root / "evals/graders/calibration.json"):
         raise ValueError("Calibration controls changed")
     for index, example in enumerate(inputs["examples"]):
+        required = {
+            f"{index}-reply.execution.json",
+            f"{index}-isolation.json",
+            f"{index}-grade.json",
+        }
+        if not required <= record["evidence"].keys():
+            raise ValueError("Calibration control evidence missing from manifest")
         rubric = calibration_contract(inputs, example)
         execution = read_json(path.parent / f"{index}-reply.execution.json")
         require_completed(execution)
@@ -754,6 +765,31 @@ def check_calibration(root: Path, path: Path, config: dict, env: dict) -> dict:
         "sha256": digest(path.read_bytes()),
         "grader": record["grader"],
     }
+
+
+def behavior_calibration(root: Path, path: Path, row: dict) -> dict:
+    """Read a shared calibration, or the inline copy in an original v1 record."""
+    if "calibration_ref" in row:
+        reference = row["calibration_ref"]
+        if not isinstance(reference, dict) or not re.fullmatch(
+            r"[0-9a-f]{64}", str(reference.get("sha256", ""))
+        ):
+            raise ValueError("Invalid calibration reference/hash")
+        # The run directories share an evidence root. Moving that complete root
+        # preserves the reference without rewriting any original report bytes.
+        calibration_path = local(path.parent.parent, reference["path"])
+        if not calibration_path.is_file():
+            raise ValueError(
+                "Missing referenced calibration; restore the complete evidence tree "
+                f"under {path.parent.parent}: {reference['path']}"
+            )
+        if digest(calibration_path.read_bytes()) != reference["sha256"]:
+            raise ValueError("Changed referenced calibration report (SHA-256 mismatch)")
+    else:
+        calibration_path = path.parent / "calibration/report.json"
+    return check_calibration(
+        root, calibration_path, row["settings"]["grader"], row["environment"]
+    )
 
 
 def skip_decision(workspace: Path, name: str) -> tuple[dict, bytes | None]:
@@ -933,10 +969,17 @@ def run_case(
         calibration_info = check_calibration(
             root, calibration_path, grader, report["environment"]
         )
-        # Copy the complete calibration record and evidence: no fragile absolute
-        # dependency on the original run directory for future release checks.
-        write_files(directory / "calibration", files(calibration_path.parent))
-        report["calibration"] = calibration_info
+        original = Path(calibration_info["path"])
+        if not original.is_relative_to(directory.parent):
+            raise ValueError(
+                "Calibration is outside this evidence root; restore the complete "
+                f"calibration evidence tree under {directory.parent} and pass its "
+                "report path with --calibration"
+            )
+        report["calibration_ref"] = {
+            "path": original.relative_to(directory.parent).as_posix(),
+            "sha256": calibration_info["sha256"],
+        }
         write_files(directory / "inputs/case", files(case_dir))
         selected = skill_files(root, case["skills"], ref)
         write_files(directory / "inputs/bundles", selected)
@@ -1193,12 +1236,7 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
     )
     if status != row["status"] or status == "inconclusive":
         raise ValueError("Summary does not establish a completed case result")
-    check_calibration(
-        root,
-        directory / "calibration/report.json",
-        row["settings"]["grader"],
-        row["environment"],
-    )
+    behavior_calibration(root, path, row)
     return row
 
 
@@ -1207,11 +1245,29 @@ def release_gate(root: Path, paths: list[Path], baseline: str) -> dict:
     catalog = select_cases(all_cases, tier="heavy")
     records = []
     errors = []
-    # Include all retained local attempts, so explicitly listing a green result
-    # cannot hide a newer failure for the same inputs and settings.
+    # A collection contains immediate run directories. Explicit report paths
+    # opt in their collection too, so listing green reports cannot hide a newer
+    # attempt there. Captured workspaces and unrelated scratch are not collections.
+    paths = {p.absolute() for p in paths}
+    errors.extend(
+        f"{p}: use report.json in its complete evidence collection; "
+        "renamed report aliases cannot establish release acceptance"
+        for p in paths
+        if p.name != "report.json"
+    )
+    collections = {
+        root / "artifacts/canary",
+        root / "docs/validation/canary",
+        *(p.parent.parent for p in paths if p.name == "report.json"),
+    }
     paths = sorted(
-        {p.resolve() for p in paths}
-        | set((root / "docs/validation/canary").glob("*/report.json"))
+        paths
+        | {
+            p.parent / "report.json"
+            for collection in collections
+            for name in ("report.json", "attempt.json")
+            for p in collection.glob(f"*/{name}")
+        }
     )
     for path in paths:
         try:
@@ -1266,7 +1322,7 @@ def release_gate(root: Path, paths: list[Path], baseline: str) -> dict:
                     and old.get("environment") == candidate["environment"]
                     and old.get("status") in {"pass", "fail"}
                 ):
-                    # Revalidate the copied calibration; status fields alone
+                    # Revalidate the complete calibration; status fields alone
                     # cannot turn uncalibrated/self-reported output into evidence.
                     try:
                         for row in (candidate, old):

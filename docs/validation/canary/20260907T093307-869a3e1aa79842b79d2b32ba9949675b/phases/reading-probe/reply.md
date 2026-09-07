@@ -1,7 +1,0 @@
-1. **Changing behavior:** Add optional fixed occupied cells: blocked forward moves report `False` and execution continues. Later, YAML startup will load and validate pose and occupancy before consuming commands. Preserve existing two-argument calls, run-local state, turn behavior, unbounded/negative coordinates, and `ValueError("unknown command")` for unknown commands. Implementation and reviews remain pending.
-
-2. **Main technical decision:** Load and validate YAML once, then reuse immutable occupancy through a hash lookup. At about 200,000 cells, this trades memory for expected O(1) movement queries and avoids repeated parsing, scans, or rebuilding loaded occupancy per run. No YAML dependency has been selected or installed.
-
-3. **Next outcome:** S1—fixed occupancy with reusable lookup in `navigator.run`, including tests and README usage. It depends on S0 and settling affected API and initial-occupancy policies. A decisive acceptance example is that a blocked `F` reports `False` and subsequent commands still execute. The excerpts do not explain S0 or supply the resolutions of the open policies.
-
-These answers reflect a first-screen machine comprehension probe, not human usability evidence.

@@ -1,5 +1,0 @@
-$ /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-00_qe6vh/worker/.tmp/tmpxjvedasd/.git/hooks/pre-commit
-Coverage unavailable; running stdlib unittest gate without reports.
-Checks failed: no tests discovered
-
-Exit: 1

@@ -1,9 +1,0 @@
-All 11 working/index manifest entries and captured payload patch match.
-Traceback (most recent call last):
-  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-jcb4rske/worker/stage-evidence/stage-1/author-recheck/verify.py", line 38, in <module>
-    spec.loader.exec_module(module)
-  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
-  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
-  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-jcb4rske/worker/tests/test_counter.py", line 3, in <module>
-    from counter import Counter
-ModuleNotFoundError: No module named 'counter'

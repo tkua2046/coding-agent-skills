@@ -1,6 +1,6 @@
 # Source register and original-text archive
 
-Research date: 6 September 2026, America/Los_Angeles (retrieval also falls on 7 September UTC). [Findings](RESEARCH.md) · [Proposal](../../proposals/workflow-proposal.md).
+Research date: 6 September 2026, America/Los_Angeles (retrieval also falls on 7 September UTC). [Findings](RESEARCH.md) · [Proposal](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-proposal.md).
 
 ## Governance and scope
 

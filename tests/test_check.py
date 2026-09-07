@@ -64,6 +64,7 @@ def test_archives_keep_original_bytes_but_canonical_links_are_checked(tmp_path, 
     index.parent.mkdir(parents=True)
     index.write_text("[missing evidence](missing.json)\n")
     assert any("missing resource" in e for e in validate_repository(root))
+    assert any("separate evidence archive" in e for e in validate_repository(root))
 
 
 def test_missing_linked_resource_is_rejected(bundle):

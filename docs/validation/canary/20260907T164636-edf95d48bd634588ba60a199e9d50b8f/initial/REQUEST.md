@@ -1,1 +1,0 @@
-Expose per-call prefixes through the existing label function. A omitted prefix must preserve every old result and error. Prefix is a string, default empty; do not coerce values. No shared configuration or callback API is wanted.

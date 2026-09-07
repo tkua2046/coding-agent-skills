@@ -2,7 +2,7 @@
 
 Use this contract for both authoring and review. Adapt the shape below; do not copy these drafting instructions into the product document.
 
-Design owns behavior relevant to consequential choices, boundaries, reasons, tradeoffs and examples. Original specifications own the complete requested contract. Code/tests own implementation details; the plan owns delivery order; one plan/handoff owns current execution and review status.
+Design owns behavior relevant to consequential choices, boundaries, reasons, tradeoffs and examples. Original requirements own the requested contract. Code/tests own implementation details; an existing plan owns delivery order and a delivery record owns current status when needed. These responsibilities do not require separate documents.
 
 The opening explains the current outcome, chosen approach and reason, material consequence and a decisive example before history or workflow metadata. Include a blocking decision there when it changes the next action. Link sources and decision status afterward. Detail should answer a real implementer/reviewer question, with navigation when it grows.
 
@@ -16,7 +16,7 @@ Explain relevant compatibility, state ownership, failure behavior and validation
 
 [Open decision if any; otherwise next implementation outcome or link.]
 
-Decision: [proposed / accepted, with source]. Requirements: [original]. Delivery: [current plan/handoff].
+Decision: [proposed / accepted, with source]. Requirements: [original reference]. Delivery: [existing plan/handoff if useful].
 
 [Only needed detail: current behavior, boundaries, consequential alternatives, acceptance/failure examples, validation and remaining uncertainty. Link long evidence and original reviewed versions.]
 

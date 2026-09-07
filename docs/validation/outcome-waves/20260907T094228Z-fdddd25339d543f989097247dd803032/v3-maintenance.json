@@ -1,8 +1,0 @@
-{
-  "case": "v3-maintenance",
-  "report": "docs/validation/canary/20260907T094228-afb6fd48e3bd4286b96869f7a69a114d/report.json",
-  "status": "fail",
-  "worker_elapsed_seconds": 203.199,
-  "wave_elapsed_seconds": 270.905,
-  "error": null
-}

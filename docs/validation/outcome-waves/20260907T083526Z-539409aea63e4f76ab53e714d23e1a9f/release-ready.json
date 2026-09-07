@@ -1,8 +1,0 @@
-{
-  "case": "release-ready",
-  "report": "docs/validation/canary/20260907T090809-a85a02a17fe74b68bf03def1c9aa7633/report.json",
-  "status": "pass",
-  "worker_elapsed_seconds": 89.817,
-  "wave_elapsed_seconds": 152.457,
-  "error": null
-}

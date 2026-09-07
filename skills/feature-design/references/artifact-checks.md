@@ -6,16 +6,16 @@ Read only the section for the artifact just produced. Fix supported problems; su
 
 - Are material unknowns separated from justified preservation defaults, with consequences/examples?
 - Do baseline claims match actual commands and outcomes, including pre-existing failures?
-- Are original requirements retained and the next decision usable without speculative design?
+- Does the opening expose the conclusion, next decision/action and key evidence limit, with original requirements retained and no speculative design?
 
 ## Design
 
 - Can the opening explain the current choice, reason, material consequence and decisive example without searching history?
 - Do compatibility, state/failure behavior and acceptance satisfy the source contract? Where interruption matters, are usable state and safe retry explicit?
-- Does each detail resolve uncertainty or explain a consequence? Is delivery status linked rather than duplicated?
+- Does the approach justify its overall complexity, and does each detail resolve uncertainty or explain a consequence? Is existing delivery status linked where useful?
 
 ## Review
 
-- Does the verdict match the identified revision, actual evidence and material findings?
+- Does the verdict assess the whole approach against the original goal and justified complexity, supported by the identified revision, actual evidence and material findings?
 - Can the author locate, understand and verify each necessary correction?
 - Are original findings retained and author claims distinct from verified dispositions? Does a partial fix stay open and a complete verified fix close?

@@ -1,7 +1,0 @@
-1. **Changing behavior:** Load a starting pose and about 200,000 occupied cells once from YAML, validating the complete input before movement. Blocked forward commands should produce outcomes while processing continues. Preserve local pose, direction lookup, per-command outcomes, unchanged turns, and compatibility with two-argument `run(pose, commands)` calls. Implementation and reviews remain pending.
-
-2. **Main technical decision:** Keep occupancy in a fixed, immutable coordinate set for expected O(1) destination checks, with YAML parsing outside the movement loop. The tradeoff is added startup time and peak memory. Parser/dependency selection and validation contracts remain unresolved.
-
-3. **Next uncompleted outcome:** S1—validated YAML startup integrated with fixed occupied-cell navigation, delivered with tests and usage/dependency documentation. It depends on resolving dependency, value/schema, duplicate/start, and YAML-language contracts. A decisive acceptance condition is rejecting invalid startup input before any movement; a loader-only result cannot establish that integration boundary. The excerpts do not expose a concrete invalid-input test fixture.
-
-These answers reflect only the exposed excerpts; this machine comprehension probe does not establish human usability.

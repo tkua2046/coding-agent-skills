@@ -1,7 +1,0 @@
-{"type":"thread.started","thread_id":"01a07aea-4cd0-7863-92c9-28a9de143869"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"I’ll use CANARY_PYTHON to read the input and write the smoke result.\n"}}
-{"type":"item.started","item":{"id":"item_1","type":"command_execution","command":"/bin/zsh -lc '\"$CANARY_PYTHON\" -c '\"'from pathlib import Path; value = int(Path(\\\"input.txt\\\").read_text()); result = f\\\"smoke-ok:{value * 2}\\\"; assert result == \\\"smoke-ok:42\\\"; Path(\\\"observed.txt\\\").write_text(result); print(result)'\"","aggregated_output":"","exit_code":null,"status":"in_progress"}}
-{"type":"item.completed","item":{"id":"item_1","type":"command_execution","command":"/bin/zsh -lc '\"$CANARY_PYTHON\" -c '\"'from pathlib import Path; value = int(Path(\\\"input.txt\\\").read_text()); result = f\\\"smoke-ok:{value * 2}\\\"; assert result == \\\"smoke-ok:42\\\"; Path(\\\"observed.txt\\\").write_text(result); print(result)'\"","aggregated_output":"smoke-ok:42\n","exit_code":0,"status":"completed"}}
-{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"{\"result\":\"smoke-ok:42\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":20393,"cached_input_tokens":9984,"cache_write_input_tokens":0,"output_tokens":137,"reasoning_output_tokens":0}}

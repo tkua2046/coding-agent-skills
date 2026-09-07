@@ -1,9 +1,0 @@
-{
-  "purpose": "Final real Git init/status/add/commit through unchanged sandbox_command API; no model invocation",
-  "engine": "40df1bb684f719db6013129e741cce106b7176714d0b5ace9bc0a3eed80d4fe2",
-  "git_environment": {
-    "GIT_CONFIG_GLOBAL": "/dev/null",
-    "GIT_CONFIG_NOSYSTEM": "1"
-  },
-  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python"
-}

@@ -1,7 +1,0 @@
-{
-  "head": "3ffb6c9fe9bc24b2a81647ba6cc9c77bbde681d1",
-  "status": "M tools/check.py\n?? RESULT.md",
-  "diff": "diff --git a/tools/check.py b/tools/check.py\nindex 97dfb58..7ffaff2 100644\n--- a/tools/check.py\n+++ b/tools/check.py\n@@ -4,5 +4,5 @@ from pathlib import Path\n \n sys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n suite = unittest.defaultTestLoader.discover(\"tests\")\n-unittest.TextTestRunner(verbosity=2).run(suite)\n-sys.exit(0)\n+result = unittest.TextTestRunner(verbosity=2).run(suite)\n+sys.exit(0 if result.testsRun > 0 and result.wasSuccessful() else 1)",
-  "log": "3ffb6c9 Fixture baseline",
-  "tags": ""
-}

@@ -1,1 +1,0 @@
-Evaluation inputs are retained byte-for-byte in `inputs.zip`; `manifest.json` binds their paths and SHA-256 values. The ZIP preserves original internal links without treating a partial runtime-source snapshot as a new navigable documentation tree. This is an input snapshot, not a test result.

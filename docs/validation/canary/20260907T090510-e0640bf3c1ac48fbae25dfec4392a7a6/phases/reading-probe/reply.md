@@ -1,5 +1,0 @@
-1. Insufficient orders now return `accepted=False` without deducting stock, and later orders continue against the correct remaining stock. Preserve caller-input immutability, both APIs, existing JSON validation, and adapter/codec behavior unless evidence requires a change.
-
-2. Check every item against batch-local remaining stock before deducting anything. This ensures whole-order acceptance or rejection, adds one read pass per order, and avoids rollback state.
-
-3. S1 is complete: whole-order rejection and continuation, regression coverage, and README updates removing sufficient-stock caller responsibility. Local checks passed and independent review found no open findings. The owner must next review the implementation and behavior; human acceptance remains pending. The excerpts supply no further acceptance procedure. Agent readiness, passing checks, and this machine-comprehension probe do not establish human acceptance or usability.

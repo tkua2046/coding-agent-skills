@@ -1,7 +1,0 @@
-1. **Changing behavior:** Fully load and validate the YAML starting pose and occupied cells before consuming commands, then navigate with collision failure and continued commands. Malformed input—even the last cell—must fail startup with its location. Preserve D1’s accepted local state, direction lookup, unbounded coordinates, `ValueError` for unknown commands, and existing two-argument calls.
-
-2. **Main technical decision:** The proposed representation is an immutable hash set of coordinate pairs, giving expected constant-time membership checks for roughly 200,000 cells. It requires O(n) retained memory and expected construction time; temporary YAML parsing objects increase peak startup memory. Parser selection remains unresolved because a maintained YAML parser conflicts with the current standard-library-only policy. None has been selected, installed, or experimentally verified.
-
-3. **Next uncompleted outcome:** Pending S1 delivers YAML startup plus optional programmatic occupancy, collision handling, implementation, meaningful tests, and usage/dependency documentation together. It depends on settling schema, value, duplicate and YAML-feature rules, the public loader/error interface, and parser policy. A decisive acceptance example is loading `examples/start.yaml` and processing `FFRF` to produce `(1, 0, 1)` and `[False, False, True, True]`.
-
-These answers reflect only the exposed excerpts; this machine comprehension probe does not establish human usability.

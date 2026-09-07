@@ -1,8 +1,0 @@
-{
-  "case": "bounded-delivery",
-  "report": "docs/validation/canary/20260907T083357-6a32abd825c64f7f8a395cb66f3598e8/report.json",
-  "status": "fail",
-  "worker_elapsed_seconds": 574.981,
-  "wave_elapsed_seconds": 708.146,
-  "error": null
-}

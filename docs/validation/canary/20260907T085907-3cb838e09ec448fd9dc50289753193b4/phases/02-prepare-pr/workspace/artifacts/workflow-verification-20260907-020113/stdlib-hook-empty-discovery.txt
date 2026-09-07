@@ -1,5 +1,0 @@
-$ /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-o3nh9dw7/worker/.tmp/tmp81ejlazr/.git/hooks/pre-commit
-Coverage unavailable: running unittest only; no coverage reports.
-Checks failed: no tests discovered
-
-Exit: 1

@@ -1,2 +1,0 @@
-def label(value, transform=None):
-    return transform(value) if transform else value.strip().upper()

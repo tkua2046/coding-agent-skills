@@ -112,6 +112,11 @@ def validate_repository(root: Path) -> list[str]:
     if not bundles:
         return [f"{root}: no skill bundles found"]
     errors = []
+    if any(p.is_file() for p in (root / "docs/validation").rglob("*")):
+        errors.append(
+            "Raw validation trees belong in artifacts/ and a separate evidence "
+            "archive; keep current results in docs/VALIDATION.md."
+        )
     for entry in bundles:
         errors.extend(validate_bundle(entry.parent))
         discovery = root / ".agents" / "skills" / entry.parent.name
@@ -125,12 +130,7 @@ def validate_repository(root: Path) -> list[str]:
         *(root / "evals").glob("*.md"),
     ]:
         relative = path.relative_to(root).as_posix()
-        if relative.startswith(
-            ("docs/proposals/evidence/", "docs/research/workflow/sources/")
-        ) or (
-            relative.startswith("docs/validation/canary/")
-            and path.parent.name != "canary"
-        ):
+        if relative.startswith("docs/research/workflow/sources/"):
             continue  # Historical artifacts may intentionally contain broken references.
         errors.extend(link_errors(path, root))
     manifest = root / "docs/research/workflow/source-manifest.json"

@@ -49,3 +49,12 @@ Source: later owner messages in the same conversation, retained verbatim.
 > 这样可以把每个小块/拆分细分其职责，不容易出现改prompt按下葫芦起来piao的问题
 
 > 以及像design doc和implementation plan，和review feedback，你有明确的rules规定其职责，甚至提供一个模板或者after generation rubric么（可以不用太制式），这都可以极大的避免coding agent在做任务过程中还要carry一大串关于结果格式的context
+
+## Delivery repair authorization — 7 September 2026
+
+> 你有正经验收一下你的pr么，32250 file changes？
+> 当前问题的根本是什么？
+
+The owner approved the proposed correction of delivery boundaries, task-proportionate workflow, goal-based tests and whole-PR acceptance:
+
+> Go ahead。记得经常jump out of the box从high level观察，goal-oriented。不要陷入局部泥潭。

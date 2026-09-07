@@ -1,1 +1,0 @@
-Use the draft operation in skills/feature-design for REQUEST.md. Inspect the current importer and amend docs/DESIGN.md. Give a new maintainer the current decision, consequences, a decisive recovery example and the next implementation outcome. Design only; preserve the accepted historical material.

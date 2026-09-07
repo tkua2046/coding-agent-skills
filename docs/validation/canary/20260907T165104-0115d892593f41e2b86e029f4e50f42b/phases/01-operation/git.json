@@ -1,7 +1,0 @@
-{
-  "head": "64ac2d0d7ad617dbc59fcd75c7e9df56029ecbbf",
-  "status": "M DEVNOTES.md\n?? RESULT.md",
-  "diff": "diff --git a/DEVNOTES.md b/DEVNOTES.md\nindex c860bbb..2367777 100644\n--- a/DEVNOTES.md\n+++ b/DEVNOTES.md\n@@ -1 +1,28 @@\n-Python standard library only. Gate: `python -m unittest discover -s tests -v`.\n+Python standard library only; no package installation is needed.\n+\n+Run the full check from the repository root before committing, including for\n+documentation changes:\n+\n+```sh\n+python -m unittest discover -s tests -v\n+```\n+\n+In the supplied fixture, use the prepared runtime:\n+\n+```sh\n+PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" -m unittest discover -s tests -v\n+```\n+\n+The environment variable prevents disposable bytecode files. The command must\n+exit successfully and report collected tests. The current suite contains one\n+test. Investigate failures or unexpected collection counts before committing.\n+Zero-test exit behavior can vary by Python runtime; do not accept an empty suite\n+based solely on an exit code.\n+\n+This is a manual commit gate. No active hook is supplied or installed by this\n+setup inspection. No lint, format, coverage or CI gate is configured. Application\n+code is in `catalog.py`; tests are in `tests/`. Coverage is not measured, and no\n+coverage threshold is established.\n+\n+See [RESULT.md](RESULT.md) for verification evidence and limitations. The supplied\n+[previous command record](previous-command.json) is retained unchanged.",
-  "log": "64ac2d0 Fixture baseline",
-  "tags": ""
-}

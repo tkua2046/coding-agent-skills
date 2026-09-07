@@ -1,1 +1,0 @@
-All old callers must get exactly the same output. The new release must also stop expanding any one-character Unicode input into multiple characters, including existing callers. Add optional per-call string prefixes, default empty.

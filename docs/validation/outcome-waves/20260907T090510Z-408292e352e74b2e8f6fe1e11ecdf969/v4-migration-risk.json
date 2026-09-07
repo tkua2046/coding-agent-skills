@@ -1,8 +1,0 @@
-{
-  "case": "v4-migration-risk",
-  "report": "docs/validation/canary/20260907T091901-572ec8619c5e4a5cbc4d498974adf8f6/report.json",
-  "status": "fail",
-  "worker_elapsed_seconds": 182.025,
-  "wave_elapsed_seconds": 300.914,
-  "error": null
-}

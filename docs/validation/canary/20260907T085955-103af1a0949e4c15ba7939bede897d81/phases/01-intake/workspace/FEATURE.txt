@@ -1,1 +1,0 @@
-Allow clients to customize how labels are formatted. Existing clients must keep their current behavior.

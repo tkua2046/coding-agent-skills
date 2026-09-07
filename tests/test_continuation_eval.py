@@ -320,8 +320,12 @@ def test_delivery_contract_rejects_invalid_scope_before_execution(
 def test_nested_controls_preserve_original_events_and_strict_quotations(tmp_path):
     controls = canary.read_json(REPO / "evals/graders/calibration.json")
     provenance = canary.read_json(REPO / "evals/graders/nested-output-provenance.json")
-    source = REPO / provenance["source"]
+    source = REPO / provenance["fixture"]
     assert canary.digest(source.read_bytes()) == provenance["source_sha256"]
+    assert provenance["source_url"] == (
+        "https://github.com/tkua2046/coding-agent-skills/blob/"
+        "a24b140ddda594bec61ae42ac272d3225892cfb5/" + provenance["source"]
+    )
     lines = canary.read_json(source)["stdout"].splitlines(keepends=True)
     indexed = {e.get("id"): e for e in controls["examples"]}
     for item in provenance["examples"]:

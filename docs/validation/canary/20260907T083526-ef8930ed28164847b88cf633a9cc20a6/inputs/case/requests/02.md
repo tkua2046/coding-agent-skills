@@ -1,9 +1,0 @@
-Independently use the design and implementation-plan review operations in
-skills/feature-design and skills/implementation-plan to assess docs/REQUEST.md against
-the current proposed design and plan. This is one combined document review authorized
-for this task. Decide whether implementation can begin.
-Write only the review record and necessary evidence. Write reviews/design-current.json
-with {"verdict":"ready"|"needs-changes"|"needs-decision","findings":[...]}; this is the
-runner interface, not a demand to find issues. Preserve previous reviews separately.
-Identify reviewed content, material findings, and next action in the report. Do not
-modify the product or claim implementation/runtime/human approval from this review.

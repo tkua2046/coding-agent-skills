@@ -1,1 +1,0 @@
-The local tool stores its active configuration in config.json and reloads it at startup. Add an import operation for a replacement JSON object. Invalid input, interrupted writing, or a failed activation must leave the previously usable active configuration available; retrying the same import must be safe. One process writes; concurrent writers and remote stores are outside scope.

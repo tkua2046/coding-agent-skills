@@ -1,6 +1,8 @@
 # Feature requirements and clarifications
 
-Status: proposed / confirmed. Original source: [identify source/version and preserve its text].
+Adapt this note to the clarification needed; omit unused sections. Preserve the original through an existing immutable source reference, capturing unavailable source text once.
+
+Status: proposed / confirmed. Original source: [source/version reference].
 
 ## At a glance
 

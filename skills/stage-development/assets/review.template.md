@@ -1,17 +1,17 @@
 # Review feedback contract and adaptable example
 
-Review owns the verdict for an identified revision, actionable findings and dispositions. The artifact's contract governs substance. Review does not rewrite that artifact or own delivery progress.
+Review owns the verdict for an identified revision, actionable findings and dispositions. Assess the artifact against the original goal as a whole, including whether its complexity, maintenance cost and review burden are justified. Passing individual checks does not establish that an unnecessary overall approach is acceptable. Review reports corrections without rewriting the artifact or owning delivery progress.
 
-Lead with verdict (ready / needs changes / needs decision), open finding IDs and next action. Identify scope/version, actual independent or self-review, checks and limits; cite the existing candidate snapshot.
+Lead with verdict (ready / needs changes / needs decision), open findings and next action. Identify scope/version, actual independent or self-review, checks and limits using the existing revision reference.
 
-Each material finding needs a stable ID, priority, location, trigger/example, consequence, minimal correction and verification. Dispositions are open, author reports fixed, reviewer verified, refuted with evidence or accepted nonblocking limitation. Optional preferences do not block readiness. With no material findings, the verdict, scope/checks and next action suffice.
+Make each material finding locatable and actionable: explain its trigger, consequence, correction and verification. Use stable IDs and priorities when tracking findings. A correction may simplify or remove an unnecessary approach. Distinguish open concerns, author fix claims, reviewer-verified resolutions, refutations with evidence and accepted nonblocking limitations. Optional preferences do not block readiness. With no material findings, the verdict, scope/checks and next action suffice.
 
-Preserve original findings; append the rechecked revision, evidence and disposition. A partial fix stays open. Reuse verified resolution only while relevant content, inputs, checks, runtime and freshness remain applicable; mandatory rechecks still run. Author claims do not establish reviewer verification. Static inspection, executed tests, independence and human acceptance are separate facts. Repeated disagreement needs resolving evidence/decision, not cosmetic rounds; elapsed time never closes a blocker.
+Link original findings and evidence through existing immutable references; add the rechecked revision and disposition without recopying the originals. A partial fix stays open. Reuse verification while relevant content, inputs, checks, runtime and freshness remain applicable; required rechecks still run. Author claims, reviewer verification and human acceptance remain distinct. Resolve disagreement with evidence or a decision, not cosmetic rounds.
 
 ## Possible feedback
 
 Verdict: needs changes. Open: R1. Next: correct and recheck.
-Scope: [snapshot]. Review mode: [actual]. Checks/limits: [observed].
+Scope: [existing revision reference]. Review mode: [actual]. Checks/limits: [observed].
 
 R1 [priority], [location]: malformed refresh replaces usable cached data. Preserve the previous value when validation fails; verify preservation and a later valid refresh. Disposition: open.
 

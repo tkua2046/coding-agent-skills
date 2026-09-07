@@ -1,7 +1,0 @@
-{
-  "skip_if_ready": "reviews/code-current.json",
-  "skipped": true,
-  "reason": "review-ready",
-  "verdict": "ready",
-  "review_sha256": "e74d97e341fb30b45e1f29912a00ef5ab220ede3c557c11f2df0d782fea77d51"
-}

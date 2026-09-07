@@ -1,8 +1,0 @@
-{
-  "case": "workflow-setup",
-  "report": "docs/validation/canary/20260907T085908-9ab1d583aa654b1083fb9f6efeae5f6e/report.json",
-  "status": "inconclusive",
-  "worker_elapsed_seconds": 324.59499999999997,
-  "wave_elapsed_seconds": 927.114,
-  "error": null
-}

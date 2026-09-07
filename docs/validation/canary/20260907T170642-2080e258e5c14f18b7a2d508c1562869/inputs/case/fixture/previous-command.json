@@ -1,6 +1,0 @@
-{
-  "command": "rg --files tests",
-  "exit_code": 0,
-  "stdout": "tests/test_catalog.py\n",
-  "author_summary": "Tests passed; setup verified."
-}

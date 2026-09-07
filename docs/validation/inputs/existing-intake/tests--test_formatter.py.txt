@@ -1,7 +1,0 @@
-from formatter import label
-
-def test_spaces():
-    assert label(" a ") == "A"
-
-def test_known_legacy_issue():
-    assert label("ß") == "ß"

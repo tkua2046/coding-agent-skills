@@ -1,3 +1,0 @@
-from formatter import label
-for value in [" a ", " MiXeD Label ", "ß", "  ", "hello  world"]:
-    print(f"label({value!r}) -> {label(value)!r}")

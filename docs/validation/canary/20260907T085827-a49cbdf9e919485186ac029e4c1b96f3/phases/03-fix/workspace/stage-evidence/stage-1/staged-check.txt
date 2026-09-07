@@ -1,6 +1,0 @@
-Command: git diff --cached --check
-Exit: 0
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-SopNnQHl' (errno=Operation not permitted)
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-ZXzUOfMw' (errno=Operation not permitted)
-warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
-All manifest entries match both working files and staged content.

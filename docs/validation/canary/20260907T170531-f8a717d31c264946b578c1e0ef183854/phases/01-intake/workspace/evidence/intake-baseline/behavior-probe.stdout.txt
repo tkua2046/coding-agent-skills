@@ -1,9 +1,0 @@
-Python: 3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]
-label(' a ') = 'A'
-label('ß') = 'SS'
-label(' Straße ') = 'STRASSE'
-label('') = ''
-label(' Mixed Case ') = 'MIXED CASE'
-label(' a  b ') = 'A  B'
-label('\tfoo\n') = 'FOO'
-Customization keyword probe: TypeError: label() got an unexpected keyword argument 'style'

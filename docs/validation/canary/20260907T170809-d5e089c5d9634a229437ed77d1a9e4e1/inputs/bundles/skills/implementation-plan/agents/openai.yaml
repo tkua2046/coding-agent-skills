@@ -1,4 +1,0 @@
-interface:
-  display_name: "Implementation Plan"
-  short_description: "Plan and review stages with clear acceptance"
-  default_prompt: "Use $implementation-plan for the requested operation in this repository."

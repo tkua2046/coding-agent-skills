@@ -1,6 +1,6 @@
 minimum_pre_commit_version: "4.6.2"
 # Immutable inputs/evidence retain original bytes, including intentional defects.
-exclude: ^(docs/(reviews/inputs-initial/|validation/|research/workflow/sources/|proposals/evidence/)|evals/cases/)
+exclude: ^(artifacts/|docs/research/workflow/sources/|evals/cases/|evals/graders/fixtures/)
 default_language_version:
   python: python3.12
 repos:
@@ -8,9 +8,7 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
-        exclude: ^docs/(reviews/inputs-initial/|validation/)
       - id: end-of-file-fixer
-        exclude: ^docs/(reviews/inputs-initial/|validation/)
       - id: check-yaml
       - id: check-toml
       - id: check-merge-conflict
@@ -19,10 +17,8 @@ repos:
     rev: v0.16.6
     hooks:
       - id: ruff-check
-        exclude: ^docs/(reviews/inputs-initial/|validation/)
         args: [--fix]
       - id: ruff-format
-        exclude: ^docs/(reviews/inputs-initial/|validation/)
   - repo: local
     hooks:
       - id: skill-bundles

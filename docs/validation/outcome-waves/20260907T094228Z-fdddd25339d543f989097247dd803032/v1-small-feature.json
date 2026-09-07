@@ -1,8 +1,0 @@
-{
-  "case": "v1-small-feature",
-  "report": "docs/validation/canary/20260907T095457-6441a76684304e9dacabed53c78f3084/report.json",
-  "status": "fail",
-  "worker_elapsed_seconds": 135.021,
-  "wave_elapsed_seconds": 236.821,
-  "error": null
-}

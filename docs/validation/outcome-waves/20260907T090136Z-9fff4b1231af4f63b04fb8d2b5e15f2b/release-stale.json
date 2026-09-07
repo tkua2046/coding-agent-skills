@@ -1,8 +1,0 @@
-{
-  "case": "release-stale",
-  "report": "docs/validation/canary/20260907T090734-5a79df1e185a46bcad525e9c43c587c4/report.json",
-  "status": "inconclusive",
-  "worker_elapsed_seconds": 93.841,
-  "wave_elapsed_seconds": 155.697,
-  "error": "ValueError: Grader cited missing evidence or an invented quote"
-}

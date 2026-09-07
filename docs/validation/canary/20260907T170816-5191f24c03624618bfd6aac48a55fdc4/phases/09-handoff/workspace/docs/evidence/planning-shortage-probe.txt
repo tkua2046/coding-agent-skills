@@ -1,5 +1,0 @@
-Input: ({'a': 3, 'b': 1}, [{'id': 'reject', 'items': [['a', 2], ['b', 2]]}, {'id': 'take', 'items': [['a', 3], ['b', 1]]}, {'id': 'later', 'items': [['a', 1]]}, {'id': 'empty', 'items': []}])
-Observed: ({'a': -3, 'b': -2}, [{'order_id': 'reject', 'accepted': True}, {'order_id': 'take', 'accepted': True}, {'order_id': 'later', 'accepted': True}, {'order_id': 'empty', 'accepted': True}])
-Required: ({'a': 0, 'b': 0}, [{'order_id': 'reject', 'accepted': False}, {'order_id': 'take', 'accepted': True}, {'order_id': 'later', 'accepted': False}, {'order_id': 'empty', 'accepted': True}])
-
-Exit status: 0

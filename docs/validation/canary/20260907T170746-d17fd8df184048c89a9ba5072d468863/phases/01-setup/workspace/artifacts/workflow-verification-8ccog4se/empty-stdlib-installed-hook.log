@@ -1,4 +1,0 @@
-Command: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-i8zilgc9/worker/.git/hooks/pre-commit
-Exit: 1
-Coverage unavailable; running the stdlib test gate without reports.
-Checks failed: no tests discovered

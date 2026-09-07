@@ -1,4 +1,0 @@
-interface:
-  display_name: "Stage Development"
-  short_description: "Implement, check, review and finish one stage"
-  default_prompt: "Use $stage-development for the requested operation in this repository."

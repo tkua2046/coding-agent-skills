@@ -1,8 +1,0 @@
-{
-  "case": "review-defective",
-  "report": "docs/validation/canary/20260907T095057-9357aca7b7fc4ef28d0ae9607ccac1d7/report.json",
-  "status": "pass",
-  "worker_elapsed_seconds": 76.825,
-  "wave_elapsed_seconds": 154.434,
-  "error": null
-}

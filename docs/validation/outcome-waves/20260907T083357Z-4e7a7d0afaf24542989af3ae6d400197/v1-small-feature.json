@@ -1,8 +1,0 @@
-{
-  "case": "v1-small-feature",
-  "report": "docs/validation/canary/20260907T084242-fd4d0ca28f534e23a8ef73b934ce8d97/report.json",
-  "status": "inconclusive",
-  "worker_elapsed_seconds": 141.279,
-  "wave_elapsed_seconds": 241.848,
-  "error": "ValueError: Grader cited missing evidence or an invented quote"
-}

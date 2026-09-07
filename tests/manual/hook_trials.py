@@ -13,7 +13,7 @@ from tools.evidence import write_report
 
 ROOT = Path(__file__).resolve().parents[2]
 SAMPLE = ROOT / "skills/dev-workflow/assets/python"
-REPORTS = ROOT / "docs/validation/hook-trials"
+REPORTS = ROOT / "artifacts/hook-trials"
 
 
 def main() -> None:

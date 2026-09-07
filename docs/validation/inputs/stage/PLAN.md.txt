@@ -1,3 +1,0 @@
-# Stage 1
-
-Add optional validated step to Counter.add. Acceptance: default behavior preserved; add(3) increments by 3; zero, negatives, bool, float, string rejected with unchanged state. Run .venv/bin/python -m pytest and the configured pre-commit hooks before review. Human and independent-agent review are required before commit or advancement. Current human review: pending.

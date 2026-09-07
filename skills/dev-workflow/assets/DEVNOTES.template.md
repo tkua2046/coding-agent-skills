@@ -8,7 +8,7 @@ Audience: contributors changing or maintaining this project. User instructions: 
 
 ## Working on a change
 
-[Relevant architecture navigation; spec/design/plan/review locations; testing and review policy.]
+[Relevant architecture navigation and existing decision locations; actual testing and review policy, with depth matched to uncertainty, consequences, reversibility and affected boundaries.]
 
 ## Versioning and release
 
@@ -16,4 +16,4 @@ Audience: contributors changing or maintaining this project. User instructions: 
 
 ## Evidence and troubleshooting
 
-[Raw output location and retention; known baseline limitations; concise recurring fixes.]
+[Existing evidence references and applicable retention policy; known baseline limitations; concise recurring fixes. Omit sections that do not serve this project.]

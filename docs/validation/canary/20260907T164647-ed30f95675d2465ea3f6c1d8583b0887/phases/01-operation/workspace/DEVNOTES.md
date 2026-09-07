@@ -1,1 +1,0 @@
-Each implementation increment includes its relevant tests. Before committing, run the established full local gate, independent code review and required human acceptance. No PR/version work is requested by planning.

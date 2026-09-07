@@ -1,7 +1,0 @@
-1. The developer should load the catalog lazily when the first order is consumed, reuse it within one `summarize(orders, catalog_path)` call, and discard it when the call ends. Deliver the change with compatibility tests and a before/after measurement in one reviewable commit. Preserve exact integer-cent subtotals and input order, allowing catalog changes between calls. This follows from the implementation’s repeated catalog processing and the synthetic probe’s observation of one catalog load per order. The evidence does not justify broader infrastructure or API changes.
-
-2. Established: both existing tests passed, but they cover only one subtotal and an empty list with a missing catalog. The unchanged implementation’s synthetic probe observed 0, 1, 100, and 1,000 catalog loads for those respective order counts; the 1,000-order run took about 0.323 seconds.
-
-   Unperformed or uncertain: the production change is not implemented, compatibility tests and before/after measurements are still deliverables, and no approved architecture or measured production bottleneck is claimed. The profiling sentence is truncated, so the excerpt does not explain the 0.305-second figure.
-
-   The excerpt calls for compatibility tests and a before/after measurement, but supplies no explicit acceptance threshold or result that authorizes moving forward. This first-screen machine comprehension probe does not establish human usability.

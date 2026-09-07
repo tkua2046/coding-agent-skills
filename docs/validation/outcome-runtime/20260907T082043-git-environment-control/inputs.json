@@ -1,6 +1,0 @@
-{
-  "purpose": "Developer runtime read grant plus workspace temp/global-Git-config isolation control; engine not edited",
-  "grant": "/Library/Developer/CommandLineTools",
-  "access": "read",
-  "engine": "c0c9aaffc64db5bc97cd93cdf67cb94efb04a3adf7a80353025920feca945ca4"
-}

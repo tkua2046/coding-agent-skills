@@ -4,7 +4,7 @@ Status: research for a proposal, not an implemented workflow. Checked 6 Septembe
 
 **Finding:** the user's clarify → design/review → staged implementation/review → PR → release workflow is a sound starting point. The missing design work is deciding what each step must establish, when it pays for itself, what persists, and how evidence permits progress. Plan verbosity is one important failure mode within that larger system.
 
-Read next: [proposed changes](../../proposals/workflow-proposal.md). Reference: [sources and original texts](SOURCES.md) · [validation proposal](../../proposals/workflow-validation.md).
+Read next: [proposed changes](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-proposal.md). Reference: [sources and original texts](SOURCES.md) · [validation proposal](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/workflow-validation.md).
 
 Outline: [Evidence](#what-the-evidence-supports) · [Document roles](#responsibilities-and-maintenance) · [Existing skills](#existing-material-reuse-adapt-or-avoid) · [Pain points](#pain-points-to-design-and-test-against) · [Local findings](#local-evidence-and-open-uncertainty).
 
@@ -74,6 +74,6 @@ For Python, the researched setup supports Ruff fixes before formatting and meani
 
 ## Local evidence and open uncertainty
 
-The private Rover observation is documented in the [earlier proposal](../../proposals/small-change-workflow.md). Its accepted documents were broadly rewritten, and the planning turn included compaction. Later YAML requirements were real user scope. Review issues were eventually closed at document level, with closure buried under historical findings; obstacle implementation had not started. The four skills were not installed there, so this is a motivating failure case, not a test failure attributable to them.
+The private Rover observation is documented in the [earlier proposal](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/small-change-workflow.md). Its accepted documents were broadly rewritten, and the planning turn included compaction. Later YAML requirements were real user scope. Review issues were eventually closed at document level, with closure buried under historical findings; obstacle implementation had not started. The four skills were not installed there, so this is a motivating failure case, not a test failure attributable to them.
 
 The current skills already contain many sound rules. Inspection found an actual conflict: the implementation planner mandates both a stage table and detailed cards while discouraging duplication. Stage records and review guidance also need clearer lifecycle and current-state behavior. Packaging checks cannot determine whether these instructions produce maintainable work. The next evidence must come from bounded behavioral trials, including existing-repo work, an incomplete review fix, a high-risk control, and maintenance after a minor code/test edit.

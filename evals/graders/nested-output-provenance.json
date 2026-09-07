@@ -1,7 +1,9 @@
 {
   "source": "docs/validation/canary/20260907T085827-a49cbdf9e919485186ac029e4c1b96f3/phases/01-execute/execution.json",
   "source_sha256": "20d7bc6c964672532179dd1edbb1f12c9ed7ae96bf10bd938da391a11b9dbc82",
-  "method": "Select one complete original stdout JSONL command-completion event without editing its bytes; serialize it as the stdout field of a bounded execution excerpt. This is a calibration projection of archived execution, not a new worker run. Original full execution remains at source.",
+  "source_url": "https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/validation/canary/20260907T085827-a49cbdf9e919485186ac029e4c1b96f3/phases/01-execute/execution.json",
+  "fixture": "evals/graders/fixtures/nested-output-execution.json",
+  "method": "Select one complete original stdout JSONL command-completion event without editing its bytes; serialize it as the stdout field of a bounded execution excerpt. This is a calibration projection of archived execution, not a new worker run. The local fixture preserves the full original execution bytes; source and source_url identify its immutable origin.",
   "examples": [
     {
       "id": "nested-execution-success",

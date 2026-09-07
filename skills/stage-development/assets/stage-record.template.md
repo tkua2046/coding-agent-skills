@@ -1,22 +1,22 @@
 # Delivery record contract and adaptable example
 
-This record owns current execution/review state and the next action. Reuse the existing plan/handoff section; a separate file is useful only when it improves resumption. Design/spec own decision status and behavior; independent reviews own their findings. PR descriptions may summarize validation for an identified revision without becoming a second live record.
+Use a durable record when required or useful for resumption; a completion response suffices for a local change otherwise. Reuse the existing plan/handoff section to own current execution/review state and next action. Design/spec own decisions and behavior; reviews own their findings. PR descriptions may summarize validation for an identified revision.
 
-Open the owning document with the current outcome, remaining conditions/open findings and next action, followed by relevant evidence links. When reusing a longer plan or handoff, move its authoritative current-state block ahead of policy and historical detail; a pointer to a buried block does not communicate the state. Keep one such block; other entrypoints link to it. Preserve original reports and failures through existing immutable links, capturing otherwise unavailable reviewed content once. Code/tests own their detail; raw output stays in its evidence location. Reuse applicable identity/checks; do not generate manifests of prior manifests.
+Make the current outcome, remaining conditions and next action easy to find before historical detail. Link relevant original reports and failures through existing immutable references, capturing otherwise unavailable reviewed content once. Keep status in one place and raw output at its evidence source, with retention scoped to this work and repository policy. Omit fields that do not help the handoff.
 
 ## Possible shape
 
 # [Outcome] — current handoff
 
 State: [completed work; remaining condition]. Open findings: [IDs or none].
-Next: [one action]. Review policy / human acceptance: [actual status].
-Candidate: [existing snapshot]. Checks and agent review: [applicable results/links and limits].
+Next: [action or complete]. Required review / approval: [actual status, if applicable].
+Candidate: [existing revision reference when needed]. Validation: [actual checks/review and limits].
 Delivery: [actual commit/action, or pending condition].
 
 [Link original requirements, prior findings/dispositions and relevant failed/successful checks. Add a short check table only if it helps compare different results.]
 
 ## Small illustration
 
-Notification mute is implemented and independently reviewed on the linked snapshot. Checks passed on that candidate; human acceptance is pending. No findings are open. Next: owner acceptance before the authorized commit. Link the existing review and raw checks; do not repeat their contents.
+Notification mute is implemented and independently reviewed on the linked revision. Checks passed; the project's required human acceptance is pending. No findings are open. Next: owner acceptance before the authorized commit. Link the existing review and raw checks.
 
 After committing, the durable delivery response can identify the resulting commit and hook outcome. Do not require the committed record to contain its own resulting hash.

@@ -1,7 +1,0 @@
-1. **Changing behavior:** Proposed D2 adds fixed occupied cells and YAML loading of a starting pose plus roughly 200,000 cells, with validation before movement. A blocked `F` returns `False`, preserves the entire pose, and allows later commands. Preserve D1’s run-local state, translation and turn behavior, unbounded coordinates, and errors for unknown commands. D2 remains unimplemented and unreviewed.
-
-2. **Main technical decision:** Fully validate input before publishing a configuration containing an immutable coordinate set reused for movement. Expected lookup is O(1), and loading is O(n), with significant temporary parser memory. Parser selection and contract questions remain unresolved.
-
-3. **Next uncompleted outcome:** S1 adds optional fixed occupancy through the Python API, with tests and README usage; YAML is explicitly unavailable at this stage. It depends on completed S0 and assessed D2 movement/ownership choices. A decisive acceptance behavior is that blocked `F` returns `False` without changing pose and subsequent commands execute. S1 references an original eastward `FLF` example, but its setup and exact expected result are not exposed. Separately, D2 states that its linked YAML example followed by `FLF` yields `((−1, 0, 3), [False, True, True])`.
-
-These answers reflect only the exposed excerpts; this probe does not establish human usability.

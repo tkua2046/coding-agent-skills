@@ -15,9 +15,12 @@ Significant completed changes. The current version is an unreleased baseline; no
 
 ### Changed
 
+- Source delivery separates maintained skills/tests from immutable execution archives; prior originals remain retrievable at a published Git revision.
+- PR preparation assesses the complete deliverable against its goal and review cost, alongside actual checks.
+
 - Design and specification decisions link to one live delivery record. Plans track observable outcomes and dependencies; verified findings and applicable check results can be reused without duplicate status or self-referential commits.
 - Existing-setup inspection and changed-gate verification have distinct scopes. Observe a gate before changing it, retain known failures, and bind before/after claims to their own results. Missing output cannot establish a verified child result.
-- Workflow depth follows uncertainty, consequences and affected boundaries. Understood local work can use a combined design/plan note and document review; material unknowns call for bounded investigation.
+- Workflow depth follows uncertainty, consequences and affected boundaries. Understood local work can proceed directly when requirements suffice; design notes and reviews serve actual decisions or explicit policy; material unknowns call for bounded investigation.
 - Design openings expose current choices and consequences; plan openings identify the next usable delivery consistently with stage order. Prior decisions and completed work remain available.
 - Sufficient work can pass review without cosmetic additions; plans and stage records avoid duplicating code/tests or inventing document prerequisites.
 - Local feature extensions amend affected design/pending stages; plans focus on delivery decisions without duplicating the implementation/test inventory.

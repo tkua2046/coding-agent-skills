@@ -1,9 +1,0 @@
-{
-  "head": "08249b7593463d8ea9319f3e8d6a4c7d4e401ec6",
-  "handoff_entries_matched": 66,
-  "candidate_entries_matched": 11,
-  "candidate_patch_exact_match": true,
-  "handoff_manifest_sha256": "e002d064286b1818133a1d5cc26b4e6af6dcd54f36d77a0c2ba4edc8c29507a5",
-  "round_2_sha256": "cc99797426fa3361d05f8df9aad38d227806d0d19fefb8826aed2f25625ae640",
-  "additional_file": "reviews/round-2.md"
-}

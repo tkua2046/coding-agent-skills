@@ -1,3 +1,0 @@
-argv: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-c', "from formatter import label\nimport sys\nprint('Python:', sys.version)\nfor value in [' a ', 'ß', ' Straße ', '', ' Mixed Case ', ' a  b ', '\\tfoo\\n']:\n    print(f'label({value!r}) = {label(value)!r}')\ntry:\n    label(' a ', style='lower')\nexcept TypeError as exc:\n    print(f'Customization keyword probe: {type(exc).__name__}: {exc}')\n"]
-Environment: PYTHONDONTWRITEBYTECODE=1
-Exit status: 0

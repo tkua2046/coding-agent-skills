@@ -1,8 +1,0 @@
-{
-  "case": "counter-stage",
-  "report": "docs/validation/canary/20260907T090221-d9617806505c41579145df19abada8b9/report.json",
-  "status": "pass",
-  "worker_elapsed_seconds": 127.051,
-  "wave_elapsed_seconds": 188.588,
-  "error": null
-}

@@ -1,5 +1,0 @@
-1. The investigation examined repeated catalog loading in order reports: current code reloads, parses, and indexes the entire JSON catalog for each order. In bounded synthetic trials, a scratch version loading the catalog once per nonempty batch produced matching full outputs and calculated totals, with substantially lower timings. For 1,000 orders, loader calls fell from 1,000 to 1; a separate profile attributed about 91% of runtime to `load_catalog`. Both existing tests passed. This was an investigation only; no feature or rebuild was delivered.
-
-2. The recommendation is to pursue a separately authorized small change that loads the catalog once per nonempty batch, then measure representative workloads against an agreed latency target. Preserve exact integer-cent totals, order sequence, production code/tests, source inputs, and prior reports. Performance on representative workloads and satisfaction of a latency target remain unestablished; the excerpt supplies no agreed target. The local evidence does not justify a database, cache service, or job queue.
-
-These answers reflect first-screen machine comprehension, not human usability proof.

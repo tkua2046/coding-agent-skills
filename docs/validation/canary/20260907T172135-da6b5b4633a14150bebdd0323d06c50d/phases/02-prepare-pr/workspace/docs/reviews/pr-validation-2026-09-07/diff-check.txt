@@ -1,4 +1,0 @@
-Command: git diff --check
-Exit: 0
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-DcTievBw' (errno=Operation not permitted)
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-Vb6Acw91' (errno=Operation not permitted)

@@ -4,13 +4,14 @@ Read only the section for the artifact just produced. Fix supported problems; su
 
 ## Delivery
 
-- Does the owning record's opening communicate the completed outcome, next action, open findings and actual pending/accepted state before policy/history, without sending the reader elsewhere for those facts?
-- Do links identify the relevant candidate and actual commands/results? Are inputs, runtime and freshness still applicable for reused evidence?
+- Does the handoff communicate the completed outcome, remaining conditions and actual status, using a durable record only when useful or required?
+- Does the complete deliverable satisfy the agreed scope toward the original goal, with any partial outcome explicit, justified complexity and a usable human review path for expected generated artifacts?
+- Does evidence identify relevant content and actual commands/results? Are inputs, runtime and freshness still applicable for reused evidence?
 - Are required gates/rechecks complete or explicitly pending? Does an author's fixed claim remain distinct from reviewer verification?
-- Is original evidence retained without copying live status into contracts or adding self-referential records/commits?
+- Is relevant original evidence retained through immutable references, within the work's scope and actual retention policy?
 
 ## Review
 
-- Does the verdict match the identified revision, actual evidence and material findings?
+- Does the verdict assess the whole deliverable against the original goal and justified complexity, supported by the identified revision, actual evidence and material findings?
 - Can the author locate, understand and verify each necessary correction?
 - Are original findings retained and author claims distinct from verified dispositions? Does a partial fix stay open and a complete verified fix close?

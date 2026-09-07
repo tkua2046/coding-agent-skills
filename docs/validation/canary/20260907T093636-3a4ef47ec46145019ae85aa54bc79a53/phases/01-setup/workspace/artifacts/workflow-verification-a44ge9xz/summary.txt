@@ -1,8 +1,0 @@
-normal: exit 0
-installed-hook: exit 0
-documentation-hook: exit 0
-failing-hook: exit 1
-empty-hook: exit 1
-stdlib-hook: exit 0
-stdlib-failing-hook: exit 1
-stdlib-empty-hook: exit 1

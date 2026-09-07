@@ -1,8 +1,0 @@
-{
-  "case": "route-uncertain",
-  "report": "docs/validation/canary/20260907T092807-ff5642a36e9c4a34a5a5f7b9b414b010/report.json",
-  "status": "pass",
-  "worker_elapsed_seconds": 157.483,
-  "wave_elapsed_seconds": 251.259,
-  "error": null
-}

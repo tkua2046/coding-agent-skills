@@ -1,8 +1,0 @@
-$ /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-00_qe6vh/worker/.tmp/tmpxjvedasd/.git/hooks/pre-commit
-Checks failed: no tests discovered
-/Users/tk/Documents/coding-agent-skills/.venv/lib/python3.12/site-packages/coverage/inorout.py:558: CoverageWarning: Module inventory was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-module-not-imported
-  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")
-/Users/tk/Documents/coding-agent-skills/.venv/lib/python3.12/site-packages/coverage/control.py:967: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.16.0/messages.html#warning-no-data-collected
-  self._warn("No data was collected.", slug="no-data-collected")
-
-Exit: 1

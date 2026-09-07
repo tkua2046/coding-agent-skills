@@ -1,9 +1,0 @@
-# Trial result
-
-Completed the requested feature-design **intake only** in the supplied fixture. [INTAKE.md](INTAKE.md) preserves the original request verbatim with its [source](FEATURE.txt), describes existing behavior, separates confirmed requirements from proposed defaults, and lists questions to answer before design.
-
-Observations: the existing formatter strips surrounding whitespace and uppercases labels. The complete supplied baseline is **1 passed, 1 failed (exit 1)**: the legacy `ß` test expects `ß`, but the current implementation returns `SS`. The failure predates this intake.
-
-Pending questions: which transformations and exact outputs clients need; whether customization applies per call, per client, or globally; and whether the conflicting legacy case must preserve observed behavior or follow the test, including whether a correction belongs in scope.
-
-Produced: [intake addendum](INTAKE.md), this result note, and [supporting evidence](intake-evidence/README.md) containing raw baseline/probe outputs, execution metadata, and source-preservation records. Application code, tests, original requirements, and supplied skills remain unchanged. No design, implementation, network activity, delegation, or inspection of prior trial artifacts was performed.

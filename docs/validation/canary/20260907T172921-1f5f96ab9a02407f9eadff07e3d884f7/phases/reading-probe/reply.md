@@ -1,7 +1,0 @@
-1. Orders with any insufficient item are rejected without deducting stock; later orders continue. Successful orders deduct every requested quantity. Preserve earlier successful deductions, input order, existing API signatures and return shapes, and one outcome per order. Copy stock once. Exact availability and empty orders succeed; empty batches return copied stock and no outcomes. Whole-payload adapter validation remains in place; the excerpt cuts off before completing its preservation requirements.
-
-2. Check every requested quantity against current batch-local stock before deducting anything. This ensures whole-order acceptance or rejection without rollback or extra stock snapshots.
-
-3. S1 implementation, regression coverage, behavior/usage documentation, required checks, and independent reviews are complete. The code review reports `ready` with no open findings; reported checks passed all 11 tests. Next, the owner reviews the candidate and decides acceptance. Human acceptance and stage acceptance remain pending; no further implementation is planned. The excerpts supply no additional human acceptance criteria.
-
-These are excerpt-based findings from a machine comprehension probe, not proof of human usability.

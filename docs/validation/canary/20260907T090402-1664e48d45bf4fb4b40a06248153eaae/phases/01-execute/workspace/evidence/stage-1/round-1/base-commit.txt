@@ -1,5 +1,0 @@
-Command: ['git', 'rev-parse', 'HEAD']
-Exit: 0
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-SzdDay4z' (errno=Operation not permitted)
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-Dx3rbuzk' (errno=Operation not permitted)
-fc4c5bf3ab8a3ddcea375eef5b7459d730cdb955

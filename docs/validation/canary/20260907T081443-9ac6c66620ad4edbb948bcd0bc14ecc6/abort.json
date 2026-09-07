@@ -1,8 +1,0 @@
-{
-  "parent_pid": 64810,
-  "terminated_child_groups": [
-    67949
-  ],
-  "termination_exit_code": 143,
-  "scope": "Owned calibration only; no worker skill trial had started. Runtime correction and fresh compatible calibration required."
-}

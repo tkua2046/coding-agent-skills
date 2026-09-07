@@ -70,7 +70,7 @@ criteria; document verdicts are not inferred by matching words in reports.
 V3 revision 2 protects each supplied history file against modification/deletion,
 while permitting new evidence records. The original directory-equality failure,
 independent HPR01 finding and negative controls remain in the
-[review record](../../docs/reviews/outcome-final-review.md#hpr01--history-preservation-measurement-addendum).
+[review record](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/reviews/outcome-final-review.md#hpr01--history-preservation-measurement-addendum).
 
 Initialize Git before installing each declared fixture hook as executable
 .git/hooks/pre-commit. The counter baseline intentionally fails the negative-input
@@ -93,4 +93,14 @@ remote, build download or real release is needed. Synthetic bundle/fixture/grade
 settings identities in these tables are facts within the release scenario; they
 are not hashes of the actual evaluation run, which the runner records separately.
 
-Runtime commands and the evaluator are maintained [one level up](../README.md). See the [current result index](../../docs/validation/canary/INDEX.md) for executed checks and limits. Asset-author scratch checks are not substituted for retained runner evidence. See the current result index for actual behavior/calibration status.
+Runtime commands and the evaluator are maintained [one level up](../README.md). See the [current result index](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/validation/canary/INDEX.md) for executed checks and limits. Asset-author scratch checks are not substituted for retained runner evidence. See the current result index for actual behavior/calibration status.
+
+## Delivery-repair regressions
+
+| Case | Role | Required outcome |
+|---|---|---|
+| `smoke-pr-scope` | Small PR operation | Keep the required generated example; exclude or flag unrelated preview output; preserve originals and actual check status |
+| `transfer-transcript-search` | Complete local feature | Compatible literal search/context, meaningful tests and usable editor instructions without unnecessary prerequisites |
+| `transfer-packet-import` | Complete consequential change | Safe preview/import, preserved destinations, failure cleanup and retry, with adequate reasoning and verification |
+
+The transfer cases retain provenance to independently frozen requests and criteria. The adapted behavior checker supports the existing runner’s source-execution convention; original assertions remain unchanged. Initial worker comparisons are recorded separately from formal calibrated canary results. See [current validation](../../docs/VALIDATION.md) and [evidence](../../docs/EVIDENCE.md).

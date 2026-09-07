@@ -138,6 +138,7 @@ class SyntheticRuntime:
         self.calls = []
         self.worker_failure = None
         self.malformed_grader = False
+        self.baseline_status = "fail"
         self.candidate_status = "pass"
 
     def probe(self, workspace, private):
@@ -172,7 +173,11 @@ class SyntheticRuntime:
                 path = "artifacts/result.txt"
             else:
                 skill = (workspace / "initial/skills/control/SKILL.md").read_text()
-                status = "fail" if "baseline" in skill else self.candidate_status
+                status = (
+                    self.baseline_status
+                    if "baseline" in skill
+                    else self.candidate_status
+                )
                 path = "artifacts/second/reply.md"
                 if not (workspace / path).exists():
                     path = "artifacts/second/decision.json"
@@ -262,28 +267,292 @@ def test_complete_synthetic_provenance_is_accepted_and_portable(accepted, monkey
     assert (
         canary.verified_behavior(trial.root, trial.old, trial.case)["status"] == "fail"
     )
-    shutil.rmtree(trial.calibration.parent)
     check_calibration = canary.check_calibration
 
     def archived_only(root, path, config, env):
-        # Relocated reports still name the original seed calibration. A gate
-        # must use its archived copy, never that still-existing source path.
-        assert path in {
-            trial.old.parent / "calibration/report.json",
-            trial.new.parent / "calibration/report.json",
-        }
+        # The seed still exists, but relocation must use this evidence tree.
+        assert path == trial.calibration
         return check_calibration(root, path, config, env)
 
     monkeypatch.setattr(canary, "check_calibration", archived_only)
-    assert gate(trial)["status"] == "pass"  # archived calibration is self-contained
+    assert gate(trial)["status"] == "pass"
     for report in (trial.old, trial.new):
         row = canary.verified_record(report)
         assert row["identity"]["skills"]
         assert row["evidence"]
-        controls = canary.read_json(report.parent / "calibration/report.json")[
-            "matched_controls"
-        ]
+        assert row["calibration_ref"] == {
+            "path": trial.calibration.relative_to(report.parent.parent).as_posix(),
+            "sha256": canary.digest(trial.calibration.read_bytes()),
+        }
+        assert not (report.parent / "calibration").exists()
+        controls = canary.read_json(trial.calibration)["matched_controls"]
         assert controls and all(controls)
+
+
+def inline_calibration(trial, path):
+    """Reproduce the legacy inline layout without changing its engine identity."""
+    row = canary.read_json(path)
+    row.pop("calibration_ref")
+    row["calibration"] = canary.check_calibration(
+        trial.root, trial.calibration, CONFIG, ENV
+    )
+    shutil.copytree(trial.calibration.parent, path.parent / "calibration")
+    put_json(path, row)
+    refresh_manifest(path)
+
+
+def test_legacy_inline_calibration_remains_readable_without_original(accepted):
+    for path in (accepted.old, accepted.new):
+        inline_calibration(accepted, path)
+    shutil.rmtree(accepted.calibration.parent)
+    assert gate(accepted)["status"] == "pass"
+    original = accepted.new.read_bytes()
+    assert canary.verified_record(accepted.new)["status"] == "pass"
+    # A new engine invalidates release compatibility; reading never relabels it.
+    (accepted.root / "tools/canary.py").write_text("changed engine")
+    assert gate(accepted)["status"] == "fail"
+    assert canary.verified_record(accepted.new)["status"] == "pass"
+    assert accepted.new.read_bytes() == original
+
+
+def test_explicit_reports_relocate_with_complete_evidence_tree(
+    accepted, tmp_path, monkeypatch, capsys
+):
+    source = accepted.calibration.parent.parent
+    original = canary.hashes(canary.files(source))
+    destination = tmp_path / "restored-evidence"
+    shutil.move(source, destination)
+    paths = [destination / p.relative_to(source) for p in (accepted.old, accepted.new)]
+    assert canary.release_gate(accepted.root, [], accepted.baseline)["status"] == "fail"
+    result = canary.release_gate(accepted.root, paths, accepted.baseline)
+    assert result["status"] == "pass", result
+    monkeypatch.setattr(canary, "ROOT", accepted.root)
+    assert (
+        canary.main(["release-gate", *map(str, paths), "--baseline", accepted.baseline])
+        == 0
+    )
+    assert json.loads(capsys.readouterr().out)["status"] == "pass"
+    assert canary.hashes(canary.files(destination)) == original
+    assert len(list(destination.rglob("inputs.json"))) == 1
+    assert not any(p.name == "calibration" for p in destination.rglob("*"))
+
+
+@pytest.mark.parametrize("outcome", ["fail", "unfinished"])
+def test_explicit_collection_includes_newer_attempts(accepted, tmp_path, outcome):
+    if outcome == "fail":
+        accepted.fake.candidate_status = "fail"
+        newer = canary.run_case(
+            accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+        )
+        assert canary.verified_record(newer)["status"] == "fail"
+    else:
+        directory, row = canary.new_record(accepted.root, "behavior")
+        canary.save(directory / "attempt.json", row)
+        newer = directory / "report.json"
+    source = accepted.calibration.parent.parent
+    destination = tmp_path / "explicit-collection"
+    shutil.move(source, destination)
+    paths = [destination / p.relative_to(source) for p in (accepted.old, accepted.new)]
+    result = canary.release_gate(accepted.root, paths, accepted.baseline)
+    assert result["status"] == "fail"
+    aliases = []
+    for path in paths:
+        alias = path.with_name("selected.json")
+        alias.write_bytes(path.read_bytes())
+        aliases.append(alias)
+    aliased = canary.release_gate(accepted.root, aliases, accepted.baseline)
+    assert aliased["status"] == "fail"
+    assert any("renamed report aliases" in error for error in aliased["errors"])
+    if outcome == "unfinished":
+        assert any(
+            str(destination / newer.relative_to(source)) in error
+            for error in result["errors"]
+        )
+
+
+def test_backup_requires_complete_restore_into_canonical_collection(accepted):
+    source = accepted.calibration.parent.parent
+    original = canary.hashes(canary.files(source))
+    backup = accepted.root / "artifacts/repair/legacy-tree/docs/validation/canary"
+    backup.parent.mkdir(parents=True)
+    shutil.move(source, backup)
+    assert canary.release_gate(accepted.root, [], accepted.baseline)["status"] == "fail"
+    shutil.move(backup, source)
+    result = canary.release_gate(accepted.root, [], accepted.baseline)
+    assert result["status"] == "pass", result
+    assert canary.hashes(canary.files(source)) == original
+
+
+@pytest.mark.parametrize(
+    "location",
+    [
+        "artifacts/scratch/app",
+        "artifacts/repair/legacy-tree/docs/validation/canary/copied-run",
+        "artifacts/canary/run/phases/first/workspace/app",
+        "docs/validation/canary/run/inputs/case/fixture/app",
+    ],
+)
+def test_discovery_ignores_scratch_backups_and_captured_reports(accepted, location):
+    unrelated = accepted.root / location
+    put_json(unrelated / "report.json", {"application": "unrelated report"})
+    put_json(unrelated / "unfinished/attempt.json", {"application": "scratch"})
+    result = gate(accepted)
+    assert result["status"] == "pass", result
+
+
+def test_passing_baseline_and_candidate_cannot_hide_newer_failure(accepted):
+    accepted.fake.baseline_status = "pass"
+    baseline = canary.run_case(
+        accepted.root,
+        "control",
+        CONFIG,
+        CONFIG,
+        accepted.calibration,
+        accepted.baseline,
+    )
+    result = gate(accepted)
+    assert result["status"] == "pass", result
+    assert result["cases"]["control"]["baseline"] == str(baseline)
+    assert result["cases"]["control"]["baseline_status"] == "pass"
+    accepted.fake.candidate_status = "fail"
+    failed = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    assert (
+        canary.verified_behavior(accepted.root, failed, accepted.case)["status"]
+        == "fail"
+    )
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_new_record_rejects_symlinked_evidence_storage(tiny_root, tmp_path):
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (tiny_root.root / "artifacts").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(ValueError):
+        canary.new_record(tiny_root.root, "behavior")
+    assert not list(outside.iterdir())
+
+
+@pytest.mark.parametrize(
+    "location",
+    [
+        "artifacts/canary",
+        "docs/validation/canary",
+    ],
+)
+def test_canonical_discovery_includes_newer_failure(accepted, location):
+    source = accepted.calibration.parent.parent
+    target = accepted.root / location
+    if source != target:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(source, target)
+        for name in ("calibration", "old", "new"):
+            setattr(
+                accepted, name, target / getattr(accepted, name).relative_to(source)
+            )
+    result = canary.release_gate(accepted.root, [], accepted.baseline)
+    assert result["status"] == "pass", result
+    assert result["cases"]["control"]["candidate"] == str(accepted.new)
+    # Generate a genuine completed synthetic failure in the default location,
+    # then retain it in the location being exercised without passing its path.
+    if source != target:
+        restored = source / accepted.calibration.parent.name
+        shutil.copytree(accepted.calibration.parent, restored)
+        calibration = restored / "report.json"
+    else:
+        calibration = accepted.calibration
+    accepted.fake.candidate_status = "fail"
+    newer = canary.run_case(accepted.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.verified_record(newer)["status"] == "fail"
+    if source != target:
+        shutil.move(newer.parent, target / newer.parent.name)
+    assert gate(accepted)["status"] == "fail"
+
+
+@pytest.mark.parametrize("location", ["artifacts/canary", "docs/validation/canary"])
+def test_unfinished_retained_attempt_cannot_hide_behind_older_pass(accepted, location):
+    directory, row = canary.new_record(accepted.root, "behavior")
+    canary.save(directory / "attempt.json", row)
+    target = accepted.root / location / directory.name
+    if target != directory:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(directory, target)
+    result = gate(accepted)
+    assert result["status"] == "fail"
+    assert any(str(target / "report.json") in error for error in result["errors"])
+
+
+@pytest.mark.parametrize("mutation", ["missing", "report", "control", "manifest"])
+def test_referenced_calibration_fails_closed(accepted, mutation):
+    report = accepted.calibration
+    if mutation == "missing":
+        shutil.rmtree(report.parent)
+    elif mutation == "report":
+        report.write_bytes(report.read_bytes() + b"\n")
+    elif mutation == "control":
+        (report.parent / "0-reply.execution.json").write_text("changed")
+    else:
+        row = canary.read_json(report)
+        row["evidence"].pop("0-reply.execution.json")
+        put_json(report, row)
+        behavior = canary.read_json(accepted.new)
+        behavior["calibration_ref"]["sha256"] = canary.digest(report.read_bytes())
+        put_json(accepted.new, behavior)
+    with pytest.raises(ValueError):
+        canary.verified_behavior(accepted.root, accepted.new, accepted.case)
+    assert gate(accepted)["status"] == "fail"
+
+
+@pytest.mark.parametrize("mutation", ["absolute", "escape", "symlink", "hash", "null"])
+def test_calibration_reference_cannot_escape_root_or_skip_hash(
+    accepted, tmp_path, mutation
+):
+    row = canary.read_json(accepted.new)
+    reference = row["calibration_ref"]
+    if mutation == "absolute":
+        reference["path"] = str(accepted.calibration)
+    elif mutation == "escape":
+        outside = accepted.calibration.parent.parent.parent / "outside"
+        shutil.copytree(accepted.calibration.parent, outside)
+        reference["path"] = "../outside/report.json"
+    elif mutation == "symlink":
+        outside = tmp_path / "outside"
+        shutil.move(accepted.calibration.parent, outside)
+        accepted.calibration.parent.symlink_to(outside, target_is_directory=True)
+    elif mutation == "hash":
+        reference.pop("sha256")
+    else:
+        row["calibration_ref"] = None
+    put_json(accepted.new, row)
+    with pytest.raises(ValueError):
+        canary.verified_behavior(accepted.root, accepted.new, accepted.case)
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_cross_root_calibration_requires_full_restore_before_worker(accepted, tmp_path):
+    outside = tmp_path / "outside"
+    shutil.copytree(accepted.calibration.parent, outside)
+    before = list(accepted.fake.calls)
+    failed = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, outside / "report.json"
+    )
+    row = canary.verified_record(failed)
+    assert row["status"] == "inconclusive"
+    assert "restore the complete calibration evidence tree" in row["error"]
+    assert accepted.fake.calls == before
+    assert gate(accepted)["status"] == "fail"
+    restored = accepted.calibration.parent.parent / "restored" / "calibration"
+    shutil.copytree(outside, restored)
+    passed = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, restored / "report.json"
+    )
+    assert (
+        canary.verified_behavior(accepted.root, passed, accepted.case)["status"]
+        == "pass"
+    )
+    assert not (passed.parent / "calibration").exists()
+    assert gate(accepted)["status"] == "pass"
 
 
 def test_phases_are_separate_calls_with_retained_artifacts_and_overlays(accepted):
@@ -332,6 +601,7 @@ def test_phases_are_separate_calls_with_retained_artifacts_and_overlays(accepted
         "evals/cases/control/requests/01.md",
         "evals/graders/calibration.json",
         "tools/canary_runtime.py",
+        "tools/canary.py",
         "requirements-dev.txt",
     ],
 )
@@ -353,7 +623,7 @@ def test_release_rejects_stale_inputs(accepted, asset):
     [
         "inputs/bundles/skills/control/SKILL.md",
         "inputs/case/case.json",
-        "calibration/report.json",
+        "calibration_ref",
         "grade.json",
         "grade-reply.execution.json",
         "phases/second/execution.json",
@@ -361,7 +631,12 @@ def test_release_rejects_stale_inputs(accepted, asset):
     ],
 )
 def test_release_rejects_missing_evidence_even_with_refreshed_manifest(accepted, asset):
-    (accepted.new.parent / asset).unlink()
+    if asset == "calibration_ref":
+        row = canary.read_json(accepted.new)
+        row.pop("calibration_ref")
+        put_json(accepted.new, row)
+    else:
+        (accepted.new.parent / asset).unlink()
     refresh_manifest(accepted.new)
     assert gate(accepted)["status"] == "fail"
 
@@ -421,8 +696,15 @@ def test_release_recomputes_archived_judgments(accepted, mutation):
         "incomplete-control",
     ],
 )
-def test_release_revalidates_copied_calibration(accepted, mutation):
-    report_path = accepted.new.parent / "calibration/report.json"
+@pytest.mark.parametrize("storage", ["reference", "inline"])
+def test_release_revalidates_complete_calibration(accepted, mutation, storage):
+    if storage == "inline":
+        inline_calibration(accepted, accepted.new)
+    report_path = (
+        accepted.calibration
+        if storage == "reference"
+        else accepted.new.parent / "calibration/report.json"
+    )
     directory = report_path.parent
     row = canary.read_json(report_path)
     if mutation in {"grader", "settings", "environment"}:
@@ -444,7 +726,13 @@ def test_release_revalidates_copied_calibration(accepted, mutation):
             result["reply"] = json.dumps(grade)
         put_json(result_path, result)
     refresh_manifest(report_path)
+    if storage == "reference":
+        row = canary.read_json(accepted.new)
+        row["calibration_ref"]["sha256"] = canary.digest(report_path.read_bytes())
+        put_json(accepted.new, row)
     refresh_manifest(accepted.new)
+    with pytest.raises(ValueError):
+        canary.verified_behavior(accepted.root, accepted.new, accepted.case)
     assert gate(accepted)["status"] == "fail"
 
 

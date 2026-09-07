@@ -1,10 +1,10 @@
 # Developer notes
 
-For contributors changing the skill bundles or checks. Users should start at [README](README.md).
+User entrypoint: [README](README.md). Decisions: [design](docs/DESIGN.md). Current outcomes: [plan](docs/IMPLEMENTATION_PLAN.md).
 
-## Setup and check
+## Setup and normal checks
 
-Use Python 3.12 and uv. From the repository root:
+Use Python 3.12 and uv; preserve an existing environment.
 
 ```sh
 uv venv --python python3.12 .venv
@@ -12,50 +12,40 @@ uv pip install --python .venv/bin/python -r requirements-dev.txt
 .venv/bin/pre-commit install --install-hooks
 ```
 
-Preserve an existing `.venv`; do not recreate it unnecessarily. The first hook installation downloads its isolated dependencies. In each checkout, install hooks locally.
+Stage intended files, then run the complete fast gate before committing:
 
 ```sh
-.venv/bin/python tools/check.py
-.venv/bin/python -m tools.canary validate
-.venv/bin/ruff check .
-.venv/bin/ruff format --check .
-.venv/bin/python -m pytest
+.venv/bin/pre-commit run --all-files
 ```
 
-Before a commit, stage the intended files and run `.venv/bin/pre-commit run --all-files`. Hooks also run at commit. Inspect/restage any automatic edits. The full test gate includes documentation commits. Pytest reports missing lines/branches for `tools`, not prompt quality; no coverage percentage threshold is imposed.
+Inspect and restage formatter changes. The commit hook also runs the gate. It includes bundle/document checks, Ruff, case validation and repository tests with tool coverage; no LLM calls. Coverage describes tooling, not skill quality. Use focused tests during a repair; do not rerun an identical suite separately when the gate already establishes the result.
 
-## Structure and document ownership
+## Ownership and evidence
 
-`skills/` is canonical. `.agents/skills/` contains only relative discovery links. Each copied bundle must have no external runtime-resource dependency. Maintain metadata and invocation defaults together.
+`skills/` is canonical; `.agents/skills/` provides relative discovery links. Each skill must work when copied independently. README owns user instructions, this file owns contributor operations, CHANGELOG owns significant changes, and AGENTS owns repository constraints.
 
-Root README owns usage, this guide owns contributor operations, CHANGELOG owns significant completed changes, and AGENTS owns agent rules. Detailed [document ownership](skills/dev-workflow/references/documents.md) is part of the dev-workflow skill.
+Retain original requirements, sources and findings. Preserve prior reviewed content through existing immutable Git links; capture otherwise unavailable content once. Raw evaluation records are not maintained source files. New runs and manual hook trials write into ignored `artifacts/`; never force-add them to the source branch. Before delivery, preserve cited runs and their dependencies, including failed attempts, in a separate evidence tree and commit the immutable links in [EVIDENCE](docs/EVIDENCE.md). A local ignored directory is working storage, not a delivered archive.
 
-## Design, tests and evidence
+The [historical archive](docs/EVIDENCE.md#before-the-delivery-repair) keeps original bytes and path relationships. Ordinary tests work offline using their declared local fixtures. Fetch an archive only for historical inspection or a check that explicitly requires it. Keep the complete run collection together: deleting failed attempts or restoring only selected passes invalidates a release assessment.
 
-[Requirements](docs/SPEC.md) · [Design](docs/DESIGN.md) · [Justification](docs/JUSTIFICATION.md) · [Stage plan](docs/IMPLEMENTATION_PLAN.md) · [Validation](docs/VALIDATION.md)
+## Choose tests by the changed behavior
 
-Repository tests check bundle portability, metadata/resource failures, checker behavior and canary gate failure controls. They do not call an LLM. Fresh-agent behavioral trials use separate temporary workspaces; they never modify the bundle being evaluated. Record tested hashes, real outcomes, original findings and follow-up fixes. Keep disposable local logs in ignored `artifacts/`; immutable trial evidence belongs under `docs/validation/`.
+Start from the [user-visible goals](evals/GOALS.md). Select affected responsibilities and contrasting cases that protect neighboring behavior. A shared-contract change requires coverage across its affected consumers, not automatically every smoke case. Unchanged known-good paths do not need fresh expensive trials merely because a report or source link changed.
 
-When staging an evidence archive, verify that every path declared in its report is present with identical bytes in Git. Nested fixture ignore rules can omit captured `artifacts/` or coverage files; explicitly stage those declared originals rather than changing ordinary scratch ignore rules. The [staged evidence check](docs/validation/outcome-final/staged-evidence.json) records the preceding delivery's correction and verification. Retain a fresh staged-byte verification with each later evidence delivery. The [continuation staged check](docs/validation/continuation-checks/staged-evidence-20260907T182835Z.json) records the later verification, referencing original report maps rather than duplicating them.
+Use the [existing runner](evals/README.md) for isolated LLM tests. Preserve exact inputs, settings, raw output, failures and judgments. Small operation tests find responsibility defects; complete tasks test interactions and effort. For this delivery repair, compare with `a24b140ddda594bec61ae42ac272d3225892cfb5`; the release suite's baseline remains separately configured. A changed engine invalidates old compatible-run claims even when storage is the only change.
 
-Run `.venv/bin/python -m tests.manual.hook_trials` for the slower isolated Git/hook exercise. Each invocation writes its own commands/results to a unique, exclusively created JSON file under `docs/validation/hook-trials/`, including failed runs. The original `hook-trials.json` is a retained historical run. This explicit trial is outside the fast commit-time test suite. Immutable validation archives are excluded from whitespace/newline fixers; preserve their bytes and fingerprints.
+At a completed outcome, inspect whether the result still serves the original goal and whether the proposed next work has a concrete benefit. Record decisions in the existing plan/result page; do not create another report or round for this checkpoint. A passing test is evidence about its scope, not overall acceptance. Investigate material failures and rerun affected cases after a supported correction; keep infrastructure failures inconclusive.
 
-## Canary cadence
+Before release, run the full required heavy suite and `tools.canary release-gate` as documented in [evals](evals/README.md). The final candidate needs current passing evidence and a comparable baseline. Missing/stale/failed/inconclusive results block release, not normal PR review. Explicit task scope can authorize earlier complete trials.
 
-Run the fast gate for normal commits/PRs, including prompt changes. Use `.venv/bin/python -m tools.canary affected` to see affected bundles/cases. Heavy checks may stay pending on a PR. Preserve a regression case for a demonstrated defect; a focused early agent run is optional when it resolves a concrete uncertainty.
+The optional slower real hook exercise is `.venv/bin/python -m tests.manual.hook_trials`. Synthetic case inputs and licensed source archives retain original bytes; formatters exclude them. Their intended defects are not housekeeping tasks.
 
-For prompt iteration, the explicit `smoke` tier tests one operation with a real worker and blind grader. Select affected responsibilities and neighbors; use all smoke cases for a shared artifact-contract change. Reuse the existing [runner commands](evals/README.md#focused-prompt-feedback-small-llm-smoke-tests), calibration and raw-evidence retention. Address any demonstrated material failure before delivery, under the normal review policy. These runs are not in the commit hook, and their success does not replace complete workflow/release checks.
+## Final PR acceptance
 
-Before release, follow [the canary commands](evals/README.md) to calibrate the grader and run matching baseline/candidate trials. Every required case must pass for the final candidate. The gate verifies input and evidence identities and cannot be satisfied by historical summaries or test-only controls. Keep failures and their dispositions; after a fix, rerun affected cases rather than unrelated expensive trials. [Current results](docs/validation/canary/INDEX.md) distinguish fast validation from heavy acceptance.
+Inspect the whole intended diff after hook edits. Check user-visible behavior, scope, complexity, document usefulness, evidence access and clean-checkout usage. Reject unnecessary generated output or workflow machinery even if checks pass. Existing artifact conventions may legitimately include generated deliverables; assess purpose, not a universal file-count threshold.
 
-Start a skill change from its [user-visible goal](evals/GOALS.md), then select the cases that exercise that goal and possible regressions. A changed rubric/reader/fixture needs a fresh compatible comparison; never overwrite an old result. After a bounded repair wave, reassess whether the process is becoming burdensome and whether the evidence shows a benefit. Failed or inconclusive results remain visible on a reviewable PR; they cannot satisfy the release gate. One-off experiment and scoring-recovery helpers in archived evidence are not supported runner commands or installed skill dependencies.
-
-Archived source text, proposal snapshots and synthetic case inputs are excluded from automatic formatters. The checker still verifies licensed source archive hashes, and case validation/tests check the fixtures. Deliberately failing fixture code must not be “fixed” as repository housekeeping.
-
-Raw validation evidence is [collapsed by default in GitHub diffs](https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github) through `.gitattributes`; the current results and delivery entrypoints stay visible. Original files remain intact. This display hint does not remove GitHub's separate diff limits: use the result links or local Git review if the web diff is truncated.
+Independent reviewers inspect stable content and actual outputs without a preferred verdict. Distinguish author fixes, verified fixes and human acceptance. Publish only the intended feature/evidence branches within authorization; retain current main until an authorized merge. Update the PR around its final behavior and observed validation.
 
 ## Version and release
 
-`VERSION` is the only library version source. Completed significant changes accumulate under Unreleased. A release request chooses the next version based on compatibility; update VERSION and notes together for review. Ordinary commits do not bump versions.
-
-Merge the reviewed change, verify the final commit and full fast gate, and run `.venv/bin/python -m tools.canary release-gate`. Missing/stale/failed/inconclusive heavy evidence blocks tagging or publication. Then tag that verified commit, validate distributed bundles and publish within the authorized release scope. This is a maintainer procedure and local machine gate; it does not configure GitHub branch protection or prevent a human bypass. Creating this repository does not itself authorize a tag or release.
+`VERSION` is the single version source. Significant completed changes accumulate under Unreleased; ordinary commits do not bump versions. An authorized release updates version/notes, verifies the merged candidate and required checks/reviews, then tags/publishes that revision. This repository does not itself enforce remote branch protection or authorize a release.

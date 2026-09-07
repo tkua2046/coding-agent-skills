@@ -1,7 +1,0 @@
-1. **Next work:** Begin S1: add compatibility tests in `tests/test_report.py` and establish a reproducible benchmark against unchanged production code. Record the implementation identity, workload parameters, timings, and catalog load counts. Cover order/iterator behavior, exact arithmetic, freshness, and failure cases. This follows because repeated catalog construction is verified, but its production performance impact is unknown and existing coverage includes only subtotal and empty-list cases.
-
-2. **Established, uncertain, and conditions for proceeding:** Planning is complete; every delivery stage remains planned, not executed. Repeated catalog construction is established. Production performance impact is unknown, and synthetic timings may not represent support workloads.
-
-   S1 is complete when existing and added compatibility tests pass against unchanged production code and reproducible baseline evidence is recorded, including N loads for N orders and zero for empty input. Those counts are baseline evidence, not permanent expected behavior. Completing S1 supports proceeding to S2: lazily load the catalog once per nonempty `summarize` call, reuse it within that call, and discard state at return or failure. The excerpt cuts off during S2, so its full acceptance criteria are not supplied. Database, shared-cache, and queue work requires further evidence and an agreed need.
-
-These answers reflect only the exposed text; this machine comprehension probe does not establish human usability.

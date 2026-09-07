@@ -5,7 +5,7 @@ description: Set up or adapt development checks and document ownership, prepare 
 
 # Development workflow
 
-Goal: effective checks, useful document ownership and accurate delivery evidence. Inspect existing conventions and reuse working setup. Select one operation and its relevant resources; load its silent check after generation.
+Goal: a useful, reviewable deliverable with effective checks and accurate evidence. Inspect existing conventions and reuse working setup. Match depth to uncertainty, consequences, reversibility and affected boundaries while honoring established user/repository review and gates. Select one operation and its relevant resources; load its silent check after generation.
 
 | Request | Read |
 |---|---|
@@ -15,4 +15,4 @@ Goal: effective checks, useful document ownership and accurate delivery evidence
 
 For document creation/reorganization, read [document ownership](references/documents.md). Root and Python assets are adaptable examples, not reasons to overwrite working configuration or create every document.
 
-Existing authorization persists; do not repeat approval questions or infer publication permission from a procedure. Ordinary commits do not trigger PRs, version bumps or releases. Preserve source requirements and reviewed versions. Distinguish configured, installed and actually verified states. Default artifacts to English; resolve resources within this bundle.
+Existing authorization persists; a procedure does not itself grant publication permission. Ordinary commits do not trigger PRs, version bumps or releases. Preserve original requirements and reviewed evidence through existing immutable references, capturing relevant otherwise unavailable content once. This does not require a repository-wide archive. Distinguish configured, installed and actually verified states. Default artifacts to English; resolve resources within this bundle.

@@ -1,6 +1,0 @@
-from counter import Counter
-
-def test_default_add():
-    counter = Counter()
-    assert counter.add() == 1
-    assert counter.add() == 2

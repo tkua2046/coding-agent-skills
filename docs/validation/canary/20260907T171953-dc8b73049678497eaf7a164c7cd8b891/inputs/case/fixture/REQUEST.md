@@ -1,1 +1,0 @@
-An implementer renamed private helper _available to _has_stock and added one regression asserting the same already agreed atomic rejection. No public behavior, dependencies, acceptance or gate changed. Decide whether the implementation plan needs updating.

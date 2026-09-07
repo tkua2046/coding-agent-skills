@@ -1,7 +1,0 @@
-{
-  "purpose": "Every declared original evidence file in completed canary reports; live filesystem only, final staged Git byte verification still required. Active attempts without report.json are excluded.",
-  "completed_reports": 143,
-  "files": 28161,
-  "bytes": 114427952,
-  "errors": []
-}

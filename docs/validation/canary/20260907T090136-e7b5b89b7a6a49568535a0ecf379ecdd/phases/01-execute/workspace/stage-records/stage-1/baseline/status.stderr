@@ -1,4 +1,0 @@
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-eFr8iarO' (errno=Operation not permitted)
-git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-tBjWWn48' (errno=Operation not permitted)
-warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
-warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
