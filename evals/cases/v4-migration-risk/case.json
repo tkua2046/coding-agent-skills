@@ -1,0 +1,37 @@
+{
+  "id": "v4-migration-risk",
+  "version": 1,
+  "tier": "heavy",
+  "title": "V4: Design crash-safe settings migration",
+  "skills": [
+    "feature-design",
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-plan",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "local-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "preserved-baseline",
+      "kind": "unchanged",
+      "paths": [
+        "settings.py",
+        "tests",
+        "data",
+        "docs/ORIGINAL.md"
+      ]
+    }
+  ]
+}

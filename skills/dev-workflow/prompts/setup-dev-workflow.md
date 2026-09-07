@@ -11,6 +11,8 @@ Read repository instructions, README/developer guide, runtime/dependency configu
 - A full-suite hook uses `pass_filenames: false`; run it even for documentation commits when that is the chosen policy. It must propagate test failures and zero-test collection failures. Do not suppress failures to bootstrap an empty project.
 - Match hook interpreter and dependencies to the application. The Python sample's isolated test environment includes test tools only; add required project/runtime dependencies or use the repository's established environment deliberately.
 - Before installing hooks, verify the intended local repository/worktree. Preserve existing hooks and custom hook paths. Prewarm dependencies and exercise a passing and failing case in an isolated fixture. Merely writing YAML does not prove installation or execution.
+- Separate fast commit/PR checks from expensive integration or agent behavior trials when the project needs both. Keep required hooks effective; schedule the heavy suite before release and label it pending on ordinary PRs. A new demonstrated defect needs a retained regression case. Do not rerun a full expensive suite for every small prompt/doc edit.
+- For agent behavior changes, use versioned fixtures and independent contract checks plus evidence-based semantic grading where necessary. Preserve raw attempts and per-criterion outcomes separately from coverage. Bind reusable results to the tested instructions, inputs, grader and settings; changed dependencies invalidate the affected evidence. A required failure or inconclusive result cannot be averaged into a pass.
 
 ## Documents and completion
 

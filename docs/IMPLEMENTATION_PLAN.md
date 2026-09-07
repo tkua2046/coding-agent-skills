@@ -1,7 +1,16 @@
 # Implementation plan
 
-Status: S1–S3 completed. The initial library commit passed local hooks and remote CI; this documentation update records the observed delivery. Review policy for this authorized bootstrap: independent-agent review; human review is not claimed.
+Status: original S1–S3 completed and preserved. C1/C2 are implemented, fast-verified and independently reviewed; heavy acceptance is deferred until release. Next action: feature PR delivery. Review policy: authorized autonomous work with independent-agent review; human review is not claimed.
 Requirements: [SPEC](SPEC.md). Design: [DESIGN](DESIGN.md).
+
+## Current increment
+
+| Stage | Observable outcome | Dependency / boundary | Acceptance / state |
+|---|---|---|---|
+| C1 | Repeatable fixtures, grading, original records and release safeguard | Freeze old bundles before C2; runner and fixtures are one usable unit | Implemented; fast gate and independent recheck passed; heavy suite pending |
+| C2 | Four skills guide proportionate plans and inspectable review closure | C1 supplies the future regression contract; no extra skills/framework | Implemented; portability/fast checks and static review passed; behavior evaluation deferred to release |
+
+Delivery may combine C1/C2 in one reviewed feature PR. Commit/review policy: [DEVNOTES](../DEVNOTES.md). [Proposal](proposals/workflow-proposal.md) · [Current evidence](validation/canary/INDEX.md). The table owns outcomes/dependencies; implementation and tests own the detailed changes.
 
 ## Stages at a glance
 

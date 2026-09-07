@@ -1,5 +1,9 @@
 # Validation
 
+Current workflow refinement: [canary evidence index](validation/canary/INDEX.md). The new fast suite/gate passes; real heavy baseline/candidate evaluation and semantic calibration remain pending until release. The results below belong to the initial library and are preserved as historical evidence, not current canary grades.
+
+## Initial library (historical)
+
 Status: packaging, real hook trials, fresh-agent follow-ups and independent implementation reviews passed. Initial commit `0ac5b7b` is pushed and its remote CI passed. This documentation update records that observed result; later commits have their own CI runs. Date: 2026-09-06.
 
 ## Observed results

@@ -12,7 +12,7 @@ Report:
 - Exact reviewed scope/version and review mode (independent or self-review).
 - Checks run, observed results and untested limitations.
 - Prioritized findings with location, trigger/example, consequence, minimal correction and verification.
-- Disposition of prior findings when this is a follow-up; identify the new reviewed version.
+- Current open finding IDs and next action first; append dispositions of prior findings with stable IDs and the new reviewed version. Distinguish an author's fix claim from reviewer verification, retaining the original concern and each round's evidence.
 
 Do not change production files, tests, specs or plans during review. A separately requested review report may be written. Avoid speculative blockers or cosmetic preferences presented as correctness problems. Preserve material findings even if only the top few fit the first screen.
 

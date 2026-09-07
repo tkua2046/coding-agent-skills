@@ -1,0 +1,16 @@
+{
+  "kind": "pre-commit full fast gate",
+  "result": {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/pre-commit",
+      "run",
+      "--all-files"
+    ],
+    "exit_code": 0,
+    "stdout": "[INFO] Initializing environment for local.\n[INFO] Installing environment for local.\n[INFO] Once installed this environment will be reused.\n[INFO] This may take a few minutes...\ntrim trailing whitespace.................................................Passed\nfix end of files.........................................................Passed\ncheck yaml...............................................................Passed\ncheck toml...............................................................Passed\ncheck for merge conflicts................................................Passed\nruff check...............................................................Passed\nruff format..............................................................Passed\nSkill bundle and documentation validation................................Passed\nRepository tests with coverage...........................................Passed\n- hook id: tests-with-coverage\n- duration: 30.16s\n\n============================= test session starts ==============================\nplatform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0\nrootdir: /Users/tk/Documents/coding-agent-skills\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: cov-7.1.0\ncollected 143 items\n\ntests/test_canary.py ................................................... [ 35%]\n.........................................                                [ 64%]\ntests/test_canary_runtime.py ..................                          [ 76%]\ntests/test_check.py ..............................                       [ 97%]\ntests/test_evidence.py ...                                               [100%]\n\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName                      Stmts   Miss Branch BrPart  Cover   Missing\n---------------------------------------------------------------------\ntools/__init__.py             0      0      0      0   100%\ntools/canary.py             478     53    190     17    88%   58, 154, 163, 223-225, 229-230, 292, 316, 373, 421-422, 443, 474, 511, 569-572, 577, 620, 646, 689, 710, 820-832, 867-901, 906\ntools/canary_runtime.py      70      2     14      3    94%   69->71, 114, 185\ntools/check.py              105      0     52      0   100%\ntools/evidence.py            12      0      0      0   100%\n---------------------------------------------------------------------\nTOTAL                       665     55    256     20    91%\nCoverage XML written to file coverage.xml\n============================= 143 passed in 29.87s =============================\n\nVersioned canary inputs (no model calls).................................Passed\n",
+    "stderr": "",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 33.786
+  }
+}

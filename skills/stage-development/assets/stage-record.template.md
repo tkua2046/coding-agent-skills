@@ -6,7 +6,7 @@ Requirements/design: [source/version]. Scope: [files/behavior].
 
 ## At a glance
 
-Outcome: [observable result]. Next action: [one step]. Pending: [check/review/decision or none].
+Outcome: [observable result]. Next action: [one step]. Open findings: [stable IDs or none]. Pending: [check/review/decision or none]. Human review: [pending / received / not required by recorded policy].
 
 ## Evidence
 
@@ -19,9 +19,10 @@ Baseline: [pre-existing failures or actual passing results].
 
 ## Review and fixes
 
-| Finding | Reviewer/version | Disposition and evidence |
+| Finding ID | Round / reviewer / candidate | Disposition and verification evidence |
 |---|---|---|
-| [issue] | [identity/snapshot] | [pending/fixed/refuted/accepted nonblocking] |
+| [stable ID; original finding link] | [identity/snapshot] | [open / author fixed / reviewer verified / refuted / accepted nonblocking; evidence] |
 
-Human review: pending / received / not required by the recorded policy.
-Agent review: [status and report]. Final gate: [actual result]. Commit: [actual ID or not created].
+Append rounds; preserve original findings. “Author fixed” remains pending recheck. Link earlier stage records instead of copying their implementation/test inventory.
+
+Agent review: [status and report]. Commit gate: [actual result]. Release-only checks: [current evidence or pending, when applicable]. Commit: [actual ID or not created].

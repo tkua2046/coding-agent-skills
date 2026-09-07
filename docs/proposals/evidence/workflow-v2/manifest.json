@@ -1,0 +1,25 @@
+{
+  "baseline": "6573f8f422cb6528981ff43bc0d20c656096e7dc",
+  "files": [
+    {
+      "path": "docs/proposals/workflow-proposal.md",
+      "archive": "docs/proposals/evidence/workflow-v2/docs--proposals--workflow-proposal.md.txt",
+      "sha256": "4a9948a9b60de201b7b1c16410c1a4ed349ac7619dc9891d1d8669373fca879f"
+    },
+    {
+      "path": "docs/proposals/workflow-validation.md",
+      "archive": "docs/proposals/evidence/workflow-v2/docs--proposals--workflow-validation.md.txt",
+      "sha256": "e480417f0b122a7b4a05098cab00bebdee4f5fff6d1213262e4d32509bac277a"
+    },
+    {
+      "path": "docs/research/workflow/RESEARCH.md",
+      "archive": "docs/proposals/evidence/workflow-v2/docs--research--workflow--RESEARCH.md.txt",
+      "sha256": "9eeae722198190c3241d7b6079977022a1788ec8ea5af59a5dbd6233362cbbef"
+    },
+    {
+      "path": "docs/research/workflow/SOURCES.md",
+      "archive": "docs/proposals/evidence/workflow-v2/docs--research--workflow--SOURCES.md.txt",
+      "sha256": "68644b3508bb7f5bece22ab95db92021afa63e6487fe50b6ac6fdb9b16e2a822"
+    }
+  ]
+}

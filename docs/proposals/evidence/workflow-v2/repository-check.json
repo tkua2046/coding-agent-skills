@@ -1,0 +1,9 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "tools/check.py"
+  ],
+  "exit_code": 0,
+  "output": "repository-check.log.txt",
+  "scope": "Read-only metadata/resource/link validation; no behavior trial or pre-commit run"
+}

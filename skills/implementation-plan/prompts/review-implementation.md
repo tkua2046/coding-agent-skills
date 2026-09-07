@@ -11,7 +11,11 @@ Assess whether:
 - Check commands exist or are explicitly planned; zero tests are not counted as success.
 - Runtime cost and stage scope fit the available time; a fixed test count is not the acceptance criterion.
 - The human/agent review loop, version being reviewed, fix loop, and final delivery are unambiguous.
+- The plan owns delivery decisions rather than duplicating code/tests; routine implementation edits will not require synchronizing a second inventory.
+- Detail is proportional to risk: local extensions preserve accepted history, while migration or failure-recovery dependencies remain explicit.
 
 Report a short verdict, scope/version, actual inspection/checks, and prioritized findings. Each finding states a location, concrete consequence/example, minimal correction, and verification. Include reading-cost issues when they prevent the plan from being used quickly. Additional material findings may live in an appendix.
 
 Stop when blockers are resolved and remaining suggestions have explicit dispositions. Do not require endless rounds or treat agent preferences as mandatory changes. State whether this was self-review or a genuinely separate reviewer. Historical review results remain bound to their reviewed version.
+
+For a recheck, show current verdict/version, open stable finding IDs and next action first. Preserve prior findings and append what changed and what was verified. “Author fixed” is not “reviewer verified”; recheck the affected contract, including previously omitted parts. Do not reopen unrelated completed decisions without a concrete consequence.

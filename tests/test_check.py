@@ -1,3 +1,5 @@
+import hashlib
+import json
 import shutil
 import subprocess
 import sys
@@ -32,6 +34,36 @@ def test_standalone_copy_preserves_all_skill_resources(tmp_path):
 
 def test_repository_passes():
     assert validate_repository(ROOT) == []
+
+
+def test_archives_keep_original_bytes_but_canonical_links_are_checked(tmp_path, bundle):
+    root = tmp_path / "repo"
+    target = root / "skills" / bundle.name
+    shutil.copytree(bundle, target)
+    discovery = root / ".agents/skills"
+    discovery.mkdir(parents=True)
+    (discovery / bundle.name).symlink_to(target)
+    source = root / "docs/research/workflow/sources/original.md"
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b"[original relative link](missing.md)  \n")
+    manifest = source.parent.parent / "source-manifest.json"
+    manifest.write_text(
+        json.dumps(
+            [
+                {
+                    "archive": source.relative_to(root).as_posix(),
+                    "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                }
+            ]
+        )
+    )
+    assert validate_repository(root) == []
+    source.write_bytes(source.read_bytes().replace(b"  \n", b"\n"))
+    assert any("changed/missing source archive" in e for e in validate_repository(root))
+    index = root / "docs/validation/canary/INDEX.md"
+    index.parent.mkdir(parents=True)
+    index.write_text("[missing evidence](missing.json)\n")
+    assert any("missing resource" in e for e in validate_repository(root))
 
 
 def test_missing_linked_resource_is_rejected(bundle):

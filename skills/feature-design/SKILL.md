@@ -17,4 +17,6 @@ Use the user's original specifications and decisions as authority. Retain source
 
 Write engineering artifacts in English unless the user requests otherwise. Put the outcome, material decisions, consequences, and next step first. Scale detail to risk and available time; retain the same review criteria for a short document. Link long evidence and examples rather than duplicating them.
 
+For a follow-up, amend affected decisions and acceptance in the existing design. Create a separate design only when it has a distinct lifecycle, audience, or substantial independent risk. Preserve accepted history and avoid expanding the workflow merely because another feature was requested.
+
 For a fresh artifact, adapt the [spec addendum](assets/spec-addendum.template.md), [design](assets/design.template.md), or [review](assets/review.template.md). Existing repository document conventions take precedence over these defaults. Resolve these resources relative to this skill folder, not the target repository.

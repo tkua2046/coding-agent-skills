@@ -1,4 +1,6 @@
 minimum_pre_commit_version: "4.6.2"
+# Immutable inputs/evidence retain original bytes, including intentional defects.
+exclude: ^(docs/(reviews/inputs-initial/|validation/|research/workflow/sources/|proposals/evidence/)|evals/cases/)
 default_language_version:
   python: python3.12
 repos:
@@ -39,3 +41,9 @@ repos:
         always_run: true
         require_serial: true
         verbose: true
+      - id: canary-assets
+        name: Versioned canary inputs (no model calls)
+        entry: python -m tools.canary validate
+        language: python
+        pass_filenames: false
+        always_run: true

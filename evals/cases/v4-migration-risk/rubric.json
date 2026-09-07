@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "preservation",
+      "required": true,
+      "requirement": "Design retains usable v1 data through interruption.",
+      "pass_when": "Separates constructing v2 from replacing/activating it; names crash points and how v1 stays readable.",
+      "fail_when": "Overwrites v1 in place without a recovery guarantee, risking irreversible loss."
+    },
+    {
+      "id": "retry-validation",
+      "required": true,
+      "requirement": "Design addresses exact preservation, validation and retry before activation.",
+      "pass_when": "Covers stable IDs/values, rejects duplicate or malformed input, validates completed output and explains retry after partial output.",
+      "fail_when": "Activates before validation or retries by appending entries, allowing duplication/drop."
+    },
+    {
+      "id": "dependencies",
+      "required": true,
+      "requirement": "Plan orders risky work by safety dependencies with decisive verification.",
+      "pass_when": "Includes interruption before activation followed by retry, checking usable v1, exact v2 entries and activation only on success; recovery dependencies precede activation.",
+      "fail_when": "Says only add migration and tests, or treats happy-path conversion as sufficient safety evidence."
+    },
+    {
+      "id": "proportionate-design",
+      "required": true,
+      "requirement": "Explain safety consequences without prescribing machinery for its own sake.",
+      "pass_when": "Justifies chosen storage/activation approach and tradeoff against a credible alternative within single-process scope.",
+      "fail_when": "Mandates a database/distributed transaction without need or omits recovery to keep the plan short."
+    },
+    {
+      "id": "honest-status",
+      "required": true,
+      "requirement": "Preserve requirements and distinguish planning from delivered behavior.",
+      "pass_when": "Original v1 contract remains intact and new migration checks/reviews are proposed, not executed claims.",
+      "fail_when": "Claims crash recovery tested from reviewing a document or edits implementation in planning scope."
+    }
+  ]
+}

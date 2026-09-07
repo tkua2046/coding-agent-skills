@@ -4,6 +4,8 @@ Read the complete feature diff, original requirements, stage/review records, rep
 
 Verify the complete feature's behavior and relevant integration/regression checks. Local hooks are feedback, while CI verifies the requested change in the remote environment. Inspect the actual final code after fixes, formatting and conflict resolution.
 
+Apply the project's agreed test tiers. Record release-only expensive checks as pending or tied to their previously tested inputs; fast checks can establish ordinary PR readiness without claiming release readiness. Update affected regression cases when behavior changes. Do not promote historic/self-reported output to current evidence.
+
 Update affected README usage, DEVNOTES operations, significant Unreleased changes and implementation status. Keep test counts/logs in validation evidence. If this feature PR is also the agreed release preparation, include the chosen version and release notes together for review. If several features feed one release, leave the ordinary feature version unchanged.
 
 Write a concise PR title/body around the final problem and resulting behavior. Include a concrete example when useful, important tradeoffs, actual validation, and material limitations. Do not narrate abandoned approaches or copy an entire design doc.

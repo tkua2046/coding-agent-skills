@@ -1,6 +1,6 @@
 # Coding workflow skills — requirements
 
-Status: implementation baseline. Source: [user workflow](sources/user-workflow.md).
+Status: initial requirements preserved; authorized refinement below. Source: [user workflow](sources/user-workflow.md).
 
 ## At a glance
 
@@ -24,3 +24,9 @@ Names: feature-design, implementation-plan, stage-development, dev-workflow. Ten
 The initial request authorizes implementation, local self-testing and adding this work to the new GitHub repository. It does not request a release or global installation. A real human review is never fabricated; autonomous prototype checks are recorded as such.
 
 Repository documentation is English. Original user requirements retain their original language in the source record. Runtime/software dependencies are used for validation; the skills themselves are Markdown and have no required MCP connection.
+
+## Authorized refinement
+
+The owner approved execution of the [reviewed proposal](proposals/workflow-proposal.md) with “执行”. The original clarification “implementation plan不是拿自然语言把整个实现和test一个一个都说一遍” requires plans to own delivery decisions, not a duplicate implementation/test inventory. Local changes must preserve accepted work and keep current review closure easy to inspect. This is one material requirement among scope fidelity, consequential design, stage execution and evidence quality.
+
+The [validation contract](proposals/workflow-validation.md) preserves the owner's request to standardize important tests, grading and original results as a safeguard for future skill changes. Its cadence is explicit: “当然太过heavy的测试也不能每次小改动都跑。在最后release之前跑就行。” Fast checks apply to normal commits/PRs; the required heavy suite and baseline comparison apply before release. Missing/inconclusive heavy results may not be reported as passing. No release or global installation was requested.

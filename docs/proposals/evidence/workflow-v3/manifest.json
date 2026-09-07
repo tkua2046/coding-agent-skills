@@ -1,0 +1,15 @@
+{
+  "baseline": "6573f8f422cb6528981ff43bc0d20c656096e7dc",
+  "files": [
+    {
+      "path": "docs/proposals/workflow-proposal.md",
+      "archive": "docs/proposals/evidence/workflow-v3/workflow-proposal.md.txt",
+      "sha256": "7efa5c1a9ab87cfed701e17770a048bc77cecdf98d072d7f78ba745606efb14e"
+    },
+    {
+      "path": "docs/proposals/workflow-validation.md",
+      "archive": "docs/proposals/evidence/workflow-v3/workflow-validation.md.txt",
+      "sha256": "65ddae4dca221acb19956c78ac513ff9fb2e7656b37a7c1f561e061698f5944a"
+    }
+  ]
+}

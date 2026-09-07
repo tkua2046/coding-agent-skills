@@ -1,0 +1,47 @@
+{
+  "id": "v3-maintenance",
+  "version": 1,
+  "tier": "heavy",
+  "title": "V3: Separate private maintenance from a public contract change",
+  "skills": [
+    "stage-development",
+    "feature-design",
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-maintain",
+      "request": "requests/01.md"
+    },
+    {
+      "id": "02-change-contract",
+      "request": "requests/02.md",
+      "overlay": "overlays/02"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "local-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "preserved-baseline",
+      "kind": "unchanged",
+      "paths": [
+        "docs/ORIGINAL.md",
+        "docs/OCCUPIED_REQUEST.md",
+        "docs/history"
+      ]
+    },
+    {
+      "id": "behavior-contract",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

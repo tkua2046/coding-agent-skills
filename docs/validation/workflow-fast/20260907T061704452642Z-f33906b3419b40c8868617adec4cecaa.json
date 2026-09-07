@@ -1,0 +1,17 @@
+{
+  "kind": "full fast suite; no real model calls",
+  "result": {
+    "argv": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "stdout": "........................................................................ [ 50%]\n.......................................................................  [100%]\n================================ tests coverage ================================\n_______________ coverage: platform darwin, python 3.12.4-final-0 _______________\n\nName                      Stmts   Miss Branch BrPart  Cover   Missing\n---------------------------------------------------------------------\ntools/__init__.py             0      0      0      0   100%\ntools/canary.py             478     53    190     17    88%   58, 154, 163, 223-225, 229-230, 292, 316, 373, 421-422, 443, 474, 511, 569-572, 577, 620, 646, 689, 710, 820-832, 867-901, 906\ntools/canary_runtime.py      70      2     14      3    94%   69->71, 114, 185\ntools/check.py              105      0     52      0   100%\ntools/evidence.py            12      0      0      0   100%\n---------------------------------------------------------------------\nTOTAL                       665     55    256     20    91%\nCoverage XML written to file coverage.xml\n143 passed in 29.72s\n",
+    "stderr": "",
+    "timed_out": false,
+    "interrupted": false,
+    "elapsed_seconds": 29.985
+  }
+}

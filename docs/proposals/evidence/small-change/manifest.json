@@ -1,0 +1,7 @@
+{
+  "proposal": "docs/proposals/small-change-workflow.md",
+  "archive": "docs/proposals/evidence/small-change/proposal-v1.md.txt",
+  "sha256": "a953325914f6945e09b294f564c9e230f10f7157cc66deddbe8c77afaefee6ac",
+  "skill_baseline_commit": "6573f8f422cb6528981ff43bc0d20c656096e7dc",
+  "implementation_status": "not started; unreviewed skill draft withdrawn"
+}

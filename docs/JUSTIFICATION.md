@@ -30,6 +30,16 @@ Repository tests establish packaging and checking behavior. Fresh-agent exercise
 
 The Markdown parser adds one pinned development dependency. This is preferable to maintaining an incomplete regular-expression parser: an independent review demonstrated missed reference links and a real review report exposed false positives in inline code. Parsing is inert; links are never rendered or fetched. Validation is limited to Markdown links/images and local resources, not every possible dependency expressed in natural language or code.
 
+## Workflow refinement and canary
+
+The [research](research/workflow/RESEARCH.md) supports a practical distinction: designs explain consequential choices, plans explain delivery order and acceptance, and code/tests retain implementation detail. A new test should not force synchronized prose edits. Local extensions amend affected work while preserving completed history; substantial migration risk still needs explicit preservation, activation and retry decisions.
+
+The [approved proposal](proposals/workflow-proposal.md) applies these rules to the four existing bundles rather than adding a workflow framework. Current verdict/open IDs plus append-only recheck evidence make review closure readable without erasing failed rounds. The plan template uses one overview, with detail only where a dependency or risk needs explanation.
+
+The [canary](../evals/README.md) standardizes previously ad hoc behavior checks. Machine oracles cover observable invariants; a separate calibrated grader covers decisions, maintainability and truthful closure. Fresh workspaces and recorded identities make a regression inspectable. The cost is explicit release-time model work and retained evidence; fast commits do not incur that cost. Passing local controls proves gate mechanics only, not prompt effectiveness.
+
+Existing frameworks informed this design but are not runtime dependencies. In particular, full executable plans and code/test recipes can suit long autonomous tasks; imposing them on every local feature would recreate the owner's maintenance problem. Licensed source files are retained with commit/hash/license metadata in the [source register](research/workflow/SOURCES.md). Articles without redistribution permission retain short excerpts and links, not reconstructed full text.
+
 ## Sources
 
 The owner's [original workflow](sources/user-workflow.md) sets the requirements. Tool facts were checked against [official references](SOURCES.md). Interview reports and proprietary/source interview materials are outside this library's content.

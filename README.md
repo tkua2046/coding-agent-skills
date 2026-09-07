@@ -27,8 +27,12 @@ Example requests:
 
 > Use $dev-workflow to adapt the existing checks and documentation layout. Keep current tools where they work.
 
+For a small follow-up, ask for a local design amendment and update only affected pending stages. Plans describe outcomes, dependencies and acceptance; code/tests retain implementation detail. Review records keep current open findings first and distinguish an author's fix claim from a reviewer's verification.
+
 ## Limits and references
 
 Skills guide agent behavior; they are not an automatic approval or release system. Independent review needs a separate context. Installation in your VS Code UI should be checked locally; see [validation](docs/VALIDATION.md) for what was actually tested.
+
+Skill changes have [versioned canary cases](evals/README.md) and retained evidence. Normal commits/PRs run fast checks; expensive agent trials are required before release. The new heavy suite is **pending**, not a claim that these prompt changes already passed behavioral evaluation.
 
 [Developer notes](DEVNOTES.md) · [Changelog](CHANGELOG.md) · [Design](docs/DESIGN.md) · [Justification](docs/JUSTIFICATION.md)

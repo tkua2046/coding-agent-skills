@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -117,8 +119,32 @@ def validate_repository(root: Path) -> list[str]:
             errors.append(
                 f"{discovery}: discovery link must target the canonical bundle"
             )
-    for path in [*root.glob("*.md"), *(root / "docs").rglob("*.md")]:
+    for path in [
+        *root.glob("*.md"),
+        *(root / "docs").rglob("*.md"),
+        *(root / "evals").glob("*.md"),
+    ]:
+        relative = path.relative_to(root).as_posix()
+        if relative.startswith(
+            ("docs/proposals/evidence/", "docs/research/workflow/sources/")
+        ) or (
+            relative.startswith("docs/validation/canary/")
+            and path.parent.name != "canary"
+        ):
+            continue  # Historical artifacts may intentionally contain broken references.
         errors.extend(link_errors(path, root))
+    manifest = root / "docs/research/workflow/source-manifest.json"
+    if manifest.is_file():
+        for source in json.loads(manifest.read_text()):
+            archive = (root / source["archive"]).resolve()
+            if (
+                not archive.is_relative_to(root)
+                or not archive.is_file()
+                or hashlib.sha256(archive.read_bytes()).hexdigest() != source["sha256"]
+            ):
+                errors.append(
+                    f"{manifest}: changed/missing source archive: {source['archive']}"
+                )
     return errors
 
 

@@ -1,0 +1,926 @@
+"""Fast structural regressions using labeled synthetic runtime controls.
+
+Passing controls establish provenance plumbing, never LLM/semantic quality or a
+real sandbox boundary. Only disposable repositories receive synthetic records.
+"""
+
+import copy
+import json
+import shutil
+import sys
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from tools import canary
+
+REPO = Path(__file__).resolve().parents[1]
+CONFIG = {"model": "synthetic-control-no-llm", "effort": "low", "timeout_seconds": 1}
+ENV = {"control": "synthetic environment; no runtime attestation"}
+
+
+def put_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value))
+
+
+def criterion(name="required", required=True):
+    return {
+        "id": name,
+        "required": required,
+        "requirement": "Synthetic control",
+        "pass_when": "Control says pass",
+        "fail_when": "Control says fail",
+    }
+
+
+def grade_row(
+    status="pass", name="required", path="artifacts/result.txt", quote="control"
+):
+    return {
+        "id": name,
+        "status": status,
+        "reason": "Synthetic control judgment",
+        "evidence": [{"path": path, "quote": quote}],
+    }
+
+
+def execution(reply, **changes):
+    return {
+        "completed": True,
+        "exit_code": 0,
+        "timed_out": False,
+        "interrupted": False,
+        "stdout": "synthetic transcript",
+        "stderr": "",
+        "reply": reply,
+        **changes,
+    }
+
+
+@pytest.fixture(autouse=True)
+def forbid_model_calls(monkeypatch):
+    def forbidden(*args, **kwargs):
+        pytest.fail("A fast test attempted a real model or sandbox invocation")
+
+    monkeypatch.setattr(canary.runtime, "execute", forbidden)
+    monkeypatch.setattr(canary.runtime, "probe", forbidden)
+    monkeypatch.setattr(canary.runtime, "sandbox_command", forbidden)
+    monkeypatch.setattr(canary, "environment", lambda: dict(ENV))
+
+
+def make_tiny_root(tmp_path, *, with_git=False):
+    root = tmp_path / "repo"
+    root.mkdir()
+    content = {
+        "skills/control/SKILL.md": b"synthetic baseline skill",
+        "evals/cases/control/fixture/keep/original.txt": b"preserve me",
+        "evals/cases/control/requests/01.md": b"synthetic first request",
+        "evals/cases/control/requests/02.md": b"synthetic second request",
+        "evals/cases/control/overlays/02/overlay.txt": b"second-phase overlay",
+        "evals/graders/review.md": b"Synthetic grader control, not an LLM assessment",
+    }
+    for name in ("tools/canary.py", "tools/canary_runtime.py", "requirements-dev.txt"):
+        content[name] = (REPO / name).read_bytes()
+    canary.write_files(root, content)
+    case = {
+        "id": "control",
+        "title": "Synthetic control",
+        "version": 1,
+        "tier": "heavy",
+        "skills": ["control"],
+        "phases": [
+            {"id": "first", "request": "requests/01.md"},
+            {"id": "second", "request": "requests/02.md", "overlay": "overlays/02"},
+        ],
+        "checks": [
+            {"id": "preserved", "kind": "unchanged", "paths": ["keep"]},
+            {"id": "tags", "kind": "no_tags"},
+            {"id": "commits", "kind": "commit_count", "expected": 0},
+        ],
+    }
+    rubric = {"version": 1, "criteria": [criterion()]}
+    put_json(root / "evals/cases/control/case.json", case)
+    put_json(root / "evals/cases/control/rubric.json", rubric)
+    put_json(
+        root / "evals/graders/calibration.json",
+        {
+            "rubric": rubric,
+            "examples": [
+                {
+                    "request": "Synthetic calibration control",
+                    "expected": status,
+                    "artifacts": {"result.txt": f"synthetic-control:{status}"},
+                }
+                for status in ("pass", "fail", "inconclusive")
+            ],
+        },
+    )
+    baseline = None
+    if with_git:
+        canary.init_fixture(root, {})
+        baseline = canary.git(root, "rev-parse", "HEAD")
+    (root / "skills/control/SKILL.md").write_text("synthetic candidate skill")
+    return SimpleNamespace(root=root, baseline=baseline, case=case)
+
+
+@pytest.fixture
+def tiny_root(tmp_path):
+    return make_tiny_root(tmp_path)
+
+
+class SyntheticRuntime:
+    """Deterministic labeled control, deliberately not a semantic grader."""
+
+    def __init__(self):
+        self.calls = []
+        self.worker_failure = None
+        self.malformed_grader = False
+        self.candidate_status = "pass"
+
+    def probe(self, workspace, private):
+        assert private.is_file() and not private.is_relative_to(workspace)
+        return {
+            "passed": True,
+            "control": "synthetic boundary result, not isolation proof",
+        }
+
+    def execute(self, workspace, prompt, output, config, schema=None):
+        self.calls.append(
+            {
+                "workspace": workspace,
+                "prompt": prompt,
+                "output": output,
+                "schema": schema,
+                "before": canary.files(workspace),
+            }
+        )
+        if schema is None:
+            assert not (workspace / "rubric.json").exists()
+            assert not (workspace / "oracle.py").exists()
+            phase = output.parent.name
+            (workspace / f"{phase}-report.txt").write_text(f"synthetic {phase} report")
+            reply = f"synthetic {phase} worker reply"
+            result = execution(reply, **(self.worker_failure or {}))
+        else:
+            control = workspace / "artifacts/result.txt"
+            if control.exists():
+                quote = control.read_text()
+                status = quote.split(":")[-1]
+                path = "artifacts/result.txt"
+            else:
+                skill = (workspace / "initial/skills/control/SKILL.md").read_text()
+                status = "fail" if "baseline" in skill else self.candidate_status
+                path = "artifacts/second/reply.md"
+                quote = (workspace / path).read_text()
+            reply = (
+                "{malformed synthetic grader"
+                if self.malformed_grader
+                else json.dumps(
+                    {"criteria": [grade_row(status, path=path, quote=quote)]}
+                )
+            )
+            result = execution(reply)
+        output.write_text(reply)
+        return result
+
+
+@pytest.fixture
+def fake_runtime(monkeypatch):
+    fake = SyntheticRuntime()
+    monkeypatch.setattr(canary.runtime, "execute", fake.execute)
+    monkeypatch.setattr(canary.runtime, "probe", fake.probe)
+    return fake
+
+
+@pytest.fixture(scope="module")
+def accepted_seed(tmp_path_factory):
+    """Generate authentic record structure once; each test mutates a private copy."""
+    trial = make_tiny_root(
+        tmp_path_factory.mktemp("synthetic-provenance"), with_git=True
+    )
+    fake = SyntheticRuntime()
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(canary.runtime, "execute", fake.execute)
+        patch.setattr(canary.runtime, "probe", fake.probe)
+        patch.setattr(canary, "environment", lambda: dict(ENV))
+        trial.calibration = canary.calibration(trial.root, CONFIG)
+        assert canary.read_json(trial.calibration)["status"] == "pass"
+        trial.old = canary.run_case(
+            trial.root, "control", CONFIG, CONFIG, trial.calibration, trial.baseline
+        )
+        trial.new = canary.run_case(
+            trial.root, "control", CONFIG, CONFIG, trial.calibration
+        )
+    result = canary.release_gate(trial.root, [trial.old, trial.new], trial.baseline)
+    assert result["status"] == "pass", result
+    assert result["cases"]["control"]["baseline_status"] == "fail"
+    return trial
+
+
+@pytest.fixture
+def accepted(accepted_seed, tmp_path, fake_runtime):
+    seed = accepted_seed
+    root = tmp_path / "repo"
+    shutil.copytree(seed.root, root)
+    trial = SimpleNamespace(
+        root=root,
+        baseline=seed.baseline,
+        case=copy.deepcopy(seed.case),
+        fake=fake_runtime,
+    )
+    for name in ("calibration", "old", "new"):
+        setattr(trial, name, root / getattr(seed, name).relative_to(seed.root))
+    # Assert acceptance after relocation, before each isolated negative mutation.
+    result = gate(trial)
+    assert result["status"] == "pass", result
+    return trial
+
+
+def refresh_manifest(report_path):
+    """Re-seal synthetic tampering to exercise semantic checks past the hash layer."""
+    row = canary.read_json(report_path)
+    content = canary.files(report_path.parent)
+    content.pop("report.json")
+    row["evidence"] = canary.hashes(content)
+    put_json(report_path, row)
+
+
+def gate(trial):
+    return canary.release_gate(trial.root, [trial.old, trial.new], trial.baseline)
+
+
+def test_complete_synthetic_provenance_is_accepted_and_portable(accepted, monkeypatch):
+    trial = accepted
+    assert (
+        canary.verified_behavior(trial.root, trial.new, trial.case)["status"] == "pass"
+    )
+    assert (
+        canary.verified_behavior(trial.root, trial.old, trial.case)["status"] == "fail"
+    )
+    shutil.rmtree(trial.calibration.parent)
+    check_calibration = canary.check_calibration
+
+    def archived_only(root, path, config, env):
+        # Relocated reports still name the original seed calibration. A gate
+        # must use its archived copy, never that still-existing source path.
+        assert path in {
+            trial.old.parent / "calibration/report.json",
+            trial.new.parent / "calibration/report.json",
+        }
+        return check_calibration(root, path, config, env)
+
+    monkeypatch.setattr(canary, "check_calibration", archived_only)
+    assert gate(trial)["status"] == "pass"  # archived calibration is self-contained
+    for report in (trial.old, trial.new):
+        row = canary.verified_record(report)
+        assert row["identity"]["skills"]
+        assert row["evidence"]
+        controls = canary.read_json(report.parent / "calibration/report.json")[
+            "matched_controls"
+        ]
+        assert controls and all(controls)
+
+
+def test_phases_are_separate_calls_with_retained_artifacts_and_overlays(accepted):
+    trial = accepted
+    trial.new = canary.run_case(
+        trial.root, "control", CONFIG, CONFIG, trial.calibration
+    )
+    assert gate(trial)["status"] == "pass"
+    worker_calls = [
+        c
+        for c in trial.fake.calls
+        if c["schema"] is None and c["output"].is_relative_to(trial.new.parent)
+    ]
+    assert [c["output"].parent.name for c in worker_calls] == [
+        p["id"] for p in trial.case["phases"]
+    ]
+    first, second = worker_calls
+    assert "synthetic first request" in first["prompt"]
+    assert "synthetic second request" in second["prompt"]
+    assert "synthetic first request" not in second["prompt"]
+    assert "first-report.txt" not in first["before"]
+    assert second["before"]["first-report.txt"] == b"synthetic first report"
+    assert second["before"]["overlay.txt"] == b"second-phase overlay"
+    for phase in trial.case["phases"]:
+        directory = trial.new.parent / "phases" / phase["id"]
+        assert (directory / "reply.md").read_text() == canary.read_json(
+            directory / "execution.json"
+        )["reply"]
+        assert canary.read_json(directory / "git.json")["head"]
+        assert (directory / "workspace" / f"{phase['id']}-report.txt").is_file()
+    grader = next(
+        c
+        for c in trial.fake.calls
+        if c["output"] == trial.new.parent / "grade-reply.json"
+    )
+    assert grader["workspace"] != first["workspace"]
+    assert "artifacts/first/reply.md" in grader["before"]
+    assert "artifacts/second/reply.md" in grader["before"]
+
+
+@pytest.mark.parametrize(
+    "asset",
+    [
+        "skills/control/SKILL.md",
+        "evals/graders/review.md",
+        "evals/cases/control/requests/01.md",
+        "evals/graders/calibration.json",
+        "tools/canary_runtime.py",
+        "requirements-dev.txt",
+    ],
+)
+def test_release_rejects_stale_inputs(accepted, asset):
+    target = accepted.root / asset
+    if target.suffix == ".json":
+        value = canary.read_json(target)
+        value["examples"][0]["request"] += " changed"
+        put_json(target, value)
+    else:
+        target.write_bytes(target.read_bytes() + b"\nchanged control")
+    rejected = gate(accepted)
+    assert rejected["status"] == "fail"
+    assert "control" not in rejected["cases"]
+
+
+@pytest.mark.parametrize(
+    "asset",
+    [
+        "inputs/bundles/skills/control/SKILL.md",
+        "inputs/case/case.json",
+        "calibration/report.json",
+        "grade.json",
+        "grade-reply.execution.json",
+        "phases/second/execution.json",
+        "grader-isolation.json",
+    ],
+)
+def test_release_rejects_missing_evidence_even_with_refreshed_manifest(accepted, asset):
+    (accepted.new.parent / asset).unlink()
+    refresh_manifest(accepted.new)
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_release_rejects_changed_evidence_bytes(accepted):
+    (accepted.new.parent / "phases/first/reply.md").write_text("substituted evidence")
+    with pytest.raises(ValueError):
+        canary.verified_record(accepted.new)
+    assert gate(accepted)["status"] == "fail"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "grade-summary",
+        "grader-reply",
+        "worker-reply",
+        "missing-criterion",
+        "duplicate-check",
+        "failed-check",
+    ],
+)
+def test_release_recomputes_archived_judgments(accepted, mutation):
+    directory = accepted.new.parent
+    if mutation in {"grade-summary", "grader-reply", "missing-criterion"}:
+        grade = canary.read_json(directory / "grade.json")
+        grade["criteria"][0]["status"] = "fail"
+        if mutation == "missing-criterion":
+            grade["criteria"] = []
+        put_json(directory / "grade.json", grade)
+        if mutation != "grader-reply":
+            result = canary.read_json(directory / "grade-reply.execution.json")
+            result["reply"] = json.dumps(grade)
+            put_json(directory / "grade-reply.execution.json", result)
+            (directory / "grade-reply.json").write_text(result["reply"])
+    elif mutation == "worker-reply":
+        (directory / "phases/first/reply.md").write_text("different reply")
+    else:
+        checks = canary.read_json(directory / "deterministic.json")
+        if mutation == "duplicate-check":
+            checks[-1] = copy.deepcopy(checks[0])
+        else:
+            checks[0]["status"] = "fail"
+        put_json(directory / "deterministic.json", checks)
+    refresh_manifest(accepted.new)
+    assert gate(accepted)["status"] == "fail"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "grader",
+        "settings",
+        "environment",
+        "controls",
+        "failed-control",
+        "incomplete-control",
+    ],
+)
+def test_release_revalidates_copied_calibration(accepted, mutation):
+    report_path = accepted.new.parent / "calibration/report.json"
+    directory = report_path.parent
+    row = canary.read_json(report_path)
+    if mutation in {"grader", "settings", "environment"}:
+        row[mutation] = "stale synthetic value"
+        put_json(report_path, row)
+    elif mutation == "controls":
+        controls = canary.read_json(directory / "inputs.json")
+        controls["examples"][0]["request"] += " changed"
+        put_json(directory / "inputs.json", controls)
+    else:
+        result_path = directory / "0-reply.execution.json"
+        result = canary.read_json(result_path)
+        if mutation == "incomplete-control":
+            result["completed"] = False
+        else:
+            grade = canary.read_json(directory / "0-grade.json")
+            grade["criteria"][0]["status"] = "fail"
+            put_json(directory / "0-grade.json", grade)
+            result["reply"] = json.dumps(grade)
+        put_json(result_path, result)
+    refresh_manifest(report_path)
+    refresh_manifest(accepted.new)
+    assert gate(accepted)["status"] == "fail"
+
+
+@pytest.mark.parametrize(
+    "failure",
+    [
+        {"completed": False, "exit_code": 9, "stderr": "synthetic failure"},
+        {"completed": False, "timed_out": True},
+        {"completed": False, "interrupted": True},
+    ],
+)
+def test_newer_incomplete_attempt_is_retained_and_blocks_older_green(accepted, failure):
+    old_bytes = accepted.new.read_bytes()
+    accepted.fake.worker_failure = failure
+    newer = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    row = canary.verified_record(newer)
+    assert row["status"] == "inconclusive"
+    assert row.get("error")
+    result = canary.read_json(newer.parent / "phases/first/execution.json")
+    for key, value in failure.items():
+        assert result[key] == value
+    assert (newer.parent / "phases/first/workspace/first-report.txt").is_file()
+    assert (newer.parent / "phases/first/git.json").is_file()
+    assert not (newer.parent / "phases/second").exists()
+    assert accepted.new.read_bytes() == old_bytes
+    assert gate(accepted)["status"] == "fail"  # newer was not passed explicitly
+
+
+def test_newer_completed_failure_blocks_cherry_picked_green(accepted):
+    accepted.fake.candidate_status = "fail"
+    newer = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    assert (
+        canary.verified_behavior(accepted.root, newer, accepted.case)["status"]
+        == "fail"
+    )
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_malformed_grader_retains_execution_and_all_phase_results(accepted):
+    accepted.fake.malformed_grader = True
+    newer = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    row = canary.verified_record(newer)
+    assert row["status"] == "inconclusive"
+    assert row.get("error")
+    result = canary.read_json(newer.parent / "grade-reply.execution.json")
+    assert result["reply"] == (newer.parent / "grade-reply.json").read_text()
+    with pytest.raises(json.JSONDecodeError):
+        json.loads(result["reply"])
+    for phase in accepted.case["phases"]:
+        assert (newer.parent / "phases" / phase["id"] / "execution.json").is_file()
+    assert not (newer.parent / "grade.json").exists()
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_failed_calibration_cannot_be_used(tiny_root, fake_runtime):
+    fake_runtime.malformed_grader = True
+    calibration = canary.calibration(tiny_root.root, CONFIG)
+    assert canary.verified_record(calibration)["status"] == "inconclusive"
+    assert (calibration.parent / "0-reply.execution.json").is_file()
+    before = list(fake_runtime.calls)
+    report = canary.run_case(tiny_root.root, "control", CONFIG, CONFIG, calibration)
+    assert canary.read_json(report)["status"] == "inconclusive"
+    assert canary.read_json(report).get("error")
+    assert canary.verified_record(report)["status"] == "inconclusive"
+    assert (report.parent / "attempt.json").is_file()
+    assert fake_runtime.calls == before
+
+
+@pytest.mark.parametrize("failure", ["missing", "nonpassing", "stale"])
+def test_early_calibration_failure_is_retained_but_later_valid_run_recovers(
+    accepted, failure
+):
+    bad = accepted.root / "bad-calibration/report.json"
+    if failure != "missing":
+        shutil.copytree(accepted.calibration.parent, bad.parent)
+        row = canary.read_json(bad)
+        row["status" if failure == "nonpassing" else "engine"] = (
+            "fail" if failure == "nonpassing" else "obsolete-engine"
+        )
+        put_json(bad, row)
+    failed = canary.run_case(accepted.root, "control", CONFIG, CONFIG, bad)
+    assert canary.verified_record(failed)["status"] == "inconclusive"
+    retained = canary.hashes(canary.files(failed.parent))
+    assert gate(accepted)["status"] == "fail"  # latest attempt cannot borrow old green
+    recovered = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    assert canary.read_json(recovered)["status"] == "pass"
+    assert gate(accepted)["status"] == "pass"
+    assert canary.hashes(canary.files(failed.parent)) == retained
+
+
+@pytest.mark.parametrize("asset", ["case.json", "rubric.json"])
+def test_content_revision_advances_with_fresh_comparable_evidence(accepted, asset):
+    target = accepted.root / "evals/cases/control" / asset
+    row = canary.read_json(target)
+    row["version"] = 2
+    put_json(target, row)
+    assert canary.cases(accepted.root)["control"]
+    assert gate(accepted)["status"] == "fail"  # v1 evidence is now stale
+    old = canary.run_case(
+        accepted.root,
+        "control",
+        CONFIG,
+        CONFIG,
+        accepted.calibration,
+        accepted.baseline,
+    )
+    new = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    assert canary.read_json(old)["status"] == "fail"  # known synthetic baseline defect
+    assert canary.read_json(new)["status"] == "pass"
+    assert gate(accepted)["status"] == "pass"
+
+
+@pytest.mark.parametrize("asset", ["case.json", "rubric.json"])
+@pytest.mark.parametrize("revision", [0, -1, True, "2", 2.1, None])
+def test_content_revision_requires_positive_integer(tiny_root, asset, revision):
+    target = tiny_root.root / "evals/cases/control" / asset
+    row = canary.read_json(target)
+    row["version"] = revision
+    put_json(target, row)
+    with pytest.raises(ValueError):
+        canary.cases(tiny_root.root)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "wrong-id",
+        "version",
+        "tier",
+        "unknown-skill",
+        "unmapped-skill",
+        "empty-phases",
+        "duplicate-phase",
+        "missing-request",
+        "escaping-request",
+        "missing-overlay",
+        "duplicate-criterion",
+        "no-required",
+        "unanchored",
+        "duplicate-check",
+        "unsupported-check",
+        "missing-oracle",
+        "missing-preserved",
+        "missing-hook",
+        "missing-fixture",
+    ],
+)
+def test_catalog_rejects_invalid_definitions(tiny_root, mutation):
+    root = tiny_root.root
+    case = copy.deepcopy(tiny_root.case)
+    case_dir = root / "evals/cases/control"
+    rubric = canary.read_json(case_dir / "rubric.json")
+    if mutation == "wrong-id":
+        case["id"] = "other"
+    elif mutation == "version":
+        case["version"] = 0
+    elif mutation == "tier":
+        case["tier"] = "fast"
+    elif mutation == "unknown-skill":
+        case["skills"] = ["missing"]
+    elif mutation == "unmapped-skill":
+        canary.write_files(root, {"skills/unmapped/SKILL.md": b"synthetic control"})
+    elif mutation == "empty-phases":
+        case["phases"] = []
+    elif mutation == "duplicate-phase":
+        case["phases"][1]["id"] = case["phases"][0]["id"]
+    elif mutation in {"missing-request", "escaping-request"}:
+        case["phases"][0]["request"] = (
+            "missing.md" if mutation == "missing-request" else "../outside.md"
+        )
+    elif mutation == "missing-overlay":
+        case["phases"][1]["overlay"] = "missing"
+    elif mutation == "duplicate-criterion":
+        rubric["criteria"].append(copy.deepcopy(rubric["criteria"][0]))
+    elif mutation == "no-required":
+        rubric["criteria"][0]["required"] = False
+    elif mutation == "unanchored":
+        del rubric["criteria"][0]["pass_when"]
+    elif mutation == "duplicate-check":
+        case["checks"].append(copy.deepcopy(case["checks"][0]))
+    elif mutation == "unsupported-check":
+        case["checks"][0]["kind"] = "unknown"
+    elif mutation == "missing-oracle":
+        case["checks"].append({"id": "oracle", "kind": "python", "file": "missing.py"})
+    elif mutation == "missing-preserved":
+        case["checks"][0]["paths"] = ["missing"]
+    elif mutation == "missing-hook":
+        case["hook"] = "missing-hook"
+    elif mutation == "missing-fixture":
+        shutil.rmtree(case_dir / "fixture")
+    put_json(case_dir / "case.json", case)
+    put_json(case_dir / "rubric.json", rubric)
+    with pytest.raises(ValueError):
+        canary.cases(root)
+
+
+@pytest.mark.parametrize(
+    "asset", ["requests/01.md", "fixture/keep/original.txt", "rubric.json"]
+)
+def test_catalog_rejects_symlinked_assets(tiny_root, asset):
+    target = tiny_root.root / "evals/cases/control" / asset
+    outside = tiny_root.root.parent / "private"
+    outside.write_bytes(target.read_bytes())
+    target.unlink()
+    target.symlink_to(outside)
+    with pytest.raises(ValueError):
+        canary.cases(tiny_root.root)
+
+
+@pytest.mark.parametrize("name", ["", "../escape", "/absolute", "nested/../../escape"])
+def test_local_rejects_paths_outside_root(tmp_path, name):
+    with pytest.raises(ValueError):
+        canary.local(tmp_path, name)
+
+
+def test_write_files_rejects_symlink_parent_without_touching_private_file(tmp_path):
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    private = tmp_path / "private"
+    private.mkdir()
+    secret = private / "secret"
+    secret.write_bytes(b"private control")
+    (workspace / "linked").symlink_to(private, target_is_directory=True)
+    with pytest.raises(ValueError):
+        canary.write_files(workspace, {"linked/secret": b"overwrite"})
+    assert secret.read_bytes() == b"private control"
+
+
+@pytest.mark.parametrize(
+    "mutation", ["none", "add", "delete", "change", "remove-directory"]
+)
+def test_directory_preservation_detects_membership_and_content_changes(
+    tmp_path, mutation
+):
+    canary.write_files(
+        tmp_path, {"docs/one.txt": b"one", "docs/nested/two.txt": b"two"}
+    )
+    initial = canary.files(tmp_path)
+    if mutation == "add":
+        (tmp_path / "docs/new.txt").write_text("added")
+    elif mutation == "delete":
+        (tmp_path / "docs/nested/two.txt").unlink()
+    elif mutation == "change":
+        (tmp_path / "docs/one.txt").write_text("changed")
+    elif mutation == "remove-directory":
+        shutil.rmtree(tmp_path / "docs")
+    check = {"checks": [{"id": "preserve", "kind": "unchanged", "paths": ["docs"]}]}
+    results = canary.deterministic(check, tmp_path, tmp_path, initial, "unused")
+    assert results[0]["status"] == ("pass" if mutation == "none" else "fail")
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "omitted",
+        "duplicate",
+        "invented",
+        "fabricated-quote",
+        "missing-artifact",
+        "rubric-evidence",
+        "traversal",
+        "no-evidence",
+    ],
+)
+def test_grading_rejects_unanchored_or_incomplete_judgments(tmp_path, mutation):
+    canary.write_files(tmp_path, {"artifacts/result.txt": b"control"})
+    row = grade_row()
+    grade = {"criteria": [row]}
+    if mutation == "omitted":
+        grade["criteria"] = []
+    elif mutation == "duplicate":
+        grade["criteria"].append(copy.deepcopy(row))
+    elif mutation == "invented":
+        row["id"] = "undeclared"
+    elif mutation == "fabricated-quote":
+        row["evidence"][0]["quote"] = "not in artifact"
+    elif mutation == "missing-artifact":
+        row["evidence"][0]["path"] = "artifacts/missing.txt"
+    elif mutation == "rubric-evidence":
+        row["evidence"][0]["path"] = "rubric.json"
+    elif mutation == "traversal":
+        row["evidence"][0]["path"] = "artifacts/../../private"
+    elif mutation == "no-evidence":
+        row["evidence"] = []
+    with pytest.raises(ValueError):
+        canary.validate_grade(grade, {"criteria": [criterion()]}, tmp_path)
+
+
+@pytest.mark.parametrize(
+    "required_status,optional_status,expected",
+    [
+        ("fail", "pass", "fail"),
+        ("inconclusive", "pass", "inconclusive"),
+        ("pass", "fail", "pass"),
+        ("pass", "pass", "pass"),
+    ],
+)
+def test_required_criteria_are_not_averaged(
+    tmp_path, required_status, optional_status, expected
+):
+    rubric = {
+        "criteria": [
+            criterion(),
+            *[criterion(f"optional-{i}", False) for i in range(5)],
+        ]
+    }
+    rows = [grade_row(required_status)] + [
+        grade_row(optional_status, f"optional-{i}") for i in range(5)
+    ]
+    assert (
+        canary.validate_grade(
+            {"criteria": rows}, rubric, tmp_path, {"result.txt": b"control"}
+        )
+        == expected
+    )
+
+
+def test_required_failure_dominates_inconclusive(tmp_path):
+    rubric = {
+        "criteria": [
+            criterion("failed"),
+            criterion("unknown"),
+            *[criterion(f"passing-{i}") for i in range(5)],
+        ]
+    }
+    grade = {
+        "criteria": [
+            grade_row("fail", "failed"),
+            grade_row("inconclusive", "unknown"),
+            *[grade_row("pass", f"passing-{i}") for i in range(5)],
+        ]
+    }
+    assert (
+        canary.validate_grade(grade, rubric, tmp_path, {"result.txt": b"control"})
+        == "fail"
+    )
+
+
+@pytest.mark.parametrize("case_id", ["counter-stage", "v6-execution-handoff"])
+def test_counter_oracles_reject_defect_missed_by_worker_tests(
+    tmp_path, monkeypatch, case_id
+):
+    case_dir = REPO / "evals/cases" / case_id
+    canary.write_files(tmp_path, canary.files(case_dir / "fixture"))
+    correct = """class Counter:
+    def __init__(self, value=0):
+        self.value = value
+    def add(self, step=1):
+        if type(step) is not int or step <= 0:
+            raise ValueError('invalid step')
+        self.value += step
+        return self.value
+"""
+    # This defective control accepts bool/float/zero, which visible tests omit.
+    defective = correct.replace("type(step) is not int or step <= 0", "step < 0")
+    monkeypatch.setattr(
+        canary.runtime, "sandbox_command", lambda workspace, command: command
+    )
+    case = canary.read_json(case_dir / "case.json")
+    oracle_case = {"checks": [c for c in case["checks"] if c["kind"] == "python"]}
+    assert oracle_case["checks"]
+    for source, expected in ((correct, "pass"), (defective, "fail")):
+        (tmp_path / "counter.py").write_text(source)
+        worker = canary.runtime.capture(
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests"],
+            tmp_path,
+            5,
+        )
+        assert worker["exit_code"] == 0, worker
+        checked = canary.deterministic(oracle_case, case_dir, tmp_path, {}, "unused")
+        assert all(c["status"] == expected for c in checked), checked
+        assert all(c["evidence"]["stderr"] for c in checked)
+
+
+def test_maintenance_oracle_rejects_west_defect_missed_by_worker_tests(
+    tmp_path, monkeypatch
+):
+    case_dir = REPO / "evals/cases/v3-maintenance"
+    canary.write_files(tmp_path, canary.files(case_dir / "fixture"))
+    correct = (tmp_path / "navigator.py").read_text()
+    defective = correct.replace(
+        "if candidate[:2] in occupied:",
+        "if heading != 3 and candidate[:2] in occupied:",
+    )
+    assert defective != correct
+    monkeypatch.setattr(
+        canary.runtime, "sandbox_command", lambda workspace, command: command
+    )
+    case = canary.read_json(case_dir / "case.json")
+    oracle_case = {"checks": [c for c in case["checks"] if c["kind"] == "python"]}
+    assert oracle_case["checks"]
+    for source, expected in ((correct, "pass"), (defective, "fail")):
+        (tmp_path / "navigator.py").write_text(source)
+        worker = canary.runtime.capture(
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests"],
+            tmp_path,
+            5,
+        )
+        assert worker["exit_code"] == 0, worker
+        checked = canary.deterministic(oracle_case, case_dir, tmp_path, {}, "unused")
+        assert all(c["status"] == expected for c in checked), checked
+
+
+def test_current_catalog_validates_without_model_but_absent_all_case_evidence_blocks_release(
+    tmp_path, monkeypatch, capsys
+):
+    # Exercise the actual CLI validator and the full current catalog, without
+    # borrowing any local behavior evidence or depending on a historical ref.
+    assert canary.main(["validate"]) == 0
+    assert capsys.readouterr().out
+    root = tmp_path / "all-cases"
+    root.mkdir()
+    for name in ("evals/cases", "skills"):
+        canary.write_files(root / name, canary.files(REPO / name))
+    for name in ("tools/canary.py", "tools/canary_runtime.py", "requirements-dev.txt"):
+        canary.write_files(root, {name: (REPO / name).read_bytes()})
+    canary.init_fixture(root, {})
+    catalog = canary.cases(root)
+    assert set(catalog) == set(canary.cases(REPO))
+    rejected = canary.release_gate(root, [], "HEAD")
+    assert rejected["status"] == "fail"
+    assert rejected["cases"] == {}
+    assert all(
+        any(error.startswith(f"{case_id}:") for error in rejected["errors"])
+        for case_id in catalog
+    )
+
+
+@pytest.mark.parametrize(
+    "artifact", ["phases/second/execution.json", "grade-reply.execution.json"]
+)
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"completed": False},
+        {"exit_code": 4},
+        {"timed_out": True},
+        {"interrupted": True},
+    ],
+)
+def test_release_rejects_incomplete_execution_despite_passing_summary(
+    accepted, artifact, change
+):
+    path = accepted.new.parent / artifact
+    result = canary.read_json(path)
+    result.update(change)
+    put_json(path, result)
+    refresh_manifest(accepted.new)
+    assert canary.verified_record(accepted.new)["status"] == "pass"
+    assert gate(accepted)["status"] == "fail"
+
+
+def test_deterministic_failure_overrides_passing_grader(accepted, monkeypatch):
+    fake = accepted.fake
+    execute = fake.execute
+
+    def destructive_control(workspace, prompt, output, config, schema=None):
+        result = execute(workspace, prompt, output, config, schema)
+        if schema is None:
+            (workspace / "keep/added.txt").write_text(
+                "synthetic preservation violation"
+            )
+        return result
+
+    monkeypatch.setattr(canary.runtime, "execute", destructive_control)
+    newer = canary.run_case(
+        accepted.root, "control", CONFIG, CONFIG, accepted.calibration
+    )
+    row = canary.verified_behavior(accepted.root, newer, accepted.case)
+    assert row["semantic"] == "pass"
+    assert row["status"] == "fail"
+    assert gate(accepted)["status"] == "fail"

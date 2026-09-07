@@ -1,6 +1,6 @@
 # Design: four portable workflow skills
 
-Status: design/plan review passed; implemented and exercised locally. See [validation](VALIDATION.md) for implementation review and delivery evidence. Requirements: [SPEC](SPEC.md).
+Status: original design retained; authorized workflow refinement and canary added below. Original validation and current limitations: [validation](VALIDATION.md). Requirements: [SPEC](SPEC.md).
 
 ## At a glance
 
@@ -44,3 +44,11 @@ Validate the Python sample in a temporary Git repository: successful tests pass;
 Delivery trials cover version/notes preparation, pending or failed CI/review, a merged revision different from the previously tested candidate, and a verified merged candidate. Incomplete or mismatched evidence must prevent tagging; a valid dry-run must identify the exact candidate and authorized next operation. These controlled trials do not publish a real release.
 
 Fresh agents receive realistic tasks plus only necessary artifacts. They may write temporary trial outputs, but must not change the bundle being evaluated. Record exact tested file hashes and actual outcomes. Fix demonstrated defects, then rerun affected checks. Details and tradeoffs: [JUSTIFICATION](JUSTIFICATION.md).
+
+## Refinement: proportional documents and repeatable evidence
+
+Amend affected decisions/pending stages for local extensions; retain original requirements and completed work. Plans own observable increments, dependencies and decisive acceptance. Implementation/test inventories stay with code. Reviews retain stable findings and round identities; author fix claims remain distinct from verified closure. Handoffs expose current state and next action before historical evidence.
+
+Ten versioned [canary cases](../evals/cases/README.md) cover the declared behaviors. The worker sees a disposable Git fixture and selected immutable skill bundles; evaluator criteria/oracles are outside the worker's tool read boundary. Each phase uses a fresh context. A separate grader assesses archived artifacts against an anchored rubric after calibration. Runtime probes fail closed when isolation is unavailable. Records preserve raw phase output and failed attempts; the release gate recomputes acceptance from evidence associated with the candidate and matching baseline.
+
+Fast mechanical controls run at commit/PR time. The full heavy suite is deferred until release; its absence blocks release rather than ordinary PR work. Evidence identity includes case files, selected bundles, grader/engine, model settings and environment. The implementation is a local runner and review procedure, not a universal workflow state machine or server-enforced publishing lock. See [operation and limitations](../evals/README.md).
