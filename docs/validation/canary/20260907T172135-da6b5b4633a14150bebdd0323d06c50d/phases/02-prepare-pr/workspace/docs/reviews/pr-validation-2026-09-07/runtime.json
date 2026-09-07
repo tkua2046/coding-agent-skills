@@ -1,0 +1,7 @@
+{
+  "python": "3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "executable": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "coverage": "7.16.0",
+  "hook_executable": true,
+  "hook_matches_maintained": true
+}

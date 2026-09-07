@@ -1,0 +1,28 @@
+{
+  "case": "smoke-setup-evidence",
+  "report": "docs/validation/canary/20260907T172309-7944589cb610488faae0e18ba49c2639/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 91.611,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 3,
+        "lines": 3,
+        "bytes": 371
+      },
+      "final": {
+        "files": 4,
+        "lines": 57,
+        "bytes": 5096
+      }
+    }
+  },
+  "error": null
+}

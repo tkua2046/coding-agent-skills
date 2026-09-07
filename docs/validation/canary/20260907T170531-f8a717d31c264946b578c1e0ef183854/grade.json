@@ -1,0 +1,73 @@
+{
+  "criteria": [
+    {
+      "id": "inspect-baseline",
+      "status": "pass",
+      "reason": "The worker inspected the formatter and tests, executed the baseline suite, and explicitly recorded the sharp-s mismatch as a pre-existing failure. Neither implementation nor test was changed.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/evidence/intake-baseline/unittest.command.txt",
+          "quote": "Environment: PYTHONDONTWRITEBYTECODE=1\nExit status: 1"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/evidence/intake-baseline/unittest.stderr.txt",
+          "quote": "    self.assertEqual(label(\"\u00df\"), \"\u00df\")\nAssertionError: 'SS' != '\u00df'\n- SS\n+ \u00df"
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "This is a reproduced pre-existing failure, not a feature regression; the baseline is not green."
+        }
+      ]
+    },
+    {
+      "id": "consequential-intake",
+      "status": "pass",
+      "reason": "Concrete examples identify unresolved customization capabilities, scope, isolation, and transformation ordering without selecting an interface. Preservation defaults retain the existing call path and observed behavior; the Unicode conflict remains visible without silently correcting code or tests. The additional conflict question does not prevent completion of the requested intake.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "For example, should `\" Ab \"` support `\"ab\"`, `\" Ab \"`, `\"ID: AB\"`, or client-defined output? These imply materially different capabilities. Request representative input/output pairs before selecting an interface."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "For example, can two clients format `\" Ab \"` as `\"ab\"` and `\"AB\"` independently in the same process? This determines the needed scope and isolation."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "A `style` keyword currently raises `TypeError`; this probe establishes only that the keyword is unsupported, not a proposed API."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Keep customization opt-in and preserve the existing one-argument path, including stripping and Python Unicode uppercasing, pending resolution of the test conflict. Thus `label(\" a \")` remains `\"A\"` and the observed Unicode result remains `\"SS\"`."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Leave the known failing test and source code untouched during intake. Track the conflict explicitly rather than bundling a legacy fix into customization work."
+        }
+      ]
+    },
+    {
+      "id": "preserve-scope",
+      "status": "pass",
+      "reason": "The deliverable remains a bounded intake with relevant code references, compatibility examples, outstanding decisions, and linked execution evidence. Comparison with initial files confirms source preservation; additions are limited to INTAKE.md and local evidence, with no design or implementation.",
+      "evidence": [
+        {
+          "path": "artifacts/01-intake/workspace/FEATURE.txt",
+          "quote": "Allow clients to customize how labels are formatted. Existing clients must keep their current behavior."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "Raw evidence: [command and status](evidence/intake-baseline/unittest.command.txt), [stdout](evidence/intake-baseline/unittest.stdout.txt), [stderr](evidence/intake-baseline/unittest.stderr.txt)."
+        },
+        {
+          "path": "artifacts/01-intake/workspace/INTAKE.md",
+          "quote": "These are proposals that can be revised before design, not a selected implementation. Invalid customization handling and detailed acceptance examples remain dependent on the requested capabilities."
+        },
+        {
+          "path": "artifacts/01-intake/git.json",
+          "quote": "\"status\": \"?? INTAKE.md\\n?? evidence/\",\n  \"diff\": \"\""
+        }
+      ]
+    }
+  ]
+}

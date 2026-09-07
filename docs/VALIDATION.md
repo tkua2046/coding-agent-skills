@@ -1,6 +1,6 @@
 # Validation
 
-Current workflow refinement: [actual canary results](validation/canary/INDEX.md) and [delivery checks](validation/outcome-final/). Real baseline/candidate evaluation and scoring calibration have run; unresolved failures, inconclusive scores and a deferred final case still block release acceptance. The results below belong to the initial library and are preserved as historical evidence, not current canary grades.
+Current evidence: [actual skill results and acceptance gaps](validation/canary/INDEX.md), [finding dispositions](reviews/continuation-dispositions.md), and [preceding delivery](validation/outcome-final/). Original failed/inconclusive attempts remain alongside later corrections. Release acceptance requires matching current heavy evidence; the results below belong to the initial library and remain historical, not current canary grades.
 
 ## Initial library (historical)
 

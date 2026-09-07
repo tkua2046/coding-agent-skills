@@ -1,0 +1,39 @@
+{
+  "id": "smoke-stage-resume",
+  "version": 1,
+  "tier": "smoke",
+  "title": "Resume a verified fix and perform only the remaining gate",
+  "skills": [
+    "stage-development"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "session.py",
+        "tests/test_session.py",
+        "REQUEST.md",
+        "reviews/round1.md",
+        "reviews/round2.md",
+        "DEVNOTES.md"
+      ]
+    }
+  ]
+}

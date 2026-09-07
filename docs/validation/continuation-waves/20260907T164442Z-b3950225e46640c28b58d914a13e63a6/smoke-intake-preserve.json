@@ -1,0 +1,28 @@
+{
+  "case": "smoke-intake-preserve",
+  "report": "docs/validation/canary/20260907T164628-6b4cf51ed8c44138bfebb43a9538f36a/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 96.706,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 3,
+        "lines": 3,
+        "bytes": 599
+      },
+      "final": {
+        "files": 5,
+        "lines": 50,
+        "bytes": 5345
+      }
+    }
+  },
+  "error": null
+}

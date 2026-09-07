@@ -1,0 +1,30 @@
+# Reservation extension — owner handoff
+
+S1 is implemented and independently reviewed: insufficient orders consume no stock,
+later orders continue, and both APIs retain their contracts. Regression coverage
+and usage/current contract documentation are complete. Independent document and
+code reviews are ready with no open findings. Required checks passed.
+Next: owner review of this candidate; human acceptance remains pending.
+No new blocker was found during this status reconciliation. No commit, publication,
+version advancement, or release was performed or is authorized.
+
+## Candidate, review and checks
+
+- Reviewed candidate: base `82d1bf03d1cf15929aed6f48e34c62b0be3d677e` plus
+  [captured diff](../reviews/s1/candidate.patch), identified by the
+  [existing manifest](../reviews/s1/candidate.json).
+- [Independent code review](../reviews/code-current.json): ready, no findings;
+  its [actual check record](../reviews/code-evidence/checks.json) records commands,
+  runtime, exit codes and the bounded independent probe.
+- `"$CANARY_PYTHON" hooks/pre-commit`: 9 tests passed, exit 0
+  ([gate output](../reviews/code-evidence/gate.txt));
+  `"$CANARY_PYTHON" -m unittest discover -s tests -v`: 9 tests passed, exit 0
+  ([unittest output](../reviews/code-evidence/unittest.txt)).
+- The reviewer also recorded 2,304 small-state scenarios through both APIs
+  (4,608 executions), all passing. This is bounded coverage under the existing
+  validated-input preconditions.
+- The review's `git diff HEAD --check` passed, exit 0
+  ([output](../reviews/code-evidence/diff-check.txt)); its sandbox cache/config
+  warnings did not prevent success.
+- At this fresh handoff entry, all 14 candidate hashes matched and the prepared
+  Python executable/version matched the recorded runtime. Only DESIGN's status

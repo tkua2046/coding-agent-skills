@@ -1,0 +1,7 @@
+1. **Behavior changing:** Callers can optionally supply fixed occupied coordinates. A forward move into an occupied cell returns `False`, preserves the entire pose, and processing continues. Preserve existing two-argument behavior, local per-run state, unbounded integer coordinates, heading-only turns, `ValueError` stopping execution for unknown commands, and the final-pose-plus-Booleans return shape.
+
+2. **Main technical decision:** The proposed policy snapshots an iterable of integer coordinate pairs into a set once at entry. This supports lists, sets, and generators, ensures fixed membership throughout the run, and leaves caller data unchanged. The tradeoff is memory proportional to the number of distinct occupied cells.
+
+3. **Next uncompleted outcome:** Implement occupied-cell support together with regression tests and README usage/examples. It depends on later implementation authorization and resolving changes arising from pending document reviews; the current phase prepares documents only. Decisive acceptance: `FFRF` from `(0,0,0)` with occupied `{(0,1)}` returns `((1,0,1), [False,False,True,True])`.
+
+These answers reflect only the exposed excerpts; this probe does not establish human usability.

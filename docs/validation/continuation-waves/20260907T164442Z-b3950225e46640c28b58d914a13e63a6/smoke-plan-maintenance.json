@@ -1,0 +1,28 @@
+{
+  "case": "smoke-plan-maintenance",
+  "report": "docs/validation/canary/20260907T164833-5d0a3f93934d4abb9b9d75dfe92bea1e/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 48.029,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 5,
+        "lines": 7,
+        "bytes": 975
+      },
+      "final": {
+        "files": 6,
+        "lines": 16,
+        "bytes": 2339
+      }
+    }
+  },
+  "error": null
+}

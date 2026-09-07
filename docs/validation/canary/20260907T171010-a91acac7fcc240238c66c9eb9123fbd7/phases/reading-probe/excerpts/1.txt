@@ -1,0 +1,18 @@
+# Plan
+
+Status: YAML and occupied-cell implementation planned, not executed. Design, plan
+and implementation reviews remain pending for this revision. Current outcome:
+load and validate starting pose plus approximately 200,000 occupied cells once,
+then preserve pose on blocked F and continue commands. Authorities:
+[specification](SPEC.md), [design](DESIGN.md), [YAML request](YAML_REQUEST.md).
+Next: resolve the design's [open contracts](DESIGN.md#open-contracts), particularly
+schema/duplicates and the standard-library/YAML dependency conflict. Independent
+movement work can proceed in a future authorized implementation; this phase only
+revises documents.
+
+## Pending work
+
+| Stage | Outcome and scope | Dependencies and boundary | Acceptance and state |
+|---|---|---|---|
+| S1 | Optional fixed occupancy in `navigator.py`, immutable snapshot reuse and blocked-F continuation; corresponding tests and README direct API usage. | Builds on D1/S0. Finalize duplicate-cell and occupied-start policy. One coherent future feature/test/documentation commit boundary; no parser needed. Keep two-argument calls compatible. | Planned. Meet movement and ownership examples in [design acceptance](DESIGN.md#acceptance-and-validation); complete DEVNOTES suite. |
+| S2 | Load YAML pose and occupancy atomically before commands, hand off normalized immutable data to S1, and demonstrate representative 200,000-cell operation. Include loader tests, README YAML usage and DEVNOTES dependency/check instructions if approved. | Depends on S1 and resolved schema, YAML language and dependency contracts. One coherent future loader/test/documentation boundary. Safe parser behavior, full-file validation and peak parsing memory are the main risks. | Planned, contract decisions pending. Sample yields blocked F and correct FRF; malformed final entry fails before any command consumption. Test resolved error/duplicate/value policies and one-load reuse; measure load time, peak/retained memory and movement separately

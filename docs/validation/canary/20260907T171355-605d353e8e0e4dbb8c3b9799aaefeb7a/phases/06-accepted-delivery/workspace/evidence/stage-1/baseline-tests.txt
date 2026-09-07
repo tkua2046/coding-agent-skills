@@ -1,0 +1,18 @@
+Command: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'unittest', 'discover', '-s', 'tests', '-v']
+Exit: 1
+test_default (test_counter.CounterTests.test_default) ... ok
+test_negative_preserves_value (test_counter.CounterTests.test_negative_preserves_value) ... FAIL
+test_positive_step (test_counter.CounterTests.test_positive_step) ... ok
+
+======================================================================
+FAIL: test_negative_preserves_value (test_counter.CounterTests.test_negative_preserves_value)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-o__yer32/worker/tests/test_counter.py", line 17, in test_negative_preserves_value
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+FAILED (failures=1)

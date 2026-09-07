@@ -1,0 +1,127 @@
+{
+  "criteria": [
+    {
+      "id": "preserve-intent",
+      "status": "pass",
+      "reason": "Original requirements and accepted D1 decisions remain readable. Completed movement work stays historical, while occupied-cell implementation and reviews remain pending.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/ORIGINAL.md",
+          "quote": "Navigate an unbounded integer grid from a supplied pose. F moves one cell; L and R\nturn in place. Return final pose and per-command success. Reject unknown commands."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "## Accepted design D1 (preserved)\n\nKeep state local to each run; no global session. A caller supplies pose and commands.\nA direction lookup supports translation; turns only affect heading. Unbounded\ncoordinates avoid imposing a board size. Unknown commands are programmer errors."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "## Completed history (preserved)\n\nComplete: basic translation and turns, accepted as D1. Existing navigation tests\ncover turns and movement. No pending stages before this feature request.\n\nHistorical acceptance: [completed S0](history/completed.md). It remains evidence\nonly for the pre-occupancy outcome."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "occupied-cell design review and plan review are pending and have not been\nperformed. Implementation belongs to a later task."
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "status": "pass",
+      "reason": "The amendment reuses the existing pose, target calculation and command branches. It explains set lookup costs, snapshot ownership and full-pose preservation, supported by a concrete blocked-move and continuation example.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Current `navigator.run(pose, commands)` calls `_target` for every `F`, changes pose,\nand appends `True`. `_target` already computes the candidate pose without mutating\nstate. Retain that movement calculation and the existing turn/error branches."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Copy the coordinates to a local immutable set before processing\ncommands. This gives expected constant-time membership checks at a one-time\nlinear construction and storage cost; duplicates collapse naturally. Repeated\nlinear scans would avoid set storage but scale with both commands and occupied\ncells. A snapshot also prevents caller collection edits during command iteration\nfrom changing this run's obstacles."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "On `F`, check only the candidate `(x, y)`, independent of heading. If occupied,\nappend `False` and keep the entire pose. Otherwise assign the candidate and\nappend `True`. Turns always append `True`."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC_OCCUPIED.md",
+          "quote": "| `(0, 0, 1)`; `FRF`; `{(1, 0)}` | `((0, -1, 2), [False, True, True])` | A turn and later free move still execute. |"
+        }
+      ]
+    },
+    {
+      "id": "executable-plan",
+      "status": "pass",
+      "reason": "One coherent increment groups the interface, behavior, regression checks and usage documentation, with explicit dependencies and completion conditions. Linked acceptance examples catch pose mutation, premature termination and turn regressions.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "| S1 | Optional occupied cells in `navigator.py`, with blocked outcomes, continued commands, regression coverage in `tests/test_navigator.py`, and caller usage in `README.md`. Promote the agreed addendum into the current behavior specification when delivered. | Amendment and plan reviews, resolving any findings, then a later implementation task. One coherent implementation commit keeps the new interface, behavior, tests, and docs together. Main risks are changing pose on failure, stopping the session, or retaining mutable caller state. | Satisfy the addendum examples and D1 regressions; verify blocked motion in all directions, default/empty compatibility, snapshot isolation and separate runs. Run the complete existing unittest gate. | Planned; unexecuted |"
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "S1 is done when the agreed behavior and usage are delivered, the full gate passes,\nand snapshot review findings are resolved."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC_OCCUPIED.md",
+          "quote": "| `(0, 0, 1)`; `F`; `{(1, 0)}` | `((0, 0, 1), [False])` | Blocked eastward move preserves full pose. |\n| `(0, 0, 1)`; `FRF`; `{(1, 0)}` | `((0, -1, 2), [False, True, True])` | A turn and later free move still execute. |\n| `(0, 0, 1)`; `FFL`; `{(1, 0)}` | `((0, 0, 0), [False, False, True])` | Repeated failure does not terminate the session; left turn works. |"
+        }
+      ]
+    },
+    {
+      "id": "scope-and-evidence",
+      "status": "pass",
+      "reason": "Changes are confined to documents. The execution record supports the reported baseline test result, while feature checks and document reviews are explicitly unperformed. No implementation or new acceptance is claimed.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/git.json",
+          "quote": "\"status\": \"M docs/DESIGN.md\\n M docs/PLAN.md\\n?? docs/SPEC_OCCUPIED.md\\n?? docs/evidence/\""
+        },
+        {
+          "path": "artifacts/01-plan/execution.json",
+          "quote": "test_left_wraps (test_navigator.NavigationTests.test_left_wraps) ... ok\\\\ntest_turn_and_forward (test_navigator.NavigationTests.test_turn_and_forward) ... ok\\\\ntest_unknown_command (test_navigator.NavigationTests.test_unknown_command) ... ok\\\\n\\\\n----------------------------------------------------------------------\\\\nRan 3 tests in 0.000s\\\\n\\\\nOK\\\\n\\\",\\\"exit_code\\\":0,\\\"status\\\":\\\"completed\\\""
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/evidence/occupied-baseline.md",
+          "quote": "These tests establish only the delivered movement/turn/error baseline. Proposed\noccupied-cell examples have not been implemented or executed. Requested design\nand plan reviews remain pending."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/SPEC_OCCUPIED.md",
+          "quote": "These expected values are derived from the grid contract, not executed feature\ntests."
+        }
+      ]
+    },
+    {
+      "id": "first-screen-comprehension",
+      "status": "pass",
+      "reason": "The recorded restricted reader correctly identifies blocked-pose preservation, continuation, the set lookup tradeoff, and S1 with its dependencies. Its qualitative acceptance scenario\u2014blocked motion preserves pose and subsequent commands continue\u2014is decisive and supported by the exposed opening; it appropriately avoids inventing the unexposed numeric examples. Full documents link supporting acceptance and history.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "1. Add optional caller-supplied fixed occupied cells. A blocked forward move returns `False`, preserves position and heading, and allows later commands to run. Preserve existing movement calculations, turn/error behavior, and two-argument calls\u2019 behavior and return shape."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "2. Snapshot occupied coordinates into a local immutable set before processing commands. This provides expected constant-time membership checks and isolates the run from caller collection edits, at a one-time linear construction and storage cost. Repeated scans avoid set storage but scale with both commands and occupied cells."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "3. The next uncompleted outcome is S1: implement occupied-cell support, regression tests, caller documentation, and promotion of the agreed addendum into the current behavior specification. It depends on amendment and plan reviews, resolving findings, and a later implementation task. A decisive exposed acceptance check is that blocked forward motion preserves pose and subsequent commands continue."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Snapshot coordinate pairs per run and check the forward target before assigning\npose: a blocked move returns `False`, preserves position and heading, and lets\nlater commands run."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Copy the coordinates to a local immutable set before processing\ncommands. This gives expected constant-time membership checks at a one-time\nlinear construction and storage cost; duplicates collapse naturally. Repeated\nlinear scans would avoid set storage but scale with both commands and occupied\ncells."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/1.txt",
+          "quote": "Amendment and plan reviews, resolving any findings, then a later implementation task. One coherent implementation commit keeps the new interface, behavior, tests, and docs together. Main risks are changing pose on failure, stopping the session, or retaining mutable caller state."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "The [spec addendum](SPEC_OCCUPIED.md#acceptance-examples) owns concrete expected\noutputs, including a blocked eastward move followed by turning and successful\nmovement."
+        }
+      ]
+    }
+  ]
+}

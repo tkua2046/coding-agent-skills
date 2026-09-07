@@ -1,0 +1,42 @@
+{
+  "criteria": [
+    {
+      "id": "decision-entry",
+      "status": "pass",
+      "reason": "The opening directly explains the limited result, whole-input validation, its resource consequence, and a decisive invalid-tail example before decision metadata or history. This is an artifact-based judgment; no reader execution is required.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "Extend `export_rows(text)` to `export_rows(text, limit=None)`: parse and validate\nthe entire CSV, then return at most the first `limit` rows in source order.\nOmitting the limit keeps the unlimited result. Applying the limit after validation\npreserves D1's failure behavior: `sku,quantity\\nA,1\\nB,-1\\n` must fail even with\n`limit=1`. The limit reduces the returned list only; parsing, validation work and\nmemory still scale with the full input. Stopping at the prefix would hide invalid\nlater rows and violate the request."
+        }
+      ]
+    },
+    {
+      "id": "adequacy-and-scope",
+      "status": "pass",
+      "reason": "The amendment preserves source order, unlimited default, existing error behavior and verbatim accepted D1. It specifies limit validation and actionable boundary and failure examples. The recorded change is confined to the existing design note, with no implementation, speculative architecture or execution-status inventory.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "order. Keep that parsing and stock validation behavior, including existing error\npropagation. Output rendering remains the caller's responsibility. No streaming\nor new dependencies are needed."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "Validate the limit before processing CSV. The proposed API uses `None` for\nunlimited and accepts nonnegative Python integers, excluding booleans. Reject\nnegative values and all other types with `ValueError`, without coercing strings\nor floats."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "| Limit omitted or `None` | `[A, B]` |\n| `limit=1` | `[A]` |\n| `limit=0` | `[]`, after validating both rows |\n| `limit=2` or `limit=3` | `[A, B]` |\n| Header only, with `limit=1` | `[]` |\n| `limit=-1`, `1.5`, `\"1\"`, or `True` | `ValueError` |\n| Second row changed to `B,-1`, with `limit=1` or `0` | Validation failure; no result |\n| Second row changed to `B,oops` or `,2`, with `limit=1` | Validation failure; no result |"
+        },
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "# Accepted export design D1\nCSV rows are fully parsed and validated before being returned in source order.\nThe caller owns output rendering. Invalid stock rows fail the request.\nThis decision is accepted; no delivery status is tracked here."
+        },
+        {
+          "path": "artifacts/01-operation/git.json",
+          "quote": "\"status\": \"M docs/DESIGN.md\""
+        }
+      ]
+    }
+  ]
+}

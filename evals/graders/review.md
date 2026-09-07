@@ -1,4 +1,4 @@
-# Blind semantic review — version 2
+# Blind semantic review — version 3
 
 Read `rubric.json` and the task contract in `request.md` (calibration) or
 `requests/*.md` with `initial/` (case run). Inspect all relevant `artifacts/`
@@ -31,11 +31,15 @@ findings. A partial fix stays open; a corrected revision must not inherit an
 obsolete defect. A well-supported report withholding readiness can pass a review
 criterion even though the reviewed product is defective.
 
-For first-screen criteria, inspect the restricted reader's actual exposed text and
-answers. An answer only counts when the excerpt supports it; knowing the expected
+For criteria explicitly requiring an independent or restricted reader, inspect
+that reader's actual exposed text and answers. An answer only counts when the
+excerpt supports it; knowing the expected
 behavior from full artifacts cannot repair an unusable entrypoint. This measures
 machine comprehension under a fixed exposure, not human reading time. A missing
 reader execution is inconclusive, not a guess that the document would be readable.
+For artifact-only opening criteria, assess the produced document directly. Do not
+require or invent a reader run, or present this direct judgment as measured reader
+comprehension. The criterion determines which evidence is required.
 
 For workflow cost, distinguish necessary fixes from stylistic cycles, repeated
 completed work, or speculative infrastructure. Case-local budgets apply only where
@@ -57,6 +61,13 @@ Return only JSON in this shape, with no overall score or extra fields:
 
 Use literal packet-relative paths under `artifacts/`, without traversal, line
 suffixes or external links. Quotes must be verbatim, not paraphrases or ellipses.
+For JSON execution files, quote their raw file text, including its literal escape
+characters. You may parse nested stdout to understand it, but do not quote the
+decoded display as though it occurred in the raw file. JSON-encode the selected
+raw substring in your response so that decoding your response once yields exactly
+that substring. Do not unescape nested strings, normalize newlines or repair the
+source. A command printed in a script is not proof it executed, and a successful
+wrapper exit does not make an embedded failed check pass. Cite observed results.
 Quote the smallest sufficient source passage; add multiple sources when relating
 a finding, revision and disposition. A quote must support the judgment, not merely
 repeat a status label. Cite reviewed content as well as a closure claim. Requests,

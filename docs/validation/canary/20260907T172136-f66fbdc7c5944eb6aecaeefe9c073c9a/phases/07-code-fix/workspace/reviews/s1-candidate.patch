@@ -1,0 +1,309 @@
+diff --git a/README.md b/README.md
+index 6cf925e..a507a8c 100644
+--- a/README.md
++++ b/README.md
+@@ -3,4 +3,18 @@ Call `batch.execute({"a": 4}, '[{"id":"o1","items":[["a",2]]}]')` to obtain
+ remaining inventory and an ordered acceptance result for each order. The Python API
+ is `inventory.reserve(stock, orders)`. Caller input is preserved. JSON validation
+ rejects unknown/duplicate SKUs and nonpositive/noninteger quantities before execution.
+-Previously callers had to ensure stock was sufficient. See DEVNOTES.md for checks.
++Each order is checked against the remaining stock. If any item is insufficient,
++the whole order returns `accepted=False` without deducting any stock. Later orders
++continue against the remaining inventory. Successful orders deduct all their items
++and return `accepted=True`; an empty order is accepted without changing stock.
++
++For example:
++
++```python
++batch.execute({"a": 2}, '[{"id":"large","items":[["a",3]]},{"id":"next","items":[["a",2]]}]')
++# ({"a": 0}, [{"order_id": "large", "accepted": False},
++#             {"order_id": "next", "accepted": True}])
++```
++
++Insufficient inventory is a normal result, not a JSON validation error.
++See DEVNOTES.md for development checks.
+diff --git a/docs/DESIGN.md b/docs/DESIGN.md
+index b02917d..24fce18 100644
+--- a/docs/DESIGN.md
++++ b/docs/DESIGN.md
+@@ -1,4 +1,54 @@
+-# Accepted design D1
++# Design: whole-order reservation rejection
++
++Status: D2 document review ready; S1 implemented, independent code review pending.
++Authority: [current request](REQUEST.md), [original requirements](ORIGINAL.md),
++and [target contract and acceptance](SPEC.md). The combined independent
++[document review](../reviews/design-current.json) found no findings. Current
++implementation evidence and pending reviews are in [S1](../reviews/s1-stage.md).
++
++Reject an order if any item exceeds the stock remaining when that order starts.
++Check all items before deducting any; on rejection append `accepted=False` and
++continue with later orders. This local extension needs one implementation outcome
++and a compact combined document review: state is in memory, interfaces are stable,
++and there is no persistence or concurrency to coordinate.
++
++## Decision and inspected implementation
++
++At planning baseline, `inventory.reserve` copied stock once but unconditionally
++subtracted each item and reported success. Keep that ownership and result shape. For each validated
++order, first determine whether every quantity is available in the current copy;
++deduct all items only if so. Empty orders succeed. Unique item SKUs make individual
++availability checks sufficient; no aggregation or additional validation is needed.
++Checking before mutation avoids partial deductions and rollback bookkeeping. It
++requires at most two passes over an accepted order and no new state framework.
++
++`batch.execute` calls `command_codec.decode` before invoking the engine. Keep both
++APIs and the existing validation/error behavior. Neither stock nor nested order
++inputs may be mutated; counts remain integers. The engine continues to trust the
++validated-input contract. No new dependencies, persistence, concurrency, commit,
++release or version change belongs to this work.
++
++The decisive [example](SPEC.md#decisive-acceptance) accepts an initial order,
++rejects a mixed order whose second item is short without deducting its first item,
++then successfully consumes the exact remaining stock. This proves rejection is
++local to the order and later processing continues against current stock.
++
++## Evidence and limits
++
++Planning inspection on 2026-09-07 covered the engine, adapter, decoder, existing
++tests, README, DEVNOTES and installed gate. Both unittest discovery and the installed
++pre-commit gate passed all 6 existing tests using `CANARY_PYTHON`. These tests do not
++cover insufficient inventory or an order with no items; the existing empty test
++covers an empty batch only. A read-only probe of the decisive example through both
++APIs returned stock `{"a": -2, "b": -2}` and four successful outcomes, confirming
++the requested behavior was absent. This is baseline evidence, not feature acceptance.
++No material design questions remain; proposed checks and delivery are in the plan.
++
++## Accepted design D1 (historical, preserved)
++
++The sufficiency responsibility below is superseded by D2; the
++other decisions remain applicable.
++
+ The JSON boundary validates shapes, positive quantities, unique IDs and item SKUs.
+ The engine trusts validated orders and copies stock once for batch-local mutation.
+ Sufficient inventory is currently the caller's responsibility. The function returns
+diff --git a/docs/PLAN.md b/docs/PLAN.md
+index eb9777a..a8e43b4 100644
+--- a/docs/PLAN.md
++++ b/docs/PLAN.md
+@@ -1,3 +1,54 @@
+ # Plan
++
++Status: D2/S1 independent document review ready with no findings; S1 implemented
++and awaiting independent code review, then human review. Current state and exact
++checks: [S1 record](../reviews/s1-stage.md). Document review:
++[preserved report](../reviews/design-current.json).
++Requirements: [REQUEST](REQUEST.md), [original](ORIGINAL.md). Rationale:
++[DESIGN D2](DESIGN.md). Behavior and decisive checks: [SPEC](SPEC.md).
++
++## S1: reject insufficient orders without partial deductions
++
++After one combined independent design/plan review resolves blocking findings,
++update the reservation engine, add focused regression coverage in the existing
++unittest suite, and update README usage to describe rejection and continuation.
++One coherent implementation/review boundary is sufficient because both APIs share
++the engine; no independently deliverable intermediate state is needed. Preserve
++the decoder's validation contract. The main risk is deducting an early item before
++discovering a later shortage, or checking availability against stale stock.
++
++Accept S1 when both APIs satisfy the [decisive acceptance](SPEC.md#decisive-acceptance),
++including rejection without any deduction, continuation, sequential depletion,
++exact-stock success, empty orders/batches, integer counts and full input preservation.
++Keep validation regression coverage appropriate to the unchanged boundary. Tests
++must assert concrete outcomes and final stock, not merely absence of exceptions.
++
++Use the existing [development gate](../DEVNOTES.md), with the prepared runtime:
++
++```sh
++"$CANARY_PYTHON" -m unittest discover -s tests -v
++"$CANARY_PYTHON" .git/hooks/pre-commit
++```
++
++Both commands were verified during planning: 6 baseline tests passed, including
++the installed gate's nonempty-discovery check. S1 results are in the current record. The
++baseline shortage probe failed the target contract as recorded in DESIGN.
++
++Review policy: the independent reviewer follows this planning phase; the implementer
++follows document review. After implementation and checks, obtain an agent code review
++of the resulting snapshot, fix blocking findings and rerun affected checks/gate before
++human handoff. Preserve prior reports and record reviewed snapshot, findings, fixes
++and actual check results in a new stage/review record when that work occurs. Do not
++claim agent review is human acceptance. Done means implemented behavior, passing gate,
++resolved blocking code-review findings and a concrete result ready for human review.
++No commit, push, version advancement or release is requested; this stage is a review
++boundary only. All phases share the original 15-minute execution allowance; keep
++reviews bounded to this change rather than adding stages or consuming the budget.
++
++## Completed history (preserved)
++
+ S0 complete: in-memory reservation and JSON validation are delivered.
+ No pending work before the current change request.
++
++See [completed S0 record](history/completed.md). Its completion is historical and
++does not establish acceptance of S1.
+diff --git a/docs/SPEC.md b/docs/SPEC.md
+index a16fc75..0c8ebfc 100644
+--- a/docs/SPEC.md
++++ b/docs/SPEC.md
+@@ -1,3 +1,45 @@
+ # Current contract
+ See ORIGINAL.md for accepted behavior. Reservation uses batch-local state and returns
+ remaining stock and ordered outcomes. No persistent database or concurrent writers.
++
++## Whole-order reservation amendment
++
++[REQUEST.md](REQUEST.md) supersedes the caller-guaranteed sufficiency requirement
++in [ORIGINAL.md](ORIGINAL.md). For `inventory.reserve(stock, orders)` and
++`batch.execute(stock, text)`, process orders in input order against batch-local
++remaining stock. If any requested quantity exceeds its available count, return
++`{"order_id": id, "accepted": False}` for that order and leave every stock quantity
++unchanged by it. Otherwise deduct every item and report `accepted=True`. Continue
++after rejection. An empty order succeeds without deductions; an empty batch returns
++a stock copy and no outcomes.
++
++Preserve the tuple of remaining-stock dictionary and ordered outcome list, integer
++counts, and all caller inputs (including nested items). Keep the existing validated
++input assumptions and JSON validation policies and errors: malformed JSON/shapes,
++duplicate IDs/SKUs, unknown SKUs, and invalid quantities fail before reservation.
++Insufficient inventory is a normal rejection outcome, not a validation exception.
++
++## Decisive acceptance
++
++Run this same valid batch through the Python API and the JSON adapter with stock
++`{"a": 4, "b": 1}`:
++
++| Order ID | Items in order | Accepted | Remaining stock after order |
++|---|---|---|---|
++| first | `[["a",1]]` | `True` | `{"a":3,"b":1}` |
++| reject | `[["a",2],["b",2]]` | `False` | `{"a":3,"b":1}` |
++| later | `[["a",3],["b",1]]` | `True` | `{"a":0,"b":0}` |
++| empty | `[]` | `True` | `{"a":0,"b":0}` |
++
++The returned outcomes must contain those four IDs and booleans in that order;
++final stock is exactly `{"a":0,"b":0}`. Stock and nested orders remain equal to
++their pre-call values. Also check sequential depletion explicitly: stock `{"a":2}`
++with orders requesting 2 then 1 yields `True, False` and `{"a":0}`. This catches
++availability checks against original rather than remaining stock. An isolated
++rejected mixed order leaves all stock unchanged. Exact equality succeeds, empty
++inputs keep their established behavior, and all returned counts have type `int`.
++
++Retain validation regression checks through `batch.execute`: malformed JSON and
++invalid shapes, duplicate IDs/SKUs, unknown SKUs, and zero/negative/noninteger
++quantities (including booleans) still raise the existing errors. A later invalid
++order still prevents execution of the batch at the decoder boundary.
+diff --git a/inventory.py b/inventory.py
+index 9c92c21..97e787e 100644
+--- a/inventory.py
++++ b/inventory.py
+@@ -3,7 +3,9 @@ def reserve(stock, orders):
+     remaining = dict(stock)
+     outcomes = []
+     for order in orders:
+-        for sku, quantity in order["items"]:
+-            remaining[sku] -= quantity
+-        outcomes.append({"order_id": order["id"], "accepted": True})
++        accepted = all(remaining[sku] >= quantity for sku, quantity in order["items"])
++        if accepted:
++            for sku, quantity in order["items"]:
++                remaining[sku] -= quantity
++        outcomes.append({"order_id": order["id"], "accepted": accepted})
+     return remaining, outcomes
+diff --git a/tests/test_inventory.py b/tests/test_inventory.py
+index 4059142..3eb3b84 100644
+--- a/tests/test_inventory.py
++++ b/tests/test_inventory.py
+@@ -1,8 +1,94 @@
++import copy
++import json
+ import unittest
++from unittest.mock import patch
+ from inventory import reserve
+ from batch import execute
+ 
+ class InventoryTests(unittest.TestCase):
++    def assert_both_apis(self, stock, orders, expected):
++        for api in (reserve, execute):
++            with self.subTest(api=api.__name__):
++                original_stock = copy.deepcopy(stock)
++                original_orders = copy.deepcopy(orders)
++                argument = orders if api is reserve else json.dumps(orders)
++                result = api(stock, argument)
++                self.assertEqual(result, expected)
++                self.assertIsNot(result[0], stock)
++                self.assertTrue(all(type(count) is int for count in result[0].values()))
++                self.assertTrue(all(type(outcome["accepted"]) is bool for outcome in result[1]))
++                self.assertEqual(stock, original_stock)
++                self.assertEqual(orders, original_orders)
++
++    def test_rejection_and_later_exact_stock_success(self):
++        self.assert_both_apis(
++            {"a": 4, "b": 1},
++            [
++                {"id": "first", "items": [["a", 1]]},
++                {"id": "reject", "items": [["a", 2], ["b", 2]]},
++                {"id": "later", "items": [["a", 3], ["b", 1]]},
++                {"id": "empty", "items": []},
++            ],
++            ({"a": 0, "b": 0}, [
++                {"order_id": "first", "accepted": True},
++                {"order_id": "reject", "accepted": False},
++                {"order_id": "later", "accepted": True},
++                {"order_id": "empty", "accepted": True},
++            ]),
++        )
++
++    def test_isolated_rejection_preserves_all_stock(self):
++        self.assert_both_apis(
++            {"a": 4, "b": 1, "untouched": 7},
++            [{"id": "reject", "items": [["a", 2], ["b", 2]]}],
++            ({"a": 4, "b": 1, "untouched": 7}, [
++                {"order_id": "reject", "accepted": False},
++            ]),
++        )
++
++    def test_availability_uses_remaining_stock(self):
++        self.assert_both_apis(
++            {"a": 2},
++            [{"id": "first", "items": [["a", 2]]},
++             {"id": "second", "items": [["a", 1]]}],
++            ({"a": 0}, [{"order_id": "first", "accepted": True},
++                        {"order_id": "second", "accepted": False}]),
++        )
++
++    def test_empty_batch_and_order_through_both_apis(self):
++        for stock in ({}, {"a": 2}):
++            self.assert_both_apis(stock, [], (stock, []))
++            self.assert_both_apis(
++                stock, [{"id": "empty", "items": []}],
++                (stock, [{"order_id": "empty", "accepted": True}]),
++            )
++
++    def test_validation_prevents_any_reservation(self):
++        valid = {"id": "first", "items": [["a", 1]]}
++        invalid_orders = [
++            None, {}, {"id": "bad", "items": [], "extra": 1},
++            {"id": 1, "items": []}, {"id": "first", "items": []},
++            {"id": "bad", "items": {}},
++            {"id": "bad", "items": [["a"]]},
++            {"id": "bad", "items": [["missing", 1]]},
++            {"id": "bad", "items": [["a", 1], ["a", 1]]},
++        ]
++        invalid_orders.extend(
++            {"id": "bad", "items": [["a", quantity]]}
++            for quantity in (0, -1, 1.5, "1", True, False, None)
++        )
++        texts = ["{", "{}", "null"] + [
++            json.dumps([valid, invalid]) for invalid in invalid_orders
++        ]
++        for text in texts:
++            with self.subTest(text=text):
++                stock = {"a": 4}
++                with patch("batch.reserve") as engine:
++                    with self.assertRaises(ValueError):
++                        execute(stock, text)
++                    engine.assert_not_called()
++                self.assertEqual(stock, {"a": 4})
++
+     def test_success_and_input_preservation(self):
+         stock={"a":4,"b":2}
+         orders=[{"id":"o1","items":[["a",2],["b",1]]}]

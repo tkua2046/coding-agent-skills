@@ -1,0 +1,28 @@
+{
+  "case": "smoke-review-ready",
+  "report": "docs/validation/canary/20260907T172110-927d1892cd894df0a5baf3e417b54979/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 68.438,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 5,
+        "lines": 11,
+        "bytes": 1670
+      },
+      "final": {
+        "files": 6,
+        "lines": 29,
+        "bytes": 4769
+      }
+    }
+  },
+  "error": null
+}

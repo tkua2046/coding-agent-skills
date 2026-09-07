@@ -1,0 +1,6 @@
+Command: ['git', 'diff', '--exit-code', 'ab74bd69494b8cf9137da2d47b83434228faa3cc', '--', 'counter.py', 'tests/test_counter.py', 'README.md', 'CHANGELOG.md', 'FEATURE.md', 'AGENTS.md', 'DEVNOTES.md', 'hooks/pre-commit', 'skills']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-o6pIap2q' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-scLMAZ11' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0

@@ -6,6 +6,8 @@ Significant completed changes. The current version is an unreleased baseline; no
 
 ### Added
 
+- Small real LLM operation tests for clarification, artifact responsibilities, review closure, resumption and delivery evidence, using the existing runner and retained originals.
+- Shared author/reviewer artifact contracts, adaptable templates and silent after-generation checks, loaded by the relevant operation.
 - Goal-to-case coverage for all four skills, with restricted-reader comprehension checks, neutral task-routing probes and real baseline/candidate execution evidence.
 - Retained independent global reviews, original failed attempts and versioned measurement corrections. The result index separates skill quality, observed benefit and unresolved release evidence.
 - Versioned workflow canary fixtures, evidence-based grading, isolated runner and a release evidence gate, with fast regression controls separate from expensive agent trials.
@@ -13,8 +15,10 @@ Significant completed changes. The current version is an unreleased baseline; no
 
 ### Changed
 
+- Design and specification decisions link to one live delivery record. Plans track observable outcomes and dependencies; verified findings and applicable check results can be reused without duplicate status or self-referential commits.
+- Existing-setup inspection and changed-gate verification have distinct scopes. Observe a gate before changing it, retain known failures, and bind before/after claims to their own results. Missing output cannot establish a verified child result.
 - Workflow depth follows uncertainty, consequences and affected boundaries. Understood local work can use a combined design/plan note and document review; material unknowns call for bounded investigation.
-- Current design/plan openings reflect the complete current scope while preserving prior decisions and completed work. Setup handoffs tie check claims to actual execution evidence.
+- Design openings expose current choices and consequences; plan openings identify the next usable delivery consistently with stage order. Prior decisions and completed work remain available.
 - Sufficient work can pass review without cosmetic additions; plans and stage records avoid duplicating code/tests or inventing document prerequisites.
 - Local feature extensions amend affected design/pending stages; plans focus on delivery decisions without duplicating the implementation/test inventory.
 - Review and handoff records expose current open findings and distinguish author fixes from verified closure, retaining prior rounds.

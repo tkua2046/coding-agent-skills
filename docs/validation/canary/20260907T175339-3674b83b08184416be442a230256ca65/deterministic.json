@@ -1,0 +1,34 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "no-commit",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "source-preserved",
+    "status": "pass",
+    "evidence": {
+      "AGENTS.md": true,
+      "session.py": true,
+      "tests/test_session.py": true,
+      "REQUEST.md": true,
+      "reviews/round1.md": true,
+      "reviews/round2.md": true,
+      "DEVNOTES.md": true
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  }
+]

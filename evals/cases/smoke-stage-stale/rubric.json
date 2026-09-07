@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "changed-candidate",
+      "required": true,
+      "requirement": "Check applicability before reusing an old verified finding.",
+      "pass_when": "Identifies the current implementation differs from the supplied reviewed hash, runs the required gate and observes the invalid-command selection regression; treats R1 or equivalent affected invariant as needing correction/recheck. Old ready review remains historical.",
+      "fail_when": "Calls R1 currently resolved/verified from the old review, suppresses the failing test or claims current checks pass. Product edits are outside this assessment scope."
+    },
+    {
+      "id": "useful-blocked-handoff",
+      "required": true,
+      "requirement": "Record the current blocker and next action without losing historical evidence.",
+      "pass_when": "Current handoff distinguishes original verified candidate from changed code, gives concrete expected/actual state and pending correction/recheck plus human acceptance. Preserves originals without duplicating a verification framework.",
+      "fail_when": "Unclear next action, author-only/static claim presented as independent approval, human acceptance inferred, or new machinery obscures the simple current blocker."
+    }
+  ]
+}

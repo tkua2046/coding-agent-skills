@@ -1,0 +1,58 @@
+Command: ['git', 'diff', '--cached', '--check']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-tJESCHlF' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-zem6ZS3k' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0
+
+Command: ['git', 'diff', '--exit-code']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-hiApShZG' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-0re8Hdan' (errno=Operation not permitted)
+
+Exit: 0
+
+Command: ['git', 'diff', '--cached', '--stat']
+ CHANGELOG.md                                       |   2 +
+ PLAN.md                                            | 108 ++++++++++++++++++++-
+ PR.md                                              |  26 +++++
+ README.md                                          |   3 +
+ counter.py                                         |   2 +
+ evidence/stage-1/author-resume-R1.txt              |   9 ++
+ evidence/stage-1/author-resume-gate.txt            |  13 +++
+ evidence/stage-1/author-resume-identity.txt        |   6 ++
+ evidence/stage-1/author-resume-manifest.sha256     |  48 +++++++++
+ evidence/stage-1/author-resume-staging.txt         |  42 ++++++++
+ evidence/stage-1/author-resume-tests.txt           |  13 +++
+ evidence/stage-1/baseline-gate.txt                 |  18 ++++
+ evidence/stage-1/baseline-git.txt                  |   6 ++
+ evidence/stage-1/baseline-head.txt                 |   3 +
+ evidence/stage-1/baseline-tests.txt                |  18 ++++
+ evidence/stage-1/baseline.patch                    |   3 +
+ evidence/stage-1/candidate-gate.txt                |  12 +++
+ evidence/stage-1/candidate-tests.txt               |  12 +++
+ evidence/stage-1/candidate-tree.txt                |   1 +
+ evidence/stage-1/candidate.patch                   |  51 ++++++++++
+ evidence/stage-1/pr-prep-gate.txt                  |  13 +++
+ evidence/stage-1/pr-prep-identity.txt              |  23 +++++
+ evidence/stage-1/pre-pr-plan.md                    |  93 ++++++++++++++++++
+ .../stage-1/staging-checks-initial-failure.txt.gz  | Bin 0 -> 389 bytes
+ evidence/stage-1/staging-checks.txt                |  44 +++++++++
+ reviews/input-R1.md                                |   5 +
+ reviews/round-1.md                                 |  90 +++++++++++++++++
+ reviews/round-2.md                                 |  95 ++++++++++++++++++
+ tests/test_counter.py                              |  24 ++++-
+ 29 files changed, 781 insertions(+), 2 deletions(-)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-xLh6td3B' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-BH4p2dj9' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0
+
+Command: ['git', 'diff', '--exit-code', 'ab74bd69494b8cf9137da2d47b83434228faa3cc', '--', 'counter.py', 'tests/test_counter.py', 'README.md', 'CHANGELOG.md', 'FEATURE.md', 'AGENTS.md', 'DEVNOTES.md', 'hooks/pre-commit', 'skills']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-zUrL1mgC' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-pL0kSQ6b' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0
+
+All prior manifest entries except the intentionally refreshed PLAN still match; prior PLAN archived as pre-pr-plan.md. Final manifest and this log are staged after these checks.

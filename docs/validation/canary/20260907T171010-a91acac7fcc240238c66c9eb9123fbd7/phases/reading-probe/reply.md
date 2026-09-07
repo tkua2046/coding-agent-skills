@@ -1,0 +1,7 @@
+1. **Changing outcome:** Load and validate a starting pose and roughly 200,000 fixed occupied cells from YAML once before movement. A blocked `F` should preserve the pose and command processing should continue. Preserve D1’s run-local state, direction lookup, turn behavior, unbounded coordinates, unknown-command errors, and existing two-argument API calls. Implementation and reviews remain pending.
+
+2. **Main technical decision:** Separate loading and validation from movement, producing a pose and an immutable hash set of occupied cells. Movement then uses destination membership queries. The tradeoff is O(n) retained storage for expected O(1) lookups, plus additional peak memory during YAML parsing. YAML dependency and schema contracts remain unresolved.
+
+3. **Next implementation outcome:** S1 adds optional fixed occupancy, immutable snapshot reuse, and blocked-`F` continuation, with tests and direct API documentation. It builds on D1/S0 and requires finalizing duplicate-cell and occupied-start policies; no parser is needed. A decisive acceptance example is that a blocked `F` leaves the pose unchanged while subsequent commands continue. The linked detailed acceptance examples and S0 definition are not supplied in the excerpts.
+
+These answers reflect first-screen machine comprehension, not human usability proof.

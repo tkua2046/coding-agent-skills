@@ -1,6 +1,10 @@
 # Design: four portable workflow skills
 
-Current increment: [outcome-driven revision](proposals/outcome-workflow.md), independently reviewed and under real baseline/candidate evaluation. Its goal is understandable decisions and correct delivery at proportionate effort. Human acceptance remains pending.
+Current decision: keep four portable skills, with one substantive artifact contract shared by each author/reviewer operation and small actual LLM tests for individual responsibilities. Design explains consequential choices; plans own delivery boundaries; reviews own findings/dispositions; one handoff owns live execution state. This reduces competing format instructions and status synchronization. For example, a private helper rename changes code and relevant check evidence without rewriting an accepted design or plan.
+
+Small tests identify basic decision regressions cheaply; complete canaries still test workflow interactions and correctness. Reusing existing checks saves work only when their content, inputs/environment and freshness remain applicable, and required gates still run. The [reviewed continuation](proposals/continuation-repair.md) develops these choices; [implementation plan](IMPLEMENTATION_PLAN.md) owns current delivery status. Earlier [outcome-driven decisions](proposals/outcome-workflow.md) remain the basis below.
+
+Requirements: [SPEC](SPEC.md). [Earlier design](https://github.com/tkua2046/coding-agent-skills/blob/d76bb80fa15a01e8240a9c328a0bac485b95564b/docs/DESIGN.md) remains in Git history. Outline: [Task depth](#task-depth-and-completion) · [Structure](#structure) · [Execution](#execution-and-review) · [Documents](#documents) · [Verification](#verification).
 
 ## Task depth and completion
 
@@ -10,17 +14,9 @@ Each operation ends at a useful outcome: sufficient decisions to implement, an a
 
 The [goal map](../evals/GOALS.md) connects these decisions to actual canaries. A restricted reader tests whether document openings convey the required facts; full artifacts remain subject to correctness/usability review. Paired elapsed time and unnecessary review/document work inform a separate benefit decision. The prescribed multi-role delivery scaffold does not prove autonomous phase selection, and machine comprehension does not replace owner reading.
 
-Status: original design retained; authorized workflow refinement and canary added below. Original validation and current limitations: [validation](VALIDATION.md). Requirements: [SPEC](SPEC.md).
-
-## At a glance
-
-Four self-contained skill folders expose ten focused operations. A user chooses the next operation; prompts and templates load only when relevant. Reviewers examine a fixed version, while the executing agent owns fixes. Human documentation stays separate from agent instructions and raw evidence.
-
-Main consequence: copying one skill must be sufficient; no runtime resource may point outside its folder. The tradeoff is a few short repeated operational principles, without duplicating full manuals.
-
-Outline: [Structure](#structure) · [Execution](#execution-and-review) · [Documents](#documents) · [Verification](#verification).
-
 ## Structure
+
+Copying one skill must be sufficient; no runtime resource may point outside its folder. This requires a few short repeated contracts across bundles, without duplicating full manuals. Within each bundle, author and reviewer share one artifact contract, and load only the selected operation's resources.
 
 - `skills/<name>/SKILL.md`: discovery metadata, scope, and operation routing.
 - Each skill's `prompts/`, `assets/`, and optional `references/`: only its required resources.
@@ -47,7 +43,7 @@ Each design/plan starts with the result and next action; longer files have a nav
 
 ## Verification
 
-The first commit includes the checker, meaningful regression tests, pinned dependencies and runnable hooks along with the bundles. Validate frontmatter, resource links (including template assets) and independently copied skill folders. Parse Markdown links and references while ignoring code examples; reject local machine paths. Exercise the checker against broken bundles. Link validation covers Markdown links/images, not arbitrary paths mentioned in prose, shell commands or raw HTML.
+Validate frontmatter, resource links (including template assets) and independently copied skill folders using the repository's checker, regression tests and pinned environment. Parse Markdown links and references while ignoring code examples; reject local machine paths. Exercise the checker against broken bundles. Link validation covers Markdown links/images, not arbitrary paths mentioned in prose, shell commands or raw HTML.
 
 Validate the Python sample in a temporary Git repository: successful tests pass; failures/no tests fail; Ruff fixes require review/restaging. To prove full-suite execution, leave a failing test unchanged while staging a different passing test, then observe the hook fail. Also check a documentation-only commit and a passing control. Coverage measures the configured implementation, including relevant subprocesses, and is not a score for prompt quality.
 
@@ -59,6 +55,6 @@ Fresh agents receive realistic tasks plus only necessary artifacts. They may wri
 
 Amend affected decisions/pending stages for local extensions; retain original requirements and completed work. Plans own observable increments, dependencies and decisive acceptance. Implementation/test inventories stay with code. Reviews retain stable findings and round identities; author fix claims remain distinct from verified closure. Handoffs expose current state and next action before historical evidence.
 
-Ten versioned [canary cases](../evals/cases/README.md) cover the declared behaviors. The worker sees a disposable Git fixture and selected immutable skill bundles; evaluator criteria/oracles are outside the worker's tool read boundary. Each phase uses a fresh context. A separate grader assesses archived artifacts against an anchored rubric after calibration. Runtime probes fail closed when isolation is unavailable. Records preserve raw phase output and failed attempts; the release gate recomputes acceptance from evidence associated with the candidate and matching baseline.
+Versioned [complete canaries and smaller operation cases](../evals/cases/README.md) cover the declared behaviors. The worker sees a disposable Git fixture and selected immutable skill bundles; evaluator criteria/oracles are outside the worker's tool read boundary. Each phase uses a fresh context. A separate grader assesses archived artifacts against an anchored rubric after calibration. Runtime probes fail closed when isolation is unavailable. Records preserve raw phase output and failed attempts; the release gate recomputes acceptance from evidence associated with the candidate and matching baseline.
 
 Fast mechanical controls run at commit/PR time. The full heavy suite is deferred until release; its absence blocks release rather than ordinary PR work. Evidence identity includes case files, selected bundles, grader/engine, model settings and environment. The implementation is a local runner and review procedure, not a universal workflow state machine or server-enforced publishing lock. See [operation and limitations](../evals/README.md).

@@ -1,0 +1,22 @@
+{
+  "executed_phases": [
+    "01-operation"
+  ],
+  "skipped_phases": [],
+  "unreached_phases": [],
+  "worker_elapsed_seconds": 95.457,
+  "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+  "documents": {
+    "scope": ".md/.txt/.rst files, excluding supplied skills",
+    "initial": {
+      "files": 3,
+      "lines": 16,
+      "bytes": 1037
+    },
+    "final": {
+      "files": 4,
+      "lines": 53,
+      "bytes": 5051
+    }
+  }
+}

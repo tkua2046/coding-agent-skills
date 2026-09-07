@@ -1,0 +1,73 @@
+{
+  "label": "candidate2-delivery-heavy",
+  "cases": [
+    "workflow-setup",
+    "v6-execution-handoff"
+  ],
+  "source_ref": null,
+  "identities": {
+    "workflow-setup": {
+      "case": "b9318ee7a4b0a57b108e191b96d9340ad269512073977ff9a5f66fde842c401f",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+        "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+        "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+        "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+        "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+        "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+        "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+        "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+        "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+        "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+        "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+        "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+        "skills/dev-workflow/prompts/setup-dev-workflow.md": "bcda682901d91a7dbcf8568168d27e722023bb25cc624d987da5a9f570bb892c",
+        "skills/dev-workflow/references/delivery-checks.md": "4ca4dffd31832529aeae8ed28940733ef8c41dfb0bbc639ec6fac4855fbcb5a4",
+        "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+      }
+    },
+    "v6-execution-handoff": {
+      "case": "876800b96a9bb9b2843769f96f58436d75eeffca82d896973cd0fe03746ef0fc",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "cd115206c1aaa3fbd2202bbe119ebeec8f6dc6099019d5ed2494e90b36a4956a",
+        "skills/stage-development/prompts/review-stage.md": "462be76d96190108a0c7c8c7c5d234b8c08c3bb939fca70fc6bcc109149a984c",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d",
+        "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+        "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+        "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+        "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+        "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+        "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+        "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+        "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+        "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+        "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+        "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+        "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+        "skills/dev-workflow/prompts/setup-dev-workflow.md": "bcda682901d91a7dbcf8568168d27e722023bb25cc624d987da5a9f570bb892c",
+        "skills/dev-workflow/references/delivery-checks.md": "4ca4dffd31832529aeae8ed28940733ef8c41dfb0bbc639ec6fac4855fbcb5a4",
+        "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+      }
+    }
+  },
+  "worker": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "grader": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "parallelism": 1,
+  "note": "One attempt each, frozen inputs checked before dispatch; no retries. Parallel timing is descriptive."
+}

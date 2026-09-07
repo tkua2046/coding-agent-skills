@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "real-decision",
+      "required": true,
+      "requirement": "Expose a conflict that cannot be solved by a preservation default.",
+      "pass_when": "Uses a concrete observed uppercase expansion such as \u00df to show the conflicting obligations and asks which behavior/scope should win (or whether new behavior can be opt-in). Holds that choice open while preserving settled prefix decisions.",
+      "fail_when": "Silently chooses uppercase or a replacement, promises both conflicting requirements, or gives generic questions without the concrete conflict."
+    },
+    {
+      "id": "intake-boundary",
+      "required": true,
+      "requirement": "Keep clarifying separate from implementing.",
+      "pass_when": "Grounded note with a material next decision and reversible settled facts; no code edits.",
+      "fail_when": "Implements a guessed resolution or demands unrelated architecture/process work."
+    }
+  ]
+}

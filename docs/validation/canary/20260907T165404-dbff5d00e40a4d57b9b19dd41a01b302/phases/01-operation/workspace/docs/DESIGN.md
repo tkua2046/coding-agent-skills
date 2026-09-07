@@ -1,0 +1,64 @@
+# Configuration import — current design amendment D2
+
+**Goal and scope:** Import a replacement JSON object into local `config.json`, retaining the previously usable configuration on invalid input, interrupted writing, or failed activation. One writer; concurrent writers and remote stores are excluded by [REQUEST.md](../REQUEST.md).
+
+**Status:** Proposed design only. Inspection confirms that `importer.py` currently writes before parsing; D1 below remains the accepted historical baseline. D2 has not been implemented or reviewed.
+
+**Decision and consequence:** Validate first, stage in the active file's directory, then atomically replace it while retaining a durable copy of the old configuration and a pending-activation record. Startup restores the old copy whenever activation is pending. Atomic replacement alone prevents partial files but cannot recover from a failure after replacement. This design costs an extra copy and local recovery metadata; a crash before commit may discard a valid candidate.
+
+**Decisive recovery example:** With active `{"theme":"light"}`, importing `{"theme":"dark"}` and stopping after replacement but before activation commits must restart with `{"theme":"light"}`. Retrying the same input must then succeed with `{"theme":"dark"}`.
+
+**Next implementation outcome:** Deliver a recoverable import and startup-loading path in `importer.py`, with failure-injection checks demonstrating the example above and the acceptance cases below. No implementation is authorized in this draft operation.
+
+Navigation: [Evidence and contract](#evidence-and-contract) · [Recovery protocol](#recovery-protocol) · [Acceptance and validation](#acceptance-and-validation) · [Limits](#limits-and-open-questions) · [Accepted D1](#accepted-configuration-d1)
+
+## Evidence and contract
+
+Verified by inspection of [importer.py](../importer.py): `load(path)` parses file text with `json.loads`; it has no object-type check or recovery step. `replace(path, text)` overwrites the destination using `write_text` and only then calls `load`. Thus malformed input is detected after the old contents are lost, and a JSON array currently succeeds. No startup caller, activation hook, or tests are supplied in this fixture.
+
+Proposed contract: retain the existing path/text calling convention and return the loaded replacement object only after commit. Reject malformed JSON and any top-level value other than an object before modifying active state. Preserve arbitrary object settings; no additional settings schema is specified. Report parsing, type, I/O, and activation failures as errors, never as successful imports. Tightening replacement to objects follows the request and D1; non-object replacement callers will now fail.
+
+For this fixture, activation means successfully loading and validating the installed file through the same loader used at startup. Additional application-side activation effects are not evidenced here. All startup loads and imports must recover pending work before accessing or replacing active state. The usable old configuration and recovery artifacts belong to this local tool and must not depend on the supplied import text remaining available.
+
+## Recovery protocol
+
+Assume an existing usable object A. The invariant is that until replacement B commits, a durable, readable A remains available, and recovery can select it without guessing from candidate contents.
+
+1. Recover any pending transaction first. Parse and check the entire candidate as an object in memory. Invalid input leaves active bytes unchanged.
+2. Write B to a uniquely named staging file in the same directory, flush it to durable storage, and load/check it. Preserve required active-file permissions; temporary and recovery files must not expose settings more broadly.
+3. Copy A to a reserved recovery file, durably finish that copy, then durably publish a pending record identifying it. Do not replace the active file unless these steps succeed. Unreferenced staging or recovery files are not evidence of pending activation.
+4. Atomically replace the active path with staged B and persist the directory change. Load/check the installed B. Keep A and the pending record throughout this step.
+5. On successful activation, remove the pending record and persist that removal: this is the commit point. Only then return B. Remove the now-unneeded recovery copy afterward; cleanup failure must not turn a committed import into a reported activation failure.
+6. On failure after publishing pending, or at startup with pending present, restore A through a fresh staged copy and atomic replacement. Keep the recovery source intact until restoration and directory persistence finish. Clear pending durably only after restoration. Repeated interruptions during rollback must therefore be recoverable. Report the failed import even when rollback succeeds.
+
+If rollback cannot complete because storage remains unavailable, retain pending and the recovery copy, report a recovery error, and do not load B as active. A remains available for recovery when storage permits; immediate successful I/O cannot be promised during a storage failure. Missing or unreadable recovery data with pending present is an explicit recovery error, not permission to accept B.
+
+Retry first completes recovery and then starts a fresh import. Importing the same object after an already committed attempt also succeeds; replacement has no additive side effects or duplicate records. A crash after activation but before durable commit can restore A, so a caller that did not receive success must be able to retry.
+
+A simpler validate-and-rename approach was considered: it handles invalid input and torn staging writes, but loses A when installed B fails activation. A retained copy plus an explicit pending state is justified by that required recovery case. No database or external dependency is needed.
+
+## Acceptance and validation
+
+These are proposed acceptance outcomes, not results of executed tests. Start each case with active A = `{"theme":"light"}` and use B = `{"theme":"dark"}` unless stated otherwise.
+
+| Input / failure point | Expected result and persisted state |
+| --- | --- |
+| Malformed `{"theme":` or non-object `[]` | Import errors before mutation; A is byte-for-byte unchanged and startup loads A. |
+| Valid B, no failure | Returns B after commit; a fresh startup loads B. Importing B again also returns B. |
+| Interrupted staging write, before pending publication | Startup loads A; partial staging data is never selected as active. Retry succeeds with B. |
+| Stop after pending publication, before active replacement | Startup restores/loads A and clears pending only after durable restoration. Retry succeeds with B. |
+| Stop after active replacement, before commit | Even if active contains valid B, fresh startup restores and returns A. Retry returns B and subsequent startup loads B. |
+| Installed B fails activation | Import errors and restores A; fresh startup loads A. Removing the injected failure permits the same B to succeed. |
+| Stop during rollback | Pending and the intact recovery copy survive; the next startup repeats restoration and loads A. |
+| Stop after durable commit, before backup cleanup | Startup loads B and ignores unreferenced backup data. Retry remains safe. |
+
+Validate with isolated temporary directories, controlled I/O/activation failures, and a fresh process for interruption/restart cases. Check returned objects, errors, active bytes where required, and recovery-file lifetime. Exercise persistence-operation failures as well as replacement failures. Process termination verifies protocol ordering but does not prove power-loss durability; confirm the chosen local filesystem's atomic replacement and flush guarantees before claiming that stronger guarantee.
+
+## Limits and open questions
+
+The implementation must use same-filesystem atomic replacement and durable file/directory ordering. Filesystem support for those guarantees is an unverified deployment assumption; unsupported operations must fail before destructive replacement. Hardware corruption, manual deletion of recovery files, and permanent storage loss are outside this recovery guarantee.
+
+The supplied fixture does not identify the startup entrypoint or any activation beyond JSON loading. Wire recovery into `load(path)` and any actual startup caller when implementing; if activation includes further side effects, define their rollback before extending this contract. No blocker remains for the fixture's local file/loader design. Initial creation without an existing usable configuration is not specified by this replacement request.
+
+# Accepted configuration D1
+The active configuration is a local JSON object loaded at startup. It contains user-edited settings that may not be recoverable from another source. Current replacement writes directly to the active file. This accepted baseline description must remain traceable when revised.

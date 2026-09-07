@@ -1,0 +1,181 @@
+{
+  "criteria": [
+    {
+      "id": "preserve-intent",
+      "status": "pass",
+      "reason": "Both phases preserve original sources and completed movement history. The YAML revision extends pending S1 without reopening S0; prior specifications, designs and plans remain readable in historical captures.",
+      "evidence": [
+        {
+          "path": "artifacts/02-extend/workspace/docs/ORIGINAL.md",
+          "quote": "Navigate an unbounded integer grid from a supplied pose. F moves one cell; L and R\nturn in place. Return final pose and per-command success. Reject unknown commands."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/history/completed.md",
+          "quote": "Synthetic historical acceptance of D1: movement and turning delivered.\nThis record predates obstacle support; it is not evidence of a new trial."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/PLAN.md",
+          "quote": "This extends the existing pending\nS1 rather than reopening completed S0."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/history/pre-yaml-documents.md",
+          "quote": "# Occupied-cell extension to D1"
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "status": "pass",
+      "reason": "The design reuses the existing pose, command and candidate-target model. It explains occupancy ownership, membership lookup, preservation of the entire pose on failure, and subsequent recovery through turns and free moves.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "The existing `_target` helper calculates a full candidate pose without mutation.\nUse that candidate's coordinates for membership; on collision retain the entire\nold pose and append False exactly once. Otherwise adopt the candidate and append\nTrue. Turns keep succeeding regardless of occupancy."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "from (0, 0, 0) with (0, 1) occupied, FFRF returns\n(1, 0, 1) and [False, False, True, True]: repeated failures preserve the pose,\nthen a turn and free move succeed."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/DESIGN.md",
+          "quote": "Build a private frozenset during startup and publish the configuration only after\nthe entire document passes validation. Reuse this immutable set in `run`; copy\nother finite caller-supplied occupied iterables once before commands."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/navigator.py",
+          "quote": "def _target(pose):\n    x, y, heading = pose\n    dx, dy = DIRECTIONS[heading]\n    return x + dx, y + dy, heading"
+        }
+      ]
+    },
+    {
+      "id": "executable-plan",
+      "status": "pass",
+      "reason": "Both plans group work into a usable outcome with an explained boundary. Acceptance covers complete-pose preservation, repeated blocking, later commands, existing turns, validation failure and recovery. The revised plan explicitly identifies unresolved dependencies and scale measurements.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "One coherent future commit boundary because API, failure behavior and usage form one local usable outcome; no partial stage or external dependency is needed"
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/PLAN.md",
+          "quote": "Depends on resolving schema/value/duplicate and YAML-feature rules, public loader/error shape, and parser policy. Select and verify a maintained parser only in a later authorized implementation phase. One coherent future change boundary gives a usable file-to-movement path; a loader alone would not meet the request."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/PLAN.md",
+          "quote": "Preserve the existing regressions and all [spec examples](SPEC.md#acceptance-examples). Verify full validation before command iteration (including a malformed final record), clear syntax/schema/I/O failures and successful corrected-file retry."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/SPEC.md",
+          "quote": "| (0, 0, 0) | {(0, 1)} | FFRF | (1, 0, 1) | [False, False, True, True] |\n| (0, 0, 0) | {(0, 1)} | FL | (0, 0, 3) | [False, True] |"
+        }
+      ]
+    },
+    {
+      "id": "scope-and-evidence",
+      "status": "pass",
+      "reason": "Workspace comparisons and execution records support document-only changes in both phases; the YAML example and request were supplied inputs. Both baseline runs actually passed three tests. Proposed feature verification, scale measurements and independent reviews are explicitly distinguished from those baseline checks.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/git.json",
+          "quote": "\"status\": \"M docs/DESIGN.md\\n M docs/PLAN.md\\n M docs/SPEC.md\\n?? docs/history/pre-occupied-documents.md\""
+        },
+        {
+          "path": "artifacts/01-plan/execution.json",
+          "quote": "Ran 3 tests in 0.000s\\\\n\\\\nOK\\\\n"
+        },
+        {
+          "path": "artifacts/02-extend/execution.json",
+          "quote": "Ran 3 tests in 0.000s\\\\n\\\\nOK\\\\n"
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/PLAN.md",
+          "quote": "again passed all 3 tests (exit 0). No YAML parsing or scale measurement was run."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/PLAN.md",
+          "quote": "Independent\n  design review, plan review, code review and new human acceptance remain pending;\n  historical D1 acceptance does not cover occupancy or YAML."
+        }
+      ]
+    },
+    {
+      "id": "phase-02-scope",
+      "status": "pass",
+      "reason": "The amendment explicitly authorizes YAML startup, retains the approximately 200,000-cell requirement, and requires complete validation before movement. It preserves both requests and designs reusable memory-backed occupancy.",
+      "evidence": [
+        {
+          "path": "artifacts/02-extend/workspace/docs/SPEC.md",
+          "quote": "Load the starting pose and about 200,000 occupied cells from YAML once into memory\nfor movement queries. Invalid structure must fail clearly before any movement.\nCommands remain supplied by the caller. Configuration loading is now in scope;"
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/YAML_REQUEST.md",
+          "quote": "Load starting pose and about 200,000 occupied cells from YAML into memory once.\nInvalid structure must fail clearly before movement."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/OCCUPIED_REQUEST.md",
+          "quote": "A forward move into an occupied\ncell reports failure and preserves both position and heading. The session continues\naccepting commands. Turns still work."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/DESIGN.md",
+          "quote": "The path-based loader reads exactly once per explicit load. Its result can be\nreused for movement calls without rereading YAML or rebuilding occupancy."
+        }
+      ]
+    },
+    {
+      "id": "phase-02-tradeoffs",
+      "status": "pass",
+      "reason": "Lookup and startup memory costs are explained. Parsing is separated from schema validation, duplicate-key loss and Boolean/integer ambiguity have concrete consequences, and malformed coordinates prevent all movement. Stricter policies remain explicit proposals. Parser guidance is justified by YAML compatibility and the unresolved dependency policy.",
+      "evidence": [
+        {
+          "path": "artifacts/02-extend/workspace/docs/DESIGN.md",
+          "quote": "About 200,000 cells justify expected constant-time membership\nper forward move rather than scanning a list. This costs O(n) retained memory and\nO(n) expected construction time; YAML parsing also creates temporary objects, so\npeak startup memory exceeds the retained set."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/SPEC.md",
+          "quote": "The exact rules below are proposals, not confirmed\ninvalid-value or duplicate policies."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/SPEC.md",
+          "quote": "Require integers excluding booleans; coordinates may be negative, heading must be 0–3. Reject `x: true`, `x: 1.0`, `x: \"1\"` and `heading: 4` rather than coercing or wrapping."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/SPEC.md",
+          "quote": "Collapse repeated `[0, 1]` cells because occupancy is membership; reject repeated `heading` or other mapping keys to avoid silent last-value wins."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/DESIGN.md",
+          "quote": "Do not substitute JSON-only\nloading or a handwritten YAML subset: the supplied example uses YAML block maps\nand sequences, and silently narrowing YAML would change the input contract."
+        },
+        {
+          "path": "artifacts/02-extend/workspace/docs/DESIGN.md",
+          "quote": "No command iteration, pose activation or partial\nconfiguration return occurs until startup succeeds."
+        }
+      ]
+    },
+    {
+      "id": "first-screen-comprehension",
+      "status": "pass",
+      "reason": "The restricted reader actually read the supplied excerpts and correctly identified YAML startup, large occupancy, pre-command validation, the lookup/memory tradeoff and pending S1 with dependencies and acceptance. Those answers are supported by the exposed beginnings; linked sections make further details navigable.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Load and validate the complete YAML starting pose and occupied cells before\nconsuming movement commands, then retain occupancy as an immutable hash set of\ncoordinate pairs. About 200,000 cells justify expected constant-time membership\nper forward move rather than scanning a list. This costs O(n) retained memory"
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/1.txt",
+          "quote": "First resolve the\n[open contract questions](SPEC.md#proposed-yaml-contract-and-open-questions) and the\nparser/dependency conflict with DEVNOTES. Decisive acceptance is loading\n`examples/start.yaml` and processing FFRF to (1, 0, 1) with\n[False, False, True, True]"
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Fully load and validate the YAML starting pose and occupied cells before consuming commands, then navigate with collision failure and continued commands."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "It requires O(n) retained memory and expected construction time; temporary YAML parsing objects increase peak startup memory."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Pending S1 delivers YAML startup plus optional programmatic occupancy, collision handling, implementation, meaningful tests, and usage/dependency documentation together. It depends on settling schema, value, duplicate and YAML-feature rules, the public loader/error interface, and parser policy."
+        }
+      ]
+    }
+  ]
+}

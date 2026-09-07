@@ -1,0 +1,5 @@
+Act as independent reviewer using skills/stage-development. Recheck the current
+candidate against FEATURE.md and prior findings; inspect actual implementation
+and run relevant checks. Preserve round 1 and write reviews/round-2.md tied to the
+current content, with dispositions and any remaining blockers. Edit review output
+only. No commits or external actions. Human acceptance remains pending.

@@ -1,0 +1,15 @@
+{
+  "note": "Exact reviewed pre-SBC-01 draft bytes recovered by reversing the recorded patch and verified against every source hash captured in the original 17:42 controls. These are the earlier inputs, not the promoted corrected case.",
+  "files": {
+    "case.json": "a50605b470107bcc8a4b98dc4c878744670ea61a8d045b7d082a4ef2e227e05e",
+    "fixture/AGENTS.md": "f0fd3c23be5030d4166e7b85e6eb25628e1d084e029d2d474040248632d97646",
+    "fixture/DEVNOTES.md": "6e5012d494b9988bfd6adac0aca81b1a9fbc0b038eb0526863080c913d01f139",
+    "fixture/README.md": "bd990e7f82235c03c532c32fdf4d42e2d39f4de183d4e35d801121e51ec075ae",
+    "fixture/adjustments.py": "4a84950979ed431341a357a38621527d1b00f96b2a2a81896fac727eeeac8be5",
+    "fixture/tests/test_adjustments.py": "c2d7c8f7d52b5284610ce72116c7ce8c9ace79b95b0a9d6a7de170b33252c3e6",
+    "fixture/tools/check.py": "6d41bf9e9b19d66bb2778622e1f486b108b2b8dcbc716bde09c94f9ce83292e9",
+    "oracle.py": "ec4233b61919bc594828f94818a69447ef6fc13d9632e2ef9dd7620b1e898724",
+    "requests/01.md": "c602ced3f7675866ad5d0366efdc61699da74cfc926e78cf6cf160f81d7c4222",
+    "rubric.json": "31e6864dc15ded566142378cd32e9544a6c023e950737948bab585be4067afb5"
+  }
+}

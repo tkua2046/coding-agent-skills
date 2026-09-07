@@ -33,3 +33,24 @@ Task-local budgets and semantic failures stay visible. Correcting evaluation inf
 Coverage limits: these are bounded synthetic repositories, not full production deployments, all language ecosystems, or a model benchmark. Explicit supplied paths test skill execution; they do not establish automatic discovery. The local-delivery case uses inventory allocation, outside the navigation examples embedded in the skills, to check transfer. No external push/tag/release is performed.
 
 The two neutral planning probes were added after independent global review found that execution cases substantially prescribed their desired route. They reuse existing applications and leave the next commitment open; see the [reviewed contract](../docs/reviews/outcome-routing-review.md). Corrected handoff and migration-reader cases retain their original disputed results in the [dispositions](../docs/reviews/outcome-dispositions.md).
+
+## Small LLM smoke tests
+
+The smoke tier exercises one real operation in a small isolated work context, followed by blind grading with the same source/evidence guarantees. It has no independent reader or complete implementation/review loop. Use it to locate basic responsibility regressions before the complete canaries; a smoke pass cannot substitute for those canaries or release acceptance.
+
+| Goal / responsibility | Focused smoke | Countercase or neighbor |
+|---|---|---|
+| FD1 — useful clarification | `smoke-intake-preserve` | `smoke-intake-conflict` requires an actual unresolved compatibility decision |
+| FD2 — usable, adequate design | `smoke-design-local` | `smoke-transfer-design` retains consequential recovery detail in a new domain |
+| IP1/IP2 — executable, maintainable plan | `smoke-plan-delivery` | `smoke-plan-maintenance` leaves private implementation changes out of the plan |
+| IP1 — consistent next delivery | `smoke-plan-preview-import` | The first pending usable increment differs from eventual feature completion; single-increment planning remains valid |
+| SD2 — useful review | `smoke-review-ready` | `smoke-review-partial` must retain the unresolved part of an invariant |
+| SD3/SD1 — truthful resumption and checks | `smoke-stage-resume` | Same executor task in `smoke-stage-stale`, with code changed after its ready review |
+| SD3 — usable current-state entry | `smoke-handoff-opening` | A policy-first plan already contains accurate state; expose it without duplicating status or executing excluded work |
+| DW1/DW2 — effective tools and accurate delivery evidence | `smoke-setup-evidence` | `smoke-transfer-pr` requires current failed checks to override old green evidence |
+| DW1/DW2 — claims bounded by evidence | `smoke-setup-child-evidence` | An enforced child result remains supported while another missing result proves neither success nor a setup defect |
+| DW1 — observe the gate being changed | `smoke-setup-baseline` | Repair a gate while retaining the application failure; distinguish its original result from later checks |
+
+The two transfer cases were authored before the repair candidate completed and withheld from the skill-writing agent. They are a limited transfer check, not a permanently secret benchmark. If a transfer failure informs a later repair, that case becomes a regression case and a new transfer scenario is needed for an unseen-transfer claim.
+
+The [reviewed smoke contract](../docs/proposals/smoke-contracts.md) requires concrete behavioral consequences rather than formatting quotas. The [continuation proposal](../docs/proposals/continuation-repair.md) supersedes the prior agent-created total-call stopping policy: individual timeouts and checkpoints control experiments, while known material defects continue to receive diagnosis and justified repair. Grader calibration still tests the scorer, separately from these fresh-worker tests.

@@ -1,0 +1,13 @@
+ordinary omitted: return 'HELLO'
+mixed-case prefix: return 'pre:HELLO'
+keyword prefix: return 'pre:HELLO'
+omitted None value: AttributeError: 'NoneType' object has no attribute 'upper'
+omitted bytes value: TypeError: can only concatenate str (not "bytes") to str
+omitted custom integer upper: TypeError: can only concatenate str (not "int") to str
+omitted custom reflected upper: return ('reflected', '')
+invalid integer prefix: TypeError: unsupported operand type(s) for +: 'int' and 'str'
+invalid prefix and value: AttributeError: 'NoneType' object has no attribute 'upper'
+bytes prefix and value: return b'pre:HELLO'
+list prefix and custom upper: return ['pre:', 'UPPER']
+string subclass prefix: return 'pre:HELLO'
+probe completed

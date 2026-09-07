@@ -1,0 +1,9 @@
+# Make baseline observation a concrete setup step
+
+The [independent complete-setup review](../reviews/workflow-setup-evidence-review.md) finds WSE-01: a compound command exposes only a later coverage-version result, but the report claims the earlier baseline ran five passing tests. Later gate results are valid. The existing general evidence wording did not prevent this recurrence.
+
+Replace the setup opening's generic baseline instruction with a concrete ordering: run a gate being cited separately, or capture and inspect that command's own output/exit condition; establish the observed baseline before changing its implementation/configuration. If output is missing, record what remains unverified. Later results stay current results. Do not infer a baseline from the last command in a compound invocation, require success before authorized repairs, or add an extra verification framework.
+
+A small setup smoke will repair an existing check command that ignores a failing suite's result, while preserving a known application defect and its tests. The report must distinguish actual before/after evidence: initially the command masks failure; afterward the unchanged failing test makes it fail correctly. No hook, new toolchain, application fix or publication is requested. This tests evidence capture during a real setup change and prevents “all green” from being the target. Existing historical-child-evidence and PR smokes remain neighbors; the full setup case still tests hooks/coverage and document audiences.
+
+Review before application. Preserve WSE-01 and both invalid scoring responses. Run the affected new/neighbor smokes and complete setup on the revised operation; source/rubric grades do not change to excuse unsupported claims. Scoring-protocol reliability is a separate issue and cannot repair an incorrect report.

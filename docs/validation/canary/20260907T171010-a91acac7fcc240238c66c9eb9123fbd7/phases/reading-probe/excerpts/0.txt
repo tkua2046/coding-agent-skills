@@ -1,0 +1,30 @@
+# Navigator design
+
+Current goal: load starting pose and roughly 200,000 fixed occupied cells from
+YAML once, validate before movement, and retain D1 and blocked-move behavior.
+Status: revised design proposed; implementation and design review pending.
+Use a separate load/validate boundary producing a pose and immutable hash set;
+movement performs only destination membership queries. This costs O(n) retained
+storage and expected O(1) per lookup, with additional YAML parsing peak memory.
+Next: resolve the [open contracts](#open-contracts), then deliver the
+[pending plan](PLAN.md). No YAML dependency has been selected or installed.
+
+Sources: [original](ORIGINAL.md), [occupied request](OCCUPIED_REQUEST.md),
+[YAML request](YAML_REQUEST.md), [sample](../examples/start.yaml), and
+[current specification](SPEC.md). Evidence: [prior baseline](evidence/occupied-baseline.md)
+and [fresh YAML baseline](evidence/yaml-baseline.md).
+
+## Accepted design D1
+Keep state local to each run; no global session. A caller supplies pose and commands.
+A direction lookup supports translation; turns only affect heading. Unbounded
+coordinates avoid imposing a board size. Unknown commands are programmer errors.
+
+## Occupied-cell amendment
+
+Inspection: `navigator.run(pose, commands)` currently assigns `_target(pose)` on
+every F and appends True for every recognized command. Existing tests cover basic
+movement, left-turn wrapping and unknown commands; occupancy and YAML are absent.
+Keep the direction lookup and turn logic.
+
+Propose `run(pose, commands, occupied=())`, preserving existing two-argument calls.
+Normalize caller-supplied coordinate pairs into a frozenset once at entry; reuse

@@ -1,0 +1,50 @@
+{
+  "criteria": [
+    {
+      "id": "whole-invariant",
+      "status": "pass",
+      "reason": "The review keeps R1 open because unknown commands preserve cursor 4 but change selection from open to closed before raising. It specifies the minimal correction and verification of both fields, supported by code and an actual experiment.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/session.py",
+          "quote": "        self.selection = \"closed\"\n        if command not in {\"next\", \"previous\"}:\n            raise ValueError(\"unknown command\")"
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "The cursor is now preserved, confirming the reported cursor correction; selection preservation still fails, so the author's fixed claim does not close R1. Move selection mutation after successful validation. Verify that an unknown command raises `ValueError` and preserves both fields, including a non-closed initial selection, and that subsequent valid commands still work."
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "unknown: ValueError: unknown command\\\\nbefore: (4, 'open') after: (4, 'closed')\\\\ncursor preserved: True\\\\nselection preserved: False"
+        }
+      ]
+    },
+    {
+      "id": "review-history",
+      "status": "pass",
+      "reason": "The original R1 remains intact. The recheck identifies the current revision and content hash, distinguishes the author claim from reviewer observations, and accurately reports executed checks and the partial-fix disposition.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/reviews/round1.md",
+          "quote": "R1 open: an unknown command changes cursor and selection before raising. Both must be preserved. Author now reports fixed by moving cursor update after validation. No reviewer has yet verified the new candidate."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Scope: independent reviewer recheck of the supplied candidate at HEAD `a8f8acacf56ba39064e3681f6f3ccbc24da50b89`; `session.py` SHA-256 `a2e28ac4bfc03a0a481453930578a6f659a933ec5663c86cdfdd8a02bf931921`."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "R1 \u2014 high priority \u2014 open (partial fix)."
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "session.py: unchanged\\\\nreviews/round1.md: unchanged"
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "cursor preserved: True\\\\nselection preserved: False\\\\nnext (5, 'closed') PASS\\\\nprevious (3, 'closed') PASS"
+        }
+      ]
+    }
+  ]
+}

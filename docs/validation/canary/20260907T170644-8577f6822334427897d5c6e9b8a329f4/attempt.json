@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T170644-8577f6822334427897d5c6e9b8a329f4",
+  "kind": "behavior",
+  "created_at": "2026-09-07T17:06:44.372961+00:00",
+  "status": "inconclusive",
+  "case_id": "smoke-setup-evidence",
+  "identity": {
+    "case": "5c867fa3a4c5ac685c43ba1f253a51edcfeed3ab13e27a9a445123503d6d14f8",
+    "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+    "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+    "skills": {
+      "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+      "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+      "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+      "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+      "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+      "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+      "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+      "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+      "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+      "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+      "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+      "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+      "skills/dev-workflow/prompts/setup-dev-workflow.md": "bcda682901d91a7dbcf8568168d27e722023bb25cc624d987da5a9f570bb892c",
+      "skills/dev-workflow/references/delivery-checks.md": "4ca4dffd31832529aeae8ed28940733ef8c41dfb0bbc639ec6fac4855fbcb5a4",
+      "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 240
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": null,
+  "requested_calibration": "docs/validation/canary/20260907T163452-9f14e14107924e83af36657950b52002/report.json"
+}

@@ -1,0 +1,33 @@
+{
+  "label": "baseline-handoff-opening",
+  "cases": [
+    "smoke-handoff-opening"
+  ],
+  "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b",
+  "identities": {
+    "smoke-handoff-opening": {
+      "case": "d796b95d7d097e14162f64e3c2bf6d26662c4b014e84e673a501289d139633ff",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "48cdfeb605e12716ced524d899b2bb3a2c65f7ca11a95c2fa8f349cb5c1aa024",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/stage-record.template.md": "9466df7ea9874b5c74d3bc36896d00ad7a50189d34a47d318177c0f8e2d26265",
+        "skills/stage-development/prompts/execute-stage.md": "50550818f29416cbc0dfcf52fc4ba8ab8c9ac44626bb3ef993cc2490530bbcde",
+        "skills/stage-development/prompts/review-stage.md": "1802dbca6613255883b83d9e349704664ab2bbbde9a51c66d222aeadb93769e8"
+      }
+    }
+  },
+  "worker": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 240
+  },
+  "grader": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "parallelism": 1,
+  "note": "One attempt each, frozen inputs checked before dispatch; no retries. Parallel timing is descriptive."
+}

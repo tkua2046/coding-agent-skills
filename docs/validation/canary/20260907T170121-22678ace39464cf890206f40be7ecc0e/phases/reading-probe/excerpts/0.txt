@@ -1,0 +1,30 @@
+# Design: source-preserving settings migration
+
+Status: proposed; **design review pending**. Implementation is deferred.
+Authority: [original requirement](ORIGINAL.md); proposed behavior and acceptance:
+[migration contract](SPEC.md). Next: review the decisions below, then review the
+[delivery plan](PLAN.md). Neither requested review has been performed.
+
+Keep v1 untouched, create and validate a separate v2 file, then atomically replace
+the active selector. Retry follows the selector, never partial output. The cost is
+temporary space and retained unselected files. Separate design and plan documents
+are warranted because preservation, activation durability and compatibility are
+consequential choices.
+
+Outline: [baseline](#current-behavior), [decisions](#decisions),
+[protocol](#publication-and-recovery), [validation](#validation-and-review-boundaries).
+
+## Current behavior
+
+`settings.py` exposes only `load(path)`: it parses v1, rejects duplicate IDs and
+returns a dictionary. Two tests cover the normal and duplicate fixtures.
+`data/active.json` selects `settings-v1.json` with format 1. The earlier design
+describes a caller reading this selector, but no caller or selector reader is
+implemented in the fixture. No migration or recovery implementation exists.
+
+[Local evidence](evidence/migration-baseline.md) records passing baseline tests and
+bounded probes: numeric IDs load but become strings in a naive v2 roundtrip;
+repeated JSON members and NaN also load. Migration therefore cannot rely on the
+legacy reader alone to establish lossless conversion.
+
+## Decisions

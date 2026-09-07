@@ -1,0 +1,7 @@
+{
+  "head": "0027def8b53446e3afc11be1fc02c30fa4c2b3b9",
+  "status": "M  navigator.py\nM  tests/test_navigator.py",
+  "diff": "diff --git a/navigator.py b/navigator.py\nindex efc5eb0..bce51f3 100644\n--- a/navigator.py\n+++ b/navigator.py\n@@ -1,7 +1,7 @@\n DIRECTIONS = ((0, 1), (1, 0), (0, -1), (-1, 0))\n \n \n-def _target(pose):\n+def _next_pose(pose):\n     x, y, heading = pose\n     dx, dy = DIRECTIONS[heading]\n     return x + dx, y + dy, heading\n@@ -13,7 +13,7 @@ def run(pose, commands, occupied=()):\n     for command in commands:\n         x, y, heading = pose\n         if command == \"F\":\n-            candidate = _target(pose)\n+            candidate = _next_pose(pose)\n             if candidate[:2] in occupied:\n                 outcomes.append(False)\n                 continue\ndiff --git a/tests/test_navigator.py b/tests/test_navigator.py\nindex 75ad7ea..d8c05e8 100644\n--- a/tests/test_navigator.py\n+++ b/tests/test_navigator.py\n@@ -19,3 +19,13 @@ class NavigationTests(unittest.TestCase):\n             run((0, 0, 0), \"FRF\", {(0, 1)}),\n             ((1, 0, 1), [False, True, True]),\n         )\n+\n+    def test_blocked_west_at_negative_coordinate(self):\n+        self.assertEqual(\n+            run((-2, -3, 3), \"F\", {(-3, -3)}),\n+            ((-2, -3, 3), [False]),\n+        )\n+        self.assertEqual(\n+            run((-2, -3, 3), \"FRF\", {(-3, -3)}),\n+            ((-2, -2, 0), [False, True, True]),\n+        )",
+  "log": "0027def Fixture baseline",
+  "tags": ""
+}

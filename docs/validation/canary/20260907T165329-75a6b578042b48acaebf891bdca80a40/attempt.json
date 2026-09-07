@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T165329-75a6b578042b48acaebf891bdca80a40",
+  "kind": "behavior",
+  "created_at": "2026-09-07T16:53:29.225367+00:00",
+  "status": "inconclusive",
+  "case_id": "smoke-stage-stale",
+  "identity": {
+    "case": "a672556b153967adb984dd34db0711f7736f8237a6d5925b9a6698238775643a",
+    "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+    "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+    "skills": {
+      "skills/stage-development/SKILL.md": "48cdfeb605e12716ced524d899b2bb3a2c65f7ca11a95c2fa8f349cb5c1aa024",
+      "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+      "skills/stage-development/assets/stage-record.template.md": "9466df7ea9874b5c74d3bc36896d00ad7a50189d34a47d318177c0f8e2d26265",
+      "skills/stage-development/prompts/execute-stage.md": "50550818f29416cbc0dfcf52fc4ba8ab8c9ac44626bb3ef993cc2490530bbcde",
+      "skills/stage-development/prompts/review-stage.md": "1802dbca6613255883b83d9e349704664ab2bbbde9a51c66d222aeadb93769e8"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 240
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b",
+  "requested_calibration": "docs/validation/canary/20260907T163452-9f14e14107924e83af36657950b52002/report.json"
+}

@@ -1,0 +1,3 @@
+argv: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', '-m', 'unittest', 'discover', '-s', 'tests', '-v']
+Environment: PYTHONDONTWRITEBYTECODE=1
+Exit status: 1

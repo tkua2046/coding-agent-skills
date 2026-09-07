@@ -1,0 +1,1 @@
+Reserve a batch only if all SKU quantities are available; rejected batches leave every count unchanged. Process later batches independently. Single process, in-memory; caller input must remain unchanged.

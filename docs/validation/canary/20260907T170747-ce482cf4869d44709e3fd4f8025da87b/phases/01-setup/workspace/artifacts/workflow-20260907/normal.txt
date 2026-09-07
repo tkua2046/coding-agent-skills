@@ -1,0 +1,18 @@
+$ /Users/tk/Documents/coding-agent-skills/.venv/bin/python tools/check.py
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.012s
+
+OK
+Name           Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------
+inventory.py      58      1     18      2    96%   59->exit, 81
+----------------------------------------------------------
+TOTAL             58      1     18      2    96%
+
+Exit: 0

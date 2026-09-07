@@ -1,0 +1,22 @@
+# Occupied-cell implementation plan
+
+Next: deliver optional fixed occupied cells in one runnable increment, with
+blocked moves preserving the pose and later commands continuing. This depends on
+the proposed [D1 amendment](DESIGN.md) and [API clarifications](SPEC_OCCUPIED.md).
+For `(0, 0, 0)`, commands `FFRF`, and occupied `{(0, 1)}`, acceptance is
+`((1, 0, 1), [False, False, True, True])`. Implementation belongs to a later task.
+
+| Proposed outcome and scope | Dependency and boundary | Acceptance |
+|---|---|---|
+| S1: Extend `navigator.run` with optional fixed occupancy, preserving existing calls and errors; add regression tests and update README usage with blocked-move outcomes and a continuation example. Update current SPEC behavior when delivered, retaining original requirements and addendum provenance. | Uses existing `_target` and command loop; no packages or infrastructure. One proposed commit keeps behavior, tests, and public documentation usable together; no useful partial delivery requires a split. Resolve any changes arising from pending document reviews before executing affected choices. | Run the standard unittest suite, retaining all baseline cases and covering the addendum's failure, recovery, boundary, iterable, snapshot, and call-isolation examples. Cover occupied forward destinations in all four headings. Verify README examples against the delivered API. |
+
+Sources: [original request](ORIGINAL.md), [current specification](SPEC.md),
+[occupied request](OCCUPIED_REQUEST.md), [design](DESIGN.md), and
+[acceptance examples](SPEC_OCCUPIED.md#acceptance-examples).
+
+Execution/check policy: [AGENTS.md](../AGENTS.md) and
+[DEVNOTES.md](../DEVNOTES.md). Standard check:
+`python3 -m unittest discover -s tests -v`, using the supplied prepared runtime in
+this fixture. This task authorizes documentation and local evidence only: no
+implementation, commits, dependency installation, or external actions. Requested
+design and plan reviews remain pending until performed; a

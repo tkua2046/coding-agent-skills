@@ -1,0 +1,30 @@
+# YAML startup and occupied-cell extension to D1
+
+Load and validate the complete YAML starting pose and occupied cells before
+consuming movement commands, then retain occupancy as an immutable hash set of
+coordinate pairs. About 200,000 cells justify expected constant-time membership
+per forward move rather than scanning a list. This costs O(n) retained memory and
+O(n) expected construction time; YAML parsing also creates temporary objects, so
+peak startup memory exceeds the retained set. For [examples/start.yaml](../examples/start.yaml),
+FFRF must produce (1, 0, 1) and [False, False, True, True]. A malformed last cell
+must instead fail startup with its location, before even the first command is read.
+
+Parser selection and exact value/duplicate rules remain unresolved; the proposed
+contract and examples are in [SPEC](SPEC.md#proposed-yaml-contract-and-open-questions).
+A maintained YAML parser is proposed, but conflicts with DEVNOTES' current
+standard-library-only policy. Resolve that dependency boundary before implementing
+YAML loading; no parser has been installed, selected or experimentally verified.
+
+Decision: YAML loading, scale and early structural failure are
+[confirmed](YAML_REQUEST.md); interface, representation and validation details
+below are proposals. Preserve D1's accepted local state, direction lookup,
+unbounded coordinates and ValueError for unknown commands. Sources:
+[original](ORIGINAL.md), [occupied request](OCCUPIED_REQUEST.md), [target spec](SPEC.md).
+Delivery and review status: [plan](PLAN.md#delivery-status). Historical text:
+[before YAML](history/pre-yaml-documents.md), [accepted D1](history/pre-occupied-documents.md).
+
+## Startup boundary and ownership
+
+Propose a separate `load_start(path)` operation returning a validated immutable
+starting configuration (pose plus occupancy), followed by
+`run(config.pose, commands, config.occupied)`. Retain existing two-argument calls

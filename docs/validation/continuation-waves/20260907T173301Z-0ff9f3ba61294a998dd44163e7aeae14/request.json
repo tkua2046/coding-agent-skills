@@ -1,0 +1,50 @@
+{
+  "label": "candidate4-stage-smoke",
+  "cases": [
+    "smoke-stage-resume",
+    "smoke-stage-stale"
+  ],
+  "source_ref": null,
+  "identities": {
+    "smoke-stage-resume": {
+      "case": "8a239218edf78a48596a18ff27e7ce4445c2b11fee8a801eeb2640be8b8cf858",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "ebaaecb438ce703e01056baabc33d45012aaf1683ff23db5079481c96a7dc27c",
+        "skills/stage-development/prompts/review-stage.md": "b47087b9a0b66f59e675b18b7cf0b0b651b5c2ab9fecf8f2205ec7982e77de42",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d"
+      }
+    },
+    "smoke-stage-stale": {
+      "case": "a672556b153967adb984dd34db0711f7736f8237a6d5925b9a6698238775643a",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "ebaaecb438ce703e01056baabc33d45012aaf1683ff23db5079481c96a7dc27c",
+        "skills/stage-development/prompts/review-stage.md": "b47087b9a0b66f59e675b18b7cf0b0b651b5c2ab9fecf8f2205ec7982e77de42",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d"
+      }
+    }
+  },
+  "worker": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 240
+  },
+  "grader": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "parallelism": 1,
+  "note": "One attempt each, frozen inputs checked before dispatch; no retries. Parallel timing is descriptive."
+}

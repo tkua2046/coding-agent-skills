@@ -1,0 +1,85 @@
+{
+  "verdict": "ready",
+  "findings": [],
+  "reviewer": "Assigned independent reviewer in a fresh context separate from the author; combined design and implementation-plan document review.",
+  "reviewed_at": "2026-09-07T17:24:57.441380+00:00",
+  "reviewed_content": {
+    "candidate": "Proposed design D2, pending plan S1, and pending SPEC amendment, assessed against REQUEST and ORIGINAL.",
+    "base_commit": "430e602e3a01959b9eb5b72ddc40680604df0f84",
+    "identity": "SHA-256 values identify the actual working-tree content reviewed, including uncommitted documents.",
+    "sha256": {
+      "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+      "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+      "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+      "docs/SPEC.md": "b99e9705d2d60abc9c649e3cf445acbf5126eacdc3bb3ec92c052ae45498546f",
+      "docs/DESIGN.md": "d437bae0b39b7589333d415b6afe09c5da806cb0d3aa8b311eb2f29d20fa5167",
+      "docs/PLAN.md": "718c56777d6f1377c5dc6532f7047e68337c5c471e8c3f118e6e0414ef4c4ffb",
+      "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+      "README.md": "6abea4adc72cada64ecaab4a50ae1f1439e7cd4ad06aa0e7612f3120aaa5fa11",
+      "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+      "inventory.py": "47ed82f0de9981ed68e93aca4248025e41bf90bc109f411589c8e2cff7793736",
+      "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+      "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+      "tests/test_inventory.py": "e8ae44127d4f5c2008bff5ef59f098519b1c8d82d9115bc0eb63b4e24c6222f5",
+      "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+      ".git/hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f"
+    }
+  },
+  "operations": [
+    "skills/feature-design/prompts/review-design.md",
+    "skills/implementation-plan/prompts/review-implementation.md"
+  ],
+  "assessment": [
+    {
+      "locations": [
+        "docs/REQUEST.md",
+        "docs/DESIGN.md: Decision and inspected implementation",
+        "inventory.py",
+        "command_codec.py"
+      ],
+      "evidence": "Checking availability against the current stock copy before any deduction ensures whole-order rejection. Unique validated SKUs make per-item checks sufficient. Successful orders deduct all items; rejected orders continue; empty orders succeed. This preserves both interfaces and avoids new validation or infrastructure."
+    },
+    {
+      "locations": [
+        "docs/SPEC.md: Decisive acceptance",
+        "docs/PLAN.md: Pending S1",
+        "batch.py"
+      ],
+      "evidence": "Concrete expected results cover a shortage in the second item without a partial deduction, later-order continuation, sequential depletion, exact-stock success, empty orders and batches, integer counts, nested input preservation, and both APIs. Decoder regression cases preserve existing validation and rejection remains a normal outcome."
+    },
+    {
+      "locations": [
+        "docs/PLAN.md: Pending S1",
+        "DEVNOTES.md",
+        ".git/hooks/pre-commit"
+      ],
+      "evidence": "One engine change with focused tests and README usage is a coherent delivery boundary. Commands exist and the installed gate rejects zero discovered tests. The plan explicitly requires snapshot-bound agent code review, fixes and affected checks before human handoff, preserves completed history, and respects the shared 15-minute allowance and prohibition on commits/releases."
+    },
+    {
+      "locations": [
+        "docs/DESIGN.md",
+        "docs/PLAN.md",
+        "docs/SPEC.md"
+      ],
+      "evidence": "The opening sections state the outcome, key decision and next stage; linked acceptance detail keeps reading cost proportional to this local change. No material unresolved decisions or nonblocking suggestions require disposition."
+    }
+  ],
+  "checks_performed": [
+    {
+      "kind": "static",
+      "result": "Read fixture instructions, both supplied skill review operations, all listed snapshot files, and actual installed check configuration."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" -m unittest discover -s tests -v",
+      "exit_code": 0,
+      "result": "6 baseline tests passed."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 \"$CANARY_PYTHON\" .git/hooks/pre-commit",
+      "exit_code": 0,
+      "result": "6 baseline tests passed; static inspection confirms empty discovery fails."
+    }
+  ],
+  "limitations": "Document readiness only. The current engine still subtracts unconditionally, and baseline tests do not establish the requested behavior. No implementation, feature runtime acceptance, code review, or human approval is claimed.",
+  "next_action": "Implementation may begin on S1 against this reviewed snapshot. Implement the engine change, regression coverage and README update; run the planned checks and complete the specified agent code-review/fix loop before human review."
+}

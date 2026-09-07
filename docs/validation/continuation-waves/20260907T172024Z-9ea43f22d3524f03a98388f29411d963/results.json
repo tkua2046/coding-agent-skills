@@ -1,0 +1,87 @@
+[
+  {
+    "case": "v1-small-feature",
+    "report": "docs/validation/canary/20260907T172024-7082e5a00d93484ab19c02eac5db047e/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-plan"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 221.807,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 9,
+          "lines": 32,
+          "bytes": 1960
+        },
+        "final": {
+          "files": 12,
+          "lines": 172,
+          "bytes": 10873
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "v4-migration-risk",
+    "report": "docs/validation/canary/20260907T172024-c7f03e138c6e4f7bb5f1b9f0cd49cbd4/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-plan"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 339.294,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 6,
+          "lines": 21,
+          "bytes": 1307
+        },
+        "final": {
+          "files": 10,
+          "lines": 268,
+          "bytes": 18350
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "v2-scope-extension",
+    "report": "docs/validation/canary/20260907T172609-040b4d165d41445290b3d3503e0ebf85/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-plan",
+        "02-extend"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 434.913,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 9,
+          "lines": 32,
+          "bytes": 1960
+        },
+        "final": {
+          "files": 12,
+          "lines": 457,
+          "bytes": 28961
+        }
+      }
+    },
+    "error": null
+  }
+]

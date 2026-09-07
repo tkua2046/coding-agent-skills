@@ -1,0 +1,233 @@
+{
+  "label": "smoke-candidate-1",
+  "cases": [
+    "smoke-design-local",
+    "smoke-intake-conflict",
+    "smoke-intake-preserve",
+    "smoke-plan-delivery",
+    "smoke-plan-maintenance",
+    "smoke-review-partial",
+    "smoke-review-ready",
+    "smoke-setup-evidence",
+    "smoke-stage-resume",
+    "smoke-stage-stale",
+    "smoke-transfer-design",
+    "smoke-transfer-pr"
+  ],
+  "source_ref": null,
+  "identities": {
+    "smoke-design-local": {
+      "case": "5583aef33f5b491d1c80a10aaf50ce178884f917b842e25ac43697a188186124",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "ee4b7f9b4da270f178bbf705e9cf704cc3f25ac5f02afe7b19b92688a26754a0",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "97f2e36ce1745447689907d25f9263015f2c773ab926991db6ca19b34be8bac7",
+        "skills/feature-design/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "29c2a389d18fb976da3f6b31bcac00924d1acb06002209926c36fd20c22d730f",
+        "skills/feature-design/prompts/intake-feature.md": "740778d4a3384ec76aa859959389dd49d3203cb41e8a3e0852cce79d03fa26e9",
+        "skills/feature-design/prompts/review-design.md": "a61458469535fcb4432d8274466f4e3d0c0ea3028337665f8a53880463a53047",
+        "skills/feature-design/references/artifact-checks.md": "d33942814aeb94701848426694b98b6f112f0d00eb4a923c503767bd9753d9e2"
+      }
+    },
+    "smoke-intake-conflict": {
+      "case": "9fdbe056c1ced933ebab6a51cad0da2f98b5971be84c5f46da304e3bceb1e215",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "ee4b7f9b4da270f178bbf705e9cf704cc3f25ac5f02afe7b19b92688a26754a0",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "97f2e36ce1745447689907d25f9263015f2c773ab926991db6ca19b34be8bac7",
+        "skills/feature-design/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "29c2a389d18fb976da3f6b31bcac00924d1acb06002209926c36fd20c22d730f",
+        "skills/feature-design/prompts/intake-feature.md": "740778d4a3384ec76aa859959389dd49d3203cb41e8a3e0852cce79d03fa26e9",
+        "skills/feature-design/prompts/review-design.md": "a61458469535fcb4432d8274466f4e3d0c0ea3028337665f8a53880463a53047",
+        "skills/feature-design/references/artifact-checks.md": "d33942814aeb94701848426694b98b6f112f0d00eb4a923c503767bd9753d9e2"
+      }
+    },
+    "smoke-intake-preserve": {
+      "case": "decd24cfb3a2a5d5477911640aa49ba75304ebc37adef9a968a499e82b473ace",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "ee4b7f9b4da270f178bbf705e9cf704cc3f25ac5f02afe7b19b92688a26754a0",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "97f2e36ce1745447689907d25f9263015f2c773ab926991db6ca19b34be8bac7",
+        "skills/feature-design/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "29c2a389d18fb976da3f6b31bcac00924d1acb06002209926c36fd20c22d730f",
+        "skills/feature-design/prompts/intake-feature.md": "740778d4a3384ec76aa859959389dd49d3203cb41e8a3e0852cce79d03fa26e9",
+        "skills/feature-design/prompts/review-design.md": "a61458469535fcb4432d8274466f4e3d0c0ea3028337665f8a53880463a53047",
+        "skills/feature-design/references/artifact-checks.md": "d33942814aeb94701848426694b98b6f112f0d00eb4a923c503767bd9753d9e2"
+      }
+    },
+    "smoke-plan-delivery": {
+      "case": "f4b5328f5f8556f1e2b71b06f60ac8b09402103d2d29746fef392b90ce255649",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/implementation-plan/SKILL.md": "ff3be914e72d5202eab032bf3add2df6ed13adc01debec023d25328caf81c647",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "e0c62cdf7d6a47dc98267aef6d53ec80f42749bfdfdb3f457a10166862316121",
+        "skills/implementation-plan/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/implementation-plan/prompts/plan-implementation.md": "9547d3b1a3c80be95dd3669efd7a291b5730861a79015b126e9e8062b6c9baf8",
+        "skills/implementation-plan/prompts/review-implementation.md": "9bdb1d93bd67b97291bbf42f0cc223acfde46c42f68366a263ff57ad7e0f643c",
+        "skills/implementation-plan/references/artifact-checks.md": "6ff03b283aad92d2720428943b78327f418e07773864ff88a54c507694159fc8"
+      }
+    },
+    "smoke-plan-maintenance": {
+      "case": "dd687b7a42a4fd7740350615f9f9693dffa348c2eb59d017c4be944a755eaeeb",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/implementation-plan/SKILL.md": "ff3be914e72d5202eab032bf3add2df6ed13adc01debec023d25328caf81c647",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "e0c62cdf7d6a47dc98267aef6d53ec80f42749bfdfdb3f457a10166862316121",
+        "skills/implementation-plan/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/implementation-plan/prompts/plan-implementation.md": "9547d3b1a3c80be95dd3669efd7a291b5730861a79015b126e9e8062b6c9baf8",
+        "skills/implementation-plan/prompts/review-implementation.md": "9bdb1d93bd67b97291bbf42f0cc223acfde46c42f68366a263ff57ad7e0f643c",
+        "skills/implementation-plan/references/artifact-checks.md": "6ff03b283aad92d2720428943b78327f418e07773864ff88a54c507694159fc8"
+      }
+    },
+    "smoke-review-partial": {
+      "case": "ffdab5a88bfb6579c56083e1fe7a0808db28f8bde5c153be5676adabf6643460",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "cd115206c1aaa3fbd2202bbe119ebeec8f6dc6099019d5ed2494e90b36a4956a",
+        "skills/stage-development/prompts/review-stage.md": "462be76d96190108a0c7c8c7c5d234b8c08c3bb939fca70fc6bcc109149a984c",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d"
+      }
+    },
+    "smoke-review-ready": {
+      "case": "5222ec2777a388d3fc9eac2c3426f27e67f5c8071617ca3610b7784c4a08d46a",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "ee4b7f9b4da270f178bbf705e9cf704cc3f25ac5f02afe7b19b92688a26754a0",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "97f2e36ce1745447689907d25f9263015f2c773ab926991db6ca19b34be8bac7",
+        "skills/feature-design/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "29c2a389d18fb976da3f6b31bcac00924d1acb06002209926c36fd20c22d730f",
+        "skills/feature-design/prompts/intake-feature.md": "740778d4a3384ec76aa859959389dd49d3203cb41e8a3e0852cce79d03fa26e9",
+        "skills/feature-design/prompts/review-design.md": "a61458469535fcb4432d8274466f4e3d0c0ea3028337665f8a53880463a53047",
+        "skills/feature-design/references/artifact-checks.md": "d33942814aeb94701848426694b98b6f112f0d00eb4a923c503767bd9753d9e2",
+        "skills/implementation-plan/SKILL.md": "ff3be914e72d5202eab032bf3add2df6ed13adc01debec023d25328caf81c647",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "e0c62cdf7d6a47dc98267aef6d53ec80f42749bfdfdb3f457a10166862316121",
+        "skills/implementation-plan/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/implementation-plan/prompts/plan-implementation.md": "9547d3b1a3c80be95dd3669efd7a291b5730861a79015b126e9e8062b6c9baf8",
+        "skills/implementation-plan/prompts/review-implementation.md": "9bdb1d93bd67b97291bbf42f0cc223acfde46c42f68366a263ff57ad7e0f643c",
+        "skills/implementation-plan/references/artifact-checks.md": "6ff03b283aad92d2720428943b78327f418e07773864ff88a54c507694159fc8"
+      }
+    },
+    "smoke-setup-evidence": {
+      "case": "3850132ecdf23d12cb5f48030eaacddc378b8a394d5e57e86a541b4a5afe864e",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+        "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+        "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+        "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+        "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+        "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+        "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+        "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+        "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+        "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+        "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+        "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+        "skills/dev-workflow/prompts/setup-dev-workflow.md": "8f1f3aeea37cd3b0dd18dc3e111acedb08f709d7de835951349c99eea85d490b",
+        "skills/dev-workflow/references/delivery-checks.md": "7f79a3f5b57792f663e153e5d7adb7606fb5152dd82f9fda8890b2af534a80cf",
+        "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+      }
+    },
+    "smoke-stage-resume": {
+      "case": "8a239218edf78a48596a18ff27e7ce4445c2b11fee8a801eeb2640be8b8cf858",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "cd115206c1aaa3fbd2202bbe119ebeec8f6dc6099019d5ed2494e90b36a4956a",
+        "skills/stage-development/prompts/review-stage.md": "462be76d96190108a0c7c8c7c5d234b8c08c3bb939fca70fc6bcc109149a984c",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d"
+      }
+    },
+    "smoke-stage-stale": {
+      "case": "a672556b153967adb984dd34db0711f7736f8237a6d5925b9a6698238775643a",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/stage-development/SKILL.md": "ebee01c033029680606375118e0feb91eeafad37d062dfdf90f96ae6db12d8df",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/stage-development/assets/stage-record.template.md": "3cab9809191f3cdd2568a7d62a6fb0d6b2923f73165a7a34ead2347a88714cc1",
+        "skills/stage-development/prompts/execute-stage.md": "cd115206c1aaa3fbd2202bbe119ebeec8f6dc6099019d5ed2494e90b36a4956a",
+        "skills/stage-development/prompts/review-stage.md": "462be76d96190108a0c7c8c7c5d234b8c08c3bb939fca70fc6bcc109149a984c",
+        "skills/stage-development/references/artifact-checks.md": "082de3c8f2bb8a25bcd205641e4cf24c6e275994b86586b533a87f74723d0d6d"
+      }
+    },
+    "smoke-transfer-design": {
+      "case": "d64e5593acc8bec45b1cf5df171b2870e6a05150a1c34406294b73fa6427ea84",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "ee4b7f9b4da270f178bbf705e9cf704cc3f25ac5f02afe7b19b92688a26754a0",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "97f2e36ce1745447689907d25f9263015f2c773ab926991db6ca19b34be8bac7",
+        "skills/feature-design/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "29c2a389d18fb976da3f6b31bcac00924d1acb06002209926c36fd20c22d730f",
+        "skills/feature-design/prompts/intake-feature.md": "740778d4a3384ec76aa859959389dd49d3203cb41e8a3e0852cce79d03fa26e9",
+        "skills/feature-design/prompts/review-design.md": "a61458469535fcb4432d8274466f4e3d0c0ea3028337665f8a53880463a53047",
+        "skills/feature-design/references/artifact-checks.md": "d33942814aeb94701848426694b98b6f112f0d00eb4a923c503767bd9753d9e2"
+      }
+    },
+    "smoke-transfer-pr": {
+      "case": "d64416aa718af6d01d4f7223ccb6ea65fdddb12b1e49c2db8981b8ca5908e82d",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/dev-workflow/SKILL.md": "b889e43d8795ab3ab738e318918034cf9a40748a5f78f0d4140960775399ce86",
+        "skills/dev-workflow/agents/openai.yaml": "d0ce96fe3def1a63baa63f17f78ffb50ef569342336c9836bdfb227e9170466a",
+        "skills/dev-workflow/assets/AGENTS.template.md": "f922029f25c1ada60f46caed9b4b5d461d9fe21004cb2d8bb8a3b1a4f2279b9e",
+        "skills/dev-workflow/assets/CHANGELOG.template.md": "887f54671f5fc076d03973cf4a2cd6535bdefbd1fc35f1b3846f76f53a02c693",
+        "skills/dev-workflow/assets/DEVNOTES.template.md": "1063ef489aa7352847704b797b5da30798d9bd3ac72af81cd8c740a7d1f4b106",
+        "skills/dev-workflow/assets/README.template.md": "a1e270244164500531e1cdf417f08234eda99ed4b2db9ac046061d6b34698f0d",
+        "skills/dev-workflow/assets/python/.gitignore": "25b5ff3cdb359415b551b62d0712ccd4a37ea4f722e71f1ee51358121ad7956b",
+        "skills/dev-workflow/assets/python/.pre-commit-config.yaml": "a1a625b38e9a5198a45dd988faa178da571de8bdd3ca924b0291651545ad7e5e",
+        "skills/dev-workflow/assets/python/pyproject.toml": "a94db893f5664417906783deb7fcfcf505c8870829cf1c42b0c4ffbfdb0170e9",
+        "skills/dev-workflow/assets/python/requirements-dev.txt": "74d7432adab7fa9d24ce355860074e6bb4cf03efe4157515076c215cb6f36747",
+        "skills/dev-workflow/prompts/prepare-pr.md": "78e69a706ec0071cad11a1a1d5c9703d0b0d4a308b0d20f4b33cff583ebd3166",
+        "skills/dev-workflow/prompts/release.md": "aaa0713537b59684c0e9e46a5ec0866fc18e17dbf994841931d729cc61a50955",
+        "skills/dev-workflow/prompts/setup-dev-workflow.md": "8f1f3aeea37cd3b0dd18dc3e111acedb08f709d7de835951349c99eea85d490b",
+        "skills/dev-workflow/references/delivery-checks.md": "7f79a3f5b57792f663e153e5d7adb7606fb5152dd82f9fda8890b2af534a80cf",
+        "skills/dev-workflow/references/documents.md": "348e5e9d00fa6d5daf478da2cba8f9bb2072fd9de6321d035ac518ca8754579d"
+      }
+    }
+  },
+  "worker": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 240
+  },
+  "grader": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "parallelism": 2,
+  "note": "One attempt each, frozen inputs checked before dispatch; no retries. Parallel timing is descriptive."
+}

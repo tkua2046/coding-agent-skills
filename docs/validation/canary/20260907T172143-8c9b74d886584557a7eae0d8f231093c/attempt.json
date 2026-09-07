@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T172143-8c9b74d886584557a7eae0d8f231093c",
+  "kind": "behavior",
+  "created_at": "2026-09-07T17:21:43.529341+00:00",
+  "status": "inconclusive",
+  "case_id": "smoke-plan-preview-import",
+  "identity": {
+    "case": "f6a8588829a72cd8136694c1e11596721790c3fbe37635a41faeb9adaabc852a",
+    "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+    "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+    "skills": {
+      "skills/implementation-plan/SKILL.md": "ff3be914e72d5202eab032bf3add2df6ed13adc01debec023d25328caf81c647",
+      "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+      "skills/implementation-plan/assets/implementation-plan.template.md": "81fdc2be489508f95f1eccc0a82d2e254c20713fca86927fef39ca76339bb536",
+      "skills/implementation-plan/assets/review.template.md": "eeb80bcbd9f2781f3615f81264d64c7c723ca0dca44ed78283b6448016613c08",
+      "skills/implementation-plan/prompts/plan-implementation.md": "9547d3b1a3c80be95dd3669efd7a291b5730861a79015b126e9e8062b6c9baf8",
+      "skills/implementation-plan/prompts/review-implementation.md": "9bdb1d93bd67b97291bbf42f0cc223acfde46c42f68366a263ff57ad7e0f643c",
+      "skills/implementation-plan/references/artifact-checks.md": "650b84e7ab03d583af18ea2f708f07688fdee0c0f7217764f96c94c48ff64aad"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 240
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": null,
+  "requested_calibration": "docs/validation/canary/20260907T163452-9f14e14107924e83af36657950b52002/report.json"
+}

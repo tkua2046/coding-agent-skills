@@ -1,0 +1,13 @@
+Command: /private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-i8zilgc9/worker/.git/hooks/pre-commit
+Exit: 0
+Coverage unavailable; running the stdlib test gate without reports.
+test_cli_success_and_failure_preserve_export (check_inventory.InventoryTests.test_cli_success_and_failure_preserve_export) ... ok
+test_header_and_empty_inventory (check_inventory.InventoryTests.test_header_and_empty_inventory) ... ok
+test_invalid_rows (check_inventory.InventoryTests.test_invalid_rows) ... ok
+test_normalized_rows_and_order (check_inventory.InventoryTests.test_normalized_rows_and_order) ... ok
+test_replace_failure_cleans_temporary_and_preserves_destination (check_inventory.InventoryTests.test_replace_failure_cleans_temporary_and_preserves_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.006s
+
+OK

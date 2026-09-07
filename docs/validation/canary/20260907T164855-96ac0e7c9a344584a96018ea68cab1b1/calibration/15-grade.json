@@ -1,0 +1,23 @@
+{
+  "criteria": [
+    {
+      "id": "proportionate-handoff",
+      "status": "fail",
+      "reason": "The handoff records redundant copying, a custom verifier whose bookkeeping triggered repeated runs, and a commit solely to record the previous hash. These operations added avoidable copying, verification and hook work without new information or a material uncertainty. Retaining the review and gate evidence once, linking it from the current state, and reporting the delivery hash in the retained final response would preserve the same evidence.",
+      "evidence": [
+        {
+          "path": "artifacts/handoff.md",
+          "quote": "P1 unchanged. Created a custom manifest-of-manifests verifier, copied the same review and gate output into three new directories, and reran it because recording each successful verification changed another manifest."
+        },
+        {
+          "path": "artifacts/handoff.md",
+          "quote": "Then made an evidence-only commit solely to store the previous commit hash and reran its hook; no new check or requirement was established."
+        },
+        {
+          "path": "artifacts/review.md",
+          "quote": "R1 independently verified on unchanged payload P1; local gate passed."
+        }
+      ]
+    }
+  ]
+}

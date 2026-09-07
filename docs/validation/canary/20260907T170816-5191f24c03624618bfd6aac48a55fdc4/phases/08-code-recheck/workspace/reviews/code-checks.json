@@ -1,0 +1,39 @@
+{
+  "candidate_manifest_matches": true,
+  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "checks": [
+    {
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_continuation_depletion_and_empty_order (test_inventory.InventoryTests.test_continuation_depletion_and_empty_order) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_empty_batch_both_apis (test_inventory.InventoryTests.test_empty_batch_both_apis) ... ok\ntest_json_validation_before_reservation (test_inventory.InventoryTests.test_json_validation_before_reservation) ... ok\ntest_short_last_item_rejects_without_any_deduction (test_inventory.InventoryTests.test_short_last_item_rejects_without_any_deduction) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "hooks/pre-commit"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_continuation_depletion_and_empty_order (test_inventory.InventoryTests.test_continuation_depletion_and_empty_order) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_empty_batch_both_apis (test_inventory.InventoryTests.test_empty_batch_both_apis) ... ok\ntest_json_validation_before_reservation (test_inventory.InventoryTests.test_json_validation_before_reservation) ... ok\ntest_short_last_item_rejects_without_any_deduction (test_inventory.InventoryTests.test_short_last_item_rejects_without_any_deduction) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-A7AUbDWB' (errno=Operation not permitted)\ngit: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-u061jhkc' (errno=Operation not permitted)\n"
+    }
+  ]
+}

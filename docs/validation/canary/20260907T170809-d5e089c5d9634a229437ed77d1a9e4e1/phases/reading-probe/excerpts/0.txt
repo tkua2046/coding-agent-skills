@@ -1,0 +1,30 @@
+# YAML initialization and fixed occupied cells
+
+Load and validate the entire YAML configuration before exposing a starting pose
+or consuming movement commands. Retain occupied coordinates in one immutable hash
+set and query that set for each forward destination. This supports about 200,000
+cells with expected constant-time membership checks, at the cost of set storage
+and temporary parsing data. For [the supplied YAML](../examples/start.yaml),
+`FFRF` yields `((1, 0, 1), [False, False, True, True])`. A malformed final cell
+must reject the entire configuration before even the first command is consumed.
+
+The parser choice is unresolved: general YAML needs a parser dependency while
+[DEVNOTES](../DEVNOTES.md) requires the Python standard library only. Strict value,
+duplicate and start-cell policies below are also proposals awaiting resolution.
+These decisions precede implementation of the YAML boundary; this document does
+not select or install a dependency.
+
+Decision: proposed revision of the occupied-cell design, incorporating the
+confirmed [YAML request](YAML_REQUEST.md). Sources: [original](ORIGINAL.md),
+[occupied request](OCCUPIED_REQUEST.md), and [current spec](SPEC.md). Delivery and
+review status: [current plan](PLAN.md#delivery-status). The unchanged accepted
+[D1 source](history/design-d1.md) remains historical authority for basic movement.
+
+## Compatibility and state ownership
+
+Keep state local to each run, unbounded integer coordinates, clockwise headings
+0–3, and the existing `(final_pose, outcomes)` return shape. Unknown commands still
+raise `ValueError` and abort processing. Direction lookup and turning behavior
+remain as in D1. Only the forward destination is tested: blockage appends `False`,
+preserves the full pose, and continues; a free move or turn appends `True`.
+

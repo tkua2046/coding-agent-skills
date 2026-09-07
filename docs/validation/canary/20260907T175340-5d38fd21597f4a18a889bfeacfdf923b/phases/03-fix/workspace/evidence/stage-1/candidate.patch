@@ -1,0 +1,78 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7b26b60..022c2c8 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,6 +1,8 @@
+ # Changelog
+ 
+ ## Unreleased
++- Validate counter steps as positive integers, rejecting booleans and other invalid
++  values with `ValueError` without changing the counter.
+ 
+ ## 0.1.0
+ - Initial counter.
+diff --git a/README.md b/README.md
+index f3696db..aa35a84 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,6 @@
+ # Counter
+ `Counter(value=0).add(step=1)` returns the updated value.
++
++`step` must be a positive Python integer; booleans are rejected. Invalid steps
++raise `ValueError` and leave the counter unchanged. Calling `add()` adds one.
++The initial value may be any integer, including zero or a negative integer.
+diff --git a/counter.py b/counter.py
+index 5498f92..0fdbf3c 100644
+--- a/counter.py
++++ b/counter.py
+@@ -3,5 +3,7 @@ class Counter:
+         self.value = value
+ 
+     def add(self, step=1):
++        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:
++            raise ValueError("step must be a positive integer")
+         self.value += step
+         return self.value
+diff --git a/tests/test_counter.py b/tests/test_counter.py
+index 0c4256a..3a4d923 100644
+--- a/tests/test_counter.py
++++ b/tests/test_counter.py
+@@ -12,6 +12,37 @@ class CounterTests(unittest.TestCase):
+     def test_positive_step(self):
+         self.assertEqual(Counter(4).add(3), 7)
+ 
++    def test_initial_values_and_repeated_additions(self):
++        for initial, expected in [(0, 3), (-8, -5), (10**100, 10**100 + 3)]:
++            with self.subTest(initial=initial):
++                counter = Counter(initial)
++                self.assertEqual(counter.add(step=2), expected - 1)
++                self.assertEqual(counter.add(), expected)
++                self.assertEqual(counter.value, expected)
++
++    def test_large_step(self):
++        counter = Counter(-2)
++        self.assertEqual(counter.add(10**100), 10**100 - 2)
++        self.assertEqual(counter.value, 10**100 - 2)
++
++    def test_integer_subclass(self):
++        class Step(int):
++            pass
++
++        counter = Counter()
++        self.assertEqual(counter.add(Step(2)), 2)
++        self.assertEqual(counter.value, 2)
++
++    def test_invalid_steps_preserve_state_and_allow_recovery(self):
++        for step in [0, -3, True, False, 1.0, 0.5, "2", None, [], {}, 1j, object()]:
++            with self.subTest(step=step):
++                counter = Counter(-7)
++                with self.assertRaises(ValueError):
++                    counter.add(step)
++                self.assertEqual(counter.value, -7)
++                self.assertEqual(counter.add(2), -5)
++                self.assertEqual(counter.value, -5)
++
+     def test_negative_preserves_value(self):
+         counter = Counter(4)
+         with self.assertRaises(ValueError):

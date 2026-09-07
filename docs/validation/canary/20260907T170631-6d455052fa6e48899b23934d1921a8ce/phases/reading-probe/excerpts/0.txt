@@ -1,0 +1,30 @@
+# Whole-order inventory reservation
+
+Reject an order if any item exceeds the stock remaining when that order begins.
+Check every item's sufficiency before deducting any items; this keeps rejection
+free of partial deductions without rollback machinery. Accepted orders deduct all
+items, and later orders use the resulting batch-local stock. This adds a read pass
+for successful orders while retaining linear work in the number of requested items.
+
+Decisive example: with stock `{"a":4,"b":1}`, process these orders in sequence:
+
+| Order | Items | Acceptance | Stock afterward |
+|---|---|---|---|
+| reject | `[["a",2],["b",2]]` | `False` | `{"a":4,"b":1}` |
+| later | `[["a",4],["b",1]]` | `True` | `{"a":0,"b":0}` |
+| empty | `[]` | `True` | `{"a":0,"b":0}` |
+
+The result must contain all three IDs in this order. Placing the insufficient item
+second makes a partial deduction observable; the next order proves continued
+processing and acceptance at exact availability.
+
+Decision: extension D2 is implemented in S1. The
+[independent document review](../reviews/design-current.json) and subsequent
+[independent code review](../reviews/code-current.json) both returned `ready`
+with no findings. Current delivery status and owner action are in the [plan](PLAN.md).
+Sources: unchanged [request](REQUEST.md), [original contract](ORIGINAL.md), and
+[prior accepted design D1](history/design-d1.md). Delivery and check evidence:
+[plan](PLAN.md).
+
+## Compatibility and boundaries
+

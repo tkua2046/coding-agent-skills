@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+    "sandbox",
+    "-P",
+    "canary",
+    "-C",
+    "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-ihc_za0m/8",
+    "-c",
+    "default_permissions=\"canary\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+    "-c",
+    "shell_environment_policy.inherit=\"core\"",
+    "-c",
+    "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-ihc_za0m/8/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+    "--",
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-I",
+    "-c",
+    "\nimport json, pathlib, socket, sys\nprivate = pathlib.Path(sys.argv[1])\np = pathlib.Path('.isolation-probe')\np.write_text('visible')\nassert p.read_text() == 'visible'\np.unlink()\ntry:\n    private.read_bytes()\nexcept PermissionError:\n    pass\nelse:\n    raise AssertionError('grader-only file is readable')\nwith socket.socket() as sock:\n    try:\n        sock.connect(('127.0.0.1', 9))\n    except PermissionError:\n        pass\n    else:\n        raise AssertionError('network unexpectedly available')\nprint(json.dumps({'workspace_io': True, 'private_read_denied': True, 'network_denied': True}))\n",
+    "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-ihc_za0m/private"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"workspace_io\": true, \"private_read_denied\": true, \"network_denied\": true}\n",
+  "stderr": "",
+  "timed_out": false,
+  "interrupted": false,
+  "elapsed_seconds": 0.123,
+  "passed": true
+}

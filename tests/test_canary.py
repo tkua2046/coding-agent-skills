@@ -920,7 +920,14 @@ def test_current_catalog_validates_without_model_but_absent_all_case_evidence_bl
     assert rejected["cases"] == {}
     assert all(
         any(error.startswith(f"{case_id}:") for error in rejected["errors"])
-        for case_id in catalog
+        for case_id, case in catalog.items()
+        if case["tier"] == "heavy"
+    )
+    assert not any(
+        error.startswith(f"{case_id}:")
+        for case_id, case in catalog.items()
+        if case["tier"] == "smoke"
+        for error in rejected["errors"]
     )
 
 

@@ -1,0 +1,37 @@
+{
+  "id": "smoke-plan-maintenance",
+  "version": 1,
+  "tier": "smoke",
+  "title": "Leave accepted planning decisions stable during an internal edit",
+  "skills": [
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "docs/DESIGN.md",
+        "docs/PLAN.md",
+        "reviews/S1.md",
+        "REQUEST.md"
+      ]
+    }
+  ]
+}

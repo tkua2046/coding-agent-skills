@@ -1,0 +1,51 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7b26b60..7a23d78 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -3,0 +4,2 @@
++- Validate counter steps as positive integers, excluding booleans, and preserve
++  the value when an invalid step raises `ValueError`.
+diff --git a/README.md b/README.md
+index f3696db..d90b9cf 100644
+--- a/README.md
++++ b/README.md
+@@ -2,0 +3,3 @@
++The initial value may be any integer. Omit `step` to add one, or pass a positive
++Python integer. Booleans and other invalid steps raise `ValueError` without
++changing the counter.
+diff --git a/counter.py b/counter.py
+index 5498f92..0fdbf3c 100644
+--- a/counter.py
++++ b/counter.py
+@@ -5,0 +6,2 @@ class Counter:
++        if isinstance(step, bool) or not isinstance(step, int) or step <= 0:
++            raise ValueError("step must be a positive integer")
+diff --git a/tests/test_counter.py b/tests/test_counter.py
+index 0c4256a..809586a 100644
+--- a/tests/test_counter.py
++++ b/tests/test_counter.py
+@@ -13 +13,23 @@ class CounterTests(unittest.TestCase):
+-        self.assertEqual(Counter(4).add(3), 7)
++        cases = [(4, 3, 7), (-8, 3, -5), (0, 1, 1),
++                 (2**100, 2**100, 2**101)]
++        for initial, step, expected in cases:
++            with self.subTest(initial=initial, step=step):
++                counter = Counter(initial)
++                self.assertEqual(counter.add(step=step), expected)
++                self.assertEqual(counter.value, expected)
++
++    def test_integer_subclass(self):
++        class Step(int):
++            pass
++
++        self.assertEqual(Counter().add(Step(3)), 3)
++
++    def test_invalid_steps_preserve_value_and_allow_recovery(self):
++        for step in [0, -2, True, False, 1.0, 0.5, float("nan"),
++                     float("inf"), "2", None, [], {}, 1 + 0j, object()]:
++            with self.subTest(step=step):
++                counter = Counter(-4)
++                with self.assertRaises(ValueError):
++                    counter.add(step)
++                self.assertEqual(counter.value, -4)
++                self.assertEqual(counter.add(2), -2)

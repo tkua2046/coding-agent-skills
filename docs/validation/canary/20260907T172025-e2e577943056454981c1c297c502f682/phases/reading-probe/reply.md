@@ -1,0 +1,7 @@
+1. **Behavior change:** Callers can supply fixed occupied cells. A forward move into an occupied destination returns a per-command `False`, preserves the entire pose, and allows processing to continue. Preserve existing two-argument calls, successful turns regardless of occupancy, and `ValueError` for unknown commands.
+
+2. **Technical decision:** Copy occupancy into a set once per run, then check the forward destination before assigning pose. This provides a fixed snapshot, deduplication, and expected constant-time lookup, at the cost of construction time and storage linear in supplied cells. Scanning the caller’s collection would avoid copying but repeat work and leave mutable caller state live.
+
+3. **Next implementation outcome:** S1 adds optional occupancy to `navigator.run`, blocking behavior, regression tests, and README usage. It depends on completed S0 and the proposed D1 amendment; design and plan reviews remain pending. One decisive acceptance case is that a blocked forward move preserves position and heading while subsequent commands still execute. The exposed text names this requirement but does not supply the linked addendum’s concrete inputs and expected outputs. S1 is not implemented or verified.
+
+These answers reflect excerpt comprehension, not human usability proof.

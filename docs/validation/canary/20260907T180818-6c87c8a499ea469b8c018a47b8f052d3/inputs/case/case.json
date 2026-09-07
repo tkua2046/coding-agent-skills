@@ -1,0 +1,40 @@
+{
+  "id": "smoke-handoff-opening",
+  "version": 1,
+  "tier": "smoke",
+  "title": "Expose current handoff state before retained policy and history",
+  "skills": [
+    "stage-development"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-and-history-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "REQUEST.md",
+        "reviews/round1.md",
+        "reviews/round2.md",
+        "session.py",
+        "tests/test_session.py",
+        "history/plan-before-handoff.md"
+      ]
+    }
+  ]
+}

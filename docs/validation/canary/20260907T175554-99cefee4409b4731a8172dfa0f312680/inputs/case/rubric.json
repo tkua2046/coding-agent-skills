@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "whole-invariant",
+      "required": true,
+      "requirement": "Verify the complete finding rather than accepting the author claim.",
+      "pass_when": "Keeps R1 open/needs changes because invalid command leaves cursor 4 but changes selection from open to closed. Reports concrete trigger, consequence, minimal correction and verification of both fields.",
+      "fail_when": "Closes R1 from author claim or cursor-only check, or invents unrelated required work."
+    },
+    {
+      "id": "review-history",
+      "required": true,
+      "requirement": "Preserve an actionable original-to-recheck trail.",
+      "pass_when": "Original finding retained; current reviewed content is identifiable, author claim separated from reviewer observation; actual experiment/static evidence accurately stated.",
+      "fail_when": "Overwrites history, loses finding identity or claims checks not performed."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "purpose": "Reviewed history guards allow additional archives, reject every protected original modification/deletion, and retain other protected-file behavior. No model calls.",
+  "command": [
+    "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_continuation_eval.py",
+    "-k",
+    "history_archives",
+    "--no-cov",
+    "-q"
+  ],
+  "exit_code": 0,
+  "stdout": "...                                                                      [100%]\n3 passed, 28 deselected in 0.32s\n",
+  "stderr": ""
+}

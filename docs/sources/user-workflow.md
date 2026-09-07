@@ -35,3 +35,17 @@ Source: subsequent owner messages in the same conversation. Original wording fol
 The owner accepted the proposed direction: select depth using uncertainty, consequences/reversibility and affected boundaries; combine the design/plan note and review for local understood changes; retain appropriate checks; define useful exit/recheck conditions. The following is the execution authorization (verbatim):
 
 > 可以。这个方向非常promising。我现在要去睡觉了，请沿着这个方向继续，然后从goal出发给每个skill添加相应的canaries，然后根据canaries结果迭代这些skills。在迭代过程中，也请经常jump out of the box审视全局，这个也比较有帮助。明早起来我来审查最后完成的skills。
+
+## Continued repair and small behavioral checks, 7 September 2026
+
+Source: later owner messages in the same conversation, retained verbatim.
+
+> 你为什么停止分析以及系统性修复这些问题了
+
+> 修复仍要确保通用性和普世意义，不要做reward，rubric hack 和overfit
+
+> 虽然比较真实的canary很重要，不过一些更简单的smoke test版本的llm based test可能可能帮我们快速发现一些基本的问题，消耗时间和token也更可控？
+
+> 这样可以把每个小块/拆分细分其职责，不容易出现改prompt按下葫芦起来piao的问题
+
+> 以及像design doc和implementation plan，和review feedback，你有明确的rules规定其职责，甚至提供一个模板或者after generation rubric么（可以不用太制式），这都可以极大的避免coding agent在做任务过程中还要carry一大串关于结果格式的context

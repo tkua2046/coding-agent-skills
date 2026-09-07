@@ -1,0 +1,7 @@
+1. **Behavior and preserved state:** Insufficient orders are rejected without consuming any stock; later orders continue. Successful orders deduct every requested item from the current remaining stock. Preserve both API signatures, `(remaining, outcomes)` returns, original order IDs, boolean acceptance flags, input order, and the batch-local stock copy. Empty orders succeed; empty batches return copied stock and no outcomes.
+
+2. **Technical choice and consequence:** D2 checks every requested quantity before deducting anything. Any shortage rejects the whole order with its stock unchanged. This adds one read pass per order, retains linear total work, and avoids rollback bookkeeping or an additional stock snapshot per order.
+
+3. **Completion and next step:** S1 implementation, regression coverage, and usage/current-contract documentation are complete. Independent document and code reviews are ready with no open findings, and required checks passed. Owner review of the candidate is next; human acceptance remains pending. The excerpts supply no further acceptance procedure. No commit, publication, version advancement, or release was performed or authorized.
+
+These answers reflect only the exposed excerpts; this machine comprehension probe does not establish human usability.

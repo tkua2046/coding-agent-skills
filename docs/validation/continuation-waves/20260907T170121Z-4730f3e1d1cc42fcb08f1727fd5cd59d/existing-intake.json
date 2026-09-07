@@ -1,0 +1,28 @@
+{
+  "case": "existing-intake",
+  "report": "docs/validation/canary/20260907T170551-87988855585e4dd6b614c24e4e6d42f6/report.json",
+  "status": "fail",
+  "observations": {
+    "executed_phases": [
+      "01-intake"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 90.196,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 4,
+        "lines": 12,
+        "bytes": 777
+      },
+      "final": {
+        "files": 6,
+        "lines": 87,
+        "bytes": 6338
+      }
+    }
+  },
+  "error": null
+}

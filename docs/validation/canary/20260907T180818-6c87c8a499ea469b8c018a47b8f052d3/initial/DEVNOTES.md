@@ -1,0 +1,1 @@
+Next required gate: `python -m unittest discover -s tests -v`. It has not run on this resumed handoff. Human acceptance follows the completed gate and remains required before committing. Existing historical review may be reused only for its matching candidate.

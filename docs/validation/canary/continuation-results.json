@@ -1,0 +1,2156 @@
+{
+  "purpose": "Latest original automatic result matching current case/selected skill/engine/grader bytes. Not a regrade, human verdict, or release gate. See independent findings and original prior attempts.",
+  "baseline": "d76bb80fa15a01e8240a9c328a0bac485b95564b",
+  "cases": [
+    {
+      "case": "bounded-delivery",
+      "title": "Inventory rejection from decisions to reviewed working code",
+      "tier": "heavy",
+      "version": 3,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172136-f66fbdc7c5944eb6aecaeefe9c073c9a/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan",
+            "02-document-review",
+            "05-implement",
+            "06-code-review",
+            "09-handoff"
+          ],
+          "skipped_phases": [
+            "03-document-fix",
+            "04-document-recheck",
+            "07-code-fix",
+            "08-code-recheck"
+          ],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 587.355,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 52,
+              "bytes": 3646
+            },
+            "final": {
+              "files": 15,
+              "lines": 507,
+              "bytes": 29548
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "inconclusive",
+        "report": "docs/validation/canary/20260907T180820-90405caa55224fc4b13a3a0c261a7b02/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan",
+            "02-document-review",
+            "05-implement",
+            "06-code-review",
+            "09-handoff"
+          ],
+          "skipped_phases": [
+            "03-document-fix",
+            "04-document-recheck",
+            "07-code-fix",
+            "08-code-recheck"
+          ],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 533.828,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 52,
+              "bytes": 3646
+            },
+            "final": {
+              "files": 17,
+              "lines": 412,
+              "bytes": 26642
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "bounded-investigation",
+      "title": "Resolve a performance uncertainty before selecting architecture",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "counter-stage",
+      "title": "Counter implementation with required reviews pending",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "existing-intake",
+      "title": "Existing-project intake with a failing legacy expectation",
+      "tier": "heavy",
+      "version": 2,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T170551-87988855585e4dd6b614c24e4e6d42f6/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-intake"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 90.196,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 12,
+              "bytes": 777
+            },
+            "final": {
+              "files": 6,
+              "lines": 87,
+              "bytes": 6338
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [
+          "consequential-intake"
+        ],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T170531-f8a717d31c264946b578c1e0ef183854/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-intake"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 93.164,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 12,
+              "bytes": 777
+            },
+            "final": {
+              "files": 11,
+              "lines": 82,
+              "bytes": 7531
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "release-ready",
+      "title": "Release assessment with current passing supplied evidence",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "release-stale",
+      "title": "Release assessment with stale and pending supplied evidence",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "review-defective",
+      "title": "Review an inventory ordering design and increment",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "review-ready",
+      "title": "Review an inventory ordering design and increment",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "route-local",
+      "title": "Plan the next inventory reservation change",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "route-uncertain",
+      "title": "Plan the next step for slow order reports",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "smoke-design-local",
+      "title": "Make a row-limit decision usable ahead of accepted history",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164442-ad99c0bc9c914adeb5847181c8203cac/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 61.041,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 6,
+              "bytes": 669
+            },
+            "final": {
+              "files": 3,
+              "lines": 67,
+              "bytes": 3905
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164440-e93ba43deedd44ac88e3fe67bd08c8a5/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 66.267,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 6,
+              "bytes": 669
+            },
+            "final": {
+              "files": 3,
+              "lines": 53,
+              "bytes": 3071
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-handoff-opening",
+      "title": "Expose current handoff state before retained policy and history",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T180818-6c87c8a499ea469b8c018a47b8f052d3/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 58.434,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 7,
+              "lines": 74,
+              "bytes": 4412
+            },
+            "final": {
+              "files": 7,
+              "lines": 103,
+              "bytes": 6083
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T180819-02a11cfd69c64c7ea3d6883356ab140f/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 70.369,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 7,
+              "lines": 74,
+              "bytes": 4412
+            },
+            "final": {
+              "files": 7,
+              "lines": 90,
+              "bytes": 5561
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-intake-conflict",
+      "title": "Identify an actual Unicode compatibility conflict",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164442-2c839831035840ff9bc4c7ed7b1ece64/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 80.181,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 601
+            },
+            "final": {
+              "files": 5,
+              "lines": 43,
+              "bytes": 5527
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164440-3ee6ec2a13bc4123be0aac2b23e3d9e6/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 88.375,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 601
+            },
+            "final": {
+              "files": 5,
+              "lines": 52,
+              "bytes": 6043
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-intake-preserve",
+      "title": "Resolve prefix API scope without reconfirming compatibility",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164628-6b4cf51ed8c44138bfebb43a9538f36a/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 96.706,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 599
+            },
+            "final": {
+              "files": 5,
+              "lines": 50,
+              "bytes": 5345
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164636-edf95d48bd634588ba60a199e9d50b8f/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 110.765,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 599
+            },
+            "final": {
+              "files": 6,
+              "lines": 54,
+              "bytes": 5262
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-plan-delivery",
+      "title": "Plan a compatibility transition around useful delivery boundaries",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164647-ed30f95675d2465ea3f6c1d8583b0887/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 61.456,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 6,
+              "bytes": 1082
+            },
+            "final": {
+              "files": 5,
+              "lines": 28,
+              "bytes": 4966
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T171953-2907b948c86c47f79ca532f832bbdcbc/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 61.003,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 6,
+              "bytes": 1082
+            },
+            "final": {
+              "files": 5,
+              "lines": 28,
+              "bytes": 4749
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-plan-maintenance",
+      "title": "Leave accepted planning decisions stable during an internal edit",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164833-5d0a3f93934d4abb9b9d75dfe92bea1e/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 48.029,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 7,
+              "bytes": 975
+            },
+            "final": {
+              "files": 6,
+              "lines": 16,
+              "bytes": 2339
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T171953-dc8b73049678497eaf7a164c7cd8b891/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 43.968,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 7,
+              "bytes": 975
+            },
+            "final": {
+              "files": 6,
+              "lines": 14,
+              "bytes": 2242
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-plan-preview-import",
+      "title": "Plan a read-only CSV preview before confirmed import",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T171332-0bfe08cafd5d475c8738228c57196250/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 84.416,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 39,
+              "bytes": 2511
+            },
+            "final": {
+              "files": 5,
+              "lines": 73,
+              "bytes": 8089
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172143-8c9b74d886584557a7eae0d8f231093c/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 78.786,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 4,
+              "lines": 39,
+              "bytes": 2511
+            },
+            "final": {
+              "files": 5,
+              "lines": 92,
+              "bytes": 7716
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-review-partial",
+      "title": "Keep a partly repaired state-preservation finding open",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T164852-1c2d724df13646ac99aa93b455d564c8/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 80.288,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 4,
+              "bytes": 497
+            },
+            "final": {
+              "files": 4,
+              "lines": 54,
+              "bytes": 3859
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T181012-6d7518debee5464fa793ced6a8c6ef54/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 62.815,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 4,
+              "bytes": 497
+            },
+            "final": {
+              "files": 4,
+              "lines": 11,
+              "bytes": 2531
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-review-ready",
+      "title": "Accept sufficient design and plan with a useful short verdict",
+      "tier": "smoke",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T170446-01cae268fe144a2aad7277952940a706/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 66.632,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 11,
+              "bytes": 1670
+            },
+            "final": {
+              "files": 6,
+              "lines": 35,
+              "bytes": 5198
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172110-927d1892cd894df0a5baf3e417b54979/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 68.438,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 11,
+              "bytes": 1670
+            },
+            "final": {
+              "files": 6,
+              "lines": 29,
+              "bytes": 4769
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-setup-baseline",
+      "title": "Repair a gate without hiding its failing application baseline",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175146-5e08334b206745a28544b1b9f692ca0c/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 77.727,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 15,
+              "bytes": 866
+            },
+            "final": {
+              "files": 4,
+              "lines": 182,
+              "bytes": 8658
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175147-045f5139dcb7417f8ad70a099e60f47f/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 83.651,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 15,
+              "bytes": 866
+            },
+            "final": {
+              "files": 4,
+              "lines": 67,
+              "bytes": 3317
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-setup-child-evidence",
+      "title": "Report partial verification from an archived package-check wrapper",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T171556-f27fb1dd043e4b1db478228ad6b7cc91/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 73.57,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 16,
+              "bytes": 1037
+            },
+            "final": {
+              "files": 4,
+              "lines": 75,
+              "bytes": 5828
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [
+          "current-versus-prior"
+        ],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175344-f82051a489ac4ae2bc0d365a99e920df/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 88.748,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 16,
+              "bytes": 1037
+            },
+            "final": {
+              "files": 4,
+              "lines": 69,
+              "bytes": 6127
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "title": "Distinguish listed tests from an executed development gate",
+      "tier": "smoke",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T170642-2080e258e5c14f18b7a2d508c1562869/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 121.267,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 371
+            },
+            "final": {
+              "files": 4,
+              "lines": 61,
+              "bytes": 6387
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175147-bf23befcbe834cc7a34bf008b06bee7a/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 80.631,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 3,
+              "bytes": 371
+            },
+            "final": {
+              "files": 4,
+              "lines": 46,
+              "bytes": 4719
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-stage-resume",
+      "title": "Resume a verified fix and perform only the remaining gate",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T165201-f622e8000b2449d0913c958e33d139e6/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 64.063,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 9,
+              "bytes": 1263
+            },
+            "final": {
+              "files": 6,
+              "lines": 31,
+              "bytes": 2682
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T180819-4f56dd989c2447a6a9bc7c4ede07efa8/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 55.836,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 9,
+              "bytes": 1263
+            },
+            "final": {
+              "files": 6,
+              "lines": 26,
+              "bytes": 2542
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-stage-stale",
+      "title": "Do not reuse a ready review after the candidate has changed",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T165329-75a6b578042b48acaebf891bdca80a40/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 89.215,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 9,
+              "bytes": 1263
+            },
+            "final": {
+              "files": 6,
+              "lines": 25,
+              "bytes": 3098
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T181002-bc6b3afc34a647a896fdc1519fe5308e/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 60.152,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 9,
+              "bytes": 1263
+            },
+            "final": {
+              "files": 6,
+              "lines": 32,
+              "bytes": 3598
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-transfer-design",
+      "title": "Configuration replacement remains recoverable after interruption",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T165404-dbff5d00e40a4d57b9b19dd41a01b302/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 126.174,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 4,
+              "bytes": 878
+            },
+            "final": {
+              "files": 3,
+              "lines": 66,
+              "bytes": 9521
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T165438-4ff826056f6046df83cd015bd25051a1/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 115.231,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 4,
+              "bytes": 878
+            },
+            "final": {
+              "files": 3,
+              "lines": 55,
+              "bytes": 9751
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "title": "A changed current check cannot inherit a previous green result",
+      "tier": "smoke",
+      "version": 1,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T170944-2c13f189f45c4563ae9d79f7006201aa/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 56.975,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 7,
+              "bytes": 693
+            },
+            "final": {
+              "files": 6,
+              "lines": 39,
+              "bytes": 2574
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175412-a5316abda8354044ac3d2d6f18a50012/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-operation"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 56.828,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 5,
+              "lines": 7,
+              "bytes": 693
+            },
+            "final": {
+              "files": 6,
+              "lines": 20,
+              "bytes": 2180
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "v1-small-feature",
+      "title": "V1: Plan occupied cells in an existing navigator",
+      "tier": "heavy",
+      "version": 3,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172025-e2e577943056454981c1c297c502f682/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 131.628,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 32,
+              "bytes": 1960
+            },
+            "final": {
+              "files": 11,
+              "lines": 180,
+              "bytes": 11038
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172024-7082e5a00d93484ab19c02eac5db047e/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 221.807,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 32,
+              "bytes": 1960
+            },
+            "final": {
+              "files": 12,
+              "lines": 172,
+              "bytes": 10873
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "v2-scope-extension",
+      "title": "V2: Confirm YAML pose and large obstacle input",
+      "tier": "heavy",
+      "version": 3,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172438-948c8aa567514f5a98bfa53f6454767a/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan",
+            "02-extend"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 313.13,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 32,
+              "bytes": 1960
+            },
+            "final": {
+              "files": 12,
+              "lines": 307,
+              "bytes": 20272
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172609-040b4d165d41445290b3d3503e0ebf85/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan",
+            "02-extend"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 434.913,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 9,
+              "lines": 32,
+              "bytes": 1960
+            },
+            "final": {
+              "files": 12,
+              "lines": 457,
+              "bytes": 28961
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "v3-maintenance",
+      "title": "V3: Separate private maintenance from a public contract change",
+      "tier": "heavy",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T171804-446cb9f7078f46529b87a71e47151bd8/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-maintain",
+            "02-change-contract"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 187.338,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 10,
+              "lines": 45,
+              "bytes": 2729
+            },
+            "final": {
+              "files": 11,
+              "lines": 175,
+              "bytes": 10396
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "v4-migration-risk",
+      "title": "V4: Design crash-safe settings migration",
+      "tier": "heavy",
+      "version": 3,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T170121-22678ace39464cf890206f40be7ecc0e/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 413.08,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 21,
+              "bytes": 1307
+            },
+            "final": {
+              "files": 8,
+              "lines": 310,
+              "bytes": 20983
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [
+          "first-screen-comprehension"
+        ],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T172024-c7f03e138c6e4f7bb5f1b9f0cd49cbd4/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-plan"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 339.294,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 21,
+              "bytes": 1307
+            },
+            "final": {
+              "files": 10,
+              "lines": 268,
+              "bytes": 18350
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    },
+    {
+      "case": "v5-review-recheck",
+      "title": "V5: Recheck an incomplete then corrected document fix",
+      "tier": "heavy",
+      "version": 1,
+      "baseline": {
+        "status": "not-run-current"
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "v6-execution-handoff",
+      "title": "V6: Execute, independently recheck, resume and deliver locally",
+      "tier": "heavy",
+      "version": 2,
+      "baseline": {
+        "status": "fail",
+        "report": "docs/validation/canary/20260907T171355-605d353e8e0e4dbb8c3b9799aaefeb7a/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-execute",
+            "02-review",
+            "03-fix",
+            "04-recheck",
+            "05-resume",
+            "06-accepted-delivery"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 829.3439999999999,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 6,
+              "lines": 25,
+              "bytes": 1205
+            },
+            "final": {
+              "files": 29,
+              "lines": 741,
+              "bytes": 45936
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [
+          "proportionate-handoff"
+        ],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "not-run-current"
+      }
+    },
+    {
+      "case": "workflow-setup",
+      "title": "Adapt inventory workflow, then prepare its local PR draft",
+      "tier": "heavy",
+      "version": 2,
+      "baseline": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T170747-ce482cf4869d44709e3fd4f8025da87b/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-setup",
+            "02-prepare-pr"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 268.728,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 75,
+              "bytes": 4173
+            },
+            "final": {
+              "files": 19,
+              "lines": 423,
+              "bytes": 24550
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      },
+      "candidate": {
+        "status": "pass",
+        "report": "docs/validation/canary/20260907T175148-bd4a7742bd9942ebb42c181d00b2c20f/report.json",
+        "observations": {
+          "executed_phases": [
+            "01-setup",
+            "02-prepare-pr"
+          ],
+          "skipped_phases": [],
+          "unreached_phases": [],
+          "worker_elapsed_seconds": 214.05200000000002,
+          "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+          "documents": {
+            "scope": ".md/.txt/.rst files, excluding supplied skills",
+            "initial": {
+              "files": 3,
+              "lines": 75,
+              "bytes": 4173
+            },
+            "final": {
+              "files": 7,
+              "lines": 147,
+              "bytes": 8523
+            }
+          }
+        },
+        "error": null,
+        "semantic_nonpass": [],
+        "guard_nonpass": []
+      }
+    }
+  ],
+  "continuation_attempts": [
+    {
+      "case": "smoke-intake-conflict",
+      "report": "docs/validation/canary/20260907T164440-3ee6ec2a13bc4123be0aac2b23e3d9e6/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-design-local",
+      "report": "docs/validation/canary/20260907T164440-e93ba43deedd44ac88e3fe67bd08c8a5/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-intake-conflict",
+      "report": "docs/validation/canary/20260907T164442-2c839831035840ff9bc4c7ed7b1ece64/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-design-local",
+      "report": "docs/validation/canary/20260907T164442-ad99c0bc9c914adeb5847181c8203cac/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-intake-preserve",
+      "report": "docs/validation/canary/20260907T164628-6b4cf51ed8c44138bfebb43a9538f36a/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-intake-preserve",
+      "report": "docs/validation/canary/20260907T164636-edf95d48bd634588ba60a199e9d50b8f/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-plan-delivery",
+      "report": "docs/validation/canary/20260907T164647-ed30f95675d2465ea3f6c1d8583b0887/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-plan-delivery",
+      "report": "docs/validation/canary/20260907T164649-55bad80ea1e64097a697be98546406ef/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-plan-maintenance",
+      "report": "docs/validation/canary/20260907T164833-5d0a3f93934d4abb9b9d75dfe92bea1e/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-review-partial",
+      "report": "docs/validation/canary/20260907T164852-1c2d724df13646ac99aa93b455d564c8/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-plan-maintenance",
+      "report": "docs/validation/canary/20260907T164855-96ac0e7c9a344584a96018ea68cab1b1/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-review-partial",
+      "report": "docs/validation/canary/20260907T164912-d5c94d4e7e9c49a0a311e0e38cf3b7bd/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-review-ready",
+      "report": "docs/validation/canary/20260907T164958-d01798cb649949d3865988c1406e9a78/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-review-ready",
+      "report": "docs/validation/canary/20260907T165029-1935cbbd56554d18b4a0d8ec6b852160/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T165104-0115d892593f41e2b86e029f4e50f42b/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T165118-dbd3ed976a8841ea825a36ed97c187aa/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-resume",
+      "report": "docs/validation/canary/20260907T165201-f622e8000b2449d0913c958e33d139e6/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-stage-resume",
+      "report": "docs/validation/canary/20260907T165241-5b82d837e66d444985807f36a48a7359/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-stale",
+      "report": "docs/validation/canary/20260907T165329-75a6b578042b48acaebf891bdca80a40/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-stage-stale",
+      "report": "docs/validation/canary/20260907T165345-e182d546f41b4f71ba3a9975bb95b3da/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-design",
+      "report": "docs/validation/canary/20260907T165404-dbff5d00e40a4d57b9b19dd41a01b302/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-transfer-design",
+      "report": "docs/validation/canary/20260907T165438-4ff826056f6046df83cd015bd25051a1/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T165548-51d9c6cf2ae5461a8627e890e0a9ec15/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T165549-1a63e87c8fc94c8eb3b12888045ee43c/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T170119-180146148713498985f8de71727f9bd3/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T170119-5ebf2365889b4b3d9d11b303e1b25a95/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T170121-22678ace39464cf890206f40be7ecc0e/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T170121-d77bd498a1c3493dbcd9ac163959e8b8/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-review-ready",
+      "report": "docs/validation/canary/20260907T170445-c696a52e951648b1a514dcbcc7034aef/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-review-ready",
+      "report": "docs/validation/canary/20260907T170446-01cae268fe144a2aad7277952940a706/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "existing-intake",
+      "report": "docs/validation/canary/20260907T170531-f8a717d31c264946b578c1e0ef183854/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "existing-intake",
+      "report": "docs/validation/canary/20260907T170551-87988855585e4dd6b614c24e4e6d42f6/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T170631-6d455052fa6e48899b23934d1921a8ce/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T170642-2080e258e5c14f18b7a2d508c1562869/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T170644-8577f6822334427897d5c6e9b8a329f4/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T170746-d17fd8df184048c89a9ba5072d468863/report.json",
+      "status": "inconclusive",
+      "source_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T170747-ce482cf4869d44709e3fd4f8025da87b/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T170809-d5e089c5d9634a229437ed77d1a9e4e1/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T170816-5191f24c03624618bfd6aac48a55fdc4/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T170854-e86406b76c7a4ff7bb59b39435481216/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T170944-2c13f189f45c4563ae9d79f7006201aa/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T171010-a91acac7fcc240238c66c9eb9123fbd7/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-plan-preview-import",
+      "report": "docs/validation/canary/20260907T171332-0bfe08cafd5d475c8738228c57196250/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T171355-605d353e8e0e4dbb8c3b9799aaefeb7a/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-setup-child-evidence",
+      "report": "docs/validation/canary/20260907T171556-f27fb1dd043e4b1db478228ad6b7cc91/report.json",
+      "status": "fail",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T171616-656c854cd952482ea3e4def32080206d/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T171804-446cb9f7078f46529b87a71e47151bd8/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T171829-438b31e15d194a8daddb503f761c6a5b/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-plan-delivery",
+      "report": "docs/validation/canary/20260907T171953-2907b948c86c47f79ca532f832bbdcbc/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-plan-maintenance",
+      "report": "docs/validation/canary/20260907T171953-dc8b73049678497eaf7a164c7cd8b891/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T172024-7082e5a00d93484ab19c02eac5db047e/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v4-migration-risk",
+      "report": "docs/validation/canary/20260907T172024-c7f03e138c6e4f7bb5f1b9f0cd49cbd4/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v1-small-feature",
+      "report": "docs/validation/canary/20260907T172025-e2e577943056454981c1c297c502f682/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-review-ready",
+      "report": "docs/validation/canary/20260907T172110-927d1892cd894df0a5baf3e417b54979/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T172135-da6b5b4633a14150bebdd0323d06c50d/report.json",
+      "status": "inconclusive",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T172136-f66fbdc7c5944eb6aecaeefe9c073c9a/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-plan-preview-import",
+      "report": "docs/validation/canary/20260907T172143-8c9b74d886584557a7eae0d8f231093c/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T172309-7944589cb610488faae0e18ba49c2639/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T172355-f0a3035d66d441e7bc7d9727f98fe0fb/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T172438-948c8aa567514f5a98bfa53f6454767a/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-setup-child-evidence",
+      "report": "docs/validation/canary/20260907T172531-91b2bfa37bf446cbae96ea77ec2f6758/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v2-scope-extension",
+      "report": "docs/validation/canary/20260907T172609-040b4d165d41445290b3d3503e0ebf85/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T172921-1f5f96ab9a02407f9eadff07e3d884f7/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-resume",
+      "report": "docs/validation/canary/20260907T173301-b06f3e30057e4a65a0cd6a66973ca88d/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T173301-d26d66598a184ca49c3d0dd4db05189a/report.json",
+      "status": "fail",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T173301-e96a4723e36d477d83d4f80b5af168bd/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-stale",
+      "report": "docs/validation/canary/20260907T173444-f64f112dee3e42d5b4b09357af362a48/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-baseline",
+      "report": "docs/validation/canary/20260907T175146-5e08334b206745a28544b1b9f692ca0c/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-setup-baseline",
+      "report": "docs/validation/canary/20260907T175147-045f5139dcb7417f8ad70a099e60f47f/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-evidence",
+      "report": "docs/validation/canary/20260907T175147-bf23befcbe834cc7a34bf008b06bee7a/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "workflow-setup",
+      "report": "docs/validation/canary/20260907T175148-bd4a7742bd9942ebb42c181d00b2c20f/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-resume",
+      "report": "docs/validation/canary/20260907T175339-3674b83b08184416be442a230256ca65/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v6-execution-handoff",
+      "report": "docs/validation/canary/20260907T175340-5d38fd21597f4a18a889bfeacfdf923b/report.json",
+      "status": "inconclusive",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T175340-a3a8de24e6a24cdc82659931b568f263/report.json",
+      "status": "inconclusive",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-setup-child-evidence",
+      "report": "docs/validation/canary/20260907T175344-f82051a489ac4ae2bc0d365a99e920df/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-transfer-pr",
+      "report": "docs/validation/canary/20260907T175412-a5316abda8354044ac3d2d6f18a50012/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-stale",
+      "report": "docs/validation/canary/20260907T175506-e415c819bc574d43a6321c7165e31aec/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-review-partial",
+      "report": "docs/validation/canary/20260907T175554-99cefee4409b4731a8172dfa0f312680/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "v3-maintenance",
+      "report": "docs/validation/canary/20260907T175555-2f7be4b14beb46d690af28c19f444339/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-handoff-opening",
+      "report": "docs/validation/canary/20260907T180818-6c87c8a499ea469b8c018a47b8f052d3/report.json",
+      "status": "pass",
+      "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b"
+    },
+    {
+      "case": "smoke-handoff-opening",
+      "report": "docs/validation/canary/20260907T180819-02a11cfd69c64c7ea3d6883356ab140f/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-resume",
+      "report": "docs/validation/canary/20260907T180819-4f56dd989c2447a6a9bc7c4ede07efa8/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "bounded-delivery",
+      "report": "docs/validation/canary/20260907T180820-90405caa55224fc4b13a3a0c261a7b02/report.json",
+      "status": "inconclusive",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-stage-stale",
+      "report": "docs/validation/canary/20260907T181002-bc6b3afc34a647a896fdc1519fe5308e/report.json",
+      "status": "pass",
+      "source_ref": null
+    },
+    {
+      "case": "smoke-review-partial",
+      "report": "docs/validation/canary/20260907T181012-6d7518debee5464fa793ced6a8c6ef54/report.json",
+      "status": "pass",
+      "source_ref": null
+    }
+  ],
+  "counts": {
+    "smoke": {
+      "pass": 16
+    },
+    "heavy": {
+      "inconclusive": 1,
+      "not-run-current": 11,
+      "pass": 5
+    }
+  }
+}

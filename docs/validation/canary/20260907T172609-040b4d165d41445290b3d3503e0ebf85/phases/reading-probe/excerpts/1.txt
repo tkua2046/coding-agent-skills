@@ -1,0 +1,18 @@
+# Plan
+
+Next deliverable: load the YAML starting pose and fixed occupancy completely before
+movement, then navigate using the retained in-memory index. First resolve the
+[open contract questions](SPEC.md#proposed-yaml-contract-and-open-questions) and the
+parser/dependency conflict with DEVNOTES. Decisive acceptance is loading
+`examples/start.yaml` and processing FFRF to (1, 0, 1) with
+[False, False, True, True]; malformed structure, including the last cell in a large
+file, must fail before any command is consumed. This extends the existing pending
+S1 rather than reopening completed S0.
+
+## Pending outcome
+
+| Outcome / scope | Dependency and boundary | Acceptance evidence |
+|---|---|---|
+| S1: deliver YAML startup plus optional programmatic occupancy, collision failure and continued commands. Include implementation, meaningful tests, README loading/error usage and DEVNOTES dependency/check instructions together. | Depends on resolving schema/value/duplicate and YAML-feature rules, public loader/error shape, and parser policy. Select and verify a maintained parser only in a later authorized implementation phase. One coherent future change boundary gives a usable file-to-movement path; a loader alone would not meet the request. No partial release is planned. | Preserve the existing regressions and all [spec examples](SPEC.md#acceptance-examples). Verify full validation before command iteration (including a malformed final record), clear syntax/schema/I/O failures and successful corrected-file retry. Verify immutable configuration reuse, mutable caller isolation, one-shot occupied iterables, repeated collision recovery, and independent runs. Exercise a representative 200,000-distinct-cell file: record startup and peak/retained memory, verify repeated membership queries and multiple runs do not reread the file or rebuild the index. Add agreed value/duplicate/YAML-feature cases once settled. |
+
+No resource budget is specified. Scale evidence must show whether the proposed

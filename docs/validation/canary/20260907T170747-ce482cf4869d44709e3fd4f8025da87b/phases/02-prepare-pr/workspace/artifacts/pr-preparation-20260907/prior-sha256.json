@@ -1,0 +1,20 @@
+{
+  "artifacts/.coverage": "dd9075bba3988108f3135c0902894d47a3f7e12746592d9c775f8d307411db75",
+  "artifacts/coverage.json": "ffb9af7a75e3a5fcd04470930fa0a35cb030eefa80aeb261d72e9cecaec28cb8",
+  "artifacts/workflow-20260907/baseline.txt": "7a4eefb31cb50e0b07054dfebc364b2176504da42874493c604661d95f2d730e",
+  "artifacts/workflow-20260907/installed-hook.txt": "c2ccc2f573c84bf945610bd2cbb1a6785f2f4921081622d36d1f5768c66c0bb3",
+  "artifacts/workflow-20260907/stdlib-hook-empty.txt": "b1ad63eaa8be863c8281b15f070e7b967a12263468357b6b12884590105e87e6",
+  "artifacts/workflow-20260907/stdlib-hook-pass.txt": "07baa852d6e2a2e9543a899957529f014cd77b5e51b92a9d2c59fb20294a9ebb",
+  "artifacts/workflow-20260907/stdlib-hook-failure.txt": "15403b4b05344e77288a7882dac71533fadb315563dc40c6c29f1d00b927e2ed",
+  "artifacts/workflow-20260907/.coverage": "dd9075bba3988108f3135c0902894d47a3f7e12746592d9c775f8d307411db75",
+  "artifacts/workflow-20260907/coverage-hook-pass.txt": "a65e38e995a0edd40f648f520c418cf7270f40925134c76ea123d7db3c2e7809",
+  "artifacts/workflow-20260907/coverage.json": "ffb9af7a75e3a5fcd04470930fa0a35cb030eefa80aeb261d72e9cecaec28cb8",
+  "artifacts/workflow-20260907/coverage-hook-failure.txt": "07f3f27f95b8926e5cb9044918c4e1a4294f1bd13a16cd94af55a30680f003a0",
+  "artifacts/workflow-20260907/coverage-hook-empty.txt": "a8f43d6c8e3383f42cb69b43cb7e295a2adc548dbb83a6f97dee40eda3561b6b",
+  "artifacts/workflow-20260907/normal.txt": "9cf9da3189315e91d0a90966c6db4262f3f87053535287a2cabd1595d9679927",
+  "README.md": "0d9a0debf9e5f0cf3cbb1e8a428acb8b95349fff3b6a107fcf48a3e1146fac3c",
+  "DEVNOTES.md": "8d51a24bf5385734b503f08ea5a18eecbf24f059aa4fc35a8aa8ab60590a0f72",
+  "tools/check.py": "f48a5ba98908c8b350c65d6dc3944636565b8a5505cb8d113baf293a7f8b94dd",
+  "docs/development-history.md": "54b5c8fd396e5672d20e2a29e539e66480172e17505c7e605ac1b33a265e17ee",
+  "docs/workflow-verification-20260907.md": "8b440b823bf439b41756859686211163f7053bb55b07cf5fec412d5b5897fcff"
+}

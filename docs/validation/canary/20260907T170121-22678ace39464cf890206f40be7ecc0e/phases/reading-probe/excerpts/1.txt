@@ -1,0 +1,17 @@
+# Implementation plan: settings v2 migration
+
+Status: planned only; **design review and plan review pending**. No stages executed.
+Next: review [DESIGN](DESIGN.md) and resolve its input, activation and durability
+boundaries, then review this plan. Implementation belongs to a later authorized task.
+Authority: [ORIGINAL](ORIGINAL.md), [proposed contract and A1–A8](SPEC.md).
+
+## Delivery stages
+
+Each row is an intended coherent code/test/document commit boundary for later work,
+not a request to commit now. Consequential design revisions must update affected
+pending stages before execution.
+
+| Stage | Observable outcome / scope | Dependencies / boundary reason | Acceptance / done condition | State |
+|---|---|---|---|---|
+| S1: Read both formats safely | Extend `settings.py` and tests with direct v2 reading, selector-aware reading and strict migration-input validation. README documents supported reads. No migration writes yet. | Document reviews and later implementation authorization. Establish decoding before mutation; dual-format reading is independently usable. | Existing tests pass; A2–A4 validation and A8 selected-file errors pass where applicable; A1 mappings agree for supplied v1/v2 test inputs. Relative selection works regardless of working directory and rejects format mismatch. No reads alter data. | Planned |
+| S2: Validated, recoverable activation | Add explicit migration, exclusive destination creation, persisted comparison, ordered syncs, atomic selector replacement and retry. Include I/O fault tests. README owns invocation/API; DEVNOTES owns platform assumptions, retained files and recovery instructions. | S1. Keep output creation and activation together so no partial public migrator is advertised. | A1–A8 pass in normal/fault-injected tests, including pre/post-replacement distinctions and final directory-sync failure reconciliation. Source bytes unchanged, values compared with types, repeated success writes nothing. Unrelated files never overwritten/delete

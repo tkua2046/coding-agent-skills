@@ -1,0 +1,26 @@
+$ git diff --cached --check
+evidence/stage-1/candidate.patch:7: trailing whitespace.
++ 
+evidence/stage-1/candidate.patch:11: trailing whitespace.
++ 
+evidence/stage-1/candidate.patch:30: trailing whitespace.
++ 
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-SmYJV1vf' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-OGCznuIs' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+Exit: 2
+
+$ git diff --cached --check -- . :(exclude)evidence/stage-1/candidate.patch
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-0NuySFNy' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-q62vfMZu' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+Exit: 0
+
+The three whitespace diagnostics are blank context lines in the preserved unified diff, not source whitespace. The second check excludes only that evidence artifact.
+
+The retained diagnostic output also contains the same literal whitespace. Final source/documentation check:
+$ git diff --cached --check -- counter.py tests/test_counter.py README.md CHANGELOG.md PLAN.md
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-CcXdH24K' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-xXRJTyC6' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+Exit: 0

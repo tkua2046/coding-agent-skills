@@ -1,0 +1,30 @@
+# Whole-order rejection delivery
+
+## Current handoff
+
+S1 implementation, regression coverage and behavior/usage documentation are complete.
+The [independent code review](../reviews/code-current.json) is **ready**, with no
+findings or open finding IDs. The [independent document review](../reviews/design-current.json)
+also reported ready with no findings. **Human acceptance remains pending.**
+Next action: the owner reviews S1 and records the human acceptance decision.
+No implementation work or required agent recheck remains open on this candidate.
+
+The engine rejects an insufficient order without deductions and continues with later
+orders; successful orders deduct fully. Both APIs retain validation, result order,
+input immutability and integer counts. The acceptance examples remain in the
+[design](DESIGN.md#decisive-acceptance); [SPEC](SPEC.md) owns the behavior contract,
+[README](../README.md) owns usage, and [DEVNOTES](../DEVNOTES.md) owns checks.
+
+Candidate: base `00a3e7d561907ec46b41344298221692a1d1d4a8` plus the
+[captured S1 diff and context](../reviews/evidence/s1-candidate.json).
+The [independent check record](../reviews/evidence/code-review-checks.json) identifies
+the reviewed files and retains actual commands, exit codes and raw outputs:
+
+| Recorded check | Result |
+| --- | --- |
+| `PYTHONDONTWRITEBYTECODE=1 "$CANARY_PYTHON" -m unittest discover -s tests -v` | Exit 0; 12 tests passed |
+| `PYTHONDONTWRITEBYTECODE=1 "$CANARY_PYTHON" hooks/pre-commit` | Exit 0; 12 tests passed; empty collection rejection inspected |
+
+Before this status update, all SHA-256 identifiers in that record matched the
+fixture, and the prepared runtime matched its executable and Python 3.12.4 version.
+Captured context and prior evidence also match. Only design status/link wording,

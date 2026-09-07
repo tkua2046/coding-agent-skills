@@ -1,6 +1,6 @@
 """Versioned behavior trials and an evidence-bound release gate.
 
-Fast validation never calls a model. Heavy runs are explicit and use fresh Codex
+Fast validation never calls a model. Smoke and heavy runs use fresh Codex
 contexts in disposable workspaces; evaluator material is outside their read scope.
 """
 
@@ -25,6 +25,7 @@ from tools import canary_runtime as runtime
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED = {".git", ".venv", ".tmp", ".ruff_cache", ".pytest_cache", "__pycache__"}
 STATES = {"pass", "fail", "inconclusive"}
+TIERS = {"heavy", "smoke"}
 REVIEW_VERDICTS = {"ready", "needs-changes", "needs-decision"}
 READER_PROMPT = (
     "Answer each question in input.json using only its document excerpts. "
@@ -126,11 +127,19 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
         if (
             case_id in result
             or not valid_revision(case.get("version"))
-            or case.get("tier") != "heavy"
+            or case.get("tier") not in TIERS
         ):
             raise ValueError(f"Duplicate/unsupported case: {case_id}")
         if not case.get("skills") or not case.get("phases"):
             raise ValueError(f"Empty scope/phases: {case_id}")
+        if case["tier"] == "smoke" and (
+            len(case["phases"]) != 1
+            or "reading_probe" in case
+            or "skip_if_ready" in case["phases"][0]
+        ):
+            raise ValueError(
+                f"Smoke requires one executed operation, no reader: {case_id}"
+            )
         if "workflow_budget_seconds" in case and not valid_revision(
             case["workflow_budget_seconds"]
         ):
@@ -188,7 +197,13 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
         check_ids = []
         for check in case.get("checks", []):
             check_ids.append(check["id"])
-            if check["kind"] not in {"unchanged", "no_tags", "commit_count", "python"}:
+            if check["kind"] not in {
+                "unchanged",
+                "no_tags",
+                "commit_count",
+                "python",
+                "phase_delivery",
+            }:
                 raise ValueError(f"Unsupported check: {case_id}")
             if (
                 check["kind"] == "python"
@@ -199,6 +214,19 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
                 for name in check["paths"]:
                     if not local(path.parent / "fixture", name).exists():
                         raise ValueError(f"Unknown preservation input: {name}")
+            if check["kind"] == "phase_delivery":
+                ordered = [p["id"] for p in case["phases"]]
+                if (
+                    check.get("review_phase") not in ordered[:-1]
+                    or check.get("delivery_phase") != ordered[-1]
+                    or not re.fullmatch(r"[a-z0-9-]+", check["id"])
+                    or not isinstance(check.get("paths"), list)
+                    or not check["paths"]
+                ):
+                    raise ValueError(f"Invalid reviewed delivery boundary: {case_id}")
+                for name in check["paths"]:
+                    if not local(path.parent / "fixture", name).exists():
+                        raise ValueError(f"Unknown delivery payload input: {name}")
         if len(check_ids) != len(set(check_ids)):
             raise ValueError(f"Duplicate deterministic check: {case_id}")
         if not (path.parent / "fixture").is_dir():
@@ -212,11 +240,31 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
         result[case_id] = case
     if not result:
         raise ValueError("No canary cases")
-    covered = {name for case in result.values() for name in case["skills"]}
+    covered = {
+        name
+        for case in result.values()
+        if case["tier"] == "heavy"
+        for name in case["skills"]
+    }
     available = {p.parent.name for p in (root / "skills").glob("*/SKILL.md")}
     if covered != available:
-        raise ValueError(f"Unmapped skill bundles: {available - covered}")
+        raise ValueError(f"Skill bundles without heavy cases: {available - covered}")
     return result
+
+
+def select_cases(catalog: dict, case_id: str = "all", tier: str | None = None) -> dict:
+    """Explicit IDs work across tiers; an unqualified bulk run remains heavy."""
+    if tier is not None and tier not in TIERS | {"all"}:
+        raise ValueError(f"Unknown tier: {tier}")
+    if case_id != "all":
+        case = catalog[case_id]
+        if tier not in (None, "all", case["tier"]):
+            raise ValueError(f"{case_id} is not a {tier} case")
+        return {case_id: case}
+    tier = tier or "heavy"
+    return {
+        name: c for name, c in catalog.items() if tier == "all" or c["tier"] == tier
+    }
 
 
 def skill_files(
@@ -430,14 +478,24 @@ def preserved(workspace: Path, name: str, initial: dict[str, bytes]) -> bool:
 
 
 def deterministic(
-    case: dict, case_dir: Path, workspace: Path, initial: dict, head: str
+    case: dict,
+    case_dir: Path,
+    workspace: Path,
+    initial: dict,
+    head: str,
+    directory: Path | None = None,
 ) -> list[dict]:
     results = []
     for check in case.get("checks", []):
         detail = {}
         try:
             kind = check["kind"]
-            if kind == "unchanged":
+            if kind == "phase_delivery":
+                if directory is None:
+                    raise ValueError("Delivery checks require captured phase evidence")
+                results.append(delivery_result(case, check, directory))
+                continue
+            elif kind == "unchanged":
                 detail = {p: preserved(workspace, p, initial) for p in check["paths"]}
                 passed = all(detail.values())
             elif kind == "no_tags":
@@ -474,6 +532,94 @@ def deterministic(
                 {"id": check["id"], "status": "inconclusive", "error": str(exc)}
             )
     return results
+
+
+def payload_files(content: dict[str, bytes], paths: list[str]) -> dict[str, bytes]:
+    return {
+        name: data
+        for name, data in content.items()
+        if any(name == p or name.startswith(p.rstrip("/") + "/") for p in paths)
+    }
+
+
+def capture_delivery(workspace: Path, base: str, paths: list[str]) -> dict:
+    """Runner-owned Git evidence; never ask the worker to build an audit system."""
+    commits = []
+    for line in git(workspace, "rev-list", "--parents", f"{base}..HEAD").splitlines():
+        commit, *parents = line.split()
+        names = git(workspace, "ls-tree", "-r", "--name-only", commit, "--", *paths)
+        payload = {
+            name: digest(
+                subprocess.check_output(
+                    ["git", "show", f"{commit}:{name}"], cwd=workspace
+                )
+            )
+            for name in names.splitlines()
+        }
+        commits.append({"id": commit, "parents": parents, "payload": payload})
+    return {
+        "base": base,
+        "head": git(workspace, "rev-parse", "HEAD"),
+        "commits": commits,
+    }
+
+
+def delivery_result(case: dict, check: dict, directory: Path) -> dict:
+    """Check phase boundaries and every introduced commit's reviewed payload."""
+    phases = directory / "phases"
+    base = read_json(directory / "initial-git.json")["head"]
+    heads = {
+        p["id"]: read_json(phases / p["id"] / "git.json")["head"]
+        for p in case["phases"]
+    }
+    final = phases / check["delivery_phase"]
+    proof = read_json(final / f"{check['id']}-git-delivery.json")
+    if proof["base"] != base or proof["head"] != heads[check["delivery_phase"]]:
+        raise ValueError(
+            "Delivery Git evidence disagrees with captured phase identities"
+        )
+    reviewed = hashes(
+        payload_files(
+            files(phases / check["review_phase"] / "workspace"), check["paths"]
+        )
+    )
+    working = hashes(payload_files(files(final / "workspace"), check["paths"]))
+    commits = {c["id"]: c for c in proof["commits"]}
+    if len(commits) != len(proof["commits"]):
+        raise ValueError("Duplicate delivery commit evidence")
+    pending, visited = [proof["head"]], set()
+    while pending:
+        commit = pending.pop()
+        if commit in visited:
+            continue
+        visited.add(commit)
+        pending.extend(commits.get(commit, {}).get("parents", []))
+    detail = {
+        "before_acceptance_heads": {
+            k: v for k, v in heads.items() if k != check["delivery_phase"]
+        },
+        "base": base,
+        "head": proof["head"],
+        "descendant_delivery": proof["head"] != base
+        and base in visited
+        and proof["head"] in commits,
+        "reviewed_payload": reviewed,
+        "working_payload_matches": bool(reviewed) and working == reviewed,
+        "unreviewed_commits": [
+            c["id"] for c in proof["commits"] if c["payload"] != reviewed
+        ],
+    }
+    passed = (
+        all(h == base for h in detail["before_acceptance_heads"].values())
+        and detail["descendant_delivery"]
+        and detail["working_payload_matches"]
+        and not detail["unreviewed_commits"]
+    )
+    return {
+        "id": check["id"],
+        "status": "pass" if passed else "fail",
+        "evidence": detail,
+    }
 
 
 def grade_packet(
@@ -842,10 +988,19 @@ def run_case(
                 save(phase_dir / "execution.json", result)
                 write_files(phase_dir / "workspace", files(workspace))
                 save(phase_dir / "git.json", git_snapshot(workspace, head))
+                for check in case.get("checks", []):
+                    if (
+                        check["kind"] == "phase_delivery"
+                        and check["delivery_phase"] == phase["id"]
+                    ):
+                        save(
+                            phase_dir / f"{check['id']}-git-delivery.json",
+                            capture_delivery(workspace, head, check["paths"]),
+                        )
                 phase_results.append(skipped or result["completed"])
                 if not phase_results[-1]:
                     break
-            checks = deterministic(case, case_dir, workspace, initial, head)
+            checks = deterministic(case, case_dir, workspace, initial, head, directory)
             unchanged_skills = all(
                 local(workspace, p).is_file() and local(workspace, p).read_bytes() == b
                 for p, b in selected.items()
@@ -1007,6 +1162,13 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
     ):
         raise ValueError("Observations differ from recorded worker phases")
     expected = {c["id"] for c in case.get("checks", [])} | {"runner.skills-preserved"}
+    for check in case.get("checks", []):
+        if check["kind"] == "phase_delivery" and [
+            c for c in checks if c["id"] == check["id"]
+        ] != [delivery_result(case, check, directory)]:
+            raise ValueError(
+                "Delivery result differs from captured phase/commit evidence"
+            )
     if "workflow_budget_seconds" in case:
         expected.add("runner.workflow-budget")
         if [c for c in checks if c["id"] == "runner.workflow-budget"] != [
@@ -1041,7 +1203,8 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
 
 
 def release_gate(root: Path, paths: list[Path], baseline: str) -> dict:
-    catalog = cases(root)
+    all_cases = cases(root)
+    catalog = select_cases(all_cases, tier="heavy")
     records = []
     errors = []
     # Include all retained local attempts, so explicitly listing a green result
@@ -1053,6 +1216,18 @@ def release_gate(root: Path, paths: list[Path], baseline: str) -> dict:
     for path in paths:
         try:
             row = verified_record(path)
+            if (
+                row.get("kind") == "behavior"
+                and all_cases.get(row.get("case_id"), {}).get("tier") == "smoke"
+            ):
+                # Valid smoke failures are feedback, not heavy requirements. An
+                # unbound header must not relabel a heavy attempt or hide corruption.
+                attempt = read_json(path.parent / "attempt.json")
+                if any(row.get(k) != attempt.get(k) for k in ("case_id", "identity")):
+                    raise ValueError(
+                        "Smoke classification differs from recorded attempt"
+                    )
+                continue
             if row.get("kind") != "behavior":
                 continue
             row["record_path"] = str(path)
@@ -1128,18 +1303,31 @@ def affected(root: Path, base: str) -> dict:
     changed.update(
         git(root, "ls-files", "--others", "--exclude-standard", "skills").splitlines()
     )
+    catalog = cases(root)
     mapping = {
         name: [
             c["id"]
-            for c in cases(root).values()
-            if any(name.startswith(f"skills/{s}/") for s in c["skills"])
+            for c in catalog.values()
+            if c["tier"] == "heavy"
+            and any(name.startswith(f"skills/{s}/") for s in c["skills"])
+        ]
+        for name in sorted(changed)
+    }
+    smoke_mapping = {
+        name: [
+            c["id"]
+            for c in catalog.values()
+            if c["tier"] == "smoke"
+            and any(name.startswith(f"skills/{s}/") for s in c["skills"])
         ]
         for name in sorted(changed)
     }
     return {
         "changed_files": mapping,
         "heavy_cases": sorted({c for v in mapping.values() for c in v}),
-        "cadence": "deferred until release; run fast checks for normal PRs",
+        "smoke_changed_files": smoke_mapping,
+        "smoke_cases": sorted({c for v in smoke_mapping.values() for c in v}),
+        "cadence": "heavy deferred until release; affected smoke is explicit behavioral feedback; fast checks for normal PRs",
     }
 
 
@@ -1147,7 +1335,8 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="Fast case/resource validation; no model calls")
-    sub.add_parser("list")
+    listing = sub.add_parser("list")
+    listing.add_argument("--tier", choices=["all", "heavy", "smoke"], default="all")
     impact = sub.add_parser("affected")
     impact.add_argument("--base")
     for name in ("calibrate", "run"):
@@ -1161,6 +1350,11 @@ def main(argv=None) -> int:
             command.add_argument("--grader-effort", default="medium")
             command.add_argument("--calibration", type=Path, required=True)
             command.add_argument("--baseline")
+            command.add_argument(
+                "--tier",
+                choices=["all", "heavy", "smoke"],
+                help="Bulk runs default to heavy; explicit case IDs work in either tier",
+            )
     gate = sub.add_parser("release-gate")
     gate.add_argument("reports", type=Path, nargs="*")
     gate.add_argument("--baseline")
@@ -1177,7 +1371,7 @@ def main(argv=None) -> int:
                 json.dumps(
                     [
                         {k: c[k] for k in ("id", "title", "tier", "skills")}
-                        for c in cases().values()
+                        for c in select_cases(cases(ROOT), tier=args.tier).values()
                     ],
                     indent=2,
                 )
@@ -1205,7 +1399,10 @@ def main(argv=None) -> int:
             else:
                 grader = settings(args.grader_model, args.grader_effort, args.timeout)
                 failures = []
-                for case_id in cases() if args.case == "all" else [args.case]:
+                selected = select_cases(cases(ROOT), args.case, args.tier)
+                if not selected:
+                    raise ValueError("No cases selected")
+                for case_id in selected:
                     path = run_case(
                         ROOT, case_id, config, grader, args.calibration, args.baseline
                     )

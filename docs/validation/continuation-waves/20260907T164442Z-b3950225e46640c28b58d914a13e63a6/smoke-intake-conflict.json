@@ -1,0 +1,28 @@
+{
+  "case": "smoke-intake-conflict",
+  "report": "docs/validation/canary/20260907T164442-2c839831035840ff9bc4c7ed7b1ece64/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 80.181,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 3,
+        "lines": 3,
+        "bytes": 601
+      },
+      "final": {
+        "files": 5,
+        "lines": 43,
+        "bytes": 5527
+      }
+    }
+  },
+  "error": null
+}

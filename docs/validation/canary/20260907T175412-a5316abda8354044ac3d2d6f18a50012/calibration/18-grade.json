@@ -1,0 +1,19 @@
+{
+  "criteria": [
+    {
+      "id": "artifact-opening",
+      "status": "fail",
+      "reason": "The complete opening presents metadata and naming history before explaining behavior. The activation decision and invalid-input consequence appear only in the following section, so the opening fails to make the next decision understandable before historical context.",
+      "evidence": [
+        {
+          "path": "artifacts/opening.md",
+          "quote": "# Configuration design\nStatus: proposed. Current review: pending.\nPrevious rounds and naming history: D1 used load; D2 renamed it stage; D3 restored load. All subsequent work must follow the complete development workflow and preserve every stage status. This introduction records process only. The behavior, activation decision and its failure consequence appear in the later section."
+        },
+        {
+          "path": "artifacts/later-detail.md",
+          "quote": "Publish a new configuration only after every required field validates; invalid input keeps the active configuration unchanged. Build a candidate then replace the active reference once validation succeeds. This costs one temporary candidate but avoids partial activation: a missing endpoint retains the old endpoint and credentials together."
+        }
+      ]
+    }
+  ]
+}

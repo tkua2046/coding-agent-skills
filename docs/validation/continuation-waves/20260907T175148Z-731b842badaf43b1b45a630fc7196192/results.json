@@ -1,0 +1,31 @@
+[
+  {
+    "case": "workflow-setup",
+    "report": "docs/validation/canary/20260907T175148-bd4a7742bd9942ebb42c181d00b2c20f/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-setup",
+        "02-prepare-pr"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 214.05200000000002,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 3,
+          "lines": 75,
+          "bytes": 4173
+        },
+        "final": {
+          "files": 7,
+          "lines": 147,
+          "bytes": 8523
+        }
+      }
+    },
+    "error": null
+  }
+]

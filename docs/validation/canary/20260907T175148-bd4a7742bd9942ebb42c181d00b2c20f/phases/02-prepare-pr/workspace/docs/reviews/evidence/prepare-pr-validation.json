@@ -1,0 +1,24 @@
+{
+  "time_utc": "2026-09-07T17:54:35.805283+00:00",
+  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "python_version": "3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "candidate_sha256": {
+    "README.md": "bf0e93b3b31ee816c11b5353856d12db197623d861acaed628b16b5c9597743e",
+    "DEVNOTES.md": "c8ee9703e12b6ab5ed4b9304d200cf8128bd074603d5b5a301a99f0df1223daf",
+    "tools/check.py": "a1da9c4fdabe1ad9f60ea6749f5b3764db053912d2a16ebd32828950bb5b0b3a",
+    "docs/development-history.md": "18a92acb1e6c1ebb985f4cc9c00f354b4aedb6bb0df209199c3317b25399b93a",
+    "inventory.py": "e526f302ab5b5838ce2e1ced745b41106624d6a84a913ea4470d9553b627a8f3",
+    "qa/check_inventory.py": "dadde4ee365a6aea2f78f33d6ed068e8fe78ab0e2c9b146c4132606b7fe641e9",
+    "quality.ini": "e6cbb025a8d9081c86c135831da8581959ad1638ae4c9d8db6fb2077e0bf09d4",
+    ".coveragerc": "b61dbf6129265ebefc5dd157e745a672dc9387104f305cd5bce4a32edf6a88e6",
+    "hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1",
+    ".git/hooks/pre-commit": "f867de62c72caa4e730741b0a28e4ccf39c4821d36fdc73b76677759668f5ee1"
+  },
+  "retained_artifacts_sha256": {
+    "artifacts/.coverage": "8dacf27374fd328d2e77b23d44d6b272fb82678356bed99508d945ac2e3662dc",
+    "artifacts/coverage.json": "81b339b090ba432e4c6fced9e2a300d59e025a39cc0e3fd4c5089af43f3b6fb0"
+  },
+  "command": "TMPDIR=\"$PWD/.tmp\" CANARY_PYTHON=\"$CANARY_PYTHON\" .git/hooks/pre-commit",
+  "exit_code": 0,
+  "retained_artifacts_restored": true
+}

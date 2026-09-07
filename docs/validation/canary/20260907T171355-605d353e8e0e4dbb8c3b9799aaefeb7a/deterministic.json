@@ -1,0 +1,91 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "accepted-delivery",
+    "status": "pass",
+    "evidence": {
+      "before_acceptance_heads": {
+        "01-execute": "70da066553d48178e447c2ced60603351b90fc38",
+        "02-review": "70da066553d48178e447c2ced60603351b90fc38",
+        "03-fix": "70da066553d48178e447c2ced60603351b90fc38",
+        "04-recheck": "70da066553d48178e447c2ced60603351b90fc38",
+        "05-resume": "70da066553d48178e447c2ced60603351b90fc38"
+      },
+      "base": "70da066553d48178e447c2ced60603351b90fc38",
+      "head": "89742cd00d6f4131bb2c05d50f861737c5906da1",
+      "descendant_delivery": true,
+      "reviewed_payload": {
+        "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+        "CHANGELOG.md": "4758c22ad920345e0f3db082460d1f5764cdc809ee536f994f8713631921483d",
+        "DEVNOTES.md": "6b00b77455546be370fed4a3d34a28538d7c8e39632372c8b429999b07e740e1",
+        "FEATURE.md": "b69180a937d8fbe4ad980513d85b47f17fde5836187717a5ee7a0b389909be33",
+        "README.md": "8b8e2dc29525a7610529fbb00ac5bc52b84fc0a628c54e0881be881a4e0895e3",
+        "VERSION": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67",
+        "counter.py": "3b4e83e0cd8cbe5d0309ce364b1a87737928cfe475818129c5740ba3abb9572f",
+        "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+        "tests/test_counter.py": "fd4399d2931af86702722fb8103c98844d39b1ee40826e374878d5b8c964fe0a"
+      },
+      "working_payload_matches": true,
+      "unreviewed_commits": []
+    }
+  },
+  {
+    "id": "preserved-baseline",
+    "status": "pass",
+    "evidence": {
+      "FEATURE.md": true,
+      "hooks/pre-commit": true,
+      "VERSION": true
+    }
+  },
+  {
+    "id": "behavior-contract",
+    "status": "pass",
+    "evidence": {
+      "argv": [
+        "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+        "sandbox",
+        "-P",
+        "canary",
+        "-C",
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-o__yer32/worker",
+        "-c",
+        "default_permissions=\"canary\"",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\",\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+        "-c",
+        "shell_environment_policy.inherit=\"core\"",
+        "-c",
+        "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-o__yer32/worker/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+        "--",
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "import os\nimport sys\nimport unittest\n\nsys.path.insert(0, os.getcwd())\nfrom counter import Counter\n\n\nclass CounterContract(unittest.TestCase):\n    def test_valid_and_legacy(self):\n        for initial in (-10, 0, 8):\n            counter = Counter(initial)\n            self.assertEqual(counter.add(), initial + 1)\n            self.assertEqual(counter.add(7), initial + 8)\n            self.assertEqual(counter.value, initial + 8)\n\n    def test_reject_without_mutation(self):\n        for step in (True, False, 0, -1, -100, 1.0, 2.5, \"2\", None, [], {}):\n            with self.subTest(step=step):\n                counter = Counter(11)\n                with self.assertRaises(ValueError):\n                    counter.add(step)\n                self.assertEqual(counter.value, 11)\n                self.assertEqual(counter.add(2), 13)\n\n\nunittest.main()\n"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.131
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  },
+  {
+    "id": "runner.hook-preserved",
+    "status": "pass"
+  }
+]

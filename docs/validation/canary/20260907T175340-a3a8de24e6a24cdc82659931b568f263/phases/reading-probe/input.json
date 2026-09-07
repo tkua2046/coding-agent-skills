@@ -1,0 +1,17 @@
+{
+  "documents": [
+    {
+      "path": "docs/DESIGN.md",
+      "text": "# Whole-order reservation\n\nReject an order if any requested quantity exceeds the current remaining stock.\nCheck all its items before deducting any, then either deduct every item and return\n`accepted=True`, or deduct nothing and return `accepted=False`. Continue in input\norder. This uses the existing batch-local copy and avoids rollback or a transaction\nframework; the cost is a second traversal of successful orders' items.\n\nDecisive example: with stock `{\"a\":4,\"b\":1}`, an order for `a:2,b:2`\nrejects without changing either quantity. A following order for `a:4` succeeds,\nand a following empty order succeeds. Final stock is `{\"a\":0,\"b\":1}`;\nacceptance results are `[False, True, True]` with the original order IDs.\n\nDecision: extension D2 passed [independent document review](../reviews/design-current.json).\nSources:\n[requested extension](REQUEST.md), [original requirements](ORIGINAL.md), and\n[current contract](SPEC.md). Delivery, review evidence and the owner\u2019s next action live in the\n[current handoff](PLAN.md#current-delivery-and-evidence).\nNo material open decision requires clarification.\n\n## Behavior and boundaries\n\nKeep `inventory.reserve(stock, orders)` and `batch.execute(stock, text)` signatures\nand their `(remaining, outcomes)` return shape. Each order has exactly one result\n`{\"order_id\": id, \"accepted\": bool}` in input order. Compare against stock left by\nprior successful orders, including exact depletion to zero. A shortage is an\nordinary rejection result, not an exception; an empty order is accepted, and an\nempty batch returns copied stock and no outcomes. All counts remain integers.\nNeither stock nor nested order contents may be mutated.\n\n"
+    },
+    {
+      "path": "docs/PLAN.md",
+      "text": "# Reservation extension plan\n\nDelivery status and the owner's next action are recorded in the\n[current handoff](#current-delivery-and-evidence). The acceptance target remains\n[the design acceptance cases](DESIGN.md#decisive-acceptance).\n\n## Execution and review policy\n\nFollow [REQUEST](REQUEST.md), fixture [AGENTS](../AGENTS.md), and\n[DEVNOTES](../DEVNOTES.md). One combined independent document review is appropriate\nfor this small local change; the following implementer runs the checks and obtains\nan independent code review before handoff for human review. Agent review is\npermitted and must not be labeled human acceptance. No\ncommit, push, version change, release, dependency installation, or external service\nis requested. The 15-minute allowance covers the whole task including necessary\nreviews; it is not a separate budget per phase or a target to consume.\n\nUse the prepared runtime from the project root:\n\n```sh\n\"$CANARY_PYTHON\" -m unittest discover -s tests -v\n\"$CANARY_PYTHON\" .git/hooks/pre-commit\n```\n\nThe installed hook rejects empty discovery and runs the suite. Run it explicitly\nwithout committing. If checks or review reveal defects, fix them and rerun the\naffected verification before reporting readiness; retain unresolved findings in\nthe handoff. Human review follows the agent work.\n\n## Current delivery and evidence\n"
+    }
+  ],
+  "questions": [
+    "What behavior changes and what state must be preserved?",
+    "What technical choice ensures an order is accepted or rejected as a whole, and what is its consequence?",
+    "Which implementation outcome is next or complete, and what remains before human acceptance?"
+  ]
+}

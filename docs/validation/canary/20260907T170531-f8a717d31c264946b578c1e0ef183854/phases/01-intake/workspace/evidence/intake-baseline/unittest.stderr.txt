@@ -1,0 +1,18 @@
+test_known_legacy_issue (test_formatter.FormatterTests.test_known_legacy_issue) ... FAIL
+test_spaces (test_formatter.FormatterTests.test_spaces) ... ok
+
+======================================================================
+FAIL: test_known_legacy_issue (test_formatter.FormatterTests.test_known_legacy_issue)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-q1zkgfz_/worker/tests/test_formatter.py", line 11, in test_known_legacy_issue
+    self.assertEqual(label("ß"), "ß")
+AssertionError: 'SS' != 'ß'
+- SS
++ ß
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)

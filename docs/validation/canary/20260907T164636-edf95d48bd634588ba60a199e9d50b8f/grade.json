@@ -1,0 +1,46 @@
+{
+  "criteria": [
+    {
+      "id": "resolved-default",
+      "status": "pass",
+      "reason": "The intake preserves the confirmed per-call string prefix and empty default, grounds compatibility in observed results and errors, and isolates a genuine unresolved exception-order decision for invalid supplied prefixes without reopening settled requirements.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/INTAKE.md",
+          "quote": "[REQUEST.md](REQUEST.md:1) requires a per-call string prefix, defaulting to empty, through the existing function; no coercion, shared configuration, or callbacks. Every result and error with an omitted prefix must remain compatible. These decisions need no further owner answer."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/intake-evidence/behavior.txt",
+          "quote": "ordinary omitted: return 'HELLO'\nmixed-case prefix: return 'pre:HELLO'\nkeyword prefix: return 'pre:HELLO'\nomitted None value: AttributeError: 'NoneType' object has no attribute 'upper'\nomitted bytes value: TypeError: can only concatenate str (not \"bytes\") to str"
+        },
+        {
+          "path": "artifacts/01-operation/workspace/INTAKE.md",
+          "quote": "- Accept `str` subclasses as strings, without coercion, matching the current ordinary subclass behavior. Do not add validation of `value` or its `upper()` result; the omitted-prefix examples above remain compatibility constraints."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/INTAKE.md",
+          "quote": "- Prefix first: `label(None, 7)` raises a prefix `TypeError`; a custom `upper()` is not called.\n- Value first: the same call raises the existing `AttributeError`; a custom `upper()` may run or raise before the prefix is rejected."
+        }
+      ]
+    },
+    {
+      "id": "bounded-intake",
+      "status": "pass",
+      "reason": "The complete note provides current behavior, diagnostic evidence, justified defaults, and one actionable owner question. Changes are limited to the intake and permitted diagnostic evidence; no implementation, full design, or additional approval workflow was introduced.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/INTAKE.md",
+          "quote": "The fixture contains no tests, test configuration, or documented check command. A bounded diagnostic probe completed with exit status 0; this is an observed baseline, not a passing test suite."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/INTAKE.md",
+          "quote": "These defaults follow the existing function and avoid additional API choices. The unresolved error-order decision above is the next consequential owner answer."
+        },
+        {
+          "path": "artifacts/01-operation/git.json",
+          "quote": "\"status\": \"?? INTAKE.md\\n?? intake-evidence/\",\n  \"diff\": \"\""
+        }
+      ]
+    }
+  ]
+}

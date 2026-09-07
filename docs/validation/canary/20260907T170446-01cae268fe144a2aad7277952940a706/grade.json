@@ -1,0 +1,58 @@
+{
+  "criteria": [
+    {
+      "id": "sufficient-review",
+      "status": "pass",
+      "reason": "Actual inspection supports the ready verdict: the review recognizes atomic rejection, continuation, caller isolation and the coherent P1 increment without inventing blockers.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/docs/DESIGN.md",
+          "quote": "Work on a private copy of caller stock. Preflight all items in each batch before any debit, then debit the full accepted batch."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/docs/PLAN.md",
+          "quote": "One API-compatible increment implements preflight/debit with the decisive rejected-multi-item then valid-batch regression, caller-input preservation and existing API checks."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "For its example, stock `{a: 2, b: 0}` with batches `{a: 1, b: 1}` then `{a: 2}` must return remaining `{a: 0, b: 0}` and flags `[False, True]`."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "D1 retains a private stock copy and the required single-process, in-memory scope. P1 explicitly preserves the API and caller inputs."
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "# Design D1\\\\nWork on a private copy of caller stock. Preflight all items in each batch before any debit, then debit the full accepted batch."
+        }
+      ]
+    },
+    {
+      "id": "review-contract",
+      "status": "pass",
+      "reason": "The review identifies D1/P1 and their revision, gives substantive static findings and an actionable ready disposition, and separates document readiness from runtime checks, independent code review and human acceptance. The execution record shows inspection and review creation; the recorded diff shows no reviewed-source changes.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Reviewed versions: [Design D1](docs/DESIGN.md) and [Plan P1](docs/PLAN.md), as supplied at fixture HEAD `2a86199c848e63fff7b869cfcff386303d070557`."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Open findings: none. Next action: implement P1 when authorized, then run the established gate and resolve material findings from independent code review before committing."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "No tests, imports, runtime experiments, implementation, or independent code review were performed."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "This verdict applies only to the supplied D1/P1 documents. It does not approve future code, establish human acceptance, or replace the independent code review required by DEVNOTES.md."
+        },
+        {
+          "path": "artifacts/01-operation/git.json",
+          "quote": "\"status\": \"?? REVIEW.md\",\n  \"diff\": \"\""
+        }
+      ]
+    }
+  ]
+}

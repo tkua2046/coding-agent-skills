@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "run_id": "20260907T164442-2c839831035840ff9bc4c7ed7b1ece64",
+  "kind": "behavior",
+  "created_at": "2026-09-07T16:44:42.594231+00:00",
+  "status": "inconclusive",
+  "case_id": "smoke-intake-conflict",
+  "identity": {
+    "case": "9fdbe056c1ced933ebab6a51cad0da2f98b5971be84c5f46da304e3bceb1e215",
+    "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+    "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+    "skills": {
+      "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+      "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+      "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+      "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+      "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+      "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+      "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+      "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94"
+    }
+  },
+  "settings": {
+    "worker": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 240
+    },
+    "grader": {
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "timeout_seconds": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "codex": "codex-cli 0.153.4",
+    "dependency_lock": "22f55def3c9fe9d76bac03ba3d1fe2671179ec5897e1a8910091726b9d558697"
+  },
+  "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b",
+  "requested_calibration": "docs/validation/canary/20260907T163452-9f14e14107924e83af36657950b52002/report.json"
+}

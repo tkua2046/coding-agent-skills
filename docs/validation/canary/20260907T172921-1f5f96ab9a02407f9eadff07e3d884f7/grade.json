@@ -1,0 +1,123 @@
+{
+  "criteria": [
+    {
+      "id": "useful-depth",
+      "status": "pass",
+      "reason": "The documents establish one local outcome, a concrete availability-check decision and decisive acceptance examples. Required reviews converged without correction cycles or speculative infrastructure. Recorded worker time was within the 15-minute allowance.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/DESIGN.md",
+          "quote": "Unique item SKUs make per-item availability checks\nsufficient without aggregation. Checking before deduction takes another traversal\nof each successful order, with linear total work and no per-order stock copy."
+        },
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "One coherent local increment; no infrastructure or separate delivery prerequisite."
+        },
+        {
+          "path": "artifacts/observations.json",
+          "quote": "\"worker_elapsed_seconds\": 571.867"
+        }
+      ]
+    },
+    {
+      "id": "working-feature",
+      "status": "pass",
+      "reason": "Final code checks current stock before any deduction and continues processing rejected orders. Meaningful tests cover both APIs, rejection prefixes, continuation, immutability and compatibility. The installed gate and independent suite executed successfully on code and tests unchanged by the final handoff; earlier failing regression evidence is preserved.",
+      "evidence": [
+        {
+          "path": "artifacts/09-handoff/workspace/inventory.py",
+          "quote": "    remaining = dict(stock)\n    outcomes = []\n    for order in orders:\n        accepted = all(remaining[sku] >= quantity for sku, quantity in order[\"items\"])\n        if accepted:\n            for sku, quantity in order[\"items\"]:\n                remaining[sku] -= quantity\n        outcomes.append({\"order_id\": order[\"id\"], \"accepted\": accepted})"
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/tests/test_inventory.py",
+          "quote": "        self.assert_both_apis({\"a\": 4, \"b\": 2}, orders[:2],\n                              {\"a\": 3, \"b\": 2}, outcomes[:2])\n        self.assert_both_apis({\"a\": 4, \"b\": 2}, orders,\n                              {\"a\": 0, \"b\": 0}, outcomes)"
+        },
+        {
+          "path": "artifacts/06-code-review/execution.json",
+          "quote": "Ran 11 tests in 0.002s\\\\n\\\\nOK\\\\n\\\",\\\"exit_code\\\":0,\\\"status\\\":\\\"completed\\\""
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-evidence/regression-before.txt",
+          "quote": "Ran 11 tests in 0.003s\n\nFAILED (failures=10)"
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-evidence/gate.txt",
+          "quote": "Ran 11 tests in 0.003s\n\nOK"
+        }
+      ]
+    },
+    {
+      "id": "review-convergence",
+      "status": "pass",
+      "reason": "Independent document and code reviewers accepted sufficient, identified content with substantive reasoning and actual checks. No material findings required fixes; skipped correction phases followed ready reports. The author preserved independent verdicts.",
+      "evidence": [
+        {
+          "path": "artifacts/02-document-review/workspace/reviews/design-current.json",
+          "quote": "The mixed-batch and rejection-prefix examples provide decisive acceptance for partial-deduction and continuation errors. Planned coverage also addresses shortages, nested input immutability and existing JSON validation."
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "No material findings. The availability pass reads current batch-local stock before any deduction. Validated unique SKUs make the per-item check sufficient; failed orders deduct nothing and do not terminate processing."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/inventory.py",
+          "quote": "        accepted = all(remaining[sku] >= quantity for sku, quantity in order[\"items\"])\n        if accepted:\n            for sku, quantity in order[\"items\"]:\n                remaining[sku] -= quantity"
+        },
+        {
+          "path": "artifacts/07-code-fix/skip-review.json",
+          "quote": "\"verdict\": \"ready\",\n  \"findings\": [],\n  \"open_finding_ids\": [],\n  \"next_action\": \"Owner review; human acceptance remains pending. No commit or release.\""
+        }
+      ]
+    },
+    {
+      "id": "usable-handoff",
+      "status": "pass",
+      "reason": "The executed restricted reader correctly recovered atomic rejection, the current-stock precheck and pending owner acceptance from exposed beginnings. Final entrypoints agree with the independent ready review, put current delivery first and explicitly identify earlier pending-review prose as history.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "Before deducting an order, check every requested quantity against the current\nbatch-local stock. If any item is insufficient, append `accepted=False` and deduct\nnothing for that order; otherwise deduct every item and append `accepted=True`."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/1.txt",
+          "quote": "The [independent code review](../reviews/code-current.json) has verdict `ready`\nand no open findings. Human acceptance remains pending; stage acceptance is not\ncomplete. Next action: the owner reviews the candidate and decides acceptance."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Check every requested quantity against current batch-local stock before deducting anything. This ensures whole-order acceptance or rejection without rollback or extra stock snapshots."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Next, the owner reviews the candidate and decides acceptance. Human acceptance and stage acceptance remain pending; no further implementation is planned."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/docs/PLAN.md",
+          "quote": "[Implementation-phase report](PLAN-s1-implementation.md), retained verbatim as history; its pending-review language describes that earlier phase, not current status."
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "status": "pass",
+      "reason": "Original requirements, completed history, adapter and gate remain unchanged. Snapshot comparison confirms the final handoff changed only design/plan status and preserved the earlier report; code, tests and independent reviews remain as reviewed. Human acceptance is honestly pending, with no commit or external delivery attempted.",
+      "evidence": [
+        {
+          "path": "artifacts/09-handoff/workspace/docs/history/completed.md",
+          "quote": "The initial reservation engine and validated JSON adapter are delivered. This is\nhistorical fixture context, not evidence that the newly requested rejection works."
+        },
+        {
+          "path": "artifacts/09-handoff/execution.json",
+          "quote": "Historical implementation report preserved byte-for-byte; local links resolve; reviewed source/tests and candidate patch remain unchanged."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/docs/PLAN.md",
+          "quote": "Only design/plan status and links, plus preservation of the prior implementation\nreport, changed for this handoff. Code, tests and the behavior contract remain as\nreviewed."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/docs/PLAN.md",
+          "quote": "No commit, push, publication, version advancement or release was\nperformed or authorized, and no human acceptance is claimed."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": "smoke-handoff-opening",
+  "report": "docs/validation/canary/20260907T180818-6c87c8a499ea469b8c018a47b8f052d3/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 58.434,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 7,
+        "lines": 74,
+        "bytes": 4412
+      },
+      "final": {
+        "files": 7,
+        "lines": 103,
+        "bytes": 6083
+      }
+    }
+  },
+  "error": null
+}

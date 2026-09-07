@@ -1,4 +1,8 @@
-# Versioned workflow canary cases
+# Versioned behavior cases
+
+The `smoke-*` cases exercise individual responsibilities through one real operation and blind grading. See the [responsibility map](../GOALS.md#small-llm-smoke-tests) for their paired scenarios and [commands](../README.md#focused-prompt-feedback-small-llm-smoke-tests) for explicit selection. They preserve the same isolation/original evidence, but do not replace the complete cases below.
+
+## Complete workflow canaries
 
 These seventeen versioned heavy cases support the [goal-based refinement](../GOALS.md).
 The owner authorized real baseline/candidate runs for this increment; ordinary small
@@ -26,10 +30,12 @@ new-test evidence for these cases. No private interview/project material is used
 | route-local | Choose useful next work for a local inventory change, without a prescribed workflow |
 | route-uncertain | Choose useful next work for an unmeasured report slowdown, without a prescribed workflow |
 
-V1/V2 revision 2 and V4 revision 3 use restricted first-screen reading. V4 separates
+V1/V2 introduced restricted first-screen reading in revision 2; their revision 3
+preserves original history files while allowing new archives. V4 revision 3 separates
 next-stage acceptance from its explicit recovery question. The bounded delivery,
 investigation and neutral planning probes also use this reader. Delivery revision 2
-adds an unconditional status-only author handoff after review. Delivery uses a prescribed multi-role scaffold:
+adds an unconditional status-only author handoff after review; revision 3 applies
+the same original-history preservation boundary. Delivery uses a prescribed multi-role scaffold:
 it tests decisions, usability, stopping and progress within that scaffold, not
 independent selection/elimination of every phase. Its inventory application is
 outside the navigation examples embedded in the skills. The two neutral planning

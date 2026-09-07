@@ -1,0 +1,67 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "local-commits",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "preserved-baseline",
+    "status": "pass",
+    "evidence": {
+      "docs/ORIGINAL.md": true,
+      "docs/OCCUPIED_REQUEST.md": true,
+      "docs/history/completed.md": true,
+      "docs/history/d2-review.md": true
+    }
+  },
+  {
+    "id": "behavior-contract",
+    "status": "pass",
+    "evidence": {
+      "argv": [
+        "/Users/tk/.nvm/versions/node/v20.12.1/bin/codex",
+        "sandbox",
+        "-P",
+        "canary",
+        "-C",
+        "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-zdu5n40j/worker",
+        "-c",
+        "default_permissions=\"canary\"",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "permissions={\"canary\"={\"extends\"=\":workspace\",\"filesystem\"={\":root\"=\"deny\",\":minimal\"=\"read\",\":tmpdir\"=\"deny\",\":slash_tmp\"=\"deny\",\":workspace_roots\"={\".\"=\"write\",\".git\"=\"write\",\"skills\"=\"read\"},\"/Users/tk/Documents/coding-agent-skills/.venv\"=\"read\",\"/Library/Developer/CommandLineTools\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/bin\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/opt/homebrew\"=\"read\"},\"network\"={\"enabled\"=false}}}",
+        "-c",
+        "shell_environment_policy.inherit=\"core\"",
+        "-c",
+        "shell_environment_policy.set={\"CANARY_PYTHON\"=\"/Users/tk/Documents/coding-agent-skills/.venv/bin/python\",\"TMPDIR\"=\"/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-zdu5n40j/worker/.tmp\",\"GIT_CONFIG_GLOBAL\"=\"/dev/null\",\"GIT_CONFIG_NOSYSTEM\"=\"1\"}",
+        "--",
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "import os\nimport sys\nimport unittest\n\nsys.path.insert(0, os.getcwd())\nfrom navigator import run\n\n\nclass MaintenanceContract(unittest.TestCase):\n    def test_runtime_still_continues(self):\n        self.assertEqual(\n            run((0, 0, 0), \"FRF\", {(0, 1)}), ((1, 0, 1), [False, True, True])\n        )\n\n    def test_west_negative_and_empty(self):\n        self.assertEqual(run((-2, -3, 3), \"F\", {(-3, -3)}), ((-2, -3, 3), [False]))\n        self.assertEqual(run((4, 5, 2), \"\", {(4, 4)}), ((4, 5, 2), []))\n\n\nunittest.main()\n"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n",
+      "timed_out": false,
+      "interrupted": false,
+      "elapsed_seconds": 0.118
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  }
+]

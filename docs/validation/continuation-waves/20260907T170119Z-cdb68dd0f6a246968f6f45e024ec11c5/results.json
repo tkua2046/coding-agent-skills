@@ -1,0 +1,181 @@
+[
+  {
+    "case": "v1-small-feature",
+    "report": "docs/validation/canary/20260907T170119-180146148713498985f8de71727f9bd3/report.json",
+    "status": "fail",
+    "observations": {
+      "executed_phases": [
+        "01-plan"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 136.354,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 9,
+          "lines": 32,
+          "bytes": 1960
+        },
+        "final": {
+          "files": 12,
+          "lines": 173,
+          "bytes": 10867
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "v4-migration-risk",
+    "report": "docs/validation/canary/20260907T170119-5ebf2365889b4b3d9d11b303e1b25a95/report.json",
+    "status": "fail",
+    "observations": {
+      "executed_phases": [
+        "01-plan"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 203.439,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 6,
+          "lines": 21,
+          "bytes": 1307
+        },
+        "final": {
+          "files": 8,
+          "lines": 276,
+          "bytes": 17916
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "existing-intake",
+    "report": "docs/validation/canary/20260907T170531-f8a717d31c264946b578c1e0ef183854/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-intake"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 93.164,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 4,
+          "lines": 12,
+          "bytes": 777
+        },
+        "final": {
+          "files": 11,
+          "lines": 82,
+          "bytes": 7531
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "v2-scope-extension",
+    "report": "docs/validation/canary/20260907T170809-d5e089c5d9634a229437ed77d1a9e4e1/report.json",
+    "status": "fail",
+    "observations": {
+      "executed_phases": [
+        "01-plan",
+        "02-extend"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 473.073,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 9,
+          "lines": 32,
+          "bytes": 1960
+        },
+        "final": {
+          "files": 13,
+          "lines": 287,
+          "bytes": 20524
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "bounded-delivery",
+    "report": "docs/validation/canary/20260907T170631-6d455052fa6e48899b23934d1921a8ce/report.json",
+    "status": "fail",
+    "observations": {
+      "executed_phases": [
+        "01-plan",
+        "02-document-review",
+        "05-implement",
+        "06-code-review",
+        "09-handoff"
+      ],
+      "skipped_phases": [
+        "03-document-fix",
+        "04-document-recheck",
+        "07-code-fix",
+        "08-code-recheck"
+      ],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 589.378,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 9,
+          "lines": 52,
+          "bytes": 3646
+        },
+        "final": {
+          "files": 23,
+          "lines": 552,
+          "bytes": 33597
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "v3-maintenance",
+    "report": "docs/validation/canary/20260907T171829-438b31e15d194a8daddb503f761c6a5b/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-maintain",
+        "02-change-contract"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 181.876,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 10,
+          "lines": 45,
+          "bytes": 2729
+        },
+        "final": {
+          "files": 12,
+          "lines": 178,
+          "bytes": 10270
+        }
+      }
+    },
+    "error": null
+  }
+]

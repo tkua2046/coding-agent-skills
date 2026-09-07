@@ -1,0 +1,4 @@
+Command: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. "$CANARY_PYTHON" intake-evidence/probe.py > intake-evidence/behavior.txt 2>&1
+Exit status: 0
+Raw stdout/stderr: behavior.txt (combined)
+Scope: diagnostic observations; exceptions are captured, not asserted.

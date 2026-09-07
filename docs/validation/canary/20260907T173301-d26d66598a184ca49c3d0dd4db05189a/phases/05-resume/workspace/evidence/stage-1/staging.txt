@@ -1,0 +1,19 @@
+Command: ['git', 'diff', '--cached', '--check']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-vXoZ14QE' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-Hk3UZpzG' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+evidence/stage-1/baseline.txt:41: new blank line at EOF.
+evidence/stage-1/candidate.patch:7: trailing whitespace.
++ 
+evidence/stage-1/candidate.patch:11: trailing whitespace.
++ 
+evidence/stage-1/candidate.patch:31: trailing whitespace.
++ 
+evidence/stage-1/checks.txt:35: new blank line at EOF.
+Exit code: 2
+Command: ['git', 'diff', '--cached', '--check', '--', 'counter.py', 'tests/test_counter.py', 'README.md', 'CHANGELOG.md', 'PLAN.md']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-VDUq6f30' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-AKe6UJ8J' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+Exit code: 0
+Staged candidate exactly matches captured patch.

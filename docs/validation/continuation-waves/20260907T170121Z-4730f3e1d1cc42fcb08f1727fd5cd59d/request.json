@@ -1,0 +1,151 @@
+{
+  "label": "baseline-affected-heavy",
+  "cases": [
+    "v1-small-feature",
+    "v4-migration-risk",
+    "existing-intake",
+    "bounded-delivery",
+    "v2-scope-extension",
+    "v3-maintenance"
+  ],
+  "source_ref": "d76bb80fa15a01e8240a9c328a0bac485b95564b",
+  "identities": {
+    "v1-small-feature": {
+      "case": "b302fd3cb7dc403acabff095086a6b5eb1d54f379303469e3bc2b35c88f8ff0a",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+        "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "add1d0de5d31936a3735088044358012091f58179c4b7b44dcd4872532aa6af8",
+        "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+        "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637"
+      }
+    },
+    "v4-migration-risk": {
+      "case": "ed4cab7ba71cabddae4f5f0d7e48df28477b10cda9f55709dc09ceb5513db9b1",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+        "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "add1d0de5d31936a3735088044358012091f58179c4b7b44dcd4872532aa6af8",
+        "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+        "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637"
+      }
+    },
+    "existing-intake": {
+      "case": "e783a0163d493f641ac6170e61b79a9af60e86dc0c3ea5b6f658c9f7d7e7fafe",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94"
+      }
+    },
+    "bounded-delivery": {
+      "case": "7a6cebac220467e4fa7c3185b2a27a203a8814ee5ee8b497631a8058eaa7eb05",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+        "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "add1d0de5d31936a3735088044358012091f58179c4b7b44dcd4872532aa6af8",
+        "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+        "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637",
+        "skills/stage-development/SKILL.md": "48cdfeb605e12716ced524d899b2bb3a2c65f7ca11a95c2fa8f349cb5c1aa024",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/stage-record.template.md": "9466df7ea9874b5c74d3bc36896d00ad7a50189d34a47d318177c0f8e2d26265",
+        "skills/stage-development/prompts/execute-stage.md": "50550818f29416cbc0dfcf52fc4ba8ab8c9ac44626bb3ef993cc2490530bbcde",
+        "skills/stage-development/prompts/review-stage.md": "1802dbca6613255883b83d9e349704664ab2bbbde9a51c66d222aeadb93769e8"
+      }
+    },
+    "v2-scope-extension": {
+      "case": "5a612d161047fe7949bec0ed3a6977bbf6e0030b64e753cc807a759e62140a98",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+        "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "add1d0de5d31936a3735088044358012091f58179c4b7b44dcd4872532aa6af8",
+        "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+        "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637"
+      }
+    },
+    "v3-maintenance": {
+      "case": "3eec633dbdf893784ec2fcd8f1f495cf2222ddea202a39a6cd6fa3ef7a7ee245",
+      "engine": "2a888d1145e1f4cf57a9f5ae894456f8fa03ae48a644684f2739b51ffe394b59",
+      "grader": "0addfd04790f86a21617ea98f32ca8b2a06c507365ae9237a7b83a331121892c",
+      "skills": {
+        "skills/feature-design/SKILL.md": "5af92549c497b7edf2b23d1792970308809ac983154b7e445279bbd29577666b",
+        "skills/feature-design/agents/openai.yaml": "656474af7a2bbc3f0e5eaf07dd2ed64b48f51a4b16fb0ee23f97c5d85a8206d8",
+        "skills/feature-design/assets/design.template.md": "e51eadf13d5c2fa8437660f14b94137b16911ddec3905c042bdfe98a71aa2d05",
+        "skills/feature-design/assets/review.template.md": "2b0af60929f8288cda88638b13f0b2994eb6836a1f2d8d6de8f0a9b3a47f3a65",
+        "skills/feature-design/assets/spec-addendum.template.md": "8dacf653bbef1753fdb00924b6c94a966db2264b21e52f9f1225718313da4a04",
+        "skills/feature-design/prompts/draft-design.md": "671e559d4b31a5d0bba73965f91eed354402a77d82efcb37d2bfa8a2fa7f1dc0",
+        "skills/feature-design/prompts/intake-feature.md": "74c28d7e34e6ada781bcd9fb2ec8a9f7037ea54bcabaa9fb1a7abb8ea3762168",
+        "skills/feature-design/prompts/review-design.md": "b37b6f6d1c0d56052f33d1938c74cef3115d5fc67c81bf841e5490c052aedb94",
+        "skills/implementation-plan/SKILL.md": "14e5d81c9634b86930829cc7fb5778f885f8134608f0805e177c6a54a1916d2a",
+        "skills/implementation-plan/agents/openai.yaml": "1bd92cd5f5bfae5654a0cfd39a79f6a45ffdb5b09b16ded896fd2918a279d495",
+        "skills/implementation-plan/assets/implementation-plan.template.md": "add1d0de5d31936a3735088044358012091f58179c4b7b44dcd4872532aa6af8",
+        "skills/implementation-plan/prompts/plan-implementation.md": "81d7d485e7c6434e8d48dfbc570ebe4b07ea625b77581ebe255f4a28e5446ca2",
+        "skills/implementation-plan/prompts/review-implementation.md": "38984a1207118a941adcaf7305cc11b53bd993b7e6b475666a18962ea6379637",
+        "skills/stage-development/SKILL.md": "48cdfeb605e12716ced524d899b2bb3a2c65f7ca11a95c2fa8f349cb5c1aa024",
+        "skills/stage-development/agents/openai.yaml": "6e7972bb39551305a96b06c4bf68b2eccca436ee2ecd92cad1912b3642549a21",
+        "skills/stage-development/assets/stage-record.template.md": "9466df7ea9874b5c74d3bc36896d00ad7a50189d34a47d318177c0f8e2d26265",
+        "skills/stage-development/prompts/execute-stage.md": "50550818f29416cbc0dfcf52fc4ba8ab8c9ac44626bb3ef993cc2490530bbcde",
+        "skills/stage-development/prompts/review-stage.md": "1802dbca6613255883b83d9e349704664ab2bbbde9a51c66d222aeadb93769e8"
+      }
+    }
+  },
+  "worker": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "grader": {
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "timeout_seconds": 600
+  },
+  "parallelism": 2,
+  "note": "One attempt each, frozen inputs checked before dispatch; no retries. Parallel timing is descriptive."
+}

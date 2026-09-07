@@ -1,0 +1,114 @@
+[
+  {
+    "case": "smoke-setup-evidence",
+    "report": "docs/validation/canary/20260907T175147-bf23befcbe834cc7a34bf008b06bee7a/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-operation"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 80.631,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 3,
+          "lines": 3,
+          "bytes": 371
+        },
+        "final": {
+          "files": 4,
+          "lines": 46,
+          "bytes": 4719
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "smoke-setup-baseline",
+    "report": "docs/validation/canary/20260907T175147-045f5139dcb7417f8ad70a099e60f47f/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-operation"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 83.651,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 3,
+          "lines": 15,
+          "bytes": 866
+        },
+        "final": {
+          "files": 4,
+          "lines": 67,
+          "bytes": 3317
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "smoke-transfer-pr",
+    "report": "docs/validation/canary/20260907T175412-a5316abda8354044ac3d2d6f18a50012/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-operation"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 56.828,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 5,
+          "lines": 7,
+          "bytes": 693
+        },
+        "final": {
+          "files": 6,
+          "lines": 20,
+          "bytes": 2180
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "case": "smoke-setup-child-evidence",
+    "report": "docs/validation/canary/20260907T175344-f82051a489ac4ae2bc0d365a99e920df/report.json",
+    "status": "pass",
+    "observations": {
+      "executed_phases": [
+        "01-operation"
+      ],
+      "skipped_phases": [],
+      "unreached_phases": [],
+      "worker_elapsed_seconds": 88.748,
+      "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+      "documents": {
+        "scope": ".md/.txt/.rst files, excluding supplied skills",
+        "initial": {
+          "files": 3,
+          "lines": 16,
+          "bytes": 1037
+        },
+        "final": {
+          "files": 4,
+          "lines": 69,
+          "bytes": 6127
+        }
+      }
+    },
+    "error": null
+  }
+]

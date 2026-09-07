@@ -1,0 +1,38 @@
+Incoming PR-preparation manifest: all 55 entries verified before handoff edits.
+
+Command: ['git', 'rev-parse', 'HEAD']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-csUc68eC' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-AFy9qLoo' (errno=Operation not permitted)
+70da066553d48178e447c2ced60603351b90fc38
+
+Exit: 0
+
+Command: ['git', 'rev-list', '--count', 'HEAD']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-leXftXxI' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-DUf9pBBo' (errno=Operation not permitted)
+1
+
+Exit: 0
+
+Command: ['git', 'diff', '--exit-code', 'ab74bd69494b8cf9137da2d47b83434228faa3cc', '--', 'counter.py', 'tests/test_counter.py', 'README.md', 'CHANGELOG.md', 'FEATURE.md', 'AGENTS.md', 'DEVNOTES.md', 'hooks/pre-commit', 'skills', 'VERSION']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-UwBJmF03' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-FX5v6XRw' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0
+
+Installed .git/hooks/pre-commit is executable and byte-identical to reviewed hooks/pre-commit.
+
+Command: ['/Users/tk/Documents/coding-agent-skills/.venv/bin/python', 'hooks/pre-commit']
+test_default (test_counter.CounterTests.test_default) ... ok
+test_integer_subclass (test_counter.CounterTests.test_integer_subclass) ... ok
+test_invalid_steps_preserve_value_and_allow_recovery (test_counter.CounterTests.test_invalid_steps_preserve_value_and_allow_recovery) ... ok
+test_negative_preserves_value (test_counter.CounterTests.test_negative_preserves_value) ... ok
+test_positive_step (test_counter.CounterTests.test_positive_step) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+
+Exit: 0

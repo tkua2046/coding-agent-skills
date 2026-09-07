@@ -1,0 +1,29 @@
+# Plan
+
+## Current delivery and evidence
+
+S1 implementation, regression coverage, behavior/usage documentation, required
+checks and independent reviews are complete. Whole-order rejection works through
+both existing APIs; rejected orders preserve stock and later orders continue.
+The [independent code review](../reviews/code-current.json) has verdict `ready`
+and no open findings. Human acceptance remains pending; stage acceptance is not
+complete. Next action: the owner reviews the candidate and decides acceptance.
+No further implementation is planned and no new blocker was discovered in this
+status-only handoff.
+
+Candidate: base `81655edcf4fd63cff672c4830c40a15f45391228` plus the preserved
+[candidate patch](../reviews/s1-evidence/candidate.patch), SHA-256
+`d2263d7b5747b06e6295e36f86ef86f8abe696680721ddaeacad7d9d58409920`.
+Before this handoff, the current tracked diff matched that snapshot exactly;
+source/test hashes, requirements, adapter/codec, repository instructions and check
+configuration matched the review evidence. The prepared runtime still resolves to
+`/Users/tk/Documents/coding-agent-skills/.venv/bin/python`, Python 3.12.4.
+Only design/plan status and links, plus preservation of the prior implementation
+report, changed for this handoff. Code, tests and the behavior contract remain as
+reviewed. The patch identifies the reviewed candidate, not these later status edits.
+
+| Evidence | Actual result |
+|---|---|
+| [Independent code review and its check outputs](../reviews/code-current.json) | `ready`; no findings. `PYTHONDONTWRITEBYTECODE=1 "$CANARY_PYTHON" -m unittest discover -s tests -v` and `PYTHONDONTWRITEBYTECODE=1 "$CANARY_PYTHON" hooks/pre-commit` each exited 0 with 11 tests passing. |
+| [Implementation gate output](../reviews/s1-evidence/gate.txt) | All 11 tests passed; the implementation report records exit 0. The installed hook performs full discovery and rejects empty collection. |
+| [Pre-fix regression output](../reviews/s1-evidence/regression-before.

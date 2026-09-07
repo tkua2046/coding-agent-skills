@@ -1,0 +1,119 @@
+{
+  "criteria": [
+    {
+      "id": "useful-depth",
+      "status": "pass",
+      "reason": "The documents establish a local check-before-deduction decision, concrete acceptance cases and one coherent implementation outcome. Reviews and evidence remain relevant to that outcome; no speculative infrastructure or additional stages were introduced. Recorded worker time was within the 15-minute allowance.",
+      "evidence": [
+        {
+          "path": "artifacts/01-plan/workspace/docs/PLAN.md",
+          "quote": "One coherent implementation/review boundary is sufficient because both APIs share\nthe engine; no independently deliverable intermediate state is needed."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/docs/DESIGN.md",
+          "quote": "Checking before mutation avoids partial deductions and rollback bookkeeping. It\nrequires at most two passes over an accepted order and no new state framework."
+        },
+        {
+          "path": "artifacts/observations.json",
+          "quote": "\"worker_elapsed_seconds\": 587.355"
+        }
+      ]
+    },
+    {
+      "id": "working-feature",
+      "status": "pass",
+      "reason": "The engine checks current copied stock before any deduction and continues after rejection. Both APIs retain their interfaces and validation behavior. Concrete regression assertions cover atomic rejection, continuation, depletion and input preservation; recorded tests and the installed gate passed on the reviewed code, which remained unchanged through handoff. Earlier regression failures were preserved rather than represented as passing.",
+      "evidence": [
+        {
+          "path": "artifacts/09-handoff/workspace/inventory.py",
+          "quote": "    remaining = dict(stock)\n    outcomes = []\n    for order in orders:\n        accepted = all(remaining[sku] >= quantity for sku, quantity in order[\"items\"])\n        if accepted:\n            for sku, quantity in order[\"items\"]:\n                remaining[sku] -= quantity\n        outcomes.append({\"order_id\": order[\"id\"], \"accepted\": accepted})\n    return remaining, outcomes"
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/tests/test_inventory.py",
+          "quote": "    def test_isolated_rejection_preserves_all_stock(self):\n        self.assert_both_apis(\n            {\"a\": 4, \"b\": 1, \"untouched\": 7},\n            [{\"id\": \"reject\", \"items\": [[\"a\", 2], [\"b\", 2]]}],\n            ({\"a\": 4, \"b\": 1, \"untouched\": 7}, [\n                {\"order_id\": \"reject\", \"accepted\": False},\n            ]),\n        )"
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-checks.json",
+          "quote": "\".git/hooks/pre-commit\"\n      ],\n      \"exit_code\": 0"
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-checks.json",
+          "quote": "Ran 11 tests in 0.003s\\n\\nOK\\n"
+        },
+        {
+          "path": "artifacts/05-implement/workspace/reviews/s1-regression-before.txt",
+          "quote": "FAILED (failures=6)"
+        }
+      ]
+    },
+    {
+      "id": "review-convergence",
+      "status": "pass",
+      "reason": "Separate document and code reviewers accepted sufficient work with substantive assessments of the complete invariant. The code reviewer independently reran checks on the identified candidate. No findings required correction, so the conditional fix and recheck phases appropriately skipped; the author preserved independent verdicts.",
+      "evidence": [
+        {
+          "path": "artifacts/02-document-review/workspace/reviews/design-current.json",
+          "quote": "Checking availability against the current stock copy before any deduction ensures whole-order rejection. Unique validated SKUs make per-item checks sufficient. Successful orders deduct all items; rejected orders continue; empty orders succeed. This preserves both interfaces and avoids new validation or infrastructure."
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "Availability is checked against the current copied stock before any mutation. With validated unique SKUs, every accepted deduction is affordable; rejected orders perform no deductions and still append an ordered False outcome. Later orders continue with current stock. Empty orders satisfy all() and succeed."
+        },
+        {
+          "path": "artifacts/06-code-review/workspace/reviews/code-current.json",
+          "quote": "Preserved unchanged. No prior code-review findings existed. Author test claims were independently rerun for this candidate."
+        },
+        {
+          "path": "artifacts/07-code-fix/decision.json",
+          "quote": "\"skipped\": true,\n  \"reason\": \"review-ready\",\n  \"verdict\": \"ready\""
+        }
+      ]
+    },
+    {
+      "id": "usable-handoff",
+      "status": "pass",
+      "reason": "The restricted reader correctly recovered atomic rejection, copied-state validation choices and completed implementation with owner acceptance pending, all supported by its exposed excerpts. Final entrypoints agree with the independent ready report and clearly label the earlier pending-review report as historical.",
+      "evidence": [
+        {
+          "path": "artifacts/reading-probe/excerpts/0.txt",
+          "quote": "order, first determine whether every quantity is available in the current copy;\ndeduct all items only if so. Empty orders succeed. Unique item SKUs make individual\navailability checks sufficient; no aggregation or additional validation is needed."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Check every item against the current stock copy before deducting anything, then deduct only if all quantities are available. This prevents partial deductions without rollback bookkeeping and requires at most two passes over accepted orders."
+        },
+        {
+          "path": "artifacts/reading-probe/excerpts/1.txt",
+          "quote": "Status: S1 implementation, checks and independent reviews are complete; ready for\nowner review. Open findings: none. Human acceptance remains pending.\nNext action: owner reviews the candidate and records acceptance or feedback."
+        },
+        {
+          "path": "artifacts/reading-probe/reply.md",
+          "quote": "Owner review is next: the owner must record acceptance or feedback. Human acceptance remains pending;"
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/reviews/s1-handoff.md",
+          "quote": "The prior report's pending code-review status describes that earlier phase."
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "status": "pass",
+      "reason": "Original requirements and completed history survive, and changes remain confined to the authorized extension. Snapshot comparison confirms the final handoff changed only DESIGN/PLAN and added the handoff, preserving code, tests, contract and independent reports. Human acceptance remains pending, with no commit or publication attempted.",
+      "evidence": [
+        {
+          "path": "artifacts/09-handoff/workspace/docs/PLAN.md",
+          "quote": "## Completed history (preserved)\n\nS0 complete: in-memory reservation and JSON validation are delivered.\nNo pending work before the current change request."
+        },
+        {
+          "path": "artifacts/09-handoff/execution.json",
+          "quote": "Verified: only DESIGN/PLAN changed; new handoff links resolve; no trailing whitespace. Prior reports, code, tests and contract unchanged."
+        },
+        {
+          "path": "artifacts/09-handoff/workspace/reviews/s1-handoff.md",
+          "quote": "Open finding IDs: none. Human acceptance: pending; S1 is not yet accepted.\nNext action: owner reviews the candidate against the [contract](../docs/SPEC.md)\nand records acceptance or feedback. No commit, publication or release was performed."
+        }
+      ]
+    }
+  ]
+}

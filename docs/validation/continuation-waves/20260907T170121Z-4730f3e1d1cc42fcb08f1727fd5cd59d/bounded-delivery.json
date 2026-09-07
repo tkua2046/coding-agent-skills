@@ -1,0 +1,37 @@
+{
+  "case": "bounded-delivery",
+  "report": "docs/validation/canary/20260907T170816-5191f24c03624618bfd6aac48a55fdc4/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-plan",
+      "02-document-review",
+      "05-implement",
+      "06-code-review",
+      "09-handoff"
+    ],
+    "skipped_phases": [
+      "03-document-fix",
+      "04-document-recheck",
+      "07-code-fix",
+      "08-code-recheck"
+    ],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 631.6560000000001,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 9,
+        "lines": 52,
+        "bytes": 3646
+      },
+      "final": {
+        "files": 20,
+        "lines": 531,
+        "bytes": 31880
+      }
+    }
+  },
+  "error": null
+}

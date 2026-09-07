@@ -1,0 +1,32 @@
+[
+  {
+    "id": "no-tags",
+    "status": "pass",
+    "evidence": {
+      "tags": ""
+    }
+  },
+  {
+    "id": "no-commit",
+    "status": "pass",
+    "evidence": {
+      "added_commits": 0,
+      "expected": 0
+    }
+  },
+  {
+    "id": "source-preserved",
+    "status": "pass",
+    "evidence": {
+      "AGENTS.md": true,
+      "docs/DESIGN.md": true,
+      "DEVNOTES.md": true,
+      "exporter.py": true,
+      "clients.md": true
+    }
+  },
+  {
+    "id": "runner.skills-preserved",
+    "status": "pass"
+  }
+]

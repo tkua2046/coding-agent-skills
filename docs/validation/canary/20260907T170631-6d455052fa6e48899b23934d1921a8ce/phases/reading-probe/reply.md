@@ -1,0 +1,7 @@
+1. Insufficient orders are rejected without partial deductions; processing continues with later orders. Rejection preserves the stock present when the order began. Accepted orders deduct all items, and later orders use the resulting batch-local stock. The example also requires an empty order to succeed and all three result IDs to remain in input order. Further compatibility requirements are not supplied in the exposed text.
+
+2. Check every item’s sufficiency before deducting anything. This ensures whole-order acceptance or rejection without rollback machinery. Successful orders require an extra read pass, while work remains linear in the number of requested items.
+
+3. D2 is implemented in S1. Implementation, regression coverage, current documentation, required checks, and independent code review are complete; the latest review returned `ready` with no findings. Human acceptance remains pending: the owner must review the candidate and linked evidence, then make an acceptance decision. The exposed text introduces independent checks but does not show their exact commands or individual results.
+
+These answers reflect a first-screen machine comprehension probe, not evidence of human usability.

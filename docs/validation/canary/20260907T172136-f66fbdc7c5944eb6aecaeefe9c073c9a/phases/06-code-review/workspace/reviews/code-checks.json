@@ -1,0 +1,68 @@
+{
+  "reviewed_at": "2026-09-07T17:29:05.947689+00:00",
+  "snapshot_matches": true,
+  "sha256": {
+    "AGENTS.md": "34ec1a63df56f4eccf184db32eab791c8cf34c7c89a949eb59cb64ef257b1344",
+    "docs/REQUEST.md": "1aca2e4b832780cc28dd0ecad1aa9d79fb29b92269bb16d7f2c7a8fbb2f84716",
+    "docs/ORIGINAL.md": "d0afbb6d9aa24b640e8951b9de30b1783c89ec0172e82eaa9696b2378b94ba44",
+    "docs/DESIGN.md": "683fb0863544423debd8b133af90fe27a6ea5543e6f0f2d433783b409433bec3",
+    "docs/PLAN.md": "79dc80684905a27ff4d3bf074d66a5223eadfc097a6eba242efbe3b887c8a9d8",
+    "docs/SPEC.md": "05cad044a9d0984e2ce4c3ba31b183697c7025c732f5d48a228d687826e29ecc",
+    "docs/history/completed.md": "f1a23fb8c111643521439656049d2f438e42d27fb0d5b2aab1ecfc47fbbca726",
+    "README.md": "ea6a146ff0000dfaad0a4d1706aa49806bb885106a55983edde78f4a7f7644e3",
+    "DEVNOTES.md": "08a1e0c902017b6c935e8aea529e98b80bc82665bdfbe4a5be7c18717f11afb7",
+    "inventory.py": "83579bb46a62f164470408a2c11ae62229051400c65615d2d3f4bc14f78a32c7",
+    "batch.py": "16f876803c270daa15e30c22ef09a48ec222fa260263f0826fb6f2474d634b3b",
+    "command_codec.py": "d15017e379fd7f6c832fa8dd578d5994097d2afe36cdb7336c813b75aad9b1de",
+    "tests/test_inventory.py": "0c497053277a49196a5c8aff1fafd2f227cf6dccff7f28d0065e5e67eb36a3d2",
+    "hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+    ".git/hooks/pre-commit": "ea1c7f1be0b6a76adfd3d5aabc9f9476b798d24f01cc6d91a02b7add9cd79e0f",
+    "reviews/design-current.json": "7e1d89977c28f494da936419b15b680b90f507f43b79d6baaf95d65c7ee59e97",
+    "reviews/s1-regression-before.txt": "0b252d90dc92d44e05f6acd2cb86c0bb7f477198d5c4f1ff83703007c5265a28",
+    "reviews/s1-unittest.txt": "70654e8799bad213094c4627c1f134e1a9b12f8084c81d0e24ecbf8b87296422",
+    "reviews/s1-gate.txt": "f9ae9a4385dbd4704cca852f24fff5f60bfe3ad8a817c838d2e1fbd190f3ed4e",
+    "reviews/s1-diff-check.txt": "5037b0c34151fcff0776ba95b1983b9a323ace85a03842a6c29045b8b548e224",
+    "reviews/s1-candidate.patch": "1cdedf2145b3d0bb1ebfb14e306698f89e4d0f8bc2e8715dd5ca353a094355bb"
+  },
+  "checks": [
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_availability_uses_remaining_stock (test_inventory.InventoryTests.test_availability_uses_remaining_stock) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_empty_batch_and_order_through_both_apis (test_inventory.InventoryTests.test_empty_batch_and_order_through_both_apis) ... ok\ntest_isolated_rejection_preserves_all_stock (test_inventory.InventoryTests.test_isolated_rejection_preserves_all_stock) ... ok\ntest_rejection_and_later_exact_stock_success (test_inventory.InventoryTests.test_rejection_and_later_exact_stock_success) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\ntest_validation_prevents_any_reservation (test_inventory.InventoryTests.test_validation_prevents_any_reservation) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+        ".git/hooks/pre-commit"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_adapter (test_inventory.InventoryTests.test_adapter) ... ok\ntest_availability_uses_remaining_stock (test_inventory.InventoryTests.test_availability_uses_remaining_stock) ... ok\ntest_bad_quantity (test_inventory.InventoryTests.test_bad_quantity) ... ok\ntest_duplicate_sku (test_inventory.InventoryTests.test_duplicate_sku) ... ok\ntest_empty (test_inventory.InventoryTests.test_empty) ... ok\ntest_empty_batch_and_order_through_both_apis (test_inventory.InventoryTests.test_empty_batch_and_order_through_both_apis) ... ok\ntest_isolated_rejection_preserves_all_stock (test_inventory.InventoryTests.test_isolated_rejection_preserves_all_stock) ... ok\ntest_rejection_and_later_exact_stock_success (test_inventory.InventoryTests.test_rejection_and_later_exact_stock_success) ... ok\ntest_success_and_input_preservation (test_inventory.InventoryTests.test_success_and_input_preservation) ... ok\ntest_unknown_sku (test_inventory.InventoryTests.test_unknown_sku) ... ok\ntest_validation_prevents_any_reservation (test_inventory.InventoryTests.test_validation_prevents_any_reservation) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        "README.md",
+        "docs",
+        "inventory.py",
+        "tests/test_inventory.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted\n"
+    }
+  ]
+}

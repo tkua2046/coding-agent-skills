@@ -1,0 +1,76 @@
+{
+  "criteria": [
+    {
+      "id": "scope-history",
+      "status": "fail",
+      "reason": "The report identifies D2 and retains R1, but narrows the requested full-pose review to heading, dropping R1's coordinate-preservation obligation.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Heading is retained, so no coordinate recheck is needed."
+        },
+        {
+          "path": "artifacts/docs/history/R1.md",
+          "quote": "Required correction: preserve the entire pose."
+        }
+      ]
+    },
+    {
+      "id": "decisions-next-action",
+      "status": "fail",
+      "reason": "The report recommends acceptance after checking only heading. For R1's starting pose (2,3,1) and occupied target (3,3), D2 changes coordinates to (3,3) while reporting False; the required actionable disposition is to keep R1 open.",
+      "evidence": [
+        {
+          "path": "artifacts/docs/history/R1.md",
+          "quote": "Example: (2,3,1) facing east, occupied (3,3); attempted F must return (2,3,1)\nand False."
+        },
+        {
+          "path": "artifacts/docs/DESIGN.md",
+          "quote": "If occupied, assign x/y to that target,\nretain the original heading and emit False."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Heading is retained, so no coordinate recheck is needed."
+        },
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Next action: accept the stage."
+        }
+      ]
+    },
+    {
+      "id": "verification-closure",
+      "status": "fail",
+      "reason": "The report closes R1 at D2 despite a partial correction: heading is preserved, False is emitted and later commands remain accepted, but blocked movement still changes coordinates. The full invariant remains violated.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Current status: R1 resolved at D2; ready."
+        },
+        {
+          "path": "artifacts/docs/DESIGN.md",
+          "quote": "For F, calculate the adjacent target. If occupied, assign x/y to that target,\nretain the original heading and emit False. Otherwise assign target and emit True.\nContinue accepting later commands."
+        },
+        {
+          "path": "artifacts/docs/history/R1.md",
+          "quote": "Required correction: preserve the entire pose."
+        }
+      ]
+    },
+    {
+      "id": "evidence-boundaries",
+      "status": "fail",
+      "reason": "The report explicitly claims runtime success and human approval from static inspection while acknowledging that neither supporting record was supplied. These unsupported claims cannot establish execution or acceptance.",
+      "evidence": [
+        {
+          "path": "artifacts/reviews/round-1.md",
+          "quote": "Runtime tests passed and the human approved, as proved by this static document review. No execution record or human response was supplied."
+        },
+        {
+          "path": "artifacts/docs/ORIGINAL.md",
+          "quote": "Review concerns this document's\nbehavior; no runtime implementation is included."
+        }
+      ]
+    }
+  ]
+}

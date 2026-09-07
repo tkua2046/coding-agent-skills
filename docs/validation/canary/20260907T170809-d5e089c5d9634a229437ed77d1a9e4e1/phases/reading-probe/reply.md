@@ -1,0 +1,7 @@
+1. **Change and preservation:** Add fully validated YAML initialization for a starting pose and fixed occupied cells before consuming commands. Blocked forward moves return `False`, preserve the full pose, and allow processing to continue. Preserve run-local state, unbounded integer coordinates, clockwise headings 0–3, existing direction and turning behavior, `(final_pose, outcomes)`, and `ValueError` with aborted processing for unknown commands.
+
+2. **Technical decision and tradeoff:** Store occupied coordinates in one immutable hash set, supporting about 200,000 cells with expected constant-time destination checks at the cost of set storage and temporary parsing data. The YAML parser decision remains unresolved: general YAML requires a parser dependency, conflicting with the stated standard-library-only requirement. Value, duplicate, and start-cell policies also remain proposals.
+
+3. **Next unfinished outcome:** S1—reusable fixed occupancy and validated YAML initialization, with meaningful tests and affected documentation. It depends on S0 and resolution of the YAML contract and dependency policy; the excerpts do not explain S0. Decisive acceptance: loading the supplied `start.yaml` and running `FFRF` yields `((1, 0, 1), [False, False, True, True])`. A malformed final cell must reject initialization before any movement command is consumed.
+
+These answers reflect only the exposed excerpts; this machine-comprehension probe does not establish human usability.

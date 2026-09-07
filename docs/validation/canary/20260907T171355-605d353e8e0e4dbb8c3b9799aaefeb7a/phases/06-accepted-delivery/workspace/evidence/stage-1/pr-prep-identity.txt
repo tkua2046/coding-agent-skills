@@ -1,0 +1,23 @@
+All 48 entries in preserved author-resume manifest match incoming bytes.
+
+Round 2 pre-report identity reproduced: 49 files; SHA-256 dfee325e4cbbefc3f658c7866a9316aea1f9423a429727af39bbc7a43b56c74c
+
+Command: ['git', 'rev-parse', 'HEAD']
+70da066553d48178e447c2ced60603351b90fc38
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-lLFX06y1' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-vD4MMDaJ' (errno=Operation not permitted)
+
+Exit: 0
+
+Command: ['git', 'diff', '--exit-code', 'ab74bd69494b8cf9137da2d47b83434228faa3cc', '--', 'counter.py', 'tests/test_counter.py', 'README.md', 'CHANGELOG.md', 'FEATURE.md', 'AGENTS.md', 'DEVNOTES.md', 'hooks/pre-commit', 'skills']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-rkhmGTKT' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-1KqYYv8R' (errno=Operation not permitted)
+warning: unable to access '/Users/tk/.config/git/ignore': Operation not permitted
+
+Exit: 0
+
+Command: ['git', 'diff', '--exit-code']
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-4mTjIQPJ' (errno=Operation not permitted)
+git: error: couldn't create cache file '/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/xcrun_db-bOemDkuN' (errno=Operation not permitted)
+
+Exit: 0

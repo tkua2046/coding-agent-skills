@@ -1,0 +1,58 @@
+{
+  "time_utc": "2026-09-07T17:11:17.052873+00:00",
+  "python": "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+  "python_version": "3.12.4 (main, Jun  6 2024, 18:26:44) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "hook_executable": true,
+  "hook_matches_wrapper": true,
+  "base": "9ccf826438b48be6d2ffcbf9daece9ec042350b2",
+  "installed-hook": {
+    "command": [
+      "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-00_qe6vh/worker/.git/hooks/pre-commit",
+      "README.md"
+    ],
+    "cwd": "docs",
+    "exit_code": 0
+  },
+  "stdlib-fallback": {
+    "command": [
+      "/Users/tk/Documents/coding-agent-skills/.venv/bin/python",
+      "-S",
+      "tools/check.py"
+    ],
+    "cwd": ".",
+    "exit_code": 0
+  },
+  "diff-check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": ".",
+    "exit_code": 0
+  },
+  "coverage": {
+    "version": "7.16.0",
+    "branch_coverage": true,
+    "files": [
+      "inventory.py"
+    ],
+    "totals": {
+      "covered_lines": 57,
+      "num_statements": 58,
+      "percent_covered": 96.05263157894737,
+      "percent_covered_display": "96",
+      "missing_lines": 1,
+      "excluded_lines": 0,
+      "percent_statements_covered": 98.27586206896552,
+      "percent_statements_covered_display": "98",
+      "num_branches": 18,
+      "num_partial_branches": 2,
+      "covered_branches": 16,
+      "missing_branches": 2,
+      "percent_branches_covered": 88.88888888888889,
+      "percent_branches_covered_display": "89"
+    }
+  },
+  "preserved_inputs": true
+}

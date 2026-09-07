@@ -1,0 +1,7 @@
+{
+  "skip_if_ready": "reviews/design-current.json",
+  "skipped": true,
+  "reason": "review-ready",
+  "verdict": "ready",
+  "review_sha256": "977e76e3c374764a83e836af2158c790d79807cbad41968e6c2ee6842b591e7c"
+}

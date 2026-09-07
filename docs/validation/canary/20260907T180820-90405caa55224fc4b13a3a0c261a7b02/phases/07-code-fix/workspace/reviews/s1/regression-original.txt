@@ -1,0 +1,66 @@
+test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) ...
+  test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function original_reserve at 0x1048dc7c0>, rejected_items=[['a', 2], ['b', 2]]) ... FAIL
+  test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function original_reserve at 0x1048dc7c0>, rejected_items=[['b', 2], ['a', 2]]) ... FAIL
+  test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function InventoryTests.test_whole_order_rejection_and_sequential_stock.<locals>.<lambda> at 0x109b15300>, rejected_items=[['a', 2], ['b', 2]]) ... FAIL
+  test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function InventoryTests.test_whole_order_rejection_and_sequential_stock.<locals>.<lambda> at 0x109b15300>, rejected_items=[['b', 2], ['a', 2]]) ... FAIL
+
+======================================================================
+FAIL: test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function original_reserve at 0x1048dc7c0>, rejected_items=[['a', 2], ['b', 2]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-5cw70d8q/worker/tests/test_inventory.py", line 23, in test_whole_order_rejection_and_sequential_stock
+    self.assertEqual(remaining, {"a": 0, "b": 0, "untouched": 7})
+AssertionError: {'a': -3, 'b': -2, 'untouched': 7} != {'a': 0, 'b': 0, 'untouched': 7}
+- {'a': -3, 'b': -2, 'untouched': 7}
+?       ^^       ^^
+
++ {'a': 0, 'b': 0, 'untouched': 7}
+?       ^       ^
+
+
+======================================================================
+FAIL: test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function original_reserve at 0x1048dc7c0>, rejected_items=[['b', 2], ['a', 2]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-5cw70d8q/worker/tests/test_inventory.py", line 23, in test_whole_order_rejection_and_sequential_stock
+    self.assertEqual(remaining, {"a": 0, "b": 0, "untouched": 7})
+AssertionError: {'a': -3, 'b': -2, 'untouched': 7} != {'a': 0, 'b': 0, 'untouched': 7}
+- {'a': -3, 'b': -2, 'untouched': 7}
+?       ^^       ^^
+
++ {'a': 0, 'b': 0, 'untouched': 7}
+?       ^       ^
+
+
+======================================================================
+FAIL: test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function InventoryTests.test_whole_order_rejection_and_sequential_stock.<locals>.<lambda> at 0x109b15300>, rejected_items=[['a', 2], ['b', 2]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-5cw70d8q/worker/tests/test_inventory.py", line 23, in test_whole_order_rejection_and_sequential_stock
+    self.assertEqual(remaining, {"a": 0, "b": 0, "untouched": 7})
+AssertionError: {'a': -3, 'b': -2, 'untouched': 7} != {'a': 0, 'b': 0, 'untouched': 7}
+- {'a': -3, 'b': -2, 'untouched': 7}
+?       ^^       ^^
+
++ {'a': 0, 'b': 0, 'untouched': 7}
+?       ^       ^
+
+
+======================================================================
+FAIL: test_whole_order_rejection_and_sequential_stock (test_inventory.InventoryTests.test_whole_order_rejection_and_sequential_stock) (api=<function InventoryTests.test_whole_order_rejection_and_sequential_stock.<locals>.<lambda> at 0x109b15300>, rejected_items=[['b', 2], ['a', 2]])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/7w/2jmyflc53t3fhsxzmf590wk80000gn/T/canary-5cw70d8q/worker/tests/test_inventory.py", line 23, in test_whole_order_rejection_and_sequential_stock
+    self.assertEqual(remaining, {"a": 0, "b": 0, "untouched": 7})
+AssertionError: {'a': -3, 'b': -2, 'untouched': 7} != {'a': 0, 'b': 0, 'untouched': 7}
+- {'a': -3, 'b': -2, 'untouched': 7}
+?       ^^       ^^
+
++ {'a': 0, 'b': 0, 'untouched': 7}
+?       ^       ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=4)

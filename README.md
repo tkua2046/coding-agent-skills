@@ -2,7 +2,7 @@
 
 Four reusable English skills for taking a feature from requirements to reviewed code and delivery. Each skill is independently copyable and includes its own prompts and templates.
 
-Current status: a revised candidate awaiting owner review. [Actual agent-test results](docs/validation/canary/INDEX.md) include unresolved failures; this is not a release-ready claim.
+Current status: a revised candidate awaiting owner review. [Actual agent-test results](docs/validation/canary/INDEX.md) retain original failures, inconclusive scores and current release acceptance gaps.
 
 ## Choose an operation
 
@@ -41,6 +41,17 @@ Example requests:
 For example: “Use $feature-design and $implementation-plan for this local extension. Choose appropriate depth; a combined note/review is fine. Then use $stage-development to implement with the existing checks and independent code review. Leave human acceptance pending for me.”
 
 Existing repository/user requirements take precedence. Plans own outcomes, dependencies and acceptance; code/tests own implementation detail. Update only affected decisions and pending work. Reviews can accept sufficient work; material findings need a concrete consequence and an affected recheck. Existing gates and real authorization remain in force on the short route.
+
+## Artifact guides
+
+The selected operation loads its relevant guidance; you do not need to paste a large formatting prompt each time. Templates are adaptable examples, not mandatory sections or separate files. After-generation checks are silent unless they uncover a problem.
+
+| Artifact | Starting point | Author/reviewer checks |
+|---|---|---|
+| Design: choices, reasons and consequences | [Design template](skills/feature-design/assets/design.template.md) | [Design checks](skills/feature-design/references/artifact-checks.md#design) |
+| Plan: delivery outcomes, dependencies and acceptance | [Plan template](skills/implementation-plan/assets/implementation-plan.template.md) | [Plan checks](skills/implementation-plan/references/artifact-checks.md#plan) |
+| Review: actionable findings and verified dispositions | [Review template](skills/feature-design/assets/review.template.md) | [Review checks](skills/feature-design/references/artifact-checks.md#review) |
+| Handoff: current execution state and evidence links | [Stage record](skills/stage-development/assets/stage-record.template.md) | [Execution and resumption](skills/stage-development/prompts/execute-stage.md) |
 
 ## Limits and references
 

@@ -1,0 +1,28 @@
+{
+  "case": "smoke-transfer-design",
+  "report": "docs/validation/canary/20260907T165404-dbff5d00e40a4d57b9b19dd41a01b302/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-operation"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 126.174,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 3,
+        "lines": 4,
+        "bytes": 878
+      },
+      "final": {
+        "files": 3,
+        "lines": 66,
+        "bytes": 9521
+      }
+    }
+  },
+  "error": null
+}

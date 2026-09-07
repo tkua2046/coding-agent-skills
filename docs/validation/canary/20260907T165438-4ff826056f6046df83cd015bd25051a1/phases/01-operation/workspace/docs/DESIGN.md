@@ -1,0 +1,53 @@
+# Recoverable configuration import
+
+Import a replacement JSON object without losing the previously usable configuration. The proposed decision is to validate and stage the candidate beside `config.json`, retain the exact previous bytes in a durable recovery record, atomically replace the active file, and commit only after loading the replacement succeeds. Startup resolves an unfinished import before loading settings. This protects user-edited settings across invalid input, interrupted writes and failed activation; the cost is a recovery record, extra disk writes and startup recovery logic. Atomic replacement alone cannot undo a failed activation.
+
+For example, with usable configuration A, import B and interrupt the process after B replaces `config.json` but before activation commits. On restart, the pending recovery record causes A to be restored before normal loading, even if B parses successfully. Retrying B then safely activates and commits B. If B instead fails activation, A remains the usable configuration and B is reported as unsuccessful.
+
+Next implementation outcome: implement the import and startup recovery as one local increment, with failure-injection checks proving the example above and the acceptance cases below. No implementation is authorized by this draft, and no delivery plan or review report is created here.
+
+Decision: **proposed**, extending the accepted D1 baseline preserved verbatim below. Requirements: [REQUEST.md](../REQUEST.md). Code inspected: [importer.py](../importer.py). No blocking product decision remains; filesystem guarantees must be verified for the supported runtime during implementation.
+
+## Verified current behavior and boundary
+
+`load(path)` reads text and calls `json.loads`; it performs no object-type check. `replace(path, text)` calls `write_text` directly on the active path, then calls `load`. It has no staging, rollback or recovery. A malformed input therefore overwrites the old contents before failing; interruption during the write can leave a truncated file. There is no activation hook or startup recovery entry point in this fixture. Today activation means successfully loading the published file; recovery must precede that load.
+
+The active format and location remain a local JSON object in `config.json`. The starting state is an existing usable configuration, as required by the replacement request. The design adds private sibling transaction files, not a new settings format. One process writes; concurrent writers and remote stores remain outside scope. Activation has no external side effects in the inspected code; adding such effects would require revisiting rollback semantics.
+
+## Publication, activation and recovery
+
+1. Before an import or startup load, resolve any existing recovery record. Do not begin another transaction while recovery is unfinished. Read and retain the current usable configuration's exact bytes, including user formatting.
+2. Parse the candidate and require a JSON object. Apply the same validation used by startup before publication. Reject malformed JSON and non-object values without changing the active file. Write the candidate to a sibling staging file, flush it and synchronize it. All replacement temporaries must be on the same filesystem as the active file.
+3. Publish a synchronized recovery record atomically, then synchronize its directory before touching `config.json`. The record contains the exact old bytes and a phase, initially `pending`. A partially written record is never published. If staging or recording fails, leave the active file unchanged and report failure.
+4. Atomically replace `config.json` with the staged candidate and synchronize the directory. Load and validate the published configuration through the startup loading path. Keep the previous in-memory configuration until activation completes. A load or validation failure triggers restoration of the old bytes through a synchronized temporary file and atomic replacement.
+5. After successful loading, atomically change the recovery record to `committed` and synchronize its directory. This is the commit point; only then report success and expose the new in-memory configuration. Cleanup removes the record and unused staging files, with directory synchronization. Cleanup failure after commit does not turn a committed import into a failed activation; leave the committed record for the next recovery pass.
+
+A `pending` record means the old configuration wins, regardless of whether publication or loading had finished. Restore its old bytes atomically and synchronize before deleting the record; interruptions during restoration simply repeat restoration. A `committed` record means the new configuration wins: load and validate it before cleanup. If it cannot be loaded, retain the saved old bytes and restore the old configuration rather than discard the last usable copy. With no recovery record, load the active file normally; unpublished staging files can be discarded.
+
+If restoration fails (for example because the disk is full), keep the recovery record and previous in-memory settings, report the failure and refuse new imports. Startup may use the validated old bytes from the record while reporting recovery still pending; it must not use the uncommitted candidate. A malformed or unreadable recovery record is an error: preserve the files and stop activation rather than guess which configuration is safe. Corruption or loss of both copies is outside the interruption guarantee.
+
+Retry first completes recovery, then imports the supplied object normally. Reapplying an already committed object is safe because replacement and loading have no cumulative side effects. A caller interrupted after commit but before receiving success may therefore retry without needing to know whether the earlier call committed. Recovery itself must also tolerate repeated interruption.
+
+## Consequences and implementation constraints
+
+A recovery record is necessary because settings may have no other source. Validating first and using only an atomic rename would prevent partial active files but would discard A before knowing whether B activates. Keeping A until a recorded commit covers that failure window and makes restart behavior deterministic. An import interrupted before commit can be rolled back even if its candidate was valid; callers must wait for success or safely retry.
+
+Preserve the active file's access permissions when replacing it, and protect recovery and staging files at least as strictly because they contain settings. Do not log their contents. Use standard local filesystem operations; no new dependency is required. Publication ordering relies on atomic same-filesystem replacement and successful file/directory synchronization. Verify those operations on the supported runtime and filesystem before shipping. If the required operations are unsupported, fail before publication rather than fall back to direct overwriting. This design covers process interruption and write/activation errors; it does not claim survival of storage loss or hardware that fails to honor synchronization.
+
+## Acceptance examples
+
+- From A, malformed JSON or valid JSON such as `[]`, `null` or `42` fails validation; A's bytes and loaded settings remain unchanged. `{}` is a valid replacement object.
+- From A, a valid object B completes publication, loading and commit; both the returned settings and a subsequent startup load use B.
+- Interrupt candidate or recovery-record staging: startup still uses A. Interrupt after publishing the pending record, during active replacement, or after loading B but before commit: startup restores A. No partial candidate becomes active.
+- Force loading B to fail after publication: the import reports failure, A is restored and restart loads A. Repeating the import fails safely again if the cause persists, or commits B if the cause is resolved.
+- Interrupt rollback itself or retry with recovery still pending: recovery repeats safely, keeping the saved A until restoration succeeds. Force restoration to fail: A remains available in the record and no new import may overwrite it.
+- Interrupt after committed-record publication or during cleanup: startup uses B and finishes cleanup. Retry B after a lost success response: the resulting configuration is still B.
+
+Failure-injection checks should exercise these boundaries using temporary local files, compare the previous bytes as well as loaded values, and invoke recovery afresh to model restart. They are the next implementation's validation obligations; none were executed as part of this design-only amendment.
+
+## Accepted historical material (preserved verbatim)
+
+The following is the supplied accepted version, captured here because no immutable reviewed-version link was supplied. Its direct-write description records the baseline, not the proposed import behavior.
+
+# Accepted configuration D1
+The active configuration is a local JSON object loaded at startup. It contains user-edited settings that may not be recoverable from another source. Current replacement writes directly to the active file. This accepted baseline description must remain traceable when revised.

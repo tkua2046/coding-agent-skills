@@ -1,0 +1,28 @@
+{
+  "case": "v4-migration-risk",
+  "report": "docs/validation/canary/20260907T172024-c7f03e138c6e4f7bb5f1b9f0cd49cbd4/report.json",
+  "status": "pass",
+  "observations": {
+    "executed_phases": [
+      "01-plan"
+    ],
+    "skipped_phases": [],
+    "unreached_phases": [],
+    "worker_elapsed_seconds": 339.294,
+    "measurement": "Recorded worker CLI/model/tool/wait wall time; excludes reader/grader. Not active inference time or a cost estimate; comparisons are descriptive at matched settings.",
+    "documents": {
+      "scope": ".md/.txt/.rst files, excluding supplied skills",
+      "initial": {
+        "files": 6,
+        "lines": 21,
+        "bytes": 1307
+      },
+      "final": {
+        "files": 10,
+        "lines": 268,
+        "bytes": 18350
+      }
+    }
+  },
+  "error": null
+}

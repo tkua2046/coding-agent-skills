@@ -1,0 +1,58 @@
+{
+  "criteria": [
+    {
+      "id": "whole-invariant",
+      "status": "pass",
+      "reason": "The review correctly keeps R1 open: rejecting an unknown command preserves cursor 4 but closes the selection. It identifies the trigger, consequence, minimal correction and verification of both fields, supported by candidate code and recorded execution.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/session.py",
+          "quote": "        self.selection = \"closed\"\n        if command not in {\"next\", \"previous\"}:\n            raise ValueError(\"unknown command\")"
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "prior=None: before=(4, 'open'), after=(4, 'closed'), ValueError=True, preserves_both=False"
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Verdict: **needs changes**. Open finding: **R1**. Next action: validate the command before changing either state field, then recheck preservation of both fields on rejection."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Minimal correction: move command validation ahead of the selection assignment as well as the cursor update. Verify that an unknown command raises `ValueError` and leaves both fields equal to their captured prior values, including a fresh session with an open selection."
+        }
+      ]
+    },
+    {
+      "id": "review-history",
+      "status": "pass",
+      "reason": "The original R1 record remains intact. The recheck identifies the candidate by HEAD and content hash, distinguishes the author's partial-fix claim from reviewer observations, and accurately reports the diagnostic failure without claiming contract success or human approval.",
+      "evidence": [
+        {
+          "path": "artifacts/01-operation/workspace/reviews/round1.md",
+          "quote": "R1 open: an unknown command changes cursor and selection before raising. Both must be preserved. Author now reports fixed by moving cursor update after validation. No reviewer has yet verified the new candidate."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "Candidate HEAD: `3523c4fe9353a7a27526a7d9f0065fb8ad783fe9`; reviewed `session.py` SHA-256: `a2e28ac4bfc03a0a481453930578a6f659a933ec5663c86cdfdd8a02bf931921`."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "The prior report records the author's claim that moving the cursor update after validation fixes it. Inspection and execution verify cursor preservation, but selection is still assigned `\"closed\"` before validation. R1 therefore remains open."
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "prior=None: before=(4, 'open'), after=(4, 'closed'), ValueError=True, preserves_both=False"
+        },
+        {
+          "path": "artifacts/01-operation/execution.json",
+          "quote": "Verified: candidate, requirements, and original review unchanged."
+        },
+        {
+          "path": "artifacts/01-operation/workspace/REVIEW.md",
+          "quote": "The experiment completed successfully as a diagnostic script; this does not mean the contract passed."
+        }
+      ]
+    }
+  ]
+}

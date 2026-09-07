@@ -1,0 +1,5 @@
+1. Reject an entire order if any item exceeds stock available when that order starts, record `accepted=False`, and continue with later orders. Accepted orders deduct all items; empty orders succeed. Preserve stock and nested order inputs, integer counts, both APIs, the result shape, and existing validation/error behavior.
+
+2. Check every item against the current stock copy before deducting anything, then deduct only if all quantities are available. This prevents partial deductions without rollback bookkeeping and requires at most two passes over accepted orders. Unique SKUs make aggregation unnecessary.
+
+3. S1—implementing rejection without partial deductions—is complete, including engine changes, focused regression coverage, README updates, checks, and independent reviews with no open findings. Owner review is next: the owner must record acceptance or feedback. Human acceptance remains pending; this machine comprehension probe does not establish human usability.
