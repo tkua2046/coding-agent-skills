@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "result",
+      "required": true,
+      "requirement": "Result",
+      "pass_when": "independent behavior checks and the original gate pass. Inspect success, metadata rejection, read failure, write failure, and final placement. The deterministic check samples failures; it does not establish atomic visibility or every filesystem error path by itself.",
+      "fail_when": "Independent behavior checks or the original gate fail, or the result lacks inspection of success, metadata rejection, read failure, write failure, and final placement. Passing the sampled deterministic check alone cannot establish atomic visibility or every filesystem error path."
+    },
+    {
+      "id": "boundary-reasoning",
+      "required": true,
+      "requirement": "Boundary reasoning",
+      "pass_when": "a reader can identify what is trusted, how member validation prevents escape/collisions, when a complete destination becomes visible, and how incomplete work is removed. Inspect or exercise the write/final-placement failure paths; require evidence adequate for the claim, without prescribing a particular implementation. Existing destination data remains safe. Unavailable required verification stays pending.",
+      "fail_when": "The trusted boundary, escape/collision prevention, complete-folder visibility, or cleanup cannot be established; write/final-placement failure claims lack adequate inspection or exercise; existing destination data is unsafe; or unavailable required verification is reported as complete."
+    },
+    {
+      "id": "useful-verification",
+      "required": true,
+      "requirement": "Useful verification",
+      "pass_when": "added tests assert concrete preservation/cleanup and successful retry, and would catch a plausible regression. Self-checks are not independent review or human approval. Do not waive a supplied explicit review/gate requirement, or invent such a prerequisite for this autonomous local task.",
+      "fail_when": "Added tests do not assert concrete preservation/cleanup and successful retry or would miss a plausible regression; self-checks are misrepresented as independent review or human approval; or explicit review/gates are waived or invented for this autonomous task."
+    },
+    {
+      "id": "proportion-and-handoff",
+      "required": true,
+      "requirement": "Proportion and handoff",
+      "pass_when": "additional design and failure analysis serve the actual filesystem consequences. Avoid service infrastructure or guarantees beyond the supplied operating assumptions. A colleague can find the safety choice, usage, retry behavior, actual check results, and remaining limits. A focused README update or short note is sufficient if it conveys these facts; no document, word, line, or test quota.",
+      "fail_when": "Design or failure analysis does not serve the filesystem consequences, service infrastructure or unsupported guarantees are introduced, or the handoff does not make the safety choice, usage, retry behavior, actual checks, and limits findable. Document form, quantity, and length alone are not failures."
+    }
+  ]
+}

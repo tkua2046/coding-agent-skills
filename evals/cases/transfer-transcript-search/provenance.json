@@ -1,0 +1,103 @@
+{
+  "source_type": "Predeclared external transfer task, integrated as a durable regression case",
+  "original_packet": "/tmp/coding-skills-transfer-20260907",
+  "original_task": "transcript-search",
+  "frozen_at_utc": "2026-09-07T19:21:38.909057+00:00",
+  "predeclared_contract_sha256": "c44d63de860431b05886cdce68325f0c967c9ef26dd64e5ad397e399b4e2d613",
+  "freeze_archive": "archive/FREEZE.json",
+  "copied_files": {
+    "fixture/AGENTS.md": {
+      "source": "transcript-search/fixture/AGENTS.md",
+      "sha256": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258"
+    },
+    "fixture/README.md": {
+      "source": "transcript-search/fixture/README.md",
+      "sha256": "3abf3f404a918eb8aad30cc7388b6c60c3cd97ffcc999541180b0ebe7b508057"
+    },
+    "fixture/REQUEST.md": {
+      "source": "transcript-search/fixture/REQUEST.md",
+      "sha256": "a0d8147046ecfc018c4ba0355320c1333c97321be623116beb9f4f3d58d7f250"
+    },
+    "fixture/examples/interview.tsv": {
+      "source": "transcript-search/fixture/examples/interview.tsv",
+      "sha256": "76ac1e701099ac8110467ebe2333103d74474d08d205f9f8864819fbee56e0e2"
+    },
+    "fixture/tests/test_transcript.py": {
+      "source": "transcript-search/fixture/tests/test_transcript.py",
+      "sha256": "41867ed977eaf4ce84e94f093989c6eea443c4fd08233d2ef56f44c96ab98098"
+    },
+    "fixture/transcript.py": {
+      "source": "transcript-search/fixture/transcript.py",
+      "sha256": "381212a652789e189885354add3cabb9e57f75ba75fede57d25830b812fe8524"
+    },
+    "REVIEW.md": {
+      "source": "transcript-search/REVIEW.md",
+      "sha256": "ed0c4ad4d53d7b883d92a43c8aa0e250499182ef1d3c99d1798c496da26e26ad"
+    },
+    "archive/accept.py": {
+      "source": "transcript-search/accept.py",
+      "sha256": "5b09aa4c1a0b38d9c38119d5dd9d4a906420c9b5a26d8b5bfce7ba5c27520829"
+    },
+    "archive/FREEZE.json": {
+      "source": "FREEZE.json",
+      "sha256": "4aa8f7e8ba0382b0a3fbf72d5ea35842da3f2de22a136988de0933aba8bcd2c3"
+    }
+  },
+  "checker_adaptation": {
+    "original": "archive/accept.py",
+    "check_file": "accept.py",
+    "original_sha256": "5b09aa4c1a0b38d9c38119d5dd9d4a906420c9b5a26d8b5bfce7ba5c27520829",
+    "adapted_sha256": "34745927959870803dc836985ba8e894e96bf4ab88b88208cded11b9c7c819c6",
+    "replacements": [
+      {
+        "before": "ROOT = Path(__file__).resolve().parent\nwork = Path(sys.argv[1]).resolve()\n",
+        "after": "work = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()\nROOT = work\n"
+      },
+      {
+        "before": "Usage: python accept.py WORKER_DIRECTORY.",
+        "after": "Usage: python accept.py [WORKER_DIRECTORY], or python -c SOURCE in the workspace."
+      }
+    ],
+    "reason": "The existing runner executes Python source using -c in the worker workspace, without __file__ or a workspace argument. Use optional argv with Path.cwd() fallback and put temporary check data in that same writable workspace. All behavioral assertions and test data are unchanged."
+  },
+  "request_mapping": {
+    "original": "fixture/REQUEST.md",
+    "phase_request": "requests/01.md",
+    "transformation": "Exact original request followed only by the neutral supplied-skill/AGENTS invocation.",
+    "appended_invocation": "\nUse the supplied skills/feature-design, skills/implementation-plan, skills/stage-development, and skills/dev-workflow as applicable. Read AGENTS.md.\n"
+  },
+  "rubric_mapping": [
+    {
+      "criterion_id": "result",
+      "original_review_item": 1,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "proportion",
+      "original_review_item": 2,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "usability",
+      "original_review_item": 3,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "truthfulness-and-scope",
+      "original_review_item": 4,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    }
+  ],
+  "grading_context": "The unchanged REVIEW.md supplies the evaluator evidence instructions. Each item maps to one required criterion; pass_when is verbatim and fail_when restates violations. Missing evidence is inconclusive, not pass. No reviewer deliverable or additional workflow is added to worker scope.",
+  "preservation_scope": "Preserve the original source request at REQUEST.md during execution. Implementation, tests, and useful documentation remain editable; initial fixture files are copied byte-for-byte.",
+  "prior_experiment_status": "Main reports initial readable-/tmp isolation probes stopped all four attempts before model execution; evidence was retained, evaluator material relocated under ROOT/artifacts/repair/transfer-packet, denied reads verified, and both sides repeated into *-r2. Those outputs remain acceptance experiments, not formal calibrated runs of these newly integrated cases. This integration does not regrade or relabel them.",
+  "integration_scope": "Only evals/cases/transfer-transcript-search and evals/cases/transfer-packet-import are written. No model run, task solution, harness, publication, or commit is included.",
+  "integration_validation": {
+    "fixture_bytes": "unchanged",
+    "review_criteria": "one-to-one verbatim pass conditions",
+    "original_unittest_gate": "pass",
+    "adapted_checker_entrypoints": "both reach expected unfinished-baseline rejection",
+    "expected_gap": "missing requested find_cues API",
+    "limitations": "Baseline rejection verifies compatibility entrypoints, not all passing branches or skill behavior. No model runs or full suite were performed."
+  }
+}

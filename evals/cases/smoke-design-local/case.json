@@ -1,0 +1,35 @@
+{
+  "id": "smoke-design-local",
+  "version": 1,
+  "tier": "smoke",
+  "title": "Make a row-limit decision usable ahead of accepted history",
+  "skills": [
+    "feature-design"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "exporter.py",
+        "REQUEST.md"
+      ]
+    }
+  ]
+}

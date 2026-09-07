@@ -1,0 +1,41 @@
+{
+  "id": "release-stale",
+  "version": 1,
+  "tier": "heavy",
+  "title": "Release assessment with stale and pending supplied evidence",
+  "skills": [
+    "dev-workflow"
+  ],
+  "phases": [
+    {
+      "id": "01-assess",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "local-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "preserved-baseline",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        ".gitignore",
+        "app.py",
+        "tests/test_app.py",
+        "VERSION",
+        "README.md",
+        "CHANGELOG.md",
+        "delivery-state.json"
+      ]
+    }
+  ]
+}

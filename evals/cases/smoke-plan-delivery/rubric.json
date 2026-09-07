@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "delivery-contract",
+      "required": true,
+      "requirement": "Plan coherent observable outcomes and compatibility dependencies.",
+      "pass_when": "Exporter opt-in support is available before Client A relies on it; retains unchanged default for Client B, includes independent behavior acceptance and meaningful review/commit boundaries. Equivalent safe rollout organization is acceptable.",
+      "fail_when": "Breaks Client B, makes Client A depend on unavailable exporter behavior, or defers tests until after an otherwise falsely complete increment."
+    },
+    {
+      "id": "maintainable-plan",
+      "required": true,
+      "requirement": "Plan decisions are maintainable separately from code/tests.",
+      "pass_when": "Readable next outcome and dependencies with decisive acceptance; links design and existing gate instead of repeating them; no invented function/test inventory or full release process.",
+      "fail_when": "Plan is primarily a paraphrase of functions/test methods, duplicates policy per stage, or requires extra stages with no delivery/dependency consequence."
+    }
+  ]
+}

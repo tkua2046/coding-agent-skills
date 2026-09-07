@@ -1,0 +1,41 @@
+{
+  "id": "transfer-transcript-search",
+  "version": 1,
+  "tier": "heavy",
+  "title": "Deliver literal transcript search with neighboring cues",
+  "skills": [
+    "feature-design",
+    "implementation-plan",
+    "stage-development",
+    "dev-workflow"
+  ],
+  "phases": [
+    {
+      "id": "01-implement",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "original-source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "REQUEST.md"
+      ]
+    },
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "behavior",
+      "kind": "python",
+      "file": "accept.py"
+    }
+  ]
+}

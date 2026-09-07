@@ -1,0 +1,212 @@
+[
+  {
+    "repo": "obra/superpowers",
+    "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "path": "LICENSE",
+    "blob_sha": "abf0390320aa14406af7a520b9b0739fdda9bf08",
+    "archive": "docs/research/workflow/sources/obra--superpowers/LICENSE.txt",
+    "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+    "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/LICENSE",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "obra/superpowers",
+    "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "path": "skills/writing-plans/SKILL.md",
+    "blob_sha": "f74605bfa9af7a3fb7e4ad7f17750a86a9b0d728",
+    "archive": "docs/research/workflow/sources/obra--superpowers/skills--writing-plans--SKILL.md.txt",
+    "sha256": "48508f44bbfd7d24b029fbf3a314f3cd14c9615599059366e922f47b8dc08cf2",
+    "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/SKILL.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "obra/superpowers",
+    "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "path": "skills/writing-plans/plan-document-reviewer-prompt.md",
+    "blob_sha": "1c12c1d6180395262d7150bdb12a9a90efc9cfa0",
+    "archive": "docs/research/workflow/sources/obra--superpowers/skills--writing-plans--plan-document-reviewer-prompt.md.txt",
+    "sha256": "aa728b96aad603c8be28875a4305637f6c984aa81ffcadcb13e743202fa2a0c7",
+    "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/plan-document-reviewer-prompt.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "obra/superpowers",
+    "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "path": "skills/brainstorming/SKILL.md",
+    "blob_sha": "b56a3b5ed6ea0d6216501e0e401ecb00a1b4675f",
+    "archive": "docs/research/workflow/sources/obra--superpowers/skills--brainstorming--SKILL.md.txt",
+    "sha256": "74edf03ea6d24ef53db48677b93558d14a979bdf052ca3f57ecdca0c66791608",
+    "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/brainstorming/SKILL.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "obra/superpowers",
+    "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "path": "skills/requesting-code-review/SKILL.md",
+    "blob_sha": "fa4f2f9965591d6d8a7ef4ad47e6ba4d5ac344d0",
+    "archive": "docs/research/workflow/sources/obra--superpowers/skills--requesting-code-review--SKILL.md.txt",
+    "sha256": "d71cc01ba56d2325cf8af5f7c11837819b63ecd57de0bfdb812f7f3ff7751df8",
+    "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/requesting-code-review/SKILL.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/spec-kit",
+    "commit": "4a7341a93d944d6efe153b71da4a1adb9c2b578c",
+    "path": "LICENSE",
+    "blob_sha": "28a50fa22639e32febe14e4ffc7a732b0ba8c90a",
+    "archive": "docs/research/workflow/sources/github--spec-kit/LICENSE.txt",
+    "sha256": "2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
+    "url": "https://github.com/github/spec-kit/blob/4a7341a93d944d6efe153b71da4a1adb9c2b578c/LICENSE",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/spec-kit",
+    "commit": "4a7341a93d944d6efe153b71da4a1adb9c2b578c",
+    "path": "templates/plan-template.md",
+    "blob_sha": "36f2eab16880bac670fe43cbe7ef2b9bc8c3aa2f",
+    "archive": "docs/research/workflow/sources/github--spec-kit/templates--plan-template.md.txt",
+    "sha256": "dfba43da2b2a207ff8c177a0fba03af074fd45e261696b4b64172041fad2e992",
+    "url": "https://github.com/github/spec-kit/blob/4a7341a93d944d6efe153b71da4a1adb9c2b578c/templates/plan-template.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/spec-kit",
+    "commit": "4a7341a93d944d6efe153b71da4a1adb9c2b578c",
+    "path": "templates/tasks-template.md",
+    "blob_sha": "7fff087cc5a3c51a889d865fd9126607a032d233",
+    "archive": "docs/research/workflow/sources/github--spec-kit/templates--tasks-template.md.txt",
+    "sha256": "1e448e9153462e8c5b5a55231a54c756d870a82950d4dd9425a2bf5b7008a0d9",
+    "url": "https://github.com/github/spec-kit/blob/4a7341a93d944d6efe153b71da4a1adb9c2b578c/templates/tasks-template.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/spec-kit",
+    "commit": "4a7341a93d944d6efe153b71da4a1adb9c2b578c",
+    "path": "templates/spec-template.md",
+    "blob_sha": "ceb28776215a098e977650ac090c785dcbf53651",
+    "archive": "docs/research/workflow/sources/github--spec-kit/templates--spec-template.md.txt",
+    "sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+    "url": "https://github.com/github/spec-kit/blob/4a7341a93d944d6efe153b71da4a1adb9c2b578c/templates/spec-template.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/spec-kit",
+    "commit": "4a7341a93d944d6efe153b71da4a1adb9c2b578c",
+    "path": "spec-driven.md",
+    "blob_sha": "28259ae28f95d7dc0ec79977108f8a574731d98d",
+    "archive": "docs/research/workflow/sources/github--spec-kit/spec-driven.md.txt",
+    "sha256": "1517eba9868e7066541ffa484009d5eb9c7d8d04bf740dbfd86e5e88c396f0c6",
+    "url": "https://github.com/github/spec-kit/blob/4a7341a93d944d6efe153b71da4a1adb9c2b578c/spec-driven.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "LICENSE",
+    "blob_sha": "89bc5e962c9944cdb050887062afdaaf89be504a",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/LICENSE.txt",
+    "sha256": "e32449d23085399adc1222f7a17408b730550258e51627c153cb108ca9955823",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/LICENSE",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "skills/create-implementation-plan/SKILL.md",
+    "blob_sha": "4540a479c34d298d5f7e78f24d0806652411fcf8",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/skills--create-implementation-plan--SKILL.md.txt",
+    "sha256": "11caba1048cbdbfca6f7ce13a0e0580d6e9d943f7b775ee24978ece1d3334066",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/skills/create-implementation-plan/SKILL.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "skills/update-implementation-plan/SKILL.md",
+    "blob_sha": "4bd64725f520d8b9971f30bb321740be5ac1d08b",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/skills--update-implementation-plan--SKILL.md.txt",
+    "sha256": "08f62222ba518b54dd0f369c539f6f75dabb32893768e0cb2ff49ecb1e8cb7a9",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/skills/update-implementation-plan/SKILL.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "agents/implementation-plan.agent.md",
+    "blob_sha": "eb6d218c28c37fcde186aad1336d12f73683fcd7",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/agents--implementation-plan.agent.md.txt",
+    "sha256": "eec19038008d9a73d21ddf679babf1f0e971a1b3bee3d11e6d17fbdb2e5082d0",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/agents/implementation-plan.agent.md",
+    "license": "MIT; repository LICENSE archived alongside files"
+  },
+  {
+    "repo": "openai/skills",
+    "commit": "a5119697b819090e00e5d11ee1d86834d7c1043a",
+    "path": "skills/.experimental/create-plan/SKILL.md",
+    "blob_sha": "fdd0050da369d0c1f9122ecdd3a850316cdc9d33",
+    "archive": "docs/research/workflow/sources/openai--skills/skills--.experimental--create-plan--SKILL.md.txt",
+    "sha256": "e3c1af59fe8fc6a040f50504babb5003c4489eee4fcfd987794227758f7291a3",
+    "url": "https://github.com/openai/skills/blob/a5119697b819090e00e5d11ee1d86834d7c1043a/skills/.experimental/create-plan/SKILL.md",
+    "license": "Apache-2.0; historical file, removed from main; license archived"
+  },
+  {
+    "repo": "openai/skills",
+    "commit": "a5119697b819090e00e5d11ee1d86834d7c1043a",
+    "path": "skills/.experimental/create-plan/LICENSE.txt",
+    "blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+    "archive": "docs/research/workflow/sources/openai--skills/skills--.experimental--create-plan--LICENSE.txt.txt",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "url": "https://github.com/openai/skills/blob/a5119697b819090e00e5d11ee1d86834d7c1043a/skills/.experimental/create-plan/LICENSE.txt",
+    "license": "Apache-2.0; historical file, removed from main; license archived"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "agents/plan.agent.md",
+    "blob_sha": "69b63f083b376a9ba48c28ea84ee58c9e1de6557",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/agents--plan.agent.md.txt",
+    "sha256": "b5735cbb2af5da39738b5e47f8e60878cf5caf7c3e373e2e1ce3bd5665498f04",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/agents/plan.agent.md",
+    "license": "MIT; repository license archived"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "agents/planner.agent.md",
+    "blob_sha": "cb1518a913319d4ccd3723f116ad598e43204e2a",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/agents--planner.agent.md.txt",
+    "sha256": "58109e974ea551e1e6cfa0c2047d6d525cde6d0475d93a5d7665f04273060dfe",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/agents/planner.agent.md",
+    "license": "MIT; repository license archived"
+  },
+  {
+    "repo": "github/awesome-copilot",
+    "commit": "f38fb6cf039b835990d0f49dc161d7c2af99ef69",
+    "path": "skills/breakdown-plan/SKILL.md",
+    "blob_sha": "9200260a4a433347c7083684f5fcdcd2492c5b62",
+    "archive": "docs/research/workflow/sources/github--awesome-copilot/skills--breakdown-plan--SKILL.md.txt",
+    "sha256": "ce46dc0485b0ee3e7fc4172a507df685207b17806c9fa431bbf723308b8a2125",
+    "url": "https://github.com/github/awesome-copilot/blob/f38fb6cf039b835990d0f49dc161d7c2af99ef69/skills/breakdown-plan/SKILL.md",
+    "license": "MIT; repository license archived"
+  },
+  {
+    "repo": "openai/openai-cookbook",
+    "commit": "a78f3f37bd23637aac2b3f1e8b1251cf5bb9e1a7",
+    "path": "LICENSE",
+    "blob_sha": "e5ad2c5aa30343f143a5c418004ca1a8d2cfaff4",
+    "archive": "docs/research/workflow/sources/openai--openai-cookbook/LICENSE.txt",
+    "sha256": "13df7812ca53ecaae1cb4a868844bb598373047ae1d580e4debfbef1dd5b6915",
+    "url": "https://github.com/openai/openai-cookbook/blob/a78f3f37bd23637aac2b3f1e8b1251cf5bb9e1a7/LICENSE",
+    "license": "MIT"
+  },
+  {
+    "repo": "openai/openai-cookbook",
+    "commit": "a78f3f37bd23637aac2b3f1e8b1251cf5bb9e1a7",
+    "path": "articles/codex_exec_plans.md",
+    "blob_sha": "d9c8a75a8df6e78d59fd3d784727872272b4e19c",
+    "archive": "docs/research/workflow/sources/openai--openai-cookbook/articles--codex_exec_plans.md.txt",
+    "sha256": "a8f7bac9c378e853e09268518a2b4e59b8113c9f95cd53cb4144ca0d9534dc52",
+    "url": "https://github.com/openai/openai-cookbook/blob/a78f3f37bd23637aac2b3f1e8b1251cf5bb9e1a7/articles/codex_exec_plans.md",
+    "license": "MIT"
+  }
+]

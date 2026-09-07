@@ -1,0 +1,157 @@
+{
+  "source_type": "Predeclared external transfer task, integrated as a durable regression case",
+  "original_packet": "/tmp/coding-skills-transfer-20260907",
+  "original_task": "packet-import",
+  "frozen_at_utc": "2026-09-07T19:21:38.909057+00:00",
+  "predeclared_contract_sha256": "c44d63de860431b05886cdce68325f0c967c9ef26dd64e5ad397e399b4e2d613",
+  "freeze_archive": "archive/FREEZE.json",
+  "copied_files": {
+    "fixture/AGENTS.md": {
+      "source": "packet-import/fixture/AGENTS.md",
+      "sha256": "640fa2ab6b7ed704bf0d630fb4e821c317d7dfd404d213efea739f814f02d258"
+    },
+    "fixture/README.md": {
+      "source": "packet-import/fixture/README.md",
+      "sha256": "2f7a1a7cc2ffcea2003382317b296ac747727512c071296510c3a98b304f8fb7"
+    },
+    "fixture/REQUEST.md": {
+      "source": "packet-import/fixture/REQUEST.md",
+      "sha256": "f93501cb34be27fa9d7900be32eaa5177a1b7c532424d8e2f16642b4db366f6e"
+    },
+    "fixture/packet_import.py": {
+      "source": "packet-import/fixture/packet_import.py",
+      "sha256": "a3fe1af6585b078acbc09b3b2b352a853f85bb5e608895f1e685e1fc185c61fe"
+    },
+    "fixture/tests/test_packet_import.py": {
+      "source": "packet-import/fixture/tests/test_packet_import.py",
+      "sha256": "20e1cd6dc63d852d3a2199a2231fd0657e03427f8e36f096818f4ec7a4f31483"
+    },
+    "REVIEW.md": {
+      "source": "packet-import/REVIEW.md",
+      "sha256": "8a6dc4677b5795bd00eece3e9583eb5d9ad6c7cf88dc21f82af9590c8f193e67"
+    },
+    "archive/accept.py": {
+      "source": "packet-import/accept.py",
+      "sha256": "db6a7c34b0f4ee9c5dff89ebdf4ffc709b27c1ee52e8152dff70017d3a285210"
+    },
+    "archive/FREEZE.json": {
+      "source": "FREEZE.json",
+      "sha256": "4aa8f7e8ba0382b0a3fbf72d5ea35842da3f2de22a136988de0933aba8bcd2c3"
+    }
+  },
+  "checker_adaptation": {
+    "original": "archive/accept.py",
+    "check_file": "accept.py",
+    "original_sha256": "db6a7c34b0f4ee9c5dff89ebdf4ffc709b27c1ee52e8152dff70017d3a285210",
+    "adapted_sha256": "c8fbae423c906accd1689927997563d5914c54ba6a384512d463e5739853f90b",
+    "replacements": [
+      {
+        "before": "ROOT = Path(__file__).resolve().parent\nwork = Path(sys.argv[1]).resolve()\n",
+        "after": "work = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()\nROOT = work\n"
+      },
+      {
+        "before": "Usage: python accept.py WORKER_DIRECTORY.",
+        "after": "Usage: python accept.py [WORKER_DIRECTORY], or python -c SOURCE in the workspace."
+      }
+    ],
+    "reason": "The existing runner executes Python source using -c in the worker workspace, without __file__ or a workspace argument. Use optional argv with Path.cwd() fallback and put temporary check data in that same writable workspace. All behavioral assertions and test data are unchanged."
+  },
+  "request_mapping": {
+    "original": "fixture/REQUEST.md",
+    "phase_request": "requests/01.md",
+    "transformation": "Exact original request followed only by the neutral supplied-skill/AGENTS invocation.",
+    "appended_invocation": "\nUse the supplied skills/feature-design, skills/implementation-plan, skills/stage-development, and skills/dev-workflow as applicable. Read AGENTS.md.\n"
+  },
+  "rubric_mapping": [
+    {
+      "criterion_id": "result",
+      "original_review_item": 1,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "boundary-reasoning",
+      "original_review_item": 2,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "useful-verification",
+      "original_review_item": 3,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    },
+    {
+      "criterion_id": "proportion-and-handoff",
+      "original_review_item": 4,
+      "pass_when": "verbatim body of the corresponding original REVIEW.md item"
+    }
+  ],
+  "grading_context": "The unchanged REVIEW.md supplies the evaluator evidence instructions. Each item maps to one required criterion; pass_when is verbatim and fail_when restates violations. Missing evidence is inconclusive, not pass. No reviewer deliverable or additional workflow is added to worker scope.",
+  "preservation_scope": "Preserve the original source request at REQUEST.md during execution. Implementation, tests, and useful documentation remain editable; initial fixture files are copied byte-for-byte.",
+  "prior_experiment_status": "Main reports initial readable-/tmp isolation probes stopped all four attempts before model execution; evidence was retained, evaluator material relocated under ROOT/artifacts/repair/transfer-packet, denied reads verified, and both sides repeated into *-r2. Those outputs remain acceptance experiments, not formal calibrated runs of these newly integrated cases. This integration does not regrade or relabel them.",
+  "integration_scope": "Only evals/cases/transfer-transcript-search and evals/cases/transfer-packet-import are written. No model run, task solution, harness, publication, or commit is included.",
+  "integration_validation": {
+    "fixture_bytes": "unchanged",
+    "review_criteria": "one-to-one verbatim pass conditions",
+    "original_unittest_gate": "pass",
+    "adapted_checker_entrypoints": "both reach expected unfinished-baseline rejection",
+    "expected_gap": "unsafe preview accepted: 0",
+    "limitations": "Baseline rejection verifies compatibility entrypoints, not all passing branches or skill behavior. No model runs or full suite were performed."
+  },
+  "regression_addenda": [
+    {
+      "case_version": 2,
+      "recorded_at_utc": "2026-09-07T19:47:06.180647+00:00",
+      "reason": "Ordinary implementation defects R1/R2 found by independent review under the unchanged original contract. Add the observed damaged-DEFLATE API/CLI/cleanup/retry regression; no new skill rule, rubric, request, or review mechanism.",
+      "historical_provenance": "checker_adaptation and integration_validation above describe version 1 only. The active version 2 checker adds behavior checks and is not an exact minimal runtime adaptation of the frozen original.",
+      "v1_adapted_checker": {
+        "archive": "archive/accept.v1-adapted.py",
+        "sha256": "c8fbae423c906accd1689927997563d5914c54ba6a384512d463e5739853f90b"
+      },
+      "frozen_original_checker": {
+        "archive": "archive/accept.py",
+        "sha256": "db6a7c34b0f4ee9c5dff89ebdf4ffc709b27c1ee52e8152dff70017d3a285210"
+      },
+      "v2_checker": {
+        "file": "accept.py",
+        "sha256": "a68091478899e5f0a39b3c0af0456b0e926c6c82c349635da47bc379a2133dbc"
+      },
+      "added_regression": "Create a real ZIP_DEFLATED archive, set the first compressed block BTYPE to reserved value 3, require documented API error classes and a clean failing CLI, compare full snapshots after each failure, restore valid bytes, and verify same-destination retry, exact contents, and unchanged neighbors. Accumulate API/CLI error-shape findings so both paths are exercised on pre-repair outputs.",
+      "original_review": {
+        "local_locator": "artifacts/repair/transfer-review.md",
+        "sha256": "3eb1791472150fdf01d2b418b525aa41eb217aec11fb0aa4b28bf5f2786f5f78",
+        "findings": [
+          "R1",
+          "R2"
+        ],
+        "evidence_index_locator": "docs/EVIDENCE.md",
+        "publication_status": "Pending publication by main; resolve an immutable evidence-tree link through docs/EVIDENCE.md. The local locator is not published release evidence."
+      },
+      "validation": {
+        "local_locator": "artifacts/repair/packet-import-v2-regression",
+        "results": [
+          {
+            "side": "baseline-r2",
+            "exit_code": 1,
+            "expected_rejection": true,
+            "elapsed_seconds": 0.258582
+          },
+          {
+            "side": "candidate-r2",
+            "exit_code": 1,
+            "expected_rejection": true,
+            "elapsed_seconds": 0.251925
+          }
+        ],
+        "interpretation": "Expected negative controls against copies of both saved pre-repair implementations. Failure stdout/stderr retained. No model runs; original worker outputs and old raw reports are unchanged and not regraded. Positive closure awaits main's one authorized follow-up and affected verification."
+      },
+      "scope_preserved": "Original fixture, REQUEST, phase request, REVIEW, rubric, frozen archive, and skills are unchanged.",
+      "publication": {
+        "evidence_commit": "9957cffae75f7e51f351bac2905573bbb116ae5c",
+        "original_review_url": "https://github.com/tkua2046/coding-agent-skills/blob/9957cffae75f7e51f351bac2905573bbb116ae5c/packet-import-v2-regression/original-review.md",
+        "negative_controls_url": "https://github.com/tkua2046/coding-agent-skills/blob/9957cffae75f7e51f351bac2905573bbb116ae5c/packet-import-v2-regression/summary.json",
+        "followup_review_url": "https://github.com/tkua2046/coding-agent-skills/blob/9957cffae75f7e51f351bac2905573bbb116ae5c/transfer-review.md",
+        "followup_checks_url": "https://github.com/tkua2046/coding-agent-skills/tree/9957cffae75f7e51f351bac2905573bbb116ae5c/packet-fix/recheck",
+        "disposition": "Independent recheck closed R1/R2 for the repaired candidate after a separate follow-up. Both original attempts remain failed; preceding pending-publication/closure statements record the earlier cutoff."
+      }
+    }
+  ]
+}

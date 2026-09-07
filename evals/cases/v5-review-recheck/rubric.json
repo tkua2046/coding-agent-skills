@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "phase-01-incomplete",
+      "required": true,
+      "requirement": "Phase 01 retains unresolved R1 at D2.",
+      "pass_when": "Identifies that (2,3,1) becomes (3,3,1) on blocked F, keeps R1 open and withholds readiness despite preserved heading.",
+      "fail_when": "Closes R1 after checking heading alone, accepting corrupted position."
+    },
+    {
+      "id": "phase-02-corrected",
+      "required": true,
+      "requirement": "Phase 02 rechecks the entire invariant at D3.",
+      "pass_when": "Verifies both coordinates and heading remain unchanged, failure is reported and later commands continue; closes R1 with D3 evidence unless another concrete blocker is found.",
+      "fail_when": "Carries an obsolete D2 defect into D3 or closes R1 without checking the full pose."
+    },
+    {
+      "id": "review-history",
+      "required": true,
+      "requirement": "Tie each verdict to identifiable content and preserve rounds.",
+      "pass_when": "Round 1 remains available; each report identifies document revision plus hash or exact reviewed excerpt, with current status before history.",
+      "fail_when": "Overwrites failed recheck evidence or cites only HEAD for differing overlaid documents."
+    },
+    {
+      "id": "review-boundary",
+      "required": true,
+      "requirement": "Separate static review from execution and human acceptance.",
+      "pass_when": "Reports document-level verification only and edits reports rather than product artifacts.",
+      "fail_when": "Claims runtime tests or human approval from the scripted corrected document."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "route-uncertain",
+  "version": 1,
+  "tier": "heavy",
+  "title": "Plan the next step for slow order reports",
+  "skills": [
+    "feature-design",
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-plan",
+      "request": "requests/01.md"
+    }
+  ],
+  "workflow_budget_seconds": 300,
+  "reading_probe": {
+    "documents": [
+      "docs/NEXT.md"
+    ],
+    "questions": [
+      "What work should the developer do next, and why does it follow from the available evidence?",
+      "What has actually been established, what remains uncertain or unperformed, and what result would justify moving forward?"
+    ]
+  },
+  "checks": [
+    {
+      "id": "preserve-starting-snapshot",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "README.md",
+        "docs/REQUEST.md",
+        "report.py",
+        "tests/test_report.py"
+      ]
+    },
+    {
+      "id": "planning-boundary",
+      "kind": "python",
+      "file": "oracle.py"
+    },
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commits",
+      "kind": "commit_count",
+      "expected": 0
+    }
+  ]
+}

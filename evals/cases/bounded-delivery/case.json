@@ -1,0 +1,92 @@
+{
+  "id": "bounded-delivery",
+  "version": 3,
+  "tier": "heavy",
+  "title": "Inventory rejection from decisions to reviewed working code",
+  "skills": [
+    "feature-design",
+    "implementation-plan",
+    "stage-development"
+  ],
+  "phases": [
+    {
+      "id": "01-plan",
+      "request": "requests/01.md"
+    },
+    {
+      "id": "02-document-review",
+      "request": "requests/02.md"
+    },
+    {
+      "id": "03-document-fix",
+      "request": "requests/03.md",
+      "skip_if_ready": "reviews/design-current.json"
+    },
+    {
+      "id": "04-document-recheck",
+      "request": "requests/04.md",
+      "skip_if_ready": "reviews/design-current.json"
+    },
+    {
+      "id": "05-implement",
+      "request": "requests/05.md"
+    },
+    {
+      "id": "06-code-review",
+      "request": "requests/06.md"
+    },
+    {
+      "id": "07-code-fix",
+      "request": "requests/07.md",
+      "skip_if_ready": "reviews/code-current.json"
+    },
+    {
+      "id": "08-code-recheck",
+      "request": "requests/08.md",
+      "skip_if_ready": "reviews/code-current.json"
+    },
+    {
+      "id": "09-handoff",
+      "request": "requests/09.md"
+    }
+  ],
+  "hook": "hooks/pre-commit",
+  "workflow_budget_seconds": 900,
+  "reading_probe": {
+    "documents": [
+      "docs/DESIGN.md",
+      "docs/PLAN.md"
+    ],
+    "questions": [
+      "What behavior changes and what state must be preserved?",
+      "What technical choice ensures an order is accepted or rejected as a whole, and what is its consequence?",
+      "Which implementation outcome is next or complete, and what remains before human acceptance?"
+    ]
+  },
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "original-contract",
+      "kind": "unchanged",
+      "paths": [
+        "docs/ORIGINAL.md",
+        "docs/REQUEST.md",
+        "docs/history/completed.md",
+        "command_codec.py"
+      ]
+    },
+    {
+      "id": "behavior",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

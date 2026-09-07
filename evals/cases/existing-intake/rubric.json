@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "criteria": [
+    {
+      "id": "inspect-baseline",
+      "required": true,
+      "requirement": "Establish current behavior and actual baseline.",
+      "pass_when": "Inspects formatter/tests, observes the sharp-s mismatch (SS versus expected \u00df), and records failing command/evidence as pre-existing.",
+      "fail_when": "Reports a green baseline or silently fixes the legacy test, hiding compatibility uncertainty."
+    },
+    {
+      "id": "consequential-intake",
+      "required": true,
+      "requirement": "Resolve consequential compatibility and customization uncertainty without unnecessary clarification.",
+      "pass_when": "Uses concrete examples to identify unresolved customization decisions; preserves the existing call path and its observed outputs/errors, or identifies a real requirement conflict that prevents doing so. A justified preservation default satisfies compatibility without reconfirmation. Flags the Unicode test/runtime mismatch without silently changing either; preserving runtime behavior and carrying the failing test visibly is sufficient pending a separately authorized correction.",
+      "fail_when": "Invents a customization interface or changes observed defaults/errors without a requirement; hides a consequential conflict; or blocks on reconfirming behavior the request already requires preserving. Extra questions alone do not establish useful intake."
+    },
+    {
+      "id": "preserve-scope",
+      "required": true,
+      "requirement": "Keep intake bounded and original intent available.",
+      "pass_when": "Reports relevant code, compatibility and unresolved decisions with evidence links while preserving source files.",
+      "fail_when": "Replaces source requirements, creates a speculative full design or changes behavior during intake."
+    }
+  ]
+}
