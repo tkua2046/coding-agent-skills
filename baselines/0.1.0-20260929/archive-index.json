@@ -1,0 +1,74 @@
+[
+  {
+    "path": "artifacts/headless-workflow-20260929.zip",
+    "name": "headless-workflow-20260929.zip",
+    "bytes": 725801,
+    "sha256": "3e0f16e63184b6165ff1c9cf7e7e19768eb16591206dd2a98c9c952478e58ec1"
+  },
+  {
+    "path": "artifacts/interactive-workflow-20260929.zip",
+    "name": "interactive-workflow-20260929.zip",
+    "bytes": 133532,
+    "sha256": "29da103841b0032484c17f5d8ea6c12d83824bc9c4fbe45efdac761a2e0cc8c5"
+  },
+  {
+    "path": "artifacts/package-use-20260929.zip",
+    "name": "package-use-20260929.zip",
+    "bytes": 1177047,
+    "sha256": "2251ea1d65700e3e4f75e45517d9ab6eb7a771ca20d48904897f482bd30231bf"
+  },
+  {
+    "path": "artifacts/prepared-version-grading-20260929.zip",
+    "name": "prepared-version-grading-20260929.zip",
+    "bytes": 892657,
+    "sha256": "e56deff8c196c95cdff91b0b581bd4eda2c7e1cc8ee76ef074a94c6220bc93dd"
+  },
+  {
+    "path": "artifacts/priority-canary-migration-evidence.zip",
+    "name": "priority-canary-migration-evidence.zip",
+    "bytes": 3713219,
+    "sha256": "7e3e9fd0731620150932bb54ca9013dce52505252b4117154d663334e938442a"
+  },
+  {
+    "path": "artifacts/review-closure-20260929.zip",
+    "name": "review-closure-20260929.zip",
+    "bytes": 1465724,
+    "sha256": "8295dc9726a2bcf1cf8f90f496aa5d5132d0d090ca3e9ff03010bba1f520e7c0"
+  },
+  {
+    "path": "artifacts/review-evidence-20260929.zip",
+    "name": "review-evidence-20260929.zip",
+    "bytes": 2625051,
+    "sha256": "4470728759a622678ca7310831230e17cacf9709898a1fc0947f9aa156dde431"
+  },
+  {
+    "path": "artifacts/transcript-workflow-20260929.zip",
+    "name": "transcript-workflow-20260929.zip",
+    "bytes": 419773,
+    "sha256": "3f2354f25e06a227f5e5c16034bbdaf1d1f362a62171e74e6bc8407f8c51dbc1"
+  },
+  {
+    "path": "artifacts/workflow-improvement-evidence.zip",
+    "name": "workflow-improvement-evidence.zip",
+    "bytes": 9456998,
+    "sha256": "be2c037258d777c07c9cb959cc8557779794d0a40c672342fafdd9dfe99952f9"
+  },
+  {
+    "path": "artifacts/workflow-release-20260929.zip",
+    "name": "workflow-release-20260929.zip",
+    "bytes": 2366106,
+    "sha256": "d9cdad21d0e7b6ed1081a2bf1500bf1671e8dbf7ffb1c561b982f3163c0703d8"
+  },
+  {
+    "path": "artifacts/interview-candidate/coding-agent-skills-evidence.zip",
+    "name": "coding-agent-skills-evidence.zip",
+    "bytes": 3401098,
+    "sha256": "e634d47c46c4d72b065bf81bbe8b2ce25de87bc9a5eaea6cbfe01132719890c0"
+  },
+  {
+    "path": "artifacts/release-version-fix-20260929/coding-agent-skills-local-20260929-r3.zip",
+    "name": "coding-agent-skills-local-20260929-r3.zip",
+    "bytes": 46319,
+    "sha256": "6d8720d5de74df481a4a486ca15bc3cbc83e48cd33f375457776e59e2545f13c"
+  }
+]

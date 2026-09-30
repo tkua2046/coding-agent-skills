@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "counts": {
+    "archive_objects": 15,
+    "payload_files": 13041
+  },
+  "potential_credential_files": [],
+  "archive_checksums_and_available_sidecars_match": true,
+  "limits": "Pattern scan is not comprehensive; no credential values logged."
+}
