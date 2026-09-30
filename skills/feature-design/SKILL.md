@@ -1,20 +1,22 @@
 ---
 name: feature-design
-description: Clarify uncertain feature requirements and draft or review designs with consequences and acceptance examples. Use for requested design work or consequential choices that need resolution before implementation.
+description: Clarify consequential requirements, draft or amend an implementable design, or review a design and recheck its findings. Use when these decisions are requested or needed before implementation.
 ---
 
 # Feature design
 
-Goal: resolve material uncertainty and leave an implementable decision. Select one operation; load its linked contract/example when needed and its self-check after generation.
+Resolve the requested decision with enough reasoning to implement it. Select the operation below; do its substantive work first and finish by making the result easy to read.
 
-| Request | Read |
+| Task | Operation |
 |---|---|
-| Understand requirements or identify clarification questions | [Intake](prompts/intake-feature.md) |
-| Write or revise the design | [Draft design](prompts/draft-design.md) |
-| Review an existing design | [Review design](prompts/review-design.md) |
+| Clarify requirements or investigate a material unknown | [Intake](prompts/intake-feature.md) |
+| Write a design or amend an existing decision | [Design](prompts/draft-design.md) |
+| Review a design or recheck a finding | [Review](prompts/review-design.md) |
 
-Choose depth by uncertainty, failure consequences, reversibility and affected interfaces/owners. An explicit design, planning or review request still gets that work. For a direct implementation request with sufficient facts, proceed without inventing design, plan or review documents. A requested local design may combine the decision and next outcome in one note; consequential choices need their reasoning and boundaries. Investigate unknowns that could change the approach, then continue when the evidence is sufficient. Revisit the approach when new evidence changes a decision, rather than scheduling recurring process assessments.
+Preserve original requirements and confirmed decisions; separate observations, assumptions and proposals. Use existing source/history references, retaining otherwise unavailable originals once. Follow actual user/repository scope, review and approval requirements, including authorization already given.
 
-Original specifications and confirmed decisions remain authoritative. Link their existing immutable sources and distinguish assumptions. Honor review and approval requirements established by the user or repository, including prior authorization and human/agent review preferences. Without an established policy, choose review depth on the same grounds as design depth. A design-only request stops before implementation.
+Match depth to uncertainty, consequences, reversibility and affected interfaces. A settled local change should take a few minutes; a 30-minute design/review loop is unacceptable. Honor supplied task budgets. Investigate facts that can change the decision; if real uncertainty expands the work, expose that consequence instead of silently expanding the workflow. Stop once the requested decision and any required review are sufficient.
 
-Author and reviewer share the artifact contract. Templates are adaptable, not required headings/files. Follow repository conventions; default artifacts to English. Amend local extensions without reopening unrelated decisions; separate designs serve distinct lifecycle, ownership or substantial independent risk. Resource paths resolve within this bundle.
+A local extension normally amends its existing note. A separate design needs a distinct decision, lifecycle, owner or substantial independent risk. Design owns choices and consequences; plans own delivery order; code/tests own implementation detail. These responsibilities need not become separate files. An implementation request with sufficient facts does not need an invented design phase; design-only work ends before coding.
+
+Templates are optional aids for the final editing step. Follow useful repository conventions; default artifacts to English. No particular headings, field order or self-check report are required. Resource paths stay inside this bundle.

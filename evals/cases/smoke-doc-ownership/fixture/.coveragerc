@@ -1,0 +1,10 @@
+[run]
+source = inventory
+branch = True
+data_file = artifacts/.coverage
+
+[report]
+show_missing = True
+
+[json]
+output = artifacts/coverage.json

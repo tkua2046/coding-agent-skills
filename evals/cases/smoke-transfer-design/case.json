@@ -1,6 +1,6 @@
 {
   "id": "smoke-transfer-design",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Configuration replacement remains recoverable after interruption",
   "skills": [
@@ -28,7 +28,8 @@
       "paths": [
         "AGENTS.md",
         "importer.py",
-        "REQUEST.md"
+        "REQUEST.md",
+        "docs/PLATFORM.md"
       ]
     }
   ]

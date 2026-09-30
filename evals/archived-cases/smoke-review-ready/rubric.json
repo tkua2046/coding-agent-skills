@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "criteria": [
+    {
+      "id": "sufficient-review",
+      "required": true,
+      "requirement": "Accept a sufficient local contract through actual inspection.",
+      "pass_when": "Recognizes all-or-nothing per batch, caller isolation and continuation in D1/P1; concludes ready or only nonblocking suggestions with concrete basis. No invented architecture, stage or percentage blocker.",
+      "fail_when": "Misses the substance and gives generic approval, or blocks on hypothetical concurrency, database transactions, extra document stages or fixed test counts.",
+      "goals": [
+        "A5",
+        "B5"
+      ]
+    },
+    {
+      "id": "review-contract",
+      "required": true,
+      "requirement": "Review feedback identifies its scope, evidence and next action without pretending runtime assurance.",
+      "pass_when": "Short verdict tied to D1/P1 and substantive static checks; no material findings can be stated without an empty checklist; implementation/runtime/human acceptance remain distinct.",
+      "fail_when": "Rewrites source documents, generates an exhaustive paraphrase, claims tests or human approval, or leaves readiness/next action unclear.",
+      "goals": [
+        "A5",
+        "B5"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6",
+        "B6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient. Additional investigation, rewrite, review, context load or repeated check addresses a material unknown, changed evidence or actual task policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace shows unrelated bulk reading, whole-document rewrites for local edits, loss/replay of completed work after compaction, cosmetic review cycles or unchanged checks repeated without cause. Identify the unnecessary operation and consequence. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving unjustified work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "A2"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes current verdict, open material findings (or none), and the next correction or action before review history. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
+    }
+  ]
+}

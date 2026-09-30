@@ -11,6 +11,7 @@ Decision: retain four independently copyable skills. Choose workflow depth from 
 | Design owns choices; plan owns outcomes | Prose should not mirror implementation | Adding a regression assertion leaves the design and completed stages alone unless the contract changes |
 | Review the whole deliverable | Individually valid files can form an unusable PR | Reject unrelated generated snapshots in the source diff even when hooks pass |
 | Store evidence separately and reference immutable originals | Source preservation does not require repeated copies in every report | A calibration run is referenced by identity; source PRs contain a result index, not its repeated workspaces |
+| Scope feedback to one operation and its scoring dependencies | Unrelated scorer examples should not gate a local test | Case calibration covers every required criterion with reviewed pass/fail controls; it is reusable only for that case. Full release calibration remains separate |
 | Load one operation and its relevant references | Installing a skill should not burden unrelated work | Design drafting loads decision guidance; release instructions stay unloaded |
 
 ## Boundaries
@@ -20,6 +21,8 @@ The four skills cover feature design, implementation planning, stage execution/r
 Existing specifications and confirmed decisions stay authoritative. A local extension updates affected decisions and pending outcomes. A separate design is useful for independent ownership/lifecycle or consequential choices, not merely because another request arrived. Document templates are adaptable examples; a direct implementation request with sufficient context does not need a document prerequisite.
 
 One existing record owns live delivery state. Git revisions, review records and actual check output establish evidence; otherwise unavailable originals are captured once. Fixed findings require applicable verification, and an unchanged verified finding does not trigger a new review cycle. Missing evidence stays unknown, not success or an invented defect.
+
+A request to communicate existing status selects a short handoff operation. A request to run a remaining gate still selects execution, even if code edits are excluded. This reduces irrelevant instructions without waiving the gate: “tell my teammate what remains” preserves its pending state; “resume and run the gate” performs it. Review summaries distinguish content actually inspected, checks executed and attributed prior evidence; narrowing a claim does not excuse missing evidence needed for the verdict.
 
 ## Evidence and verification
 

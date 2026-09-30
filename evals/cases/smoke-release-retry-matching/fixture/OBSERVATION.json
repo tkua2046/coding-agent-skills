@@ -1,0 +1,11 @@
+{
+  "synthetic_offline_observation": true,
+  "version": "1.3.0",
+  "candidate_commit": "1111111111111111111111111111111111111111",
+  "candidate_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "tag": "v1.3.0",
+  "actual_tag_commit": "1111111111111111111111111111111111111111",
+  "service_status": "completed",
+  "published_source_commit": "1111111111111111111111111111111111111111",
+  "published_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

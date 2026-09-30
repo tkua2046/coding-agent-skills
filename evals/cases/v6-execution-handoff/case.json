@@ -1,6 +1,6 @@
 {
   "id": "v6-execution-handoff",
-  "version": 2,
+  "version": 5,
   "tier": "heavy",
   "title": "V6: Execute, independently recheck, resume and deliver locally",
   "skills": [

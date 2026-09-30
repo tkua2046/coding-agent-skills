@@ -1,25 +1,13 @@
-# Feature requirements and clarifications
+# Optional clarification note
 
-Adapt this note to the clarification needed; omit unused sections. Preserve the original through an existing immutable source reference, capturing unavailable source text once.
+Use a response or an existing note when that is sufficient. Preserve the original request through its existing source reference, retaining otherwise unavailable text once. The following shape can help a clarification that needs to persist; omit anything irrelevant.
 
-Status: proposed / confirmed. Original source: [source/version reference].
+**Settled:** [observable behavior and relevant compatibility].
 
-## At a glance
+**Open choice:** [material question, alternatives and consequence; omit if resolved].
 
-Goal: [observable benefit]. Scope: [included behavior]. Next decision: [question or none].
+**Evidence and assumptions:** [confirmed answer/source, observed behavior or proposed default, with any consequential limit].
 
-## Requirements and examples
+Example: preserving the submitted order and sorting every result cannot both hold for input B, A. If the owner has not selected precedence, expose that choice; do not silently rename one promise an exception. A confirmed source-order default needs no further question.
 
-| ID | Required behavior | Input → expected result | Source |
-|---|---|---|---|
-| R1 | [behavior] | [concrete example] | [original location] |
-
-## Clarifications
-
-| Question | Answer or proposed default | Status and source |
-|---|---|---|
-| [material question] | [answer/default and consequence] | [confirmed/proposed; locator] |
-
-## Existing behavior and baseline
-
-[Relevant interfaces to preserve; checks run and evidence location; known failures.]
+Requirement IDs or tables are useful only when they support actual downstream references. They are not required for a short clarification.

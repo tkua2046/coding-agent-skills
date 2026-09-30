@@ -1,6 +1,6 @@
 {
   "id": "smoke-intake-preserve",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Resolve prefix API scope without reconfirming compatibility",
   "skills": [

@@ -1,22 +1,11 @@
-# Delivery record contract and adaptable example
+# Optional delivery record example
 
-Use a durable record when required or useful for resumption; a completion response suffices for a local change otherwise. Reuse the existing plan/handoff section to own current execution/review state and next action. Design/spec own decisions and behavior; reviews own their findings. PR descriptions may summarize validation for an identified revision.
+Use an existing plan or handoff section when durable status helps resumption or is required. A local completion response can suffice. Adapt or omit any part of this example; it does not prescribe headings, fields or a separate file.
 
-Make the current outcome, remaining conditions and next action easy to find before historical detail. Link relevant original reports and failures through existing immutable references, capturing otherwise unavailable reviewed content once. Keep status in one place and raw output at its evidence source, with retention scoped to this work and repository policy. Omit fields that do not help the handoff.
+## Example
 
-## Possible shape
+Notification mute is implemented on [candidate]. [Actual checks] passed and [review reference] verifies the change. No material findings remain; the project's required human acceptance is pending before the authorized commit.
 
-# [Outcome] — current handoff
+Relevant context: [original requirements], [original findings and current dispositions], [failed/successful check evidence]. Keep raw output at its evidence source and current status in one place.
 
-State: [completed work; remaining condition]. Open findings: [IDs or none].
-Next: [action or complete]. Required review / approval: [actual status, if applicable].
-Candidate: [existing revision reference when needed]. Validation: [actual checks/review and limits].
-Delivery: [actual commit/action, or pending condition].
-
-[Link original requirements, prior findings/dispositions and relevant failed/successful checks. Add a short check table only if it helps compare different results.]
-
-## Small illustration
-
-Notification mute is implemented and independently reviewed on the linked revision. Checks passed; the project's required human acceptance is pending. No findings are open. Next: owner acceptance before the authorized commit. Link the existing review and raw checks.
-
-After committing, the durable delivery response can identify the resulting commit and hook outcome. Do not require the committed record to contain its own resulting hash.
+After an authorized commit, report its actual result and hook outcome in the response or existing record. Do not require that commit to contain its own hash. When the task is complete, say what was delivered without inventing another action.

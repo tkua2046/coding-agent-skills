@@ -5,10 +5,15 @@ description: Plan implementation outcomes, dependencies, acceptance and useful d
 
 # Implementation plan
 
-Goal: make the next coherent outcome, dependencies and acceptance usable without maintaining another implementation in prose.
+Make the next coherent delivery and its acceptance clear without maintaining another implementation in prose.
 
-Select [Plan implementation](prompts/plan-implementation.md) to write/revise, or [Review implementation plan](prompts/review-implementation.md) to review. Each loads the same substantive plan contract and an after-generation check when needed.
+- To create or amend a plan, read [Plan implementation](prompts/plan-implementation.md).
+- To review or recheck a plan, read [Review implementation plan](prompts/review-implementation.md).
 
-Ground work in original requirements, confirmed decisions and current code; the request itself can supply sufficient decisions. Choose depth by remaining uncertainty, consequences, reversibility and affected boundaries. Perform explicitly requested planning; a direct implementation request with sufficient facts needs no plan document. Expand stages where delivery, dependencies, risk or ownership benefit from a boundary. Honor established user/repository review and approval requirements; otherwise choose proportionate review without inventing checkpoints.
+Load only the requested operation. Requirements or an existing note can provide sufficient decisions; a separate design document is not a prerequisite. Perform requested planning, but do not turn a direct implementation request into a planning exercise when its decisions are already settled.
 
-Templates are adaptable examples; repository conventions take precedence. Default artifacts to English and resolve resources within this bundle. A planning-only request stops before implementation or commit; unexecuted work remains proposed.
+Choose depth from uncertainty, dependencies, consequences and reversibility. A local change can have one increment; split only where delivery, risk or ownership benefits. A small settled planning task should take minutes, not a prolonged design/review loop. Honor supplied time budgets; if a material unknown prevents completion, expose that unknown and the smallest next action instead of repeatedly reconstructing settled work.
+
+Preserve original requirements, completed work and applicable review/approval policy. Planning owns outcomes, order and acceptance; design owns choices and reasons; code/tests own implementation details. A planning-only request stops before implementation or commit. Proposed checks are not passed checks.
+
+Finish the selected task with a readable result. Templates are optional aids for that final edit, not fields to carry through the work. Default artifacts to English and keep references within this bundle.

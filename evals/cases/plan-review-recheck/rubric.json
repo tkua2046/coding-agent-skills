@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "criteria": [
+    {
+      "id": "partial-remains-open",
+      "goals": [
+        "B5",
+        "B1",
+        "B2"
+      ],
+      "required": true,
+      "requirement": "Recheck P2 rather than accept the author claim.",
+      "pass_when": "Round 1 needs changes with R1 open: the execution-order table still puts A before its unavailable exporter prerequisite, despite the new description. Cites the conflicting P2 rows/opening and requests exporter-first sequencing.",
+      "fail_when": "Closes R1 from prerequisite wording alone, misses consumer-first ordering, or claims implementation failed.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    },
+    {
+      "id": "complete-contract",
+      "goals": [
+        "B5",
+        "B2",
+        "B3"
+      ],
+      "required": true,
+      "requirement": "Recheck the entire P3 dependency and compatibility concern.",
+      "pass_when": "Round 2 verifies exporter is deployed/available before A, JSON SKU strings and integer zero, malformed input with no partial output, and unchanged default CSV for B through A rollout; closes R1 at plan level unless a separate concrete material blocker is evidenced.",
+      "fail_when": "Closes only on row order without legacy-client acceptance, carries obsolete P2 defect into P3, or blocks a sufficient plan for formatting.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    },
+    {
+      "id": "history-and-identity",
+      "goals": [
+        "B5",
+        "B4"
+      ],
+      "required": true,
+      "requirement": "Preserve original finding and failed recheck with revision-specific dispositions.",
+      "pass_when": "Original R1/P1/P2 remain intact; round 1 remains readable after round 2. Reports identify P2/P3 via hash or exact relevant excerpts, distinguish author claim from verified disposition, and link original R1 plus prior recheck.",
+      "fail_when": "Overwrites original/failed evidence, treats both overlays as the same HEAD identity, or implies author assertions are independent verification.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    },
+    {
+      "id": "review-usability",
+      "goals": [
+        "B5",
+        "B6"
+      ],
+      "required": true,
+      "requirement": "Opening makes readiness, open IDs and next action recoverable.",
+      "pass_when": "Both reports lead with supported verdict, open R1 or none, and necessary correction or plan-ready next step; details agree and evidence is locatable.",
+      "fail_when": "Verdict, remaining issue or next action is absent, buried or contradicted later.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    },
+    {
+      "id": "review-limits",
+      "goals": [
+        "B5"
+      ],
+      "required": true,
+      "requirement": "Report actual review mode and static limits.",
+      "pass_when": "Reports independent reviewer role or accurately disclosed self-review, verifies plan content only, edits reports only, and leaves implementation/testing/human acceptance unclaimed.",
+      "fail_when": "Implements the plan, rewrites reviewed inputs, or claims runtime/human acceptance.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    },
+    {
+      "id": "proportionate-work",
+      "goals": [
+        "B6"
+      ],
+      "required": true,
+      "requirement": "Stop after required rechecks and usable reports.",
+      "pass_when": "Captured traces show relevant requirements, plans and finding read; any repeated review/investigation addresses new evidence or a material uncertainty. Concludes once P3 is sufficient; retains elapsed/token/wait evidence where available without claiming speed from length.",
+      "fail_when": "Replans settled history, invents stage/test inventories or an audit system, reopens closed issues for wording, repeats unchanged checks without cause, or loads unrelated bundles/archives. No arbitrary deadline applies.",
+      "evidence": "Phase replies, reviews/round-1.md and round-2.md, captured workspace snapshots, Git state and execution traces; structural oracle does not grade prose."
+    }
+  ]
+}

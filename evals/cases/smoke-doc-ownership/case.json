@@ -1,0 +1,40 @@
+{
+  "id": "smoke-doc-ownership",
+  "version": 3,
+  "tier": "smoke",
+  "title": "Separate documentation by audience without losing content",
+  "skills": [
+    "dev-workflow"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "inventory.py",
+        "qa/check_inventory.py",
+        "tools/check.py",
+        "quality.ini",
+        ".coveragerc",
+        "hooks/pre-commit",
+        "examples/stock.csv",
+        "VERSION"
+      ]
+    }
+  ]
+}

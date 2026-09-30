@@ -2,7 +2,9 @@
 
 Four reusable English skills for taking a feature from requirements to reviewed code and delivery. Each skill is independently copyable and includes its own prompts and templates.
 
-Current status: reviewed draft skills with scoped behavioral validation; release acceptance remains pending. [Actual agent-test results](docs/VALIDATION.md) retain original failures, inconclusive scores and current release acceptance gaps.
+Current version: **0.1.0, first usable source baseline**. The four skills have scoped behavioral validation and independent review; full release qualification remains pending. [Actual agent-test results](docs/VALIDATION.md) retain original failures, inconclusive scores and current release acceptance gaps.
+
+For a pair-programming session, start with the one-page [quickstart](docs/QUICKSTART.md): choose an operation, load its skill, and keep the interviewer in the loop.
 
 ## Choose an operation
 
@@ -10,7 +12,7 @@ Current status: reviewed draft skills with scoped behavioral validation; release
 |---|---|
 | [feature-design](skills/feature-design/SKILL.md) | Requirements clarification, existing-code intake, design drafting/review |
 | [implementation-plan](skills/implementation-plan/SKILL.md) | Stage/commit planning and plan review |
-| [stage-development](skills/stage-development/SKILL.md) | Stage implementation, testing, review, fixes and commit readiness |
+| [stage-development](skills/stage-development/SKILL.md) | Implementation, testing, review, fixes, commit readiness and status-only handoff |
 | [dev-workflow](skills/dev-workflow/SKILL.md) | Environment/hooks, document ownership, PR preparation and authorized releases |
 
 ## Use in Codex
@@ -51,11 +53,11 @@ The selected operation loads its relevant guidance; you do not need to paste a l
 | Design: choices, reasons and consequences | [Design template](skills/feature-design/assets/design.template.md) | [Design checks](skills/feature-design/references/artifact-checks.md#design) |
 | Plan: delivery outcomes, dependencies and acceptance | [Plan template](skills/implementation-plan/assets/implementation-plan.template.md) | [Plan checks](skills/implementation-plan/references/artifact-checks.md#plan) |
 | Review: actionable findings and verified dispositions | [Review template](skills/feature-design/assets/review.template.md) | [Review checks](skills/feature-design/references/artifact-checks.md#review) |
-| Handoff: current execution state and evidence links | [Stage record](skills/stage-development/assets/stage-record.template.md) | [Execution and resumption](skills/stage-development/prompts/execute-stage.md) |
+| Handoff: current execution state and evidence links | [Stage record](skills/stage-development/assets/stage-record.template.md) | [Status-only handoff](skills/stage-development/prompts/handoff-stage.md) or [execution and resumption](skills/stage-development/prompts/execute-stage.md) |
 
 ## Limits and references
 
-Skills guide agent behavior; they are not an automatic approval or release system. Independent review needs a separate context. Installation in your VS Code UI should be checked locally; see [validation](docs/VALIDATION.md) for what was actually tested.
+Skills guide agent behavior; they are not an automatic approval or release system. Independent review needs a separate context. The packaged skills have been discovered and exercised by the registered VS Code Codex backend in isolated projects. Interactive UI use should still be checked locally; see [validation](docs/VALIDATION.md) for the tested calls and limits.
 
 The [goal-based canaries](evals/GOALS.md) check document comprehension, maintainability, useful review, actual implementation and development setup. Normal commits/PRs run fast checks; expensive agent trials run before release or when explicitly requested. See [actual results](docs/VALIDATION.md) for quality, observed benefit and remaining limits. A passing machine-reader check does not establish human readability.
 

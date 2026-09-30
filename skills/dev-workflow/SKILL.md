@@ -5,14 +5,18 @@ description: Set up or adapt development checks and document ownership, prepare 
 
 # Development workflow
 
-Goal: a useful, reviewable deliverable with effective checks and accurate evidence. Inspect existing conventions and reuse working setup. Match depth to uncertainty, consequences, reversibility and affected boundaries while honoring established user/repository review and gates. Select one operation and its relevant resources; load its silent check after generation.
+Complete the requested setup, delivery or release operation with effective checks and accurate evidence. Select the relevant operation; do its substantive work, check the result, then make it easy to read as the final part of the same task.
 
-| Request | Read |
+| Task | Operation |
 |---|---|
-| Configure/repair environment, hooks, coverage or document layout | [Setup](prompts/setup-dev-workflow.md) |
-| Prepare/revise a feature PR | [Prepare PR](prompts/prepare-pr.md) |
-| Prepare/version/tag/publish a release within scope | [Release](prompts/release.md) |
+| Inspect or repair environment, checks, hooks, coverage or document ownership | [Setup](prompts/setup-dev-workflow.md) |
+| Prepare or revise a feature PR | [Prepare PR](prompts/prepare-pr.md) |
+| Assess readiness, prepare version/notes, tag, publish or resolve a release retry | [Release](prompts/release.md) |
 
-For document creation/reorganization, read [document ownership](references/documents.md). Root and Python assets are adaptable examples, not reasons to overwrite working configuration or create every document.
+Reuse working project tools and applicable evidence. Match depth to uncertainty, consequences, reversibility and affected boundaries; honor task budgets and actual required gates/review. A small implementation does not need workflow infrastructure added along the way. Inspection diagnoses the supplied state; it does not imply permission or a need to repair it.
 
-Existing authorization persists; a procedure does not itself grant publication permission. Ordinary commits do not trigger PRs, version bumps or releases. Preserve original requirements and reviewed evidence through existing immutable references, capturing relevant otherwise unavailable content once. This does not require a repository-wide archive. Distinguish configured, installed and actually verified states. Default artifacts to English; resolve resources within this bundle.
+Preserve original requirements, confirmed decisions and review findings through existing immutable references; retain otherwise unavailable relevant originals once. Existing authorization persists, but this procedure grants no additional scope. Ordinary commits do not trigger PRs, version bumps or releases. Distinguish author fixes, reviewer verification and human acceptance; a passing gate does not establish all three.
+
+Use [document ownership](references/documents.md) when changing document responsibilities. Root templates and Python assets are optional examples: preserve useful conventions, filenames and working configuration. No particular headings, fields, new artifacts or self-check reports are required unless the task itself requires them. Default artifacts to English; resource paths stay inside this bundle.
+
+Before delivery, use the shared [final checks](references/delivery-checks.md) to catch material omissions. Correct supported issues and finish; this is not an automatic review loop or reason to rerun adequate checks.

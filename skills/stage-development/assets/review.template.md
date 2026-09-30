@@ -1,18 +1,11 @@
-# Review feedback contract and adaptable example
+# Optional review feedback example
 
-Review owns the verdict for an identified revision, actionable findings and dispositions. Assess the artifact against the original goal as a whole, including whether its complexity, maintenance cost and review burden are justified. Passing individual checks does not establish that an unnecessary overall approach is acceptable. Review reports corrections without rewriting the artifact or owning delivery progress.
+Adapt this example when it helps communicate a review. The review operation owns the substantive requirements; these labels and their order are not required. A concise verdict with scope and evidence limits can suffice when no material findings remain.
 
-Lead with verdict (ready / needs changes / needs decision), open findings and next action. Identify scope/version, actual independent or self-review, checks and limits using the existing revision reference.
+## Example
 
-Make each material finding locatable and actionable: explain its trigger, consequence, correction and verification. Use stable IDs and priorities when tracking findings. A correction may simplify or remove an unnecessary approach. Distinguish open concerns, author fix claims, reviewer-verified resolutions, refutations with evidence and accepted nonblocking limitations. Optional preferences do not block readiness. With no material findings, the verdict, scope/checks and next action suffice.
+The candidate needs changes: R1 remains open on [revision]. A malformed refresh replaces usable cached data before validation fails. Preserve the prior value on rejection and verify that a later valid refresh still succeeds.
 
-Link original findings and evidence through existing immutable references; add the rechecked revision and disposition without recopying the originals. A partial fix stays open. Reuse verification while relevant content, inputs, checks, runtime and freshness remain applicable; required rechecks still run. Author claims, reviewer verification and human acceptance remain distinct. Resolve disagreement with evidence or a decision, not cosmetic rounds.
+[Location and observed evidence.] This was [actual review mode]; [checks run and material limits]. Original finding: [immutable reference]. Next: correct and recheck the affected behavior.
 
-## Possible feedback
-
-Verdict: needs changes. Open: R1. Next: correct and recheck.
-Scope: [existing revision reference]. Review mode: [actual]. Checks/limits: [observed].
-
-R1 [priority], [location]: malformed refresh replaces usable cached data. Preserve the previous value when validation fails; verify preservation and a later valid refresh. Disposition: open.
-
-Adapt this format. The cache example is not a new requirement.
+For a later recheck, identify its candidate and current disposition, linking the original evidence. The cache scenario illustrates actionable feedback; it adds no requirement to another project.

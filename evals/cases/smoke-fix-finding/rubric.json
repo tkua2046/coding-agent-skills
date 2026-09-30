@@ -1,0 +1,47 @@
+{
+  "version": 4,
+  "criteria": [
+    {
+      "id": "verified-repair",
+      "required": true,
+      "goals": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "requirement": "Repair and verify the whole finding without changing valid behavior.",
+      "pass_when": "Validation occurs before any invalid-command mutation for arbitrary initial cursor/selection; valid next/previous remain correct. Adds a regression asserting both fields and the exception, retains existing tests, runs the agreed suite with observed nonempty passing results, and calls this author-verified repair rather than independent closure.",
+      "fail_when": "Fixes only the default state, cursor or selection; breaks valid commands; omits the full-state regression; hides a failure/empty suite; or claims independent reviewer closure from its own fix."
+    },
+    {
+      "id": "scope-and-evidence",
+      "required": true,
+      "goals": [
+        "C3"
+      ],
+      "requirement": "Stay within the supplied operation and distinguish observations from claims.",
+      "pass_when": "Preserves original R1/requirements/developer policy and retains existing test assertions; edits only the bounded implementation/tests and optional concise report. No fabricated independence or unrelated documents.",
+      "fail_when": "Changes preserved inputs or performs a different development operation; claims unperformed checks or unsupported independent review, human approval or real publication. Truthful disclosure of the independently assigned review is allowed. Missing evidence is disclosed, not replaced by an invented success."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "C4"
+      ],
+      "requirement": "Expose the current useful result before supporting detail.",
+      "pass_when": "The response makes the repaired behavior, observed check outcome and author/reviewer verification boundary clear. Expose material pending work, a decision, dependency or limitation when one remains. Use a concrete before/after example when the behavior explanation otherwise leaves the trigger, affected state or consequence unclear; an already clear bounded repair needs neither a duplicate example nor a ritual declaration that nothing remains.",
+      "fail_when": "Logs, policy or historical discussion obscure the result/next action; a heading or link substitutes for the actual answer; the opening contradicts the detailed artifact. Short but incomplete output also fails."
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "C5"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    }
+  ]
+}

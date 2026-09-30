@@ -1,25 +1,33 @@
 # Execute the current stage
 
-Read the requested outcome, applicable review policy and relevant findings/evidence before editing. Use the shared stage contract in SKILL.md. Reuse an applicable baseline or run a focused check when a comparison is needed; identify pre-existing failures. Consult the [delivery-record example](../assets/stage-record.template.md) when a durable handoff is useful or required.
+If the request only asks to summarize or reconcile existing status/evidence, use [Hand off](handoff-stage.md) and stop here. An independent review or finding recheck uses [Review stage](review-stage.md). Requested implementation or gate execution stays here, even when a gate-only request excludes code edits.
+
+## Establish the remaining work
+
+Read the requested outcome and relevant code, current handoff, findings and check evidence. On resumption, distinguish completed work from pending work and compare the affected candidate with its reviewed content. Reuse applicable verification under the shared contract in SKILL.md; an author's fixed label is not closure.
+
+Investigate material unknowns, then proceed within authorization. Use an applicable baseline or run a focused comparison when needed; identify pre-existing failures. If an assumption fails, revise the affected decision/outcome and obtain a decision or targeted review before dependent work when consequences or policy require it.
 
 ## Implement and verify
 
-Investigate concrete unknowns that could change the implementation. Once the evidence is sufficient, proceed; reopen the approach only when new evidence or scope affects a decision. For an existing finding, reuse reviewer verification while its content and evidence remain applicable. Changed content or missing verification requires checking the affected invariant; an author's fixed label is not closure.
+Make the scoped change while preserving unrelated work. For a supplied finding, repair the whole affected invariant, including failure state and later recovery, rather than only its reported symptom. Use existing checks and add regression coverage where changed behavior or material risk needs it; retain meaningful existing expectations.
 
-Implement supported changes, preserving unrelated work. Use existing checks and add tests where needed to verify changed behavior or a material risk. Run focused checks during development and the repository's required gate. An installed hook that executes the same suite under applicable inputs/runtime establishes that result; repeat it only for a separate requirement or new uncertainty. Preserve the fast/expensive test cadence and mandatory rechecks. Do not suppress a failing baseline or empty collection.
+Run focused checks during repair and the required project gate. Inspect actual results, collection and hook edits; do not suppress a failing baseline or empty suite. An executed hook can establish the same suite's result under applicable inputs/runtime; installed configuration alone cannot. Repeat checks for affected changes, new uncertainty or an explicit requirement, preserving the project's fast/expensive cadence.
 
-Update affected usage/developer documentation and significant Unreleased impact. A private rename or extra test does not itself change the design or plan. If an assumption fails, revise the affected decision/outcome; obtain a decision or targeted review before dependent work when the consequences or established policy require it.
+Update affected usage/developer documentation and significant Unreleased impact under project conventions. Private renames or extra tests do not by themselves require design/plan changes.
 
-## Review and fix
+## Review and resolve
 
-Inspect the complete intended deliverable, including new files and expected generated artifacts, for goal fulfillment, compatibility, unnecessary complexity and reviewability. Follow the established review policy and requested review work. Otherwise, focused verification and self-review can suffice for an understood local reversible change; add review where uncertainty, consequences or boundaries justify it.
+Inspect the complete intended deliverable, including new files and expected generated artifacts, against the original goal: behavior, compatibility, justified complexity and reviewability. Apply the shared review policy; do not start additional rounds merely to polish wording.
 
-For required or warranted external review, identify the candidate through an existing commit/tree or capture otherwise unavailable relevant diff and new-file content once. Include the requirements and check context needed to assess it. Keep that content stable while reviewers inspect it; supply original requirements, actual changes and evidence without a preferred verdict. Disclose unavailable independence. On resumption, compare affected content and evidence applicability, linking the original reference rather than copying it again.
+For required or warranted external review, identify stable content through an existing commit/tree or capture otherwise unavailable relevant diff and new-file content once. Supply original requirements, actual changes and check context without a preferred verdict. Keep the reviewed content stable and disclose unavailable independence. Preserve original findings and evidence through immutable references within the work's scope and repository retention policy.
 
-Use the [review feedback contract](../assets/review.template.md) for findings and dispositions when reporting review. Fix supported material findings, verify the affected invariant and obtain required reviewer verification. Widen checks for newly affected boundaries. Preserve original concerns and evidence through immutable references; retention is scoped to the relevant work and actual repository policy.
+Fix supported material findings, verify the whole affected concern and obtain required reviewer verification. Widen checks for newly affected boundaries. Keep partial fixes open; a verified complete fix should close. Evidence-based refutation or an accepted nonblocking limitation should remain distinguishable from repair. Use the optional [feedback example](../assets/review.template.md) if helpful when reporting findings.
 
-## Commit and hand off
+## Complete or resume coherently
 
-Verify the agreed outcome against the original goal and disclose any intentionally partial result, with actual required review/approval and final gate status. When committing is authorized, stage only intended files, including needed new artifacts, and inspect the complete staged diff after hook fixes. Never bypass hooks. Report the actual commit and hook outcome in the delivery response or established record; a commit need not contain its own resulting hash.
+Confirm the agreed outcome against the original goal, actual gate results and required review/approval. An intentionally partial stage must leave a usable state and expose what remains. Continue to the next authorized outcome when prerequisites and required approvals are satisfied.
 
-Continue to the next authorized outcome when its prerequisites and required approvals are satisfied. Report completed behavior, actual validation and remaining conditions. Update an existing delivery record when one is needed, linking original reviews/checks; otherwise the response suffices. Update design/spec only when decisions change. Load the Delivery section of [artifact checks](../references/artifact-checks.md) after the handoff. Correct supported issues and disclose unresolved conditions; otherwise remain silent.
+When committing is authorized, stage only intended files and inspect the complete staged diff after hook fixes; never bypass hooks. Report the actual commit and hook result afterward. A committed record need not contain its own resulting hash.
+
+Use the Delivery section of [final checks](../references/artifact-checks.md), then deliver the completed behavior, observed validation and any material remaining condition. Update one existing handoff when useful or required; the [record example](../assets/stage-record.template.md) is optional. A trivial completion needs no additional record unless required; finished work needs no invented next step.

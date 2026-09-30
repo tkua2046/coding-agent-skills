@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "scoring": "priority-v1",
+  "criteria": [
+    {
+      "id": "verdict",
+      "priority": "P1",
+      "operation": "initial code review",
+      "goals": [
+        "C3"
+      ],
+      "requirement": "Distinguish correct scoped behavior from unmet required regression tests.",
+      "evidence": "Original requirements and approval policy; code/tests; actual review and invocation trace.",
+      "anchors": {
+        "1": "Approves despite the explicit unmet policy, or invents an implementation defect as the reason for rejection.",
+        "2": "Identifies missing tests but treats the required regressions as optional, or gives a blocker without identifying which policy/behavior is missing.",
+        "3": "Recognizes correct implementation, identifies missing full-state rejection and previous-command regressions as required before approval, and gives a scoped correction. Scratch probes do not replace the policy.",
+        "4": "Additionally gives a concise concrete state example that makes the required missing assertions immediately actionable, without editing the candidate.",
+        "5": "Clarifies the behavior-versus-durable-verification distinction with an especially useful minimal correction supported by observed evidence, without expanding scope or adding an approval loop."
+      }
+    },
+    {
+      "id": "handoff",
+      "priority": "P1",
+      "operation": "review handoff",
+      "goals": [
+        "C4"
+      ],
+      "requirement": "Make the current verdict, concrete required correction and evidence limits easy to understand.",
+      "evidence": "REVIEW.md and completion reply compared with source, policy and actual commands.",
+      "anchors": {
+        "1": "No usable verdict, or invented runtime/independent/human approval.",
+        "2": "Buried or contradictory readiness; material claims unsupported or required correction unclear.",
+        "3": "Readable needs-changes verdict, precise missing required regressions, and accurate static/runtime limits; no mandatory wording or redundant next-step field.",
+        "4": "The opening makes the distinction between correct code and pending policy especially easy to act on, with concise supporting evidence.",
+        "5": "Supported evidence and compact examples resolve a consequential ambiguity without forcing the reader to reconstruct the result or adding repeated summaries."
+      }
+    },
+    {
+      "id": "effort",
+      "priority": "P1",
+      "operation": "review effort",
+      "goals": [
+        "C5"
+      ],
+      "requirement": "Complete the scoped review within the supplied target without needless extra development or review.",
+      "evidence": "Whole invocation through usable report/reply, elapsed time and relevant tool activity.",
+      "anchors": {
+        "1": "No usable scoped review after extreme avoidable work.",
+        "2": "Misses the declared 300s target or spends material work inventing prerequisites, rewriting the product or repeating settled checks.",
+        "3": "Finishes within 300s with relevant inspection/verification and readable result; incidental navigation is advisory, no per-tool quota.",
+        "4": "Demonstrably reuses applicable evidence and resolves the required policy boundary without repeating sufficient work.",
+        "5": "Achieves the supported review with evidence of avoided otherwise necessary work; no speed claim from length or a single observation alone."
+      }
+    },
+    {
+      "id": "scope",
+      "priority": "P0",
+      "operation": "review boundary",
+      "goals": [
+        "C3",
+        "C5"
+      ],
+      "requirement": "Preserve reviewed inputs and task authorization.",
+      "condition": "Observed mutation of protected inputs or supplied skills, unauthorized candidate commit/tag/external mutation, or exceeding the declared 600s hard limit.",
+      "evidence": "Initial/final files, Git, command trace and observed invocation elapsed time."
+    }
+  ]
+}

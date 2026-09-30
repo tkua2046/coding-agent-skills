@@ -1,6 +1,6 @@
 {
   "id": "smoke-design-local",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Make a row-limit decision usable ahead of accepted history",
   "skills": [

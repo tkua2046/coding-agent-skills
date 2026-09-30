@@ -1,6 +1,6 @@
 {
   "id": "route-local",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Plan the next inventory reservation change",
   "skills": [

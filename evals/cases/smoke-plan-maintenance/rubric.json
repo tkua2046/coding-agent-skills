@@ -1,12 +1,26 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "stable-plan",
       "required": true,
       "requirement": "Keep planning decisions authoritative without duplicating private implementation changes.",
       "pass_when": "Leaves accepted/current plan unchanged and explains that the implementation/test evidence owns this maintenance change; next existing delivery outcome remains clear.",
-      "fail_when": "Rewrites stages/history, appends test/helper inventory or invents a new design/review phase solely for the private edit."
+      "fail_when": "Rewrites stages/history, appends test/helper inventory or invents a new design/review phase solely for the private edit.",
+      "goals": [
+        "B1",
+        "B4"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "B6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
     }
   ]
 }

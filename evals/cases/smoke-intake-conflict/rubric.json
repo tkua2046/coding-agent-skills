@@ -1,19 +1,46 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "real-decision",
       "required": true,
       "requirement": "Expose a conflict that cannot be solved by a preservation default.",
       "pass_when": "Uses a concrete observed uppercase expansion such as \u00df to show the conflicting obligations and asks which behavior/scope should win (or whether new behavior can be opt-in). Holds that choice open while preserving settled prefix decisions.",
-      "fail_when": "Silently chooses uppercase or a replacement, promises both conflicting requirements, or gives generic questions without the concrete conflict."
+      "fail_when": "Silently chooses uppercase or a replacement, promises both conflicting requirements, or gives generic questions without the concrete conflict.",
+      "goals": [
+        "A1",
+        "A3"
+      ]
     },
     {
       "id": "intake-boundary",
       "required": true,
       "requirement": "Keep clarifying separate from implementing.",
       "pass_when": "Grounded note with a material next decision and reversible settled facts; no code edits.",
-      "fail_when": "Implements a guessed resolution or demands unrelated architecture/process work."
+      "fail_when": "Implements a guessed resolution or demands unrelated architecture/process work.",
+      "goals": [
+        "A1"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "A2"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes known contract, material unresolved choice and its consequence (or why none remains), and the next action. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "id": "smoke-plan-delivery",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Plan a compatibility transition around useful delivery boundaries",
   "skills": [

@@ -1,12 +1,11 @@
-# After-generation delivery checks
+# Final delivery checks
 
-Load after preparing the setup report, PR, handoff or release report. Correct supported issues and expose unresolved material conditions; otherwise remain silent. Do not generate a self-check report or another review round.
+Use these questions at the end of the selected operation, in proportion to the work. Correct material omissions, make the result readable and deliver. They do not require specific headings, a checklist artifact, another reviewer or another test round.
 
-- Does the whole deliverable fulfill the original goal at the requested scope? Is any partial outcome explicit, even when checks pass?
-- Can a human review the intended diff, new files and expected generated artifacts through clear entrypoints? Is their combined complexity and maintenance burden justified by the outcome?
-- Can the reader identify the result, actual validation/limits and next action? Does each included document or artifact serve a useful purpose?
-- Are configured, installed, executed, independently reviewed, accepted and published states distinguished using actual evidence?
-- Are both claimed successes and alleged gaps supported by observed output, actually enforced conditions or inspected applicable configuration/source? Missing evidence and unchecked child results remain unverified; neither intended commands nor remembered framework behavior establishes current facts.
-- Do reused checks still apply to the relevant content, requirements, inputs, runtime, configuration and freshness needs? Are mandatory gates/rechecks complete or explicitly pending?
-- Where durable status is needed, is it kept in one place with relevant original evidence linked? Is retention scoped to the work and actual policy, rather than expanded into an unnecessary archive?
-- Are version/PR/release actions within scope and accurately reported, including failed or uncertain outcomes?
+- Does the whole result fulfill the original goal within authorization? Are partial outcomes and remaining conditions visible even when checks pass?
+- Can the reader quickly find the result, meaningful validation and next action, and review intended new files or generated deliverables? Does each artifact justify its maintenance and review burden?
+- Do claims distinguish configured, installed, executed, author-fixed, independently verified, accepted and published states? Are both successes and alleged gaps supported, with unknown or unchecked results left unverified?
+- Does reused evidence apply to the relevant candidate, requirements, inputs/runtime, configuration and freshness needs? Are required gates/reviews complete or explicitly pending?
+- Is durable status maintained in one existing place when needed, with relevant originals and failure evidence retained under actual policy? Are uncertain or conflicting external outcomes reported without unjustified retries?
+
+Fix substantive defects within scope. Cosmetic preferences alone do not reopen completed work; sufficient output and required review are the stopping point.

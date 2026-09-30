@@ -1,40 +1,139 @@
 {
-  "version": 2,
+  "version": 6,
+  "scoring": "priority-v1",
   "criteria": [
     {
-      "id": "preserve-intent",
-      "required": true,
-      "requirement": "Preserve original requirements and completed history; amend only affected facts.",
-      "pass_when": "Original sources remain readable and completed movement work remains historical; obstacle work is pending.",
-      "fail_when": "Replacing the original request or reopening completed stages loses traceability."
+      "id": "scope-boundary",
+      "priority": "P0",
+      "operation": "design and plan only",
+      "goals": [
+        "A1"
+      ],
+      "requirement": "Honor the expressly forbidden mutation boundary.",
+      "condition": "Any product implementation, source commit/tag or external mutation forbidden by the task. Editing design/plan and local evidence is allowed. Modifying the read-only supplied skill files or installed required hook is also prohibited.",
+      "evidence": "Phase-specific requests, complete changed files and Git state, execution trace; no inference of human approval from agent reports."
+    },
+    {
+      "id": "hard-deadline",
+      "priority": "P0",
+      "operation": "whole requested task",
+      "goals": [
+        "A6",
+        "B6"
+      ],
+      "requirement": "Respect the prospectively declared hard time limits.",
+      "condition": "Cumulative worker execution exceeds 600 seconds, or exhausts that allowance before all required worker phases finish. Complete delivery exactly at the applicable limit is allowed.",
+      "evidence": "Actual phase elapsed time and total observations. Includes development reviewers/fixes; excludes evaluator reader/scorer as declared. Missing timing is inconclusive; a known breach remains a failure."
     },
     {
       "id": "decisions",
-      "required": true,
-      "requirement": "Explain behavior and consequential design choices using existing code.",
-      "pass_when": "Reuses pose/command model and explains membership lookup and failure-state ownership with a blocked-move example.",
-      "fail_when": "Invents a new navigation framework or omits unchanged pose, making the change unsafe or unnecessarily broad."
+      "priority": "P1",
+      "operation": "amend design",
+      "goals": [
+        "A1",
+        "A3"
+      ],
+      "requirement": "An implementable local obstacle decision preserves the supplied behavior and explains consequential choices.",
+      "evidence": "Original request and implementation compared with actual updated design and examples.",
+      "anchors": {
+        "1": "Changes the requested behavior or omits the obstacle decision.",
+        "2": "Blocked coordinates/heading or later commands are wrong/unclear; introduces a navigation framework without a real need.",
+        "3": "Reuse pose/commands; explain membership lookup and check-before-assignment or an equivalently justified whole-state preservation mechanism; a blocked move leaves the whole pose unchanged and later commands/turns work. Scope stays caller-supplied fixed cells.",
+        "4": "A compact counterexample makes state ownership or lookup cost especially easy to assess.",
+        "5": "One clear decision resolves coupled compatibility/state concerns with less complexity, supported by actual reasoning rather than extra alternatives."
+      }
     },
     {
       "id": "executable-plan",
-      "required": true,
-      "requirement": "Plan coherent outcomes, dependencies and meaningful acceptance.",
-      "pass_when": "A future implementer can verify blocking, later commands and existing turns; boundaries explain why work is grouped.",
-      "fail_when": "A function/test census or duplicated execution narration obscures outcomes, or no acceptance catches state mutation."
+      "priority": "P1",
+      "operation": "amend pending plan",
+      "goals": [
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "requirement": "Plan delivery outcomes, prerequisites and decisive acceptance, not a prose implementation/test census.",
+      "evidence": "Actual pending plan and dependency/acceptance examples; no requirement for a particular format or stage count.",
+      "anchors": {
+        "1": "No executable pending feature outcome or acceptance would approve broken state.",
+        "2": "Function/test inventories dominate, stages have no delivery reason, or continuation/compatibility acceptance is missing.",
+        "3": "One or justified few pending outcomes have available prerequisites and acceptance for blocked whole pose, failure result, later commands and unchanged turns. Actual test bodies remain owned by tests.",
+        "4": "A concise acceptance example catches a subtle state/continuation boundary.",
+        "5": "A shared compact example resolves interacting acceptance/dependency concerns without duplicate maintenance."
+      }
     },
     {
-      "id": "scope-and-evidence",
-      "required": true,
-      "requirement": "Keep design/planning distinct from implementation and review acceptance.",
-      "pass_when": "Changes documents only and distinguishes observed baseline checks from proposed verification and pending review.",
-      "fail_when": "Implements the feature or asserts unperformed checks/reviews, misrepresenting readiness."
+      "id": "preserve-intent",
+      "priority": "P1",
+      "operation": "local document maintenance",
+      "goals": [
+        "A4",
+        "B4"
+      ],
+      "requirement": "Preserve sources and completed work while amending only affected live decisions.",
+      "evidence": "Initial and final documents, original files, changes and trace. File replacement or line count alone does not establish harmful rewriting.",
+      "anchors": {
+        "1": "Destroys original requirements/history or represents completed movement as unimplemented.",
+        "2": "Reconstructs unrelated accepted history, duplicates live facts across new documents or requires private implementation/test synchronization.",
+        "3": "Original sources and completed movement survive; obstacle work is pending and changes stay on affected behavior/outcomes. Equivalent reflow is allowed.",
+        "4": "Existing references make the affected decisions easy to update without duplicate live ownership.",
+        "5": "Removes an actual pre-existing duplication while preserving original history and clear current ownership."
+      }
     },
     {
       "id": "first-screen-comprehension",
-      "required": true,
-      "requirement": "A new reader can identify the change, main choice/consequence and next implementation outcome from the actual document beginnings.",
-      "pass_when": "The separately captured reader answers correctly explain unchanged blocked pose and continuation, the chosen lookup tradeoff, and the next uncompleted increment with a decisive acceptance example; answers are supported by the exposed excerpts. Full documents provide navigable supporting reasoning.",
-      "fail_when": "The reader must guess or cannot locate the change, consequence or next outcome, contradicts the contract, or the main document requires searching through implementation/test inventories. Correctness inferred from other full files does not repair a failed first-screen probe."
+      "priority": "P1",
+      "operation": "final document readability",
+      "goals": [
+        "A2",
+        "B1"
+      ],
+      "requirement": "A reader can find change, consequential choice and next outcome from actual document openings.",
+      "evidence": "Recorded restricted-reader excerpts and answers plus actual complete documents. Reader is a machine proxy, not measured human reading time.",
+      "anchors": {
+        "1": "Opening directs the reader to a false contract or completed work as next.",
+        "2": "Reader cannot recover the substantive change, consequence or next acceptance without reconstructing buried history; actual opening contradicts detail.",
+        "3": "Restricted reader correctly recovers preserved blocked pose/continuation, lookup/state decision and next pending outcome with decisive acceptance from exposed beginnings. Supporting detail remains navigable.",
+        "4": "Opening also makes a consequential limitation immediately assessable without redundant summary.",
+        "5": "A compact example makes interacting behavior and delivery limitations clear with minimal reading; extra headings/length earn no benefit."
+      }
+    },
+    {
+      "id": "scope-and-evidence",
+      "priority": "P1",
+      "operation": "planning evidence and review status",
+      "goals": [
+        "A1"
+      ],
+      "requirement": "Distinguish observed checks, proposed verification and pending independent review.",
+      "evidence": "Actual command/response trace, final document claims and review records; missing critical evidence is inconclusive, demonstrated false claims fail.",
+      "anchors": {
+        "1": "Invents independent/human approval or knowingly presents failed checks as passed.",
+        "2": "Claims unperformed baseline checks/reviews or presents proposed verification as executed.",
+        "3": "Observed code/check facts are supported; proposed tests remain proposed and requested review stays pending until performed. A planning-only task need not execute every proposed check.",
+        "4": "Precise applicable evidence references make the boundary easy to assess without new bureaucracy.",
+        "5": "Resolves a real evidence ambiguity concisely without inventing verification or repeating unrelated checks."
+      }
+    },
+    {
+      "id": "proportionate-effort",
+      "priority": "P1",
+      "operation": "whole requested task",
+      "goals": [
+        "A6",
+        "B6"
+      ],
+      "requirement": "Deliver usable work within the declared target without material avoidable replay, rewriting or review cycles. ",
+      "evidence": "Complete phase execution traces and observations.json including worker/reviewer/fix elapsed time; absent required timing is inconclusive, never zero. Hard limits are separately enforced by the runner.",
+      "anchors": {
+        "1": "No usable outcome because extreme avoidable loops dominate the task.",
+        "2": "Known target miss or material avoidable full rewrites, duplicate live maintenance, cosmetic review loops, or repeated unchanged full gates. Explain the concrete cost; incidental navigation is not enough.",
+        "3": "All required phases finish within 300 seconds, using work justified by scope/uncertainty and a final readability edit. Required checks and meaningful fixes remain included.",
+        "4": "Meets 3 and the trace demonstrates reuse of accepted decisions or applicable checks that avoids meaningful work; a lower clock alone is not evidence.",
+        "5": "Meets 4 and concrete comparative work evidence shows interacting constraints resolved without otherwise necessary repeated work. Do not invent a comparison."
+      }
     }
-  ]
+  ],
+  "advisory": "P2 only: preferred headings, table columns, exact wording and redundant summaries. Equivalent readable formats do not affect readiness; judge material comprehension under the relevant P1.",
+  "timing": "Use the case-declared phase/whole-task targets and hard limits. Missing critical trace/timing is inconclusive; known target misses remain failures even if other evidence is absent."
 }

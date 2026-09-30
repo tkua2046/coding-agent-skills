@@ -1,6 +1,6 @@
 {
   "id": "v5-review-recheck",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "V5: Recheck an incomplete then corrected document fix",
   "skills": [

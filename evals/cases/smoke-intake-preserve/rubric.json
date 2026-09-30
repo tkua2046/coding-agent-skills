@@ -1,19 +1,46 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "resolved-default",
       "required": true,
       "requirement": "Advance from confirmed requirements using observed compatibility.",
       "pass_when": "Inspects old uppercase behavior/errors, preserves them and the explicitly selected per-call string prefix/default. States enough is known to proceed or only concrete remaining material ambiguity; examples support the decision.",
-      "fail_when": "Invents global/callback interfaces, changes old errors/coerces values, or blocks on asking the owner to reconfirm already explicit preservation/default decisions."
+      "fail_when": "Invents global/callback interfaces, changes old errors/coerces values, or blocks on asking the owner to reconfirm already explicit preservation/default decisions.",
+      "goals": [
+        "A1",
+        "A3"
+      ]
     },
     {
       "id": "bounded-intake",
       "required": true,
       "requirement": "Produce usable intake without starting another workflow.",
       "pass_when": "Concise grounded intake and next action; no code changes, full design or mandatory new approval sequence.",
-      "fail_when": "A generic question checklist obscures the resolved next step, or implementation/full planning starts outside scope."
+      "fail_when": "A generic question checklist obscures the resolved next step, or implementation/full planning starts outside scope.",
+      "goals": [
+        "A2"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "A2"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes known contract, material unresolved choice and its consequence (or why none remains), and the next action. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
     }
   ]
 }

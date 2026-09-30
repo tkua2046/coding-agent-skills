@@ -1,6 +1,6 @@
 {
   "id": "smoke-handoff-opening",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Expose current handoff state before retained policy and history",
   "skills": [

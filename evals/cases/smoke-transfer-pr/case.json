@@ -1,6 +1,6 @@
 {
   "id": "smoke-transfer-pr",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "A changed current check cannot inherit a previous green result",
   "skills": [

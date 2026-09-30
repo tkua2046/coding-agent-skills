@@ -1,6 +1,6 @@
 {
   "id": "smoke-pr-scope",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Goal-based regression: assess the whole PR for a completed CSV export",
   "skills": [

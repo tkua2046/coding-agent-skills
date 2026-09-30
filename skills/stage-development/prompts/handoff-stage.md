@@ -1,0 +1,7 @@
+# Hand off existing work
+
+Use this operation when the requested work is only to communicate or reconcile existing delivery status. Requested implementation or gate execution uses [Execute stage](execute-stage.md); independent review or finding recheck uses [Review stage](review-stage.md). Complete that requested operation before handing back its status.
+
+1. **Establish the current state.** Start with the existing handoff and relevant review/check evidence already available. Resolve missing or conflicting facts that could change what is complete or what happens next. Check whether reused evidence still applies to the affected content; keep its source and limits clear. An author's repair, a reviewer's verification and human acceptance are distinct.
+2. **Update one account.** Use the existing status record, or a response if no durable record is needed. State the actual outcome, material remaining gate/finding/approval and next action when work remains. Link the existing evidence and retained history. Reconcile competing current statements without repeating accepted design, implementation details or the sequence of past reviews.
+3. **Finish and stop.** Use the Delivery section of [final checks](../references/artifact-checks.md). Make the current state easy to find and preserve useful history. A pending requirement stays pending; preparing its handoff does not fulfill it or authorize more work.

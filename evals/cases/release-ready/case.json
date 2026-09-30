@@ -1,6 +1,6 @@
 {
   "id": "release-ready",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Release assessment with current passing supplied evidence",
   "skills": [

@@ -1,6 +1,6 @@
 minimum_pre_commit_version: "4.6.2"
 # Immutable inputs/evidence retain original bytes, including intentional defects.
-exclude: ^(artifacts/|docs/research/workflow/sources/|evals/cases/|evals/graders/fixtures/)
+exclude: ^(artifacts/|docs/research/workflow/sources/|evals/cases/|evals/archived-cases/|evals/graders/fixtures/)
 default_language_version:
   python: python3.12
 repos:

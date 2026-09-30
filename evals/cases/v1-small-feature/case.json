@@ -1,6 +1,6 @@
 {
   "id": "v1-small-feature",
-  "version": 3,
+  "version": 8,
   "tier": "heavy",
   "title": "V1: Plan occupied cells in an existing navigator",
   "skills": [
@@ -45,5 +45,16 @@
       "What is the main technical decision and its practical consequence or tradeoff?",
       "What is the next uncompleted implementation outcome, its dependency, and one decisive acceptance example?"
     ]
-  }
+  },
+  "workflow_target_seconds": 300,
+  "workflow_budget_seconds": 600,
+  "check_criteria": {
+    "no-tags": "scope-boundary",
+    "local-commits": "scope-boundary",
+    "preserved-baseline": "preserve-intent",
+    "runner.skills-preserved": "scope-boundary",
+    "runner.workflow-budget": "hard-deadline",
+    "runner.workflow-target": "proportionate-effort"
+  },
+  "calibration_qualification": "readiness"
 }

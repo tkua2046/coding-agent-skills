@@ -1,6 +1,6 @@
 {
   "id": "transfer-packet-import",
-  "version": 2,
+  "version": 5,
   "tier": "heavy",
   "title": "Deliver safe local workshop ZIP import and retry",
   "skills": [

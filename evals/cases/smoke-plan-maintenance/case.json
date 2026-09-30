@@ -1,6 +1,6 @@
 {
   "id": "smoke-plan-maintenance",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Leave accepted planning decisions stable during an internal edit",
   "skills": [

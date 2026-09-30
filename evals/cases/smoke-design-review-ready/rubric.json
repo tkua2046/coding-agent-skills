@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "criteria": [
+    {
+      "id": "substantive-review",
+      "required": true,
+      "goals": [
+        "A5"
+      ],
+      "requirement": "Judge the actual design against the supplied contract.",
+      "pass_when": "Checks D1 private-copy ownership, preflight-before-debit, rejected multi-item state and later-batch continuation; supports a ready verdict for the design as written.",
+      "fail_when": "Generic approval without substantive inspection; an invented database/concurrency, extra-stage or percentage requirement blocks sufficient work; misses or contradicts the supplied batch/compatibility contract."
+    },
+    {
+      "id": "scope-and-evidence",
+      "required": true,
+      "goals": [
+        "A5"
+      ],
+      "requirement": "Keep static review evidence and the requested artifact boundary explicit.",
+      "pass_when": "Identifies D1 and material static evidence. Does not infer implemented behavior, executed checks or human approval from static review; no additional approval step or pending-status checklist is required. Preserves supplied sources. Reviews D1 without generating/reviewing an implementation plan.",
+      "fail_when": "Rewrites source, performs an unrequested second operation, claims unperformed test execution or unsupported human approval, or treats unexecuted product code as verified behavior."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "A2"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes current verdict, open material findings (or none), and the next correction or action before review history. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    }
+  ]
+}

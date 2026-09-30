@@ -1,16 +1,22 @@
-# After-generation checks
+# Final checks
 
-Read only the section for the artifact just produced. Fix supported problems; surface unresolved material issues. Otherwise remain silent. This is neither independent review nor an instruction to generate a checklist/report or repeat review until wording converges.
+Use the relevant questions during the selected operation's final edit. Fix material gaps; a checklist, fixed layout or additional review is not required.
 
 ## Plan
 
-- Do the opening and ordered stages identify the same first undelivered outcome, its prerequisites and acceptance? Is eventual feature completion distinguished when it requires later stages, with material failure behavior covered?
-- Are the overall approach and its boundaries justified by delivery, dependencies, risk or ownership? Does the proposed committed state stay coherent without unnecessary coordination or maintenance burden?
-- Would an internal rename or added test require synchronizing this prose? If so, remove the duplicated inventory.
-- Are existing requirements, completed history and actual gates preserved through relevant references, with live delivery state kept in one place where needed?
+- Can the reader identify the next undelivered outcome, prerequisite and decisive acceptance without reconciling different summaries? Is a partial delivery distinguished from the eventual feature?
+- Are increments coherent, prerequisites available in order, and boundaries useful for delivery, risk or ownership? Are important failure and compatibility expectations retained?
+- Would an ordinary helper rename or added test require rewriting this prose? Remove such duplication; preserve original requirements, completed history and actual gates.
+- Is proposed work distinct from evidence of completion, with live status kept in one place where needed?
 
 ## Review
 
-- Does the verdict assess the whole approach against the original goal and justified complexity, supported by the identified revision, actual evidence and material findings?
-- Can the author locate, understand and verify each necessary correction?
-- Are original findings retained and author claims distinct from verified dispositions? Does a partial fix stay open and a complete verified fix close?
+- Is the verdict supported by the identified revision and actual evidence, including whether the overall approach justifies its complexity?
+- Can the author locate, understand and verify each material correction? Are preferences nonblocking?
+- Are original findings retained, author claims distinguished from verification, partial fixes open and complete verified fixes closed?
+
+Support the requested judgment with the necessary evidence. Claim inspection only of content actually read; a file listing or an author's report is not your inspection. Attribute reused evidence and distinguish it from checks you executed. State the true scope and material limits; do not add work merely to make that account longer.
+
+## Readability
+
+Put the decision or verdict where it is easy to find, with its important consequence nearby. Keep detail needed to act; remove boilerplate and repeated summaries. Headings, table columns and exact wording are optional. Stop once the result is usable.

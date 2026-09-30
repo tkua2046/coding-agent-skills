@@ -1,0 +1,46 @@
+{
+  "version": 3,
+  "criteria": [
+    {
+      "id": "material-finding",
+      "required": true,
+      "goals": [
+        "A3",
+        "A5"
+      ],
+      "requirement": "Find the consequential design defect.",
+      "pass_when": "Needs changes: filtering before full validation violates the entire-input contract; identifies the selection decision and a concrete discarded-row duplicate/malformed example, preserved-destination consequence, and minimal correction to validate before selection. Does not invent architecture or style blockers.",
+      "fail_when": "Approves selected-only validation, misses the counterexample, treats atomic writing alone as sufficient, or demands unrelated architecture."
+    },
+    {
+      "id": "scope-and-evidence",
+      "required": true,
+      "goals": [
+        "A5"
+      ],
+      "requirement": "Stay within the supplied operation and distinguish observations from claims.",
+      "pass_when": "Identifies the reviewed DESIGN.md revision and static evidence; preserves sources. The other context is input, not an additional review target. Does not claim executed checks.",
+      "fail_when": "Changes preserved inputs or performs a different development operation; claims unperformed checks or unsupported independent review, human approval or real publication. Truthful disclosure of the independently assigned review is allowed. Missing evidence is disclosed, not replaced by an invented success."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "A2"
+      ],
+      "requirement": "Expose the current useful result before supporting detail.",
+      "pass_when": "The opening gives the current verdict, material blocker and next correction; locations, examples and consequences follow clearly.",
+      "fail_when": "Logs, policy or historical discussion obscure the result/next action; a heading or link substitutes for the actual answer; the opening contradicts the detailed artifact. Short but incomplete output also fails."
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    }
+  ]
+}

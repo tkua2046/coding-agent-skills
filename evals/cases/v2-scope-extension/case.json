@@ -1,6 +1,6 @@
 {
   "id": "v2-scope-extension",
-  "version": 3,
+  "version": 6,
   "tier": "heavy",
   "title": "V2: Confirm YAML pose and large obstacle input",
   "skills": [

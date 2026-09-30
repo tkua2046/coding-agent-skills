@@ -1,6 +1,6 @@
 {
   "id": "workflow-setup",
-  "version": 2,
+  "version": 5,
   "tier": "heavy",
   "title": "Adapt inventory workflow, then prepare its local PR draft",
   "skills": [

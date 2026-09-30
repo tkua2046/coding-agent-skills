@@ -1,6 +1,6 @@
 {
   "id": "v4-migration-risk",
-  "version": 3,
+  "version": 6,
   "tier": "heavy",
   "title": "V4: Design crash-safe settings migration",
   "skills": [

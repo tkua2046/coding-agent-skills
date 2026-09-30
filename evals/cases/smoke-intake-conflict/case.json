@@ -1,6 +1,6 @@
 {
   "id": "smoke-intake-conflict",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Identify an actual Unicode compatibility conflict",
   "skills": [

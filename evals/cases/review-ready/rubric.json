@@ -1,26 +1,49 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "material-review-and-restraint",
       "required": true,
       "requirement": "Recognize a sufficient design and coherent next increment through actual static inspection.",
       "pass_when": "Explains that D1 validates the whole file before selection and retains the existing writer/default, while P1 delivers that contract and regressions together. Concludes ready for the separately assigned implementation absent a substantiated material defect. Does not demand streaming, dependencies, more stages, a function inventory or extra review rounds.",
-      "fail_when": "Manufactures a blocker from a preference, treats unimplemented proposed behavior as a defect, postpones a supported verdict for fictional permission, or overlooks the actual proposal while offering generic approval."
+      "fail_when": "Manufactures a blocker from a preference, treats unimplemented proposed behavior as a defect, postpones a supported verdict for fictional permission, or overlooks the actual proposal while offering generic approval.",
+      "goals": [
+        "A5",
+        "B5"
+      ]
     },
     {
       "id": "reading-cost",
       "required": true,
       "requirement": "Assess usability from the document entrypoints without inventing a readability blocker.",
       "pass_when": "Recognizes the opening outcome/choice/next action and bounded P1 as usable. Optional concrete improvements can be nonblocking. No heading, length or template quota is used as a readiness condition.",
-      "fail_when": "Requires expanded paperwork, copied tests or a redesign of already usable documents without a concrete reader consequence, or calls the clear validate-then-select order buried/ambiguous without evidence."
+      "fail_when": "Requires expanded paperwork, copied tests or a redesign of already usable documents without a concrete reader consequence, or calls the clear validate-then-select order buried/ambiguous without evidence.",
+      "goals": [
+        "A2",
+        "B1"
+      ]
     },
     {
       "id": "actionable-static-verdict",
       "required": true,
       "requirement": "Produce a concise combined report tied to the reviewed content and authorized scope.",
       "pass_when": "The report opens with verdict, D1/P1 scope and next action, grounds its conclusions in identifiable excerpts/locations and the inspected baseline, and clearly limits assurance to static design/plan review. Findings if any are actionable, prioritized and nonblocking when appropriate. Report-only changes; no extra permissions requested.",
-      "fail_when": "No clear verdict or next action, ungrounded boilerplate, product edits, a sprawling paraphrase of every document, or false claims of runtime tests, independent review, human approval or feature implementation."
+      "fail_when": "No clear verdict or next action, ungrounded boilerplate, product edits, a sprawling paraphrase of every document, or false claims of runtime tests, independent review, human approval or feature implementation.",
+      "goals": [
+        "A5",
+        "B5"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6",
+        "B6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
     }
   ]
 }

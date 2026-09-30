@@ -1,47 +1,80 @@
 {
-  "version": 3,
+  "version": 6,
   "criteria": [
     {
       "id": "preservation",
       "required": true,
       "requirement": "Design retains usable v1 data through interruption.",
       "pass_when": "Separates constructing v2 from replacing/activating it; names crash points and how v1 stays readable.",
-      "fail_when": "Overwrites v1 in place without a recovery guarantee, risking irreversible loss."
+      "fail_when": "Overwrites v1 in place without a recovery guarantee, risking irreversible loss.",
+      "goals": [
+        "A1",
+        "A3"
+      ]
     },
     {
       "id": "retry-validation",
       "required": true,
       "requirement": "Design addresses exact preservation, validation and retry before activation.",
       "pass_when": "Covers stable IDs/values, rejects duplicate or malformed input, validates completed output and explains retry after partial output.",
-      "fail_when": "Activates before validation or retries by appending entries, allowing duplication/drop."
+      "fail_when": "Activates before validation or retries by appending entries, allowing duplication/drop.",
+      "goals": [
+        "A3"
+      ]
     },
     {
       "id": "dependencies",
       "required": true,
       "requirement": "Plan orders risky work by safety dependencies with decisive verification.",
       "pass_when": "Includes interruption before activation followed by retry, checking usable v1, exact v2 entries and activation only on success; recovery dependencies precede activation.",
-      "fail_when": "Says only add migration and tests, or treats happy-path conversion as sufficient safety evidence."
+      "fail_when": "Says only add migration and tests, or treats happy-path conversion as sufficient safety evidence.",
+      "goals": [
+        "B2",
+        "B3"
+      ]
     },
     {
       "id": "proportionate-design",
       "required": true,
       "requirement": "Explain safety consequences without prescribing machinery for its own sake.",
       "pass_when": "Justifies chosen storage/activation approach and tradeoff against a credible alternative within single-process scope.",
-      "fail_when": "Mandates a database/distributed transaction without need or omits recovery to keep the plan short."
+      "fail_when": "Mandates a database/distributed transaction without need or omits recovery to keep the plan short.",
+      "goals": [
+        "A3"
+      ]
     },
     {
       "id": "honest-status",
       "required": true,
       "requirement": "Preserve requirements and distinguish planning from delivered behavior.",
       "pass_when": "Original v1 contract remains intact and new migration checks/reviews are proposed, not executed claims.",
-      "fail_when": "Claims crash recovery tested from reviewing a document or edits implementation in planning scope."
+      "fail_when": "Claims crash recovery tested from reviewing a document or edits implementation in planning scope.",
+      "goals": [
+        "A1",
+        "A4"
+      ]
     },
     {
       "id": "first-screen-comprehension",
       "required": true,
       "requirement": "A new reader can identify the change, main choice/consequence and next implementation outcome from the actual document beginnings.",
       "pass_when": "The reader correctly identifies v1\u2192v2 migration, preservation/validate-before-activation, the next dependency-ordered outcome with a supported acceptance example for that outcome, and separately explains interrupted-retry safety acceptance, using the actual exposed beginnings. Recovery acceptance need not belong to the first implementation stage. Full detail remains navigable.",
-      "fail_when": "The reader must guess or cannot locate the change, consequence or next outcome, contradicts the contract, or the main document requires searching through implementation/test inventories. Correctness inferred from other full files does not repair a failed first-screen probe."
+      "fail_when": "The reader must guess or cannot locate the change, consequence or next outcome, contradicts the contract, or the main document requires searching through implementation/test inventories. Correctness inferred from other full files does not repair a failed first-screen probe.",
+      "goals": [
+        "A2",
+        "B1"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6",
+        "B6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
     }
   ]
 }

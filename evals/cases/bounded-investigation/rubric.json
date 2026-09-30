@@ -1,26 +1,47 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "resolve-uncertainty",
       "required": true,
       "requirement": "Investigate the consequential unknown before expanding architecture.",
       "pass_when": "Runs a bounded correct-output-preserving probe/profile that reveals repeated catalog reads/parsing per order and reports actual observations with limits, rather than accepting the infrastructure proposal.",
-      "fail_when": "Only speculates from source without an experiment, invents measurements, or designs a database/queue before establishing the cause."
+      "fail_when": "Only speculates from source without an experiment, invents measurements, or designs a database/queue before establishing the cause.",
+      "goals": [
+        "A1",
+        "A3"
+      ]
     },
     {
       "id": "proportionate-next-action",
       "required": true,
       "requirement": "Recommend a scope justified by the evidence.",
       "pass_when": "Explains a local once-per-batch load opportunity and fixed-catalog premise, notes benchmarking/verification needed for delivered performance, and leaves implementation for a subsequent authorized task.",
-      "fail_when": "Mandates unrelated services or a multi-document rewrite, claims general production latency from this small probe, or silently implements production changes."
+      "fail_when": "Mandates unrelated services or a multi-document rewrite, claims general production latency from this small probe, or silently implements production changes.",
+      "goals": [
+        "A1",
+        "A3"
+      ]
     },
     {
       "id": "readable-findings",
       "required": true,
       "requirement": "A new reader quickly finds conclusion, evidence limit and next action.",
       "pass_when": "Restricted reader correctly answers from the actual first screen; full raw experiment detail is available separately.",
-      "fail_when": "Conclusion or next action is buried, unsupported, or the reader must infer it from unseen full code."
+      "fail_when": "Conclusion or next action is buried, unsupported, or the reader must infer it from unseen full code.",
+      "goals": [
+        "A2"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "A6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
     }
   ]
 }

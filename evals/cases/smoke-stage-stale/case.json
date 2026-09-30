@@ -1,6 +1,6 @@
 {
   "id": "smoke-stage-stale",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Do not reuse a ready review after the candidate has changed",
   "skills": [

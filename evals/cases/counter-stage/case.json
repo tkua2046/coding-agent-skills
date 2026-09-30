@@ -1,6 +1,6 @@
 {
   "id": "counter-stage",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Counter implementation with required reviews pending",
   "skills": [

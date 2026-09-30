@@ -1,6 +1,6 @@
 {
   "id": "release-stale",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Release assessment with stale and pending supplied evidence",
   "skills": [

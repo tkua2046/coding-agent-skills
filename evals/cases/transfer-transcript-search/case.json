@@ -1,6 +1,6 @@
 {
   "id": "transfer-transcript-search",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Deliver literal transcript search with neighboring cues",
   "skills": [

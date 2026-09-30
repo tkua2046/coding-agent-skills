@@ -1,27 +1,27 @@
-# Set up or adapt a development workflow
+# Inspect or adapt a development workflow
 
-Read repository instructions, README/developer guide, runtime/dependency configuration, existing checks, CI and local Git state.
+Read the request, repository instructions, relevant developer/user guides, runtime/dependency configuration, checks, CI and local Git state. Identify the requested diagnosis or change; reuse the established environment and toolchain. Repair a demonstrated gap within scope, without replacing an effective gate to match an example.
 
-Before changing an existing check, reuse applicable baseline evidence or observe its relevant output and exit condition. Keep each check's result identifiable; wrapper success cannot establish an unchecked child result. If the baseline is unavailable or fails, state that and proceed with justified authorized repair. Later checks establish the later state only.
+Before changing a check, reuse applicable baseline evidence or observe its output and exit condition. Keep child results identifiable: wrapper success does not establish an unchecked child's result. An unavailable or failing baseline does not block justified authorized repair, but later success establishes only the later state. For inspection, report supported state and gaps without doing unrequested repairs; probe an unchanged runner's failure behavior only when propagation remains uncertain.
 
-Adapt only a demonstrated gap or explicitly requested change; an existing effective gate does not need replacement to match the sample. For inspection, use relevant actual gate results and report gaps; probe an unchanged runner's failure behavior only for an unresolved propagation risk. For new or changed runners, wrappers, discovery or hooks, verify meaningful collection, passing/failing execution and relevant failure propagation through the affected path. A direct runner check does not prove an installed hook executed. Reuse established tools; Python samples are optional examples.
+Trace the active check path from configuration to the invoked runner; read other scripts or historical output only when they help explain an observed gap.
 
-## Checks
+## When checks or hooks change
 
-- Provide a clear normal check entrypoint and commit gate. For Python, Ruff handles lint/format; pytest can run pytest or unittest tests with coverage.
-- Configure actual application source/module paths, branch measurement, missing-line output and optional machine reports. Account for subprocess execution when relevant. Do not leave the example's `app` source selector in an unrelated repository.
-- Coverage reports and coverage failure thresholds are distinct decisions. Preserve an existing threshold; otherwise do not invent a required percentage. Test assertions, failure behavior and independent expectations matter beyond coverage.
-- Run Ruff fixes before formatting. Inspect generated changes and restage intended files when preparing a commit. Exclude disposable environments, caches and scratch reports from version control; preserve intentional generated deliverables and required evidence.
-- A full-suite hook uses `pass_filenames: false`; run it even for documentation commits when that is the chosen policy. It must propagate test failures and zero-test collection failures. Do not suppress failures to bootstrap an empty project.
-- Match hook interpreter and dependencies to the application. The Python sample's isolated test environment includes test tools only; add required project/runtime dependencies or use the repository's established environment deliberately.
-- Before installing hooks, verify the intended local repository/worktree. Preserve existing hooks and custom hook paths. Prewarm dependencies and exercise a passing and failing case in an isolated fixture. Merely writing YAML does not prove installation or execution.
-- Separate fast commit/PR checks from expensive integration or agent behavior trials when the project needs both, honoring the actual required cadence. Keep required hooks effective and label deferred checks accurately. Retain regression coverage for demonstrated defects where it verifies the behavior. Rerun expensive checks when affected behavior, uncertainty or policy calls for them.
-- If this project itself maintains agent behavior, preserve relevant versioned behavioral regressions and their real outcomes. Reuse its evaluation system; an ordinary application setup request does not require creating an agent-testing framework.
+- Keep a usable normal check entrypoint and the project's commit policy. For changed runners, discovery, wrappers or hooks, verify meaningful collection, passing/failing execution and relevant failure propagation. Test a hook through the installed hook path; calling the runner directly does not prove hook execution.
+- Preserve existing hooks and custom hook paths; verify the intended repository/worktree before installation. Match the interpreter and dependencies to the application, prewarm needed hook dependencies and exercise failing probes in isolated scratch fixtures. Keep probes out of the deliverable.
+- A full-suite pre-commit hook uses `pass_filenames: false` and runs on documentation-only commits when that is the chosen policy. Propagate test failures and zero-test collection failures. If application tests are absent, report the gap and identify meaningful tests needed with implementation; do not suppress the failure or create an empty suite merely to claim setup success. Documentation-only projects do not need an invented application test suite.
+- Use established lint/format/test tools. For a Python setup that needs them, the optional samples use Ruff and pytest (including unittest collection); run Ruff fixes before formatting. Adapt sample paths and include required application dependencies in an isolated hook environment, or deliberately use the project's existing environment.
+- Inspect formatter changes and restage only intended files when preparing a commit. Keep disposable environments, caches and scratch reports out of version control while preserving intentional deliverables and required evidence.
 
-## Documents and completion
+## When coverage or test policy changes
 
-Apply the document ownership reference, using the owned root templates as needed. Preserve original files or version history when moving content, update links and metadata, and avoid two copies of the same authoritative instructions.
+Measure the actual application source/modules, including initialization and subprocess execution where relevant, with branch and missing-line reporting. Adapt the sample `app` selector; add machine reports when useful or requested. Preserve an existing coverage threshold; a report is not a reason to invent a percentage gate. Report what was measured and consequential uncovered behavior without equating coverage with test quality. Meaningful assertions and independent expected outcomes still matter.
 
-Report the result, actual validation, material limits and next action. Include hook status, coverage policy or document mapping when affected. Support successes and alleged gaps with observed output, enforced conditions or inspected applicable configuration/source; disclose assumptions and missing evidence. Absent optional tools are not automatically defects. Link detailed output at its existing evidence location. If application tests are absent, report that and identify meaningful coverage needed with implementation.
+Preserve the project's fast commit/PR and expensive integration/behavior-test cadence. Add regression coverage for demonstrated defects when it verifies the behavior; rerun affected checks and mandatory gates, reusing adequate unaffected evidence. Label deferred checks accurately. If the project maintains agent behavior, use its existing evaluation system and retain relevant versioned regressions and real outcomes; ordinary application setup does not require an agent-testing framework.
 
-After drafting that report, load [delivery checks](../references/delivery-checks.md). Correct supported issues; expose unresolved limitations. Otherwise the check is silent and adds no report or review round.
+## Documents and delivery
+
+For document creation or reorganization, apply [document ownership](../references/documents.md); adapt templates only when helpful. Preserve original content/history, update affected links and metadata, and keep one authoritative owner for each instruction.
+
+Finish with the result, observed validation and material limits or remaining work. Make changed check commands and required environment accessible in the response or linked developer guide. For coverage, make actual measurements and consequential gaps easy to find; disclose unavailable measurement. State configured, installed and executed hook status accurately when affected. Support successes and alleged gaps with observed output or applicable inspected configuration/source; missing optional tools alone are not defects. Reuse existing evidence locations rather than creating a log or report by default.

@@ -1,6 +1,6 @@
 {
   "id": "bounded-investigation",
-  "version": 1,
+  "version": 4,
   "tier": "heavy",
   "title": "Resolve a performance uncertainty before selecting architecture",
   "skills": [

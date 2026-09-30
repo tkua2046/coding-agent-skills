@@ -1,6 +1,6 @@
 {
   "id": "smoke-setup-evidence",
-  "version": 2,
+  "version": 5,
   "tier": "smoke",
   "title": "Distinguish listed tests from an executed development gate",
   "skills": [

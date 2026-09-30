@@ -1,26 +1,55 @@
 {
-  "version": 1,
+  "version": 4,
   "criteria": [
     {
       "id": "observed-baseline",
       "required": true,
       "requirement": "Report the original gate and changed gate from their own observed evidence.",
       "pass_when": "Distinguishes the original wrapper's zero exit from its failing suite, and the repaired wrapper's nonzero exit on the unchanged failure. Before/after claims match actual execution and content order; a later replay is labeled as such and any missing original observation stays unverified.",
-      "fail_when": "Claims the baseline suite passed, uses a later compound-command exit as proof of an earlier test result, invents counts/output or retroactively treats post-edit checks as pre-edit evidence."
+      "fail_when": "Claims the baseline suite passed, uses a later compound-command exit as proof of an earlier test result, invents counts/output or retroactively treats post-edit checks as pre-edit evidence.",
+      "goals": [
+        "D1"
+      ]
     },
     {
       "id": "effective-gate",
       "required": true,
       "requirement": "Repair the existing gate while keeping application failure visible.",
       "pass_when": "Uses the existing unittest command and verifies relevant failing, passing and empty-collection behavior through that command with temporary controls restored. Code and observed checks establish deliberate empty-collection rejection; no particular diagnostic wording or runner invocation on the empty path is required. Reports that gate propagation is repaired while the known application test still fails; no application acceptance is invented.",
-      "fail_when": "Silences or fixes the application test, substitutes an unconditional failing exit, skips meaningful collection, mistakes an unrelated crash for empty-collection handling, claims application tests all green, or replaces the toolchain."
+      "fail_when": "Silences or fixes the application test, substitutes an unconditional failing exit, skips meaningful collection, mistakes an unrelated crash for empty-collection handling, claims application tests all green, or replaces the toolchain.",
+      "goals": [
+        "D1"
+      ]
     },
     {
       "id": "bounded-report",
       "required": true,
       "requirement": "Provide a concise actionable setup handoff within scope.",
       "pass_when": "Explains the repaired contributor behavior, supported results and outstanding application defect, with evidence linked or compactly recorded and no new process.",
-      "fail_when": "Invents hook/coverage/Git verification, changes preserved records, or adds unrelated release, design or approval machinery."
+      "fail_when": "Invents hook/coverage/Git verification, changes preserved records, or adds unrelated release, design or approval machinery.",
+      "goals": [
+        "D1"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "D6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "D1"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes what setup changed or was verified, actual installed versus executed check evidence, remaining limits and next action; later PR output must expose its own final scope and readiness. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
     }
   ]
 }

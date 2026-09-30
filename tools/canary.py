@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
@@ -49,6 +50,146 @@ SKIPPED_EXECUTION = {
 
 def valid_revision(value) -> bool:
     return type(value) is int and value > 0
+
+
+def priority_scoring(rubric: dict) -> bool:
+    return rubric.get("scoring") == "priority-v1"
+
+
+def blocking(criterion: dict, rubric: dict) -> bool:
+    return (
+        criterion["priority"] != "P2"
+        if priority_scoring(rubric)
+        else criterion["required"]
+    )
+
+
+def combined_status(statuses) -> str:
+    statuses = set(statuses)
+    return (
+        "fail"
+        if "fail" in statuses
+        else "inconclusive"
+        if "inconclusive" in statuses
+        else "pass"
+    )
+
+
+def score_status(score) -> str:
+    if score is None:
+        return "inconclusive"
+    if type(score) is not int or not 1 <= score <= 5:
+        raise ValueError("P1 score must be an integer 1..5 or null")
+    return "pass" if score >= 3 else "fail"
+
+
+def validate_rubric(rubric: dict) -> None:
+    if "scoring" in rubric and not priority_scoring(rubric):
+        raise ValueError("Unsupported scoring version")
+    criteria = rubric.get("criteria", [])
+    ids = [c["id"] for c in criteria]
+    if (
+        not valid_revision(rubric.get("version"))
+        or not ids
+        or any(not isinstance(name, str) or not name.strip() for name in ids)
+        or len(ids) != len(set(ids))
+    ):
+        raise ValueError("Invalid rubric")
+    for criterion in criteria:
+        if priority_scoring(rubric):
+            if criterion.get("priority") not in {"P0", "P1", "P2"} or any(
+                not isinstance(criterion.get(k), str) or not criterion[k].strip()
+                for k in ("operation", "requirement")
+            ):
+                raise ValueError("Invalid priority criterion")
+            for key in ("goals", "evidence"):
+                value = criterion.get(key)
+                values = (
+                    [value] if key == "evidence" and isinstance(value, str) else value
+                )
+                if (
+                    not isinstance(values, list)
+                    or not values
+                    or any(not isinstance(v, str) or not v.strip() for v in values)
+                ):
+                    raise ValueError(f"Priority criterion requires {key}")
+            if criterion["priority"] == "P1":
+                anchors = criterion.get("anchors")
+                if (
+                    not isinstance(anchors, dict)
+                    or set(anchors) != set("12345")
+                    or any(
+                        not isinstance(v, str) or not v.strip()
+                        for v in anchors.values()
+                    )
+                ):
+                    raise ValueError("P1 requires concrete anchors 1..5")
+            if criterion["priority"] == "P0" and (
+                not isinstance(criterion.get("condition"), str)
+                or not criterion["condition"].strip()
+            ):
+                raise ValueError("P0 requires an explicit condition")
+        elif not isinstance(criterion.get("required"), bool) or any(
+            not criterion.get(k) for k in ("requirement", "pass_when", "fail_when")
+        ):
+            raise ValueError("Unanchored criterion")
+    if not any(blocking(c, rubric) for c in criteria):
+        raise ValueError("At least one required criterion is necessary")
+
+
+def validate_budgets(contract: dict, prefix: str = "") -> None:
+    target, budget = prefix + "target_seconds", prefix + "budget_seconds"
+    for key in (target, budget):
+        if key in contract and not valid_revision(contract[key]):
+            raise ValueError(f"{key} must be a positive integer")
+    if target in contract and (
+        budget not in contract or contract[target] > contract[budget]
+    ):
+        raise ValueError("Target requires a hard budget at least as large")
+
+
+def timing_limits(case: dict):
+    for field in ("budget", "target"):
+        key = f"workflow_{field}_seconds"
+        if key in case:
+            yield f"runner.workflow-{field}", None, field, case[key]
+    for phase in case["phases"]:
+        for field in ("budget", "target"):
+            key = f"{field}_seconds"
+            if key in phase:
+                yield f"runner.{phase['id']}-{field}", phase["id"], field, phase[key]
+
+
+def check_ids(case: dict) -> set[str]:
+    return (
+        {c["id"] for c in case.get("checks", [])}
+        | {"runner.skills-preserved"}
+        | ({"runner.hook-preserved"} if case.get("hook") else set())
+        | {name for name, *_ in timing_limits(case)}
+    )
+
+
+def validate_check_criteria(case: dict, rubric: dict) -> None:
+    if not priority_scoring(rubric):
+        return
+    mapping = case.get("check_criteria")
+    criteria = {c["id"]: c for c in rubric["criteria"]}
+    if (
+        not isinstance(mapping, dict)
+        or set(mapping) != check_ids(case)
+        or any(
+            not isinstance(name, str)
+            or name not in criteria
+            or criteria[name]["priority"] == "P2"
+            for name in mapping.values()
+        )
+    ):
+        raise ValueError(
+            "Numeric check_criteria must map every deterministic check to a P1 or P0 criterion"
+        )
+    for name, _, field, _ in timing_limits(case):
+        if field == "target" and criteria[mapping[name]]["priority"] != "P1":
+            raise ValueError("Usable targets must map to P1 efficiency, not P0")
 
 
 def digest(data: bytes) -> str:
@@ -133,17 +274,15 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
         if not case.get("skills") or not case.get("phases"):
             raise ValueError(f"Empty scope/phases: {case_id}")
         if case["tier"] == "smoke" and (
-            len(case["phases"]) != 1
+            len(case["skills"]) != 1
+            or len(case["phases"]) != 1
             or "reading_probe" in case
             or "skip_if_ready" in case["phases"][0]
         ):
             raise ValueError(
-                f"Smoke requires one executed operation, no reader: {case_id}"
+                f"Smoke requires one skill/operation, no reader: {case_id}"
             )
-        if "workflow_budget_seconds" in case and not valid_revision(
-            case["workflow_budget_seconds"]
-        ):
-            raise ValueError(f"Workflow budget must be a positive integer: {case_id}")
+        validate_budgets(case, "workflow_")
         for skill in case["skills"]:
             if (
                 not re.fullmatch(r"[a-z0-9-]+", skill)
@@ -152,6 +291,7 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
                 raise ValueError(f"Unknown skill: {skill}")
         phase_ids = set()
         for phase in case["phases"]:
+            validate_budgets(phase)
             if (
                 not re.fullmatch(r"[a-z0-9-]+", phase["id"])
                 or phase["id"] in phase_ids
@@ -180,20 +320,15 @@ def cases(root: Path = ROOT) -> dict[str, dict]:
             for name in probe["documents"]:
                 local(path.parent / "fixture", name)
         rubric = read_json(path.parent / "rubric.json")
-        criteria = rubric.get("criteria", [])
-        ids = [x["id"] for x in criteria]
-        if (
-            not valid_revision(rubric.get("version"))
-            or not ids
-            or len(ids) != len(set(ids))
-            or not any(c.get("required") is True for c in criteria)
+        validate_rubric(rubric)
+        if "calibration_qualification" in case and (
+            case["calibration_qualification"] != "readiness"
+            or not priority_scoring(rubric)
         ):
-            raise ValueError(f"Invalid rubric: {case_id}")
-        for criterion in criteria:
-            if not isinstance(criterion.get("required"), bool) or any(
-                not criterion.get(k) for k in ("requirement", "pass_when", "fail_when")
-            ):
-                raise ValueError(f"Unanchored criterion: {case_id}")
+            raise ValueError(
+                "Calibration qualification must be readiness on a priority rubric"
+            )
+        validate_check_criteria(case, rubric)
         check_ids = []
         for check in case.get("checks", []):
             check_ids.append(check["id"])
@@ -337,7 +472,7 @@ def environment() -> dict:
 
 
 def grade_schema(rubric: dict) -> dict:
-    return {
+    schema = {
         "type": "object",
         "additionalProperties": False,
         "required": ["criteria"],
@@ -373,6 +508,16 @@ def grade_schema(rubric: dict) -> dict:
         },
     }
 
+    if priority_scoring(rubric):
+        row = schema["properties"]["criteria"]["items"]
+        row["required"].append("score")
+        row["properties"]["score"] = {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 5,
+        }
+    return schema
+
 
 def validate_grade(
     grade: dict,
@@ -389,6 +534,17 @@ def validate_grade(
     for row in received:
         if row.get("status") not in STATES or not row.get("reason", "").strip():
             raise ValueError("Invalid status or missing grading reason")
+        criterion = expected[row["id"]]
+        if priority_scoring(rubric):
+            if "score" not in row:
+                raise ValueError(
+                    "Priority grade requires score, including explicit null"
+                )
+            if criterion["priority"] == "P1":
+                if row["status"] != score_status(row["score"]):
+                    raise ValueError("P1 status disagrees with score")
+            elif row["score"] is not None:
+                raise ValueError("P0/P2 score must be null")
         evidence = row.get("evidence", [])
         if row["status"] != "inconclusive" and not evidence:
             raise ValueError("Pass/fail requires artifact evidence")
@@ -409,7 +565,7 @@ def validate_grade(
             )
             if item["quote"] not in evidence_text:
                 raise ValueError("Grader cited missing evidence or an invented quote")
-        if expected[row["id"]]["required"]:
+        if blocking(criterion, rubric):
             required.append(row["status"])
     if not required:
         raise ValueError("At least one required criterion is necessary")
@@ -646,6 +802,8 @@ def grade_packet(
 
 def calibration_contract(inputs: dict, example: dict) -> dict:
     rubric = example["rubric"] if "rubric" in example else inputs["rubric"]
+    if priority_scoring(rubric):
+        validate_rubric(rubric)
     if "expected_criteria" in example:
         expected = example["expected_criteria"]
         ids = [c["id"] for c in rubric["criteria"]]
@@ -659,28 +817,193 @@ def calibration_contract(inputs: dict, example: dict) -> dict:
             )
         ):
             raise ValueError("Expected criteria must map every rubric ID to a status")
+    if priority_scoring(rubric) or "expected_scores" in example:
+        scores = example.get("expected_scores")
+        criteria = {c["id"]: c for c in rubric["criteria"]}
+        p1 = {name for name, c in criteria.items() if c.get("priority") == "P1"}
+        if (
+            not priority_scoring(rubric)
+            or not isinstance(scores, dict)
+            or not p1 <= scores.keys() <= criteria.keys()
+        ):
+            raise ValueError(
+                "Expected scores must map every P1 ID, with no unknown IDs"
+            )
+        statuses = example.get("expected_criteria", {})
+        for name, bounds in scores.items():
+            if bounds is None:
+                if name in p1 and name in statuses and statuses[name] != "inconclusive":
+                    raise ValueError("Null expected score requires inconclusive status")
+                continue
+            if name not in p1 or not isinstance(bounds, list) or len(bounds) != 2:
+                raise ValueError(
+                    "Expected score range must be [min,max]; P0/P2 must be null"
+                )
+            low, high = bounds
+            if any(type(v) is not int or not 1 <= v <= 5 for v in bounds) or low > high:
+                raise ValueError(
+                    "Expected score range must contain ordered integers 1..5"
+                )
+            if name in statuses and any(
+                score_status(v) != statuses[name] for v in bounds
+            ):
+                raise ValueError("Expected score range contradicts expected status")
     return rubric
 
 
 def calibration_matches(example: dict, grade: dict, status: str) -> bool:
-    return status == example["expected"] and (
+    statuses_match = status == example["expected"] and (
         "expected_criteria" not in example
         or {c["id"]: c["status"] for c in grade.get("criteria", [])}
         == example["expected_criteria"]
     )
+    scores = {c["id"]: c.get("score") for c in grade.get("criteria", [])}
+    return statuses_match and all(
+        name in scores
+        and (
+            scores[name] is None
+            if bounds is None
+            else type(scores[name]) is int and bounds[0] <= scores[name] <= bounds[1]
+        )
+        for name, bounds in example.get("expected_scores", {}).items()
+    )
 
 
-def calibration(root: Path, config: dict) -> Path:
-    directory, report = new_record(root, "calibration")
+def case_calibration_inputs(root: Path, case_id: str) -> dict:
+    """Select the case's reviewed controls, rejecting missing contrasts locally."""
+    catalog = cases(root)
+    if case_id not in catalog:
+        raise ValueError(f"Unknown calibration case: {case_id}")
+    rubric = read_json(root / "evals/cases" / case_id / "rubric.json")
+    criteria = {c["id"]: c for c in rubric["criteria"]}
+    examples = [
+        e
+        for e in read_json(root / "evals/graders/calibration.json")["examples"]
+        if e.get("case_source", {}).get("id") == case_id
+    ]
+    numeric = priority_scoring(rubric)
+    contrasts = {name: set() for name, c in criteria.items() if blocking(c, rubric)}
+    cosmetic = False
+    usable = False
+    for example in examples:
+        if (
+            example["case_source"].get("rubric_version") != rubric["version"]
+            or "expected_criteria" not in example
+        ):
+            raise ValueError(f"Stale or unlabeled calibration control: {case_id}")
+        selected = calibration_contract({}, example)
+        if (
+            selected.get("scoring") != rubric.get("scoring")
+            or selected["version"] != rubric["version"]
+            or any(
+                criterion != criteria.get(criterion["id"])
+                for criterion in selected["criteria"]
+            )
+        ):
+            raise ValueError(f"Calibration criterion differs from case: {case_id}")
+        for artifact, source in example.get("input_sources", {}).items():
+            if example["artifacts"].get(artifact) != local(root, source).read_text():
+                raise ValueError(f"Stale calibration source: {case_id}: {source}")
+        for name, status in example["expected_criteria"].items():
+            if name in contrasts:
+                if numeric and criteria[name]["priority"] == "P1":
+                    bounds = example["expected_scores"][name]
+                    if bounds is not None and (bounds[0] == 3 or bounds[1] <= 2):
+                        contrasts[name].add(status)
+                else:
+                    contrasts[name].add(status)
+        if numeric:
+            labels = example["expected_criteria"]
+            expected_status = combined_status(
+                labels[c["id"]] for c in selected["criteria"] if blocking(c, selected)
+            )
+            if expected_status != example["expected"]:
+                raise ValueError("Control readiness contradicts expected criteria")
+            full_pass = set(labels) == set(criteria) and expected_status == "pass"
+            if example.get("kind") == "cosmetic-equivalent":
+                cosmetic |= full_pass
+            else:
+                usable |= full_pass
+    missing = [
+        name for name, statuses in contrasts.items() if not {"pass", "fail"} <= statuses
+    ]
+    if not contrasts or missing:
+        raise ValueError(
+            f"Case calibration lacks pass/fail controls for {case_id}: "
+            + ", ".join(missing)
+        )
+    if numeric and not (cosmetic and usable):
+        raise ValueError(
+            "Numeric case calibration requires full passing usable and cosmetic-equivalent controls"
+        )
+    return {
+        "rubric": rubric,
+        "examples": examples,
+        **(
+            {"calibration_qualification": catalog[case_id]["calibration_qualification"]}
+            if "calibration_qualification" in catalog[case_id]
+            else {}
+        ),
+        **(
+            {
+                "case_identity": fingerprint(
+                    hashes(files(root / "evals/cases" / case_id))
+                )
+            }
+            if numeric
+            else {}
+        ),
+    }
+
+
+def case_grading_identity(root: Path) -> str:
+    # The executable schema/validation are bound by engine_identity; unrelated
+    # calibration data is not part of this case's scoring dependency.
+    return digest((root / "evals/graders/review.md").read_bytes())
+
+
+def calibration(
+    root: Path, config: dict, group: str | None = None, case_id: str | None = None
+) -> Path:
+    if group is not None and case_id is not None:
+        raise ValueError("Select a case or a diagnostic group, not both")
+    directory, report = new_record(
+        root,
+        "case-calibration"
+        if case_id is not None
+        else "calibration-sample"
+        if group is not None
+        else "calibration",
+    )
     report.update(
-        grader=grading_identity(root),
+        grader=case_grading_identity(root)
+        if case_id is not None
+        else grading_identity(root),
         engine=engine_identity(root),
         settings=config,
         environment=environment(),
     )
+    if case_id is not None:
+        report["case_id"] = case_id
     save(directory / "attempt.json", report)
     try:
-        examples = read_json(root / "evals/graders/calibration.json")
+        examples = (
+            case_calibration_inputs(root, case_id)
+            if case_id is not None
+            else read_json(root / "evals/graders/calibration.json")
+        )
+        if case_id is not None and "calibration_qualification" in examples:
+            report["calibration_qualification"] = examples["calibration_qualification"]
+        if group is not None:
+            examples = {
+                **examples,
+                "examples": [
+                    e for e in examples["examples"] if e.get("group") == group
+                ],
+            }
+            if not examples["examples"]:
+                raise ValueError(f"Unknown or empty calibration group: {group}")
+            report["group"] = group
         save(directory / "inputs.json", examples)
         outcomes = []
         with tempfile.TemporaryDirectory(prefix="canary-") as temp:
@@ -718,13 +1041,19 @@ def calibration(root: Path, config: dict) -> Path:
     return finish(directory, report)
 
 
-def check_calibration(root: Path, path: Path, config: dict, env: dict) -> dict:
+def check_calibration(
+    root: Path, path: Path, config: dict, env: dict, *, case_id: str | None = None
+) -> dict:
     record = verified_record(path)
+    scoped = record.get("kind") == "case-calibration"
+    if scoped and (case_id is None or record.get("case_id") != case_id):
+        raise ValueError("Case calibration cannot authorize another case or release")
     if any(
         (
-            record.get("kind") != "calibration",
+            record.get("kind") not in {"calibration", "case-calibration"},
             record.get("status") != "pass",
-            record.get("grader") != grading_identity(root),
+            record.get("grader")
+            != (case_grading_identity(root) if scoped else grading_identity(root)),
             record.get("engine") != engine_identity(root),
             record.get("settings") != config,
             record.get("environment") != env,
@@ -734,8 +1063,21 @@ def check_calibration(root: Path, path: Path, config: dict, env: dict) -> dict:
     if "inputs.json" not in record["evidence"]:
         raise ValueError("Calibration controls missing from evidence manifest")
     inputs = read_json(path.parent / "inputs.json")
-    if inputs != read_json(root / "evals/graders/calibration.json"):
+    current_inputs = (
+        case_calibration_inputs(root, case_id)
+        if scoped
+        else read_json(root / "evals/graders/calibration.json")
+    )
+    if inputs != current_inputs:
         raise ValueError("Calibration controls changed")
+    if scoped and record.get("calibration_qualification") != inputs.get(
+        "calibration_qualification"
+    ):
+        raise ValueError("Calibration qualification differs from bound case inputs")
+    if not scoped and case_id is not None:
+        rubric = read_json(root / "evals/cases" / case_id / "rubric.json")
+        if priority_scoring(rubric):
+            case_calibration_inputs(root, case_id)
     for index, example in enumerate(inputs["examples"]):
         required = {
             f"{index}-reply.execution.json",
@@ -764,10 +1106,13 @@ def check_calibration(root: Path, path: Path, config: dict, env: dict) -> dict:
         "path": str(path.resolve()),
         "sha256": digest(path.read_bytes()),
         "grader": record["grader"],
+        **({"case_id": case_id} if scoped else {}),
     }
 
 
-def behavior_calibration(root: Path, path: Path, row: dict) -> dict:
+def behavior_calibration(
+    root: Path, path: Path, row: dict, *, case_id: str | None = None
+) -> dict:
     """Read a shared calibration, or the inline copy in an original v1 record."""
     if "calibration_ref" in row:
         reference = row["calibration_ref"]
@@ -788,7 +1133,11 @@ def behavior_calibration(root: Path, path: Path, row: dict) -> dict:
     else:
         calibration_path = path.parent / "calibration/report.json"
     return check_calibration(
-        root, calibration_path, row["settings"]["grader"], row["environment"]
+        root,
+        calibration_path,
+        row["settings"]["grader"],
+        row["environment"],
+        **({"case_id": case_id} if case_id is not None else {}),
     )
 
 
@@ -876,6 +1225,8 @@ def run_reader(workspace: Path, directory: Path, probe: dict, config: dict) -> N
 
 def observations(directory: Path, case: dict) -> dict:
     executed, skipped, unreached, elapsed = [], [], [], []
+    incomplete = []
+    phase_times = {}
     final = directory / "initial"
     for phase in case["phases"]:
         phase_dir = directory / "phases" / phase["id"]
@@ -890,6 +1241,7 @@ def observations(directory: Path, case: dict) -> dict:
             or seconds < 0
         ):
             raise ValueError("Worker elapsed time missing/invalid")
+        phase_times[phase["id"]] = seconds
         if result.get("skipped") is True:
             if result != SKIPPED_EXECUTION:
                 raise ValueError("Skipped phase contains execution/time")
@@ -897,6 +1249,8 @@ def observations(directory: Path, case: dict) -> dict:
         else:
             executed.append(phase["id"])
             elapsed.append(seconds)
+            if not result.get("completed"):
+                incomplete.append(phase["id"])
         final = phase_dir / "workspace"
 
     def document_counts(path):
@@ -913,6 +1267,13 @@ def observations(directory: Path, case: dict) -> dict:
         }
 
     return {
+        **({"incomplete_phases": incomplete} if incomplete else {}),
+        **(
+            {"phase_elapsed_seconds": phase_times}
+            if "workflow_target_seconds" in case
+            or any("target_seconds" in p for p in case["phases"])
+            else {}
+        ),
         "executed_phases": executed,
         "skipped_phases": skipped,
         "unreached_phases": unreached,
@@ -933,14 +1294,81 @@ def budget_check(case: dict, observed: dict) -> dict:
         "id": "runner.workflow-budget",
         "status": "fail"
         if seconds > budget
+        or (
+            seconds >= budget
+            and (observed["unreached_phases"] or observed.get("incomplete_phases"))
+        )
         else "inconclusive"
-        if observed["unreached_phases"]
+        if observed["unreached_phases"] or observed.get("incomplete_phases")
         else "pass",
         "evidence": {
             "worker_elapsed_seconds": seconds,
             "workflow_budget_seconds": budget,
         },
     }
+
+
+def timing_checks(case: dict, observed: dict, directory: Path) -> list[dict]:
+    checks = []
+    for name, phase_id, field, limit in timing_limits(case):
+        if name == "runner.workflow-budget":
+            checks.append(budget_check(case, observed))
+            continue
+        if phase_id is None:
+            seconds = observed["worker_elapsed_seconds"]
+            complete = not (
+                observed["unreached_phases"] or observed.get("incomplete_phases")
+            )
+        else:
+            path = directory / "phases" / phase_id / "execution.json"
+            execution = read_json(path) if path.is_file() else {}
+            seconds = execution.get("elapsed_seconds", 0)
+            complete = execution.get("completed") or execution.get("skipped")
+        checks.append(
+            {
+                "id": name,
+                "status": "fail"
+                if seconds > limit
+                or (field == "budget" and seconds >= limit and not complete)
+                else "pass"
+                if complete
+                else "inconclusive",
+                "evidence": {
+                    "worker_elapsed_seconds": seconds,
+                    f"{field}_seconds": limit,
+                    "phase_id": phase_id,
+                },
+            }
+        )
+    return checks
+
+
+def check_facts(checks: list[dict], case: dict, rubric: dict) -> list[dict]:
+    """Attach declared priority facts, without inventing a semantic score or P0."""
+    if not priority_scoring(rubric):
+        return checks
+    criteria = {c["id"]: c for c in rubric["criteria"]}
+    facts = []
+    for check in checks:
+        criterion = criteria[case["check_criteria"][check["id"]]]
+        facts.append(
+            {
+                **check,
+                "criterion_id": criterion["id"],
+                "priority": criterion["priority"],
+                "score_ceiling": 2
+                if check["status"] == "fail" and criterion["priority"] == "P1"
+                else None,
+            }
+        )
+    return facts
+
+
+def execution_seconds(result: dict) -> float:
+    seconds = result.get("elapsed_seconds")
+    if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds < 0:
+        raise ValueError("Worker elapsed time missing/invalid")
+    return seconds
 
 
 def run_case(
@@ -951,8 +1379,10 @@ def run_case(
     calibration_path: Path,
     ref: str | None = None,
 ) -> Path:
+    started = time.perf_counter()
     case = cases(root)[case_id]
     case_dir = root / "evals/cases" / case_id
+    rubric = read_json(case_dir / "rubric.json")
     directory, report = new_record(root, "behavior")
     report.update(
         case_id=case_id,
@@ -967,8 +1397,10 @@ def run_case(
     )
     try:
         calibration_info = check_calibration(
-            root, calibration_path, grader, report["environment"]
+            root, calibration_path, grader, report["environment"], case_id=case_id
         )
+        if "case_id" in calibration_info:
+            report["calibration_scope"] = calibration_info["case_id"]
         original = Path(calibration_info["path"])
         if not original.is_relative_to(directory.parent):
             raise ValueError(
@@ -1003,7 +1435,13 @@ def run_case(
             if not isolation["passed"]:
                 raise RuntimeError("Worker canary read/network boundary failed")
             phase_results = []
+            worker_times = []
             for phase in case["phases"]:
+                remaining = case.get("workflow_budget_seconds", math.inf) - math.fsum(
+                    worker_times
+                )
+                if remaining <= 0:
+                    break
                 request = local(case_dir, phase["request"]).read_text()
                 phase_dir = directory / "phases" / phase["id"]
                 phase_dir.mkdir(parents=True)
@@ -1024,10 +1462,54 @@ def run_case(
                         request
                         + "\n\nUse only this fixture and the supplied skills/. Read fixture AGENTS.md if present. This phase is a fresh context. Preserve prior reports. CANARY_PYTHON points to the prepared Python runtime. Do not install packages or use external services.\n"
                     )
+                    invocation = {
+                        **worker,
+                        "timeout_seconds": min(
+                            worker["timeout_seconds"],
+                            remaining,
+                            phase.get("budget_seconds", math.inf),
+                        ),
+                    }
+                    if "workflow_budget_seconds" in case:
+                        consumed = math.fsum(worker_times)
+                        target_remaining = (
+                            f"{max(0, case['workflow_target_seconds'] - consumed):.3f}s"
+                            if "workflow_target_seconds" in case
+                            else "not declared"
+                        )
+                        prompt += (
+                            f"\nWorkflow worker clock: {consumed:.3f}s consumed; "
+                            f"usable target remaining: {target_remaining}; "
+                            f"hard budget remaining: {remaining:.3f}s; "
+                            f"this invocation cap: {invocation['timeout_seconds']:.3f}s.\n"
+                        )
                     (phase_dir / "prompt.md").write_text(prompt)
-                    result = runtime.execute(
-                        workspace, prompt, phase_dir / "reply.md", worker
+                    save(phase_dir / "settings.json", invocation)
+                    save(
+                        phase_dir / "budget.json",
+                        {
+                            "worker_elapsed_seconds": math.fsum(worker_times),
+                            "workflow_remaining_seconds": remaining
+                            if math.isfinite(remaining)
+                            else None,
+                            "phase_remaining_seconds": phase.get("budget_seconds"),
+                            "timeout_seconds": invocation["timeout_seconds"],
+                        },
                     )
+                    call_started = time.perf_counter()
+                    try:
+                        result = runtime.execute(
+                            workspace, prompt, phase_dir / "reply.md", invocation
+                        )
+                    except (Exception, KeyboardInterrupt) as exc:
+                        result = {
+                            **SKIPPED_EXECUTION,
+                            "skipped": False,
+                            "elapsed_seconds": time.perf_counter() - call_started,
+                            "interrupted": isinstance(exc, KeyboardInterrupt),
+                            "stderr": f"{type(exc).__name__}: {exc}",
+                        }
+                    worker_times.append(execution_seconds(result))
                 save(phase_dir / "execution.json", result)
                 write_files(phase_dir / "workspace", files(workspace))
                 save(phase_dir / "git.json", git_snapshot(workspace, head))
@@ -1043,6 +1525,8 @@ def run_case(
                 phase_results.append(skipped or result["completed"])
                 if not phase_results[-1]:
                     break
+                if result["elapsed_seconds"] > phase.get("budget_seconds", math.inf):
+                    break
             checks = deterministic(case, case_dir, workspace, initial, head, directory)
             unchanged_skills = all(
                 local(workspace, p).is_file() and local(workspace, p).read_bytes() == b
@@ -1055,21 +1539,29 @@ def run_case(
                 }
             )
             if hook is not None:
+                hook_path = workspace / ".git/hooks/pre-commit"
                 checks.append(
                     {
                         "id": "runner.hook-preserved",
                         "status": "pass"
-                        if (workspace / ".git/hooks/pre-commit").read_bytes() == hook
+                        if hook_path.is_file() and hook_path.read_bytes() == hook
                         else "fail",
                     }
                 )
             observed = observations(directory, case)
             save(directory / "phases/observations.json", observed)
             report["observations"] = observed
-            if "workflow_budget_seconds" in case:
-                checks.append(budget_check(case, observed))
+            checks.extend(timing_checks(case, observed, directory))
+            checks = check_facts(checks, case, rubric)
             save(directory / "deterministic.json", checks)
             report["deterministic"] = checks
+            # Establish known failures before any incomplete worker/reader/grader
+            # can prevent final aggregation. Missing dimensions stay unknown.
+            report["status"] = combined_status(
+                ["inconclusive", *[c["status"] for c in checks]]
+            )
+            if priority_scoring(rubric):
+                save(directory / "phases/deterministic.json", checks)
             if len(phase_results) != len(case["phases"]) or not all(phase_results):
                 raise RuntimeError("Worker phase incomplete; partial results retained")
             if "reading_probe" in case:
@@ -1094,7 +1586,6 @@ def run_case(
             save(directory / "grader-isolation.json", isolation)
             if not isolation["passed"]:
                 raise RuntimeError("Grader boundary failed")
-            rubric = read_json(case_dir / "rubric.json")
             result, grade, semantic_status = grade_packet(
                 root, packet, directory / "grade-reply.json", rubric, grader
             )
@@ -1110,6 +1601,19 @@ def run_case(
             )
     except (Exception, KeyboardInterrupt) as exc:
         report["error"] = f"{type(exc).__name__}: {exc}"
+    evaluator_times = {}
+    for role, name in (
+        ("reader", "phases/reading-probe/execution.json"),
+        ("grader", "grade-reply.execution.json"),
+    ):
+        path = directory / name
+        if path.is_file():
+            evaluator_times[role] = read_json(path).get("elapsed_seconds")
+    report["timing"] = {
+        "end_to_end_elapsed_seconds": time.perf_counter() - started,
+        "evaluator_elapsed_seconds": evaluator_times,
+        "clock": "Worker budget sums runtime.execute wall time, including tools/waits; evaluator and harness overhead excluded. End-to-end includes setup/evaluation through report assembly.",
+    }
     return finish(directory, report)
 
 
@@ -1125,11 +1629,22 @@ def require_completed(execution: dict) -> None:
         raise ValueError("Execution incomplete; cannot establish acceptance")
 
 
-def verified_behavior(root: Path, path: Path, case: dict) -> dict:
+def verified_behavior(
+    root: Path, path: Path, case: dict, *, require_full_calibration: bool = False
+) -> dict:
     """Recompute acceptance from archived criteria and executions, not a status label."""
     row = verified_record(path)
     directory = path.parent
     stored = row["identity"]
+    scoped = row.get("calibration_scope")
+    if scoped:
+        current = identity(root, case, row.get("source_ref"))
+        if (
+            scoped != case["id"]
+            or row["case_id"] != case["id"]
+            or any(stored[key] != current[key] for key in ("case", "skills", "engine"))
+        ):
+            raise ValueError("Scoped behavior inputs or execution engine changed")
     if (
         fingerprint(hashes(files(directory / "inputs/case"))) != stored["case"]
         or hashes(files(directory / "inputs/bundles")) != stored["skills"]
@@ -1140,6 +1655,8 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
             raise ValueError("Isolation probe missing/failed")
     previous_workspace = directory / "initial"
     previous_git = directory / "initial-git.json"
+    rubric = read_json(root / "evals/cases" / case["id"] / "rubric.json")
+    worker_times = []
     for phase in case["phases"]:
         phase_dir = directory / "phases" / phase["id"]
         execution = read_json(phase_dir / "execution.json")
@@ -1163,9 +1680,41 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
             ):
                 raise ValueError("Skipped phase must retain state with zero execution")
         else:
+            remaining = case.get("workflow_budget_seconds", math.inf) - math.fsum(
+                worker_times
+            )
+            if remaining <= 0:
+                raise ValueError("Worker executed after workflow budget exhaustion")
+            settings_path = phase_dir / "settings.json"
+            if settings_path.is_file() or priority_scoring(rubric):
+                worker = row["settings"]["worker"]
+                expected_settings = {
+                    **worker,
+                    "timeout_seconds": min(
+                        worker["timeout_seconds"],
+                        remaining,
+                        phase.get("budget_seconds", math.inf),
+                    ),
+                }
+                if read_json(settings_path) != expected_settings:
+                    raise ValueError("Worker timeout differs from remaining budget")
+                budget_path = phase_dir / "budget.json"
+                if priority_scoring(rubric) or budget_path.is_file():
+                    if read_json(budget_path) != {
+                        "worker_elapsed_seconds": math.fsum(worker_times),
+                        "workflow_remaining_seconds": remaining
+                        if math.isfinite(remaining)
+                        else None,
+                        "phase_remaining_seconds": phase.get("budget_seconds"),
+                        "timeout_seconds": expected_settings["timeout_seconds"],
+                    }:
+                        raise ValueError(
+                            "Recorded remaining worker budget differs from phases"
+                        )
             require_completed(execution)
             if (phase_dir / "reply.md").read_text() != execution["reply"]:
                 raise ValueError("Worker reply differs from recorded execution")
+            worker_times.append(execution_seconds(execution))
         previous_workspace = phase_dir / "workspace"
         previous_git = phase_dir / "git.json"
     if "reading_probe" in case:
@@ -1193,7 +1742,7 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
         raise ValueError("Grader reply differs from recorded judgment")
     semantic = validate_grade(
         grade,
-        read_json(root / "evals/cases" / case["id"] / "rubric.json"),
+        rubric,
         directory,
         files(directory / "phases"),
     )
@@ -1204,22 +1753,24 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
         or row.get("observations") != observed
     ):
         raise ValueError("Observations differ from recorded worker phases")
-    expected = {c["id"] for c in case.get("checks", [])} | {"runner.skills-preserved"}
+    expected = check_ids(case)
+    if check_facts(checks, case, rubric) != checks:
+        raise ValueError("Deterministic priority mapping differs from case contract")
+    if (
+        priority_scoring(rubric)
+        and read_json(directory / "phases/deterministic.json") != checks
+    ):
+        raise ValueError("Grader deterministic facts differ from retained checks")
     for check in case.get("checks", []):
         if check["kind"] == "phase_delivery" and [
             c for c in checks if c["id"] == check["id"]
-        ] != [delivery_result(case, check, directory)]:
+        ] != check_facts([delivery_result(case, check, directory)], case, rubric):
             raise ValueError(
                 "Delivery result differs from captured phase/commit evidence"
             )
-    if "workflow_budget_seconds" in case:
-        expected.add("runner.workflow-budget")
-        if [c for c in checks if c["id"] == "runner.workflow-budget"] != [
-            budget_check(case, observed)
-        ]:
-            raise ValueError("Workflow budget differs from recorded worker time")
-    if case.get("hook"):
-        expected.add("runner.hook-preserved")
+    for timing in check_facts(timing_checks(case, observed, directory), case, rubric):
+        if [c for c in checks if c["id"] == timing["id"]] != [timing]:
+            raise ValueError("Workflow budget/target differs from recorded worker time")
     if (
         len(checks) != len(expected)
         or {c["id"] for c in checks} != expected
@@ -1236,7 +1787,12 @@ def verified_behavior(root: Path, path: Path, case: dict) -> dict:
     )
     if status != row["status"] or status == "inconclusive":
         raise ValueError("Summary does not establish a completed case result")
-    behavior_calibration(root, path, row)
+    behavior_calibration(
+        root,
+        path,
+        row,
+        **({"case_id": case["id"]} if scoped and not require_full_calibration else {}),
+    )
     return row
 
 
@@ -1327,7 +1883,9 @@ def release_gate(root: Path, paths: list[Path], baseline: str) -> dict:
                     try:
                         for row in (candidate, old):
                             record_path = Path(row["record_path"])
-                            verified_behavior(root, record_path, case)
+                            verified_behavior(
+                                root, record_path, case, require_full_calibration=True
+                            )
                     except (ValueError, OSError, KeyError) as exc:
                         errors.append(f"{case_id}: invalid behavior evidence: {exc}")
                         continue
@@ -1400,10 +1958,26 @@ def main(argv=None) -> int:
         command.add_argument("--model", required=True)
         command.add_argument("--effort", default="medium")
         command.add_argument("--timeout", type=int, default=900)
+        if name == "calibrate":
+            selection = command.add_mutually_exclusive_group()
+            selection.add_argument(
+                "--group",
+                help="Check a named subset; its report cannot authorize worker runs or release",
+            )
+            selection.add_argument(
+                "--case",
+                dest="case_id",
+                help="Calibrate all required criteria for one case; not release certification",
+            )
         if name == "run":
             command.add_argument("case")
             command.add_argument("--grader-model", required=True)
             command.add_argument("--grader-effort", default="medium")
+            command.add_argument(
+                "--grader-timeout",
+                type=int,
+                help="Grader invocation timeout in seconds; defaults to --timeout",
+            )
             command.add_argument("--calibration", type=Path, required=True)
             command.add_argument("--baseline")
             command.add_argument(
@@ -1451,9 +2025,15 @@ def main(argv=None) -> int:
         else:
             config = settings(args.model, args.effort, args.timeout)
             if args.command == "calibrate":
-                path = calibration(ROOT, config)
+                path = calibration(ROOT, config, args.group, args.case_id)
             else:
-                grader = settings(args.grader_model, args.grader_effort, args.timeout)
+                grader = settings(
+                    args.grader_model,
+                    args.grader_effort,
+                    args.timeout
+                    if args.grader_timeout is None
+                    else args.grader_timeout,
+                )
                 failures = []
                 selected = select_cases(cases(ROOT), args.case, args.tier)
                 if not selected:

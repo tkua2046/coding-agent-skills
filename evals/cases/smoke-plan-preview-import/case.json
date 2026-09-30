@@ -1,6 +1,6 @@
 {
   "id": "smoke-plan-preview-import",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Plan a read-only CSV preview before confirmed import",
   "skills": [

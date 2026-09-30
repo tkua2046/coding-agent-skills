@@ -1,7 +1,7 @@
 [tool.ruff]
 target-version = "py312"
 line-length = 88
-extend-exclude = ["artifacts", "docs/research/workflow/sources", "evals/cases"]
+extend-exclude = ["artifacts", "docs/research/workflow/sources", "evals/cases", "evals/archived-cases"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B"]

@@ -1,6 +1,6 @@
 {
   "id": "existing-intake",
-  "version": 2,
+  "version": 5,
   "tier": "heavy",
   "title": "Existing-project intake with a failing legacy expectation",
   "skills": [

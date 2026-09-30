@@ -1,6 +1,6 @@
 {
   "id": "smoke-setup-child-evidence",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Report partial verification from an archived package-check wrapper",
   "skills": [

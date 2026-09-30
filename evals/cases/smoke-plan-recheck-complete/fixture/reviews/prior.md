@@ -1,0 +1,1 @@
+Supplied prior review at P1: R1 open; exporter must be available before A enables JSON, with default CSV compatibility throughout. See docs/history/R1.md. This is frozen input, not a prior worker prerequisite.

@@ -1,6 +1,6 @@
 {
   "id": "bounded-delivery",
-  "version": 3,
+  "version": 9,
   "tier": "heavy",
   "title": "Inventory rejection from decisions to reviewed working code",
   "skills": [
@@ -88,5 +88,17 @@
       "kind": "python",
       "file": "oracle.py"
     }
-  ]
+  ],
+  "workflow_target_seconds": 600,
+  "check_criteria": {
+    "no-tags": "scope-boundary",
+    "no-commits": "scope-boundary",
+    "original-contract": "useful-depth",
+    "behavior": "working-feature",
+    "runner.skills-preserved": "scope-boundary",
+    "runner.workflow-budget": "hard-deadline",
+    "runner.workflow-target": "proportionate-effort",
+    "runner.hook-preserved": "scope-boundary"
+  },
+  "calibration_qualification": "readiness"
 }

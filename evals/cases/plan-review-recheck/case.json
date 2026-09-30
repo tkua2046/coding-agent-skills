@@ -1,0 +1,47 @@
+{
+  "id": "plan-review-recheck",
+  "version": 1,
+  "tier": "heavy",
+  "title": "Plan review: partial prerequisite fix then complete dependency and compatibility recheck",
+  "skills": [
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-partial",
+      "request": "requests/01.md"
+    },
+    {
+      "id": "02-complete",
+      "request": "requests/02.md",
+      "overlay": "overlays/02"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commits",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "original-history",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "README.md",
+        "docs/ORIGINAL.md",
+        "docs/DESIGN.md",
+        "docs/history"
+      ]
+    },
+    {
+      "id": "review-boundary",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

@@ -1,21 +1,22 @@
 ---
 name: stage-development
-description: Implement a bounded change with appropriate validation and required review, or independently review code. Use for direct implementation requests, planned stages and focused code reviews.
+description: Implement a bounded change with appropriate validation and required review, independently review code, or prepare a status-only handoff. Use for direct implementation, planned stages, focused code reviews and delivery status.
 ---
 
 # Stage development
 
-| Operation | Read |
+Deliver the requested working change or review, then make the result easy to use. Read only the selected operation and relevant context; sufficient requirements can support direct implementation without a new design, plan or stage record.
+
+| Task | Operation |
 |---|---|
-| Implement, fix findings, or finish a stage | [Execute stage](prompts/execute-stage.md) |
-| Review stage code and tests | [Review stage](prompts/review-stage.md) |
+| Implement, fix a finding, or resume work with checks or review still to perform | [Execute stage](prompts/execute-stage.md) |
+| Review code or recheck a finding | [Review stage](prompts/review-stage.md) |
+| Summarize or reconcile existing delivery evidence only | [Hand off](prompts/handoff-stage.md) |
 
-Goal: deliver a correct, reviewable outcome with effective checks and a usable handoff. Read the request, relevant original requirements and existing decisions, repository instructions and acceptance. Sufficient facts in the request can support direct implementation without design, plan or review documents. Load only the selected operation and its relevant resources.
+Read the original requirements, confirmed decisions, repository instructions and acceptance relevant to this outcome. Preserve unrelated work and prior authorization. A stage request does not authorize release or unrelated refactoring. Match depth to uncertainty, consequences, reversibility and affected interfaces; investigate facts that could change the result. Honor supplied task budgets without dropping substantive requirements.
 
-Both executor and reviewer assess the deliverable against the original goal and agreed stage scope, including observable behavior, compatibility, relevant state/error/recovery invariants and maintainability. An intentionally partial stage must leave a usable state and disclose the remaining outcome. Choose investigation, validation and review depth from uncertainty, consequences, reversibility and affected interfaces/owners. Use meaningful checks with independently derived expectations; new tests or abstractions need a current behavior or risk. Run the project's required gates; failed or empty test collection is not success.
+When implementing or verifying behavior, judge it against the contract, including compatibility and relevant state, failure and recovery invariants. Tests need meaningful expectations derived independently of the implementation. Run required gates and explicitly required rechecks; a failed command or empty test collection is not success. For any operation, reuse evidence only while relevant content, requirements, inputs, check configuration, runtime and freshness requirements still match. Check applicability at the affected scope, not through a new whole-workspace inventory.
 
-Reuse evidence only while relevant content, requirements, inputs, check configuration, runtime conditions and freshness requirements still match. A changed input/runtime can invalidate a result without a code edit. Verify applicability at that scope, not through a new whole-workspace inventory. Mandatory gates and explicitly required independent rechecks still run.
+Honor actual review and approval requirements, including human plus agent review when requested; do not ask again for authorization already given. For an understood local reversible change without such a policy, focused verification and self-review can suffice. Seek additional review when consequential uncertainty or affected boundaries warrant it. Keep author repair, reviewer verification and human acceptance distinct; missing required review remains pending.
 
-Honor established user/repository review and approval requirements, including human plus agent review when requested and prior authorization. Without an established policy, a local understood reversible change can use focused verification and self-review; seek independent or human review when consequential uncertainty or affected boundaries warrant it. Perform explicitly requested review, keep author and reviewer roles distinct, and disclose actual independence. Missing required review stays pending. A stage request does not authorize release or unrelated refactoring.
-
-When durable delivery status is useful or required, keep it in one existing record; a completion response can suffice for a local change. Design/spec own decisions/contracts. Operations provide adaptable record/feedback examples and silent checks. Default artifacts to English; resolve resources within this bundle.
+Finish by checking substance and editing for readability within the same task. Templates are optional aids, not required fields, headings or new artifacts. One existing record can own durable status when useful or required; otherwise the completion response suffices. Design/spec own decisions and contracts, reviews own findings. Default artifacts to English; resource paths stay within this bundle.

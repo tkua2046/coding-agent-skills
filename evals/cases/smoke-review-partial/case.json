@@ -1,6 +1,6 @@
 {
   "id": "smoke-review-partial",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Keep a partly repaired state-preservation finding open",
   "skills": [

@@ -1,6 +1,6 @@
 {
   "id": "smoke-stage-resume",
-  "version": 1,
+  "version": 4,
   "tier": "smoke",
   "title": "Resume a verified fix and perform only the remaining gate",
   "skills": [

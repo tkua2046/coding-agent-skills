@@ -1,6 +1,6 @@
 {
   "id": "v3-maintenance",
-  "version": 2,
+  "version": 7,
   "tier": "heavy",
   "title": "V3: Separate private maintenance from a public contract change",
   "skills": [
@@ -11,12 +11,16 @@
   "phases": [
     {
       "id": "01-maintain",
-      "request": "requests/01.md"
+      "request": "requests/01.md",
+      "target_seconds": 300,
+      "budget_seconds": 600
     },
     {
       "id": "02-change-contract",
       "request": "requests/02.md",
-      "overlay": "overlays/02"
+      "overlay": "overlays/02",
+      "target_seconds": 300,
+      "budget_seconds": 600
     }
   ],
   "checks": [
@@ -44,5 +48,21 @@
       "kind": "python",
       "file": "oracle.py"
     }
-  ]
+  ],
+  "workflow_target_seconds": 600,
+  "workflow_budget_seconds": 1200,
+  "check_criteria": {
+    "no-tags": "scope-boundary",
+    "local-commits": "scope-boundary",
+    "preserved-baseline": "history-and-handoff",
+    "behavior-contract": "phase-01-local-maintenance",
+    "runner.skills-preserved": "scope-boundary",
+    "runner.workflow-budget": "hard-deadline",
+    "runner.workflow-target": "proportionate-effort",
+    "runner.01-maintain-budget": "hard-deadline",
+    "runner.01-maintain-target": "proportionate-effort",
+    "runner.02-change-contract-budget": "hard-deadline",
+    "runner.02-change-contract-target": "proportionate-effort"
+  },
+  "calibration_qualification": "readiness"
 }

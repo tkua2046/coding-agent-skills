@@ -1,0 +1,1 @@
+Use the prepared interpreter (CANARY_PYTHON if set); coverage is installed in it for this fixture. No installs. Preserve unittest discovery and application-only branch settings, missing-line display, JSON report path, and no percentage threshold. Run tools/check.py. No hook installation or document restructuring is requested.

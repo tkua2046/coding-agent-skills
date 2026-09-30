@@ -1,17 +1,17 @@
-# After-generation checks
+# Finish the current result
 
-Read only the section for the artifact just produced. Fix supported problems; surface unresolved material issues. Otherwise remain silent. This is neither independent review nor an instruction to generate a checklist/report or repeat review until wording converges.
+Use only the relevant section. Correct substantive gaps, then make the result readable and deliver. This is the final part of the same task, not independent review, a checklist artifact or a new review loop. A newly discovered material defect may need correction and affected verification; formatting alone does not require rerunning unchanged checks.
 
 ## Delivery
 
-- Does the handoff communicate the completed outcome, remaining conditions and actual status, using a durable record only when useful or required?
-- Does the complete deliverable satisfy the agreed scope toward the original goal, with any partial outcome explicit, justified complexity and a usable human review path for expected generated artifacts?
-- Does evidence identify relevant content and actual commands/results? Are inputs, runtime and freshness still applicable for reused evidence?
-- Are required gates/rechecks complete or explicitly pending? Does an author's fixed claim remain distinct from reviewer verification?
-- Is relevant original evidence retained through immutable references, within the work's scope and actual retention policy?
+Can the reader tell what now works, what was actually checked and what remains? Ensure the outcome agrees with the complete scoped deliverable and current evidence. Distinguish an intentionally partial stage, unresolved failure or pending required approval from completion. Reconcile stale or conflicting status in the existing handoff when one is needed, linking original evidence rather than replaying history.
 
 ## Review
 
-- Does the verdict assess the whole deliverable against the original goal and justified complexity, supported by the identified revision, actual evidence and material findings?
-- Can the author locate, understand and verify each necessary correction?
-- Are original findings retained and author claims distinct from verified dispositions? Does a partial fix stay open and a complete verified fix close?
+Is the verdict supported by the identified candidate and observed evidence? Can the author locate and verify each material correction? Preserve original finding identity and truthful dispositions: partial repairs remain open, fully verified fixes close, and author claims do not become independent acceptance.
+
+Support the requested judgment with the necessary evidence. Claim inspection only of content actually read; a file listing or an author's report is not your inspection. Attribute reused evidence and distinguish it from checks you executed. State the true scope and material limits; do not add work merely to make that account longer.
+
+## Readability
+
+Put the current result before policy, logs and historical detail. Keep necessary reasons, consequences and evidence easy to locate; group related detail and remove duplication. A response or existing record may be sufficient. No exact fields, headings, table or compulsory next-action declaration is required when the work is complete.

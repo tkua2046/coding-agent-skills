@@ -1,6 +1,6 @@
 # What these tests must establish
 
-Status: revised contract for the outcome-driven iteration. [Run instructions](README.md) · [Decision and iteration rules](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/outcome-workflow.md) · [Results](../docs/VALIDATION.md).
+Current per-skill requirements and their concrete case criteria: [evaluation contracts](CONTRACTS.md). The broader goal groups below retain the earlier suite rationale. [Run instructions](README.md) · [Decision and iteration rules](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/proposals/outcome-workflow.md) · [Results](../docs/VALIDATION.md).
 
 **Success means usable decisions and correct delivery with proportionate effort.** File counts, headings, coverage percentages and passing packaging tests do not establish that outcome. Each goal below has required case-specific criteria; quality acceptance and observed improvement are reported separately.
 
@@ -30,7 +30,7 @@ For each goal, report quality as pass/fail/inconclusive and benefit against the 
 
 Task-local budgets and semantic failures stay visible. Correcting evaluation infrastructure never counts as improving a skill. Every attempted run is retained; a failure gets a disposition and a justified affected rerun. Case/grading changes require compatible baseline/candidate evaluation. See the proposal for cumulative iteration limits and independent global checkpoints.
 
-Coverage limits: these are bounded synthetic repositories, not full production deployments, all language ecosystems, or a model benchmark. Explicit supplied paths test skill execution; they do not establish automatic discovery. The local-delivery case uses inventory allocation, outside the navigation examples embedded in the skills, to check transfer. No external push/tag/release is performed.
+Coverage limits: these are bounded synthetic repositories, not full production deployments, all language ecosystems, or a model benchmark. Explicit supplied paths test skill execution; they do not establish automatic discovery. The local-delivery case uses inventory allocation, outside the navigation examples embedded in the skills, to check transfer. No external push or hosted release is performed. The separately scoped local release case creates tags only in its disposable fixture.
 
 The two neutral planning probes were added after independent global review found that execution cases substantially prescribed their desired route. They reuse existing applications and leave the next commitment open; see the [reviewed contract](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/reviews/outcome-routing-review.md). Corrected handoff and migration-reader cases retain their original disputed results in the [dispositions](https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/reviews/outcome-dispositions.md).
 
@@ -44,7 +44,9 @@ The smoke tier exercises one real operation in a small isolated work context, fo
 | FD2 — usable, adequate design | `smoke-design-local` | `smoke-transfer-design` retains consequential recovery detail in a new domain |
 | IP1/IP2 — executable, maintainable plan | `smoke-plan-delivery` | `smoke-plan-maintenance` leaves private implementation changes out of the plan |
 | IP1 — consistent next delivery | `smoke-plan-preview-import` | The first pending usable increment differs from eventual feature completion; single-increment planning remains valid |
-| SD2 — useful review | `smoke-review-ready` | `smoke-review-partial` must retain the unresolved part of an invariant |
+| FD3 — design review | `smoke-design-review-ready` | Review D1 only; meaningful static grounds distinguish sufficient work from generic approval or invented blockers |
+| IP3 — plan review | `smoke-plan-review-ready` | Review P1 against accepted D1; design context is a prerequisite, not a second review operation |
+| SD2 — code recheck | `smoke-review-partial` | A partial fix remains open; complete code-review closure is covered in the existing V6 integration case |
 | SD3/SD1 — truthful resumption and checks | `smoke-stage-resume` | Same executor task in `smoke-stage-stale`, with code changed after its ready review |
 | SD3 — usable current-state entry | `smoke-handoff-opening` | A policy-first plan already contains accurate state; expose it without duplicating status or executing excluded work |
 | DW1/DW2 — effective tools and accurate delivery evidence | `smoke-setup-evidence` | `smoke-transfer-pr` requires current failed checks to override old green evidence |

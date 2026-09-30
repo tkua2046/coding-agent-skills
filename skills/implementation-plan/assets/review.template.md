@@ -1,18 +1,12 @@
-# Review feedback contract and adaptable example
+# Optional review shape
 
-Review owns the verdict for an identified revision, actionable findings and dispositions. Assess the artifact against the original goal as a whole, including whether its complexity, maintenance cost and review burden are justified. Passing individual checks does not establish that an unnecessary overall approach is acceptable. Review reports corrections without rewriting the artifact or owning delivery progress.
+Review owns a revision-bound verdict and actionable findings, not a rewritten plan or duplicated delivery status. A sufficient review may be a short response.
 
-Lead with verdict (ready / needs changes / needs decision), open findings and next action. Identify scope/version, actual independent or self-review, checks and limits using the existing revision reference.
+Verdict: [ready / needs changes / needs decision, with material open concerns].
+Scope and evidence: [reviewed revision, actual independent/self-review, checks and limits].
 
-Make each material finding locatable and actionable: explain its trigger, consequence, correction and verification. Use stable IDs and priorities when tracking findings. A correction may simplify or remove an unnecessary approach. Distinguish open concerns, author fix claims, reviewer-verified resolutions, refutations with evidence and accepted nonblocking limitations. Optional preferences do not block readiness. With no material findings, the verdict, scope/checks and next action suffice.
+[For each material finding: location, trigger, consequence, smallest correction and verification. Stable IDs help when findings need rechecking.]
 
-Link original findings and evidence through existing immutable references; add the rechecked revision and disposition without recopying the originals. A partial fix stays open. Reuse verification while relevant content, inputs, checks, runtime and freshness remain applicable; required rechecks still run. Author claims, reviewer verification and human acceptance remain distinct. Resolve disagreement with evidence or a decision, not cosmetic rounds.
+Example: R1, stage order — the import stage promises writes before validation is available. An invalid row could then change stored data. Make validation a prerequisite of the first mutating stage; verify invalid input causes no writes. Open pending correction and recheck.
 
-## Possible feedback
-
-Verdict: needs changes. Open: R1. Next: correct and recheck.
-Scope: [existing revision reference]. Review mode: [actual]. Checks/limits: [observed].
-
-R1 [priority], [location]: malformed refresh replaces usable cached data. Preserve the previous value when validation fails; verify preservation and a later valid refresh. Disposition: open.
-
-Adapt this format. The cache example is not a new requirement.
+On recheck, link the original finding and reviewed revision; record what changed and the supported disposition. Preserve originals through existing immutable references, capturing unavailable content once. Author-reported fixes, reviewer-verified closure and human acceptance are different states. Partial fixes stay open; complete verified fixes close. Nonblocking preferences need no correction round.

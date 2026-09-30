@@ -1,10 +1,20 @@
 # Versioned behavior cases
 
-The `smoke-*` cases exercise individual responsibilities through one real operation and blind grading. See the [responsibility map](../GOALS.md#small-llm-smoke-tests) for their paired scenarios and [commands](../README.md#focused-prompt-feedback-small-llm-smoke-tests) for explicit selection. They preserve the same isolation/original evidence, but do not replace the complete cases below.
+Active inventory: **39 smoke and 21 heavy cases**. Use the [complete operation map](../CONTRACTS.md#independently-testable-operations) to select one responsibility, and [actual validation](../../docs/VALIDATION.md) to distinguish defined cases, scorer checks and skill runs. Single-operation tests use fixed prerequisites; heavy does not necessarily mean a combined workflow. [Execution commands](../README.md#focused-prompt-feedback-small-llm-smoke-tests) support explicit case selection.
 
-## Complete workflow canaries
+Three existing heavy cases now have priority-based scoring and explicit target/hard
+budgets: `v1-small-feature`, `v3-maintenance`, and `bounded-delivery`.
+The [bounded migration](../../docs/proposals/priority-canary-pilot.md) preserves
+their original scenarios. The new `smoke-code-review-required-tests` and `smoke-version-prepared` use
+priority-based scoring for required regressions and reuse of prepared metadata. The other
+55 cases retain their previous scoring;
+defined or migrated does not mean calibrated or run on current skills.
 
-These seventeen versioned heavy cases support the [goal-based refinement](../GOALS.md).
+Design/plan reviews and rechecks now have separate cases. The former combined smoke is retained unchanged in [the archive](../archived-cases/smoke-review-ready/requests/01.md); existing heavy `review-ready` retains the integration check without adding a release case.
+
+## Heavy cases: single operations and workflows
+
+These versioned heavy cases support the [goal-based refinement](../GOALS.md).
 The owner authorized real baseline/candidate runs for this increment; ordinary small
 edits still use the fast tier. Historical
 archives in docs/validation informed scenario selection only; they are not runs or
@@ -22,6 +32,8 @@ new-test evidence for these cases. No private interview/project material is used
 | v6-execution-handoff | Execute, review, fix, recheck, resume pending, scripted acceptance/delivery |
 | release-stale | Assess stale candidate evidence and pending integration |
 | release-ready | Assess current passing supplied release evidence |
+| plan-review-recheck | Review partial then complete prerequisite/compatibility correction, retaining original finding |
+| local-release-execution | Execute local version/tag/artifact checks and inspect simulated matching/conflicting/uncertain retry states |
 | bounded-delivery | Inventory reservation: plan, combined review, implement, code review and final author handoff; skip unnecessary fixes/rechecks |
 | bounded-investigation | Experiment on catalog-backed report slowness before proposing infrastructure |
 | workflow-setup | Adapt an existing application's checks/docs, then prepare its actual local PR draft |
@@ -54,7 +66,7 @@ workspace snapshot separately so later edits cannot erase earlier failures.
 
 The case root rubric is evaluator-only. All required criteria need evidence and a
 pass; missing/inconclusive evidence cannot pass. No word, heading or test quotas.
-Only supported unchanged/no_tags/commit_count/python checks are declared. Commit
+Checks use the existing preservation, Git, Python-oracle and phase-delivery mechanisms. Commit
 counts mean worker commits after runner initialization, not total Git history.
 Unchanged checks compare the original baseline and deliberately exclude paths
 legitimately replaced by overlays. Phase-specific preservation/review behavior

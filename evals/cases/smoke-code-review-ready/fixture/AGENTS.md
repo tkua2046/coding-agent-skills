@@ -1,0 +1,1 @@
+Work only on the requested operation. Retain supplied requirements and historical records. Use the prepared local tools. No source-repository commits, tags, pushes, releases, downloads or external services. Follow the narrower operation request.

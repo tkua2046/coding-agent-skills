@@ -1,21 +1,21 @@
-# After-generation checks
+# Finish the current result
 
-Read only the section for the artifact just produced. Fix supported problems; surface unresolved material issues. Otherwise remain silent. This is neither independent review nor an instruction to generate a checklist/report or repeat review until wording converges.
+Use only the section for the operation just completed. First correct any material content/evidence problem, then edit for readability and deliver. This is the final part of the same task, not independent review or an instruction to emit a checklist. A new substantive defect may need its actual correction; optional wording does not trigger another round.
 
 ## Intake
 
-- Are material unknowns separated from justified preservation defaults, with consequences/examples?
-- Do baseline claims match actual commands and outcomes, including pre-existing failures?
-- Does the opening expose the conclusion, next decision/action and key evidence limit, with original requirements retained and no speculative design?
+Can the reader quickly tell what is settled and which consequential choice remains? Keep confirmed facts distinct from assumptions; preserve the original request and truthful observations. Put a useful example beside a genuinely ambiguous question. When nothing remains open, say so without inventing another action.
 
 ## Design
 
-- Can the opening explain the current choice, reason, material consequence and decisive example without searching history?
-- Do compatibility, state/failure behavior and acceptance satisfy the source contract? Where interruption matters, are usable state and safe retry explicit?
-- Does the approach justify its overall complexity, and does each detail resolve uncertainty or explain a consequence? Is existing delivery status linked where useful?
+Can an implementer quickly understand the choice, reason and material consequence, then locate enough behavior/examples to implement it? Check the affected contract, compatibility and consequential failure/retry behavior before polishing. Preserve accepted decisions outside the amendment and avoid prose code/test inventories. Expose an unresolved material decision; a complete design needs no compulsory next-step field.
 
 ## Review
 
-- Does the verdict assess the whole approach against the original goal and justified complexity, supported by the identified revision, actual evidence and material findings?
-- Can the author locate, understand and verify each necessary correction?
-- Are original findings retained and author claims distinct from verified dispositions? Does a partial fix stay open and a complete verified fix close?
+Is the verdict supported and easy to find? Can the author locate and verify each material correction? Keep the reviewed revision, actual evidence limits and original finding dispositions clear. Accept sufficient work and close fully verified fixes; do not elevate a stylistic preference into a blocker.
+
+Support the requested judgment with the necessary evidence. Claim inspection only of content actually read; a file listing or an author's report is not your inspection. Attribute reused evidence and distinguish it from checks you executed. State the true scope and material limits; do not add work merely to make that account longer.
+
+## Readability
+
+Put the current answer before background that obscures it. Remove repeated policy/log text, group related detail and add useful navigation when needed. Preserve substantive reasons and examples; brevity alone is not success. Headings, tables, field order and repeated summaries are choices, not acceptance conditions. Stop when the intended reader can understand and use the result.
