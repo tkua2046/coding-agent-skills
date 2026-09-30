@@ -1,0 +1,129 @@
+{
+  "branch": "codex/evidence-delivery-repair",
+  "parent": "55d56ac40ec0e0d212282cdccea54608aaabb1bc",
+  "commit": "ecbb2533e6be9a9cec78acb9deb884ca66fce1db",
+  "tree": "f140387569bf53f8c0056f2c54702565d24e3ed0",
+  "entries": [
+    {
+      "path": "baselines/0.1.0-20260929/README.md",
+      "blob": "d3828dce816d3a1634df375470179eb14f453345",
+      "bytes": 2032,
+      "sha256": "7adbf0b47fa4cc8bd6c6468810d2765ae5c5a18e6760e63a85b05cdc7791df4e"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/SHA256SUMS",
+      "blob": "502bd7e5b8f0595471e8c59290f669ff02ae89eb",
+      "bytes": 1188,
+      "sha256": "aaa4666309bc4f015817d43ca1df39120ef032feb07d4232d9fa51a23aad5101"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/archive-index.json",
+      "blob": "b93008cea07cd5f71a210cb89cc36d4d2b55c4a7",
+      "bytes": 2662,
+      "sha256": "856e585c1165b046c6ac623ed8b460e61528617fcdd8232cd8ad2742110a2a25"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/canonical-skills.json",
+      "blob": "1f1b0afaac4ae25eb366c2c7036491a1ce339247",
+      "bytes": 4721,
+      "sha256": "57f373dd96ef6d9beef55514b3ccd18b32d9d3c409ff7719d523a32598ce13a1"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/coding-agent-skills-evidence.zip",
+      "blob": "4e67f398bdaece744e8511f09ee115e277741271",
+      "bytes": 3401098,
+      "sha256": "e634d47c46c4d72b065bf81bbe8b2ce25de87bc9a5eaea6cbfe01132719890c0"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/coding-agent-skills-local-20260929-r3.zip",
+      "blob": "b89b80318760b4b71af386360adecfd14dd63a64",
+      "bytes": 46319,
+      "sha256": "6d8720d5de74df481a4a486ca15bc3cbc83e48cd33f375457776e59e2545f13c"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/credential-pattern-scan.json",
+      "blob": "b443170a38275b4933fc33ec9b78d1b12ce028e1",
+      "bytes": 261,
+      "sha256": "c9b95f1120bd625f9c8fadcb8142389858771a81434034cda163e0bedf0e06af"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/headless-workflow-20260929.zip",
+      "blob": "3f4aa7b427a74a06029562be141e9408ae11bece",
+      "bytes": 725801,
+      "sha256": "3e0f16e63184b6165ff1c9cf7e7e19768eb16591206dd2a98c9c952478e58ec1"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/interactive-workflow-20260929.zip",
+      "blob": "2317e0ed82608f4083d96d4f98360263013045fe",
+      "bytes": 133532,
+      "sha256": "29da103841b0032484c17f5d8ea6c12d83824bc9c4fbe45efdac761a2e0cc8c5"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/package-use-20260929.zip",
+      "blob": "411ed413f3542ea606f77bdf9a9e603c36d09b8a",
+      "bytes": 1177047,
+      "sha256": "2251ea1d65700e3e4f75e45517d9ab6eb7a771ca20d48904897f482bd30231bf"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/prepared-version-grading-20260929.zip",
+      "blob": "6f322a370ba4916319a238a72ebd2b4c7856cb63",
+      "bytes": 892657,
+      "sha256": "e56deff8c196c95cdff91b0b581bd4eda2c7e1cc8ee76ef074a94c6220bc93dd"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/principal-review.json",
+      "blob": "60a012fafdfb1c9c1f8cb07e17ae7dc2faf9e1ef",
+      "bytes": 1453,
+      "sha256": "eb6984b94025704f49ba0b3d336c8baf570ab24ed3cb81bcd9566d141f9cbfbb"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/priority-canary-migration-evidence.zip",
+      "blob": "86597a0fce74040fa342d522c7949e6d011bb021",
+      "bytes": 3713219,
+      "sha256": "7e3e9fd0731620150932bb54ca9013dce52505252b4117154d663334e938442a"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/proposal.md",
+      "blob": "324c1324258b95b24645e4925be7c31c7f1d4dbd",
+      "bytes": 2397,
+      "sha256": "8dc15c0ecf39213f1bbaaed2f323d8144df13b17fb2c9b802729e0c7ed0c9bb2"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/recursive-archive-check.json",
+      "blob": "7f52c02aae8463d2a1965cbe8571cb9e751bea67",
+      "bytes": 269,
+      "sha256": "a406431a10d98cb9090a0abfa1dfa72a7ae7ab73a74491b9371f629b6df2ac73"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/review-closure-20260929.zip",
+      "blob": "7498e7636b7a6fe7e6db2a0532fd7352873207bb",
+      "bytes": 1465724,
+      "sha256": "8295dc9726a2bcf1cf8f90f496aa5d5132d0d090ca3e9ff03010bba1f520e7c0"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/review-evidence-20260929.zip",
+      "blob": "2f2e1ce2f097e026b7264dfd2a85e93d3e23f2c9",
+      "bytes": 2625051,
+      "sha256": "4470728759a622678ca7310831230e17cacf9709898a1fc0947f9aa156dde431"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/transcript-workflow-20260929.zip",
+      "blob": "18f3cfbbe897d71caa8e5a5fa9d7ed0636fa7a78",
+      "bytes": 419773,
+      "sha256": "3f2354f25e06a227f5e5c16034bbdaf1d1f362a62171e74e6bc8407f8c51dbc1"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/workflow-improvement-evidence.zip",
+      "blob": "02c3330af83bed2d47dff88bb74c803e4f00ac5d",
+      "bytes": 9456998,
+      "sha256": "be2c037258d777c07c9cb959cc8557779794d0a40c672342fafdd9dfe99952f9"
+    },
+    {
+      "path": "baselines/0.1.0-20260929/workflow-release-20260929.zip",
+      "blob": "b841387b7a4c9fcb3434fd62513f6b1037f2563f",
+      "bytes": 2366106,
+      "sha256": "d9cdad21d0e7b6ed1081a2bf1500bf1671e8dbf7ffb1c561b982f3163c0703d8"
+    }
+  ],
+  "remote_verified": true
+}

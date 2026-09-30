@@ -1,0 +1,340 @@
+trim trailing whitespace.................................................Passed
+fix end of files.........................................................Passed
+check yaml...............................................................Passed
+check toml...............................................................Passed
+check for merge conflicts................................................Passed
+ruff check...............................................................Passed
+ruff format..............................................................Passed
+Skill bundle and documentation validation................................Passed
+Repository tests with coverage...........................................Passed
+- hook id: tests-with-coverage
+- duration: 108.43s
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/tk/Documents/coding-agent-skills
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 390 items
+
+tests/test_atomic_cases.py .....................                         [  5%]
+tests/test_canary.py ................................................... [ 18%]
+........................................................................ [ 36%]
+............................................                             [ 48%]
+tests/test_canary_runtime.py ...................                         [ 53%]
+tests/test_check.py ..............................                       [ 60%]
+tests/test_continuation_eval.py ...............................          [ 68%]
+tests/test_evidence.py ...                                               [ 69%]
+tests/test_new_case_controls.py ......                                   [ 71%]
+tests/test_priority_case_controls.py ............                        [ 74%]
+tests/test_priority_grading.py ......................................... [ 84%]
+.......................................                                  [ 94%]
+tests/test_scoped_calibration.py .................                       [ 98%]
+tests/test_specification_contracts.py ....                               [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.12.4-final-0 _______________
+
+Name                      Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------
+tools/__init__.py             0      0      0      0   100%
+tools/canary.py             998     55    486     46    93%   88, 104, 115, 126, 131, 215, 226, 328, 364, 368, 377, 393, 458, 463-464, 536, 571, 608, 653, 688-689, 736, 747, 752, 819, 876, 969, 1024, 1064, 1080, 1093, 1220, 1243, 1247, 1370, 1428-1431, 1436, 1542-1543, 1588, 1655, 1681, 1687, 1689->1714, 1702->1714, 1711, 1737, 1755, 1763, 2040, 2050-2052, 2057
+tools/canary_runtime.py      74      2     16      3    94%   76->78, 119, 190
+tools/check.py              107      0     54      0   100%
+tools/evidence.py            12      0      0      0   100%
+---------------------------------------------------------------------
+TOTAL                      1191     57    556     49    94%
+Coverage XML written to file coverage.xml
+======================= 390 passed in 108.19s (0:01:48) ========================
+
+Versioned canary inputs (no model calls).................................Passed
+[codex/workflow-canary 1a584bc] Freeze first usable 0.1.0 workflow skills baseline
+ 414 files changed, 24866 insertions(+), 622 deletions(-)
+ create mode 100644 docs/OUTPUT_REQUIREMENTS_DETAILS.md
+ create mode 100644 docs/OUTPUT_REQUIREMENTS_PROPOSAL.md
+ create mode 100644 docs/QUICKSTART.md
+ create mode 100644 docs/proposals/priority-canary-pilot.md
+ create mode 100644 docs/specs/dev-workflow.md
+ create mode 100644 docs/specs/evaluation.md
+ create mode 100644 docs/specs/feature-design.md
+ create mode 100644 docs/specs/implementation-plan.md
+ create mode 100644 docs/specs/stage-development.md
+ create mode 100644 evals/CONTRACTS.md
+ rename evals/{cases => archived-cases}/smoke-review-ready/case.json (97%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/AGENTS.md (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/DEVNOTES.md (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/REQUEST.md (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/docs/DESIGN.md (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/docs/PLAN.md (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/inventory.py (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/fixture/tests/test_inventory.py (100%)
+ rename evals/{cases => archived-cases}/smoke-review-ready/requests/01.md (100%)
+ create mode 100644 evals/archived-cases/smoke-review-ready/rubric.json
+ create mode 100644 evals/cases/local-release-execution/README.md
+ create mode 100644 evals/cases/local-release-execution/case.json
+ create mode 100644 evals/cases/local-release-execution/fixture/.gitignore
+ create mode 100644 evals/cases/local-release-execution/fixture/AGENTS.md
+ create mode 100644 evals/cases/local-release-execution/fixture/CHANGELOG.md
+ create mode 100644 evals/cases/local-release-execution/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/local-release-execution/fixture/README.md
+ create mode 100644 evals/cases/local-release-execution/fixture/VERSION
+ create mode 100644 evals/cases/local-release-execution/fixture/examples/stock.csv
+ create mode 100644 evals/cases/local-release-execution/fixture/inventory_report.py
+ create mode 100644 evals/cases/local-release-execution/fixture/tests/test_inventory_report.py
+ create mode 100644 evals/cases/local-release-execution/fixture/tools/build.py
+ create mode 100644 evals/cases/local-release-execution/fixture/tools/publication.py
+ create mode 100644 evals/cases/local-release-execution/oracle.py
+ create mode 100644 evals/cases/local-release-execution/requests/01.md
+ create mode 100644 evals/cases/local-release-execution/requests/02.md
+ create mode 100644 evals/cases/local-release-execution/rubric.json
+ create mode 100644 evals/cases/plan-review-recheck/README.md
+ create mode 100644 evals/cases/plan-review-recheck/case.json
+ create mode 100644 evals/cases/plan-review-recheck/fixture/AGENTS.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/README.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/ORIGINAL.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/PLAN.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/history/P1.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/history/P2.md
+ create mode 100644 evals/cases/plan-review-recheck/fixture/docs/history/R1.md
+ create mode 100644 evals/cases/plan-review-recheck/oracle.py
+ create mode 100644 evals/cases/plan-review-recheck/overlays/02/docs/PLAN.md
+ create mode 100644 evals/cases/plan-review-recheck/requests/01.md
+ create mode 100644 evals/cases/plan-review-recheck/requests/02.md
+ create mode 100644 evals/cases/plan-review-recheck/rubric.json
+ create mode 100644 evals/cases/smoke-code-recheck-complete/case.json
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/AUTHOR.md
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/reviews/R1.md
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/session.py
+ create mode 100644 evals/cases/smoke-code-recheck-complete/fixture/tests/test_session.py
+ create mode 100644 evals/cases/smoke-code-recheck-complete/requests/01.md
+ create mode 100644 evals/cases/smoke-code-recheck-complete/rubric.json
+ create mode 100644 evals/cases/smoke-code-review-defective/case.json
+ create mode 100644 evals/cases/smoke-code-review-defective/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-code-review-defective/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-code-review-defective/fixture/session.py
+ create mode 100644 evals/cases/smoke-code-review-defective/fixture/tests/test_session.py
+ create mode 100644 evals/cases/smoke-code-review-defective/requests/01.md
+ create mode 100644 evals/cases/smoke-code-review-defective/rubric.json
+ create mode 100644 evals/cases/smoke-code-review-ready/README.md
+ create mode 100644 evals/cases/smoke-code-review-ready/case.json
+ create mode 100644 evals/cases/smoke-code-review-ready/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-code-review-ready/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-code-review-ready/fixture/session.py
+ create mode 100644 evals/cases/smoke-code-review-ready/fixture/tests/test_session.py
+ create mode 100644 evals/cases/smoke-code-review-ready/requests/01.md
+ create mode 100644 evals/cases/smoke-code-review-ready/rubric.json
+ create mode 100644 evals/cases/smoke-code-review-required-tests/README.md
+ create mode 100644 evals/cases/smoke-code-review-required-tests/case.json
+ create mode 100644 evals/cases/smoke-code-review-required-tests/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-code-review-required-tests/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-code-review-required-tests/fixture/session.py
+ create mode 100644 evals/cases/smoke-code-review-required-tests/fixture/tests/test_session.py
+ create mode 100644 evals/cases/smoke-code-review-required-tests/requests/01.md
+ create mode 100644 evals/cases/smoke-code-review-required-tests/rubric.json
+ create mode 100644 evals/cases/smoke-design-new/case.json
+ create mode 100644 evals/cases/smoke-design-new/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-design-new/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-design-new/fixture/exporter.py
+ create mode 100644 evals/cases/smoke-design-new/requests/01.md
+ create mode 100644 evals/cases/smoke-design-new/rubric.json
+ create mode 100644 evals/cases/smoke-design-recheck-complete/case.json
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/docs/ORIGINAL.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/docs/history/D1.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/docs/history/D2.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/docs/history/R1.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/fixture/reviews/prior.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/requests/01.md
+ create mode 100644 evals/cases/smoke-design-recheck-complete/rubric.json
+ create mode 100644 evals/cases/smoke-design-recheck-partial/case.json
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/docs/ORIGINAL.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/docs/history/D1.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/docs/history/D2.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/docs/history/R1.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/fixture/reviews/prior.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/requests/01.md
+ create mode 100644 evals/cases/smoke-design-recheck-partial/rubric.json
+ create mode 100644 evals/cases/smoke-design-review-defective/case.json
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/DESIGN.md
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/qa/check_inventory.py
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/quality.ini
+ create mode 100644 evals/cases/smoke-design-review-defective/fixture/tools/check.py
+ create mode 100644 evals/cases/smoke-design-review-defective/requests/01.md
+ create mode 100644 evals/cases/smoke-design-review-defective/rubric.json
+ create mode 100644 evals/cases/smoke-design-review-ready/case.json
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-design-review-ready/fixture/tests/test_inventory.py
+ create mode 100644 evals/cases/smoke-design-review-ready/requests/01.md
+ create mode 100644 evals/cases/smoke-design-review-ready/rubric.json
+ create mode 100644 evals/cases/smoke-doc-ownership/case.json
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/.coveragerc
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/CHANGELOG.md
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/README.md
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/VERSION
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/examples/stock.csv
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/hooks/pre-commit
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/qa/check_inventory.py
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/quality.ini
+ create mode 100644 evals/cases/smoke-doc-ownership/fixture/tools/check.py
+ create mode 100644 evals/cases/smoke-doc-ownership/requests/01.md
+ create mode 100644 evals/cases/smoke-doc-ownership/rubric.json
+ create mode 100644 evals/cases/smoke-fix-finding/case.json
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/reviews/R1.md
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/session.py
+ create mode 100644 evals/cases/smoke-fix-finding/fixture/tests/test_session.py
+ create mode 100644 evals/cases/smoke-fix-finding/oracle.py
+ create mode 100644 evals/cases/smoke-fix-finding/requests/01.md
+ create mode 100644 evals/cases/smoke-fix-finding/rubric.json
+ create mode 100644 evals/cases/smoke-plan-amend/case.json
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/docs/PLAN.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/docs/history/D2.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/docs/history/completed.md
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/navigator.py
+ create mode 100644 evals/cases/smoke-plan-amend/fixture/tests/test_navigator.py
+ create mode 100644 evals/cases/smoke-plan-amend/requests/01.md
+ create mode 100644 evals/cases/smoke-plan-amend/rubric.json
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/case.json
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/ORIGINAL.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/PLAN.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/history/P1.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/history/P2.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/docs/history/R1.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/fixture/reviews/prior.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/requests/01.md
+ create mode 100644 evals/cases/smoke-plan-recheck-complete/rubric.json
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/case.json
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/ORIGINAL.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/PLAN.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/history/P1.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/history/P2.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/docs/history/R1.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/fixture/reviews/prior.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/requests/01.md
+ create mode 100644 evals/cases/smoke-plan-recheck-partial/rubric.json
+ create mode 100644 evals/cases/smoke-plan-review-defective/case.json
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/DESIGN.md
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/PLAN.md
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/qa/check_inventory.py
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/quality.ini
+ create mode 100644 evals/cases/smoke-plan-review-defective/fixture/tools/check.py
+ create mode 100644 evals/cases/smoke-plan-review-defective/requests/01.md
+ create mode 100644 evals/cases/smoke-plan-review-defective/rubric.json
+ create mode 100644 evals/cases/smoke-plan-review-ready/case.json
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/docs/DESIGN.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/docs/PLAN.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-plan-review-ready/fixture/tests/test_inventory.py
+ create mode 100644 evals/cases/smoke-plan-review-ready/requests/01.md
+ create mode 100644 evals/cases/smoke-plan-review-ready/rubric.json
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/case.json
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/fixture/OBSERVATION.json
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/requests/01.md
+ create mode 100644 evals/cases/smoke-release-retry-conflicting/rubric.json
+ create mode 100644 evals/cases/smoke-release-retry-matching/case.json
+ create mode 100644 evals/cases/smoke-release-retry-matching/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-release-retry-matching/fixture/OBSERVATION.json
+ create mode 100644 evals/cases/smoke-release-retry-matching/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-release-retry-matching/requests/01.md
+ create mode 100644 evals/cases/smoke-release-retry-matching/rubric.json
+ create mode 100644 evals/cases/smoke-release-retry-unknown/case.json
+ create mode 100644 evals/cases/smoke-release-retry-unknown/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-release-retry-unknown/fixture/OBSERVATION.json
+ create mode 100644 evals/cases/smoke-release-retry-unknown/fixture/REQUEST.md
+ create mode 100644 evals/cases/smoke-release-retry-unknown/requests/01.md
+ create mode 100644 evals/cases/smoke-release-retry-unknown/rubric.json
+ delete mode 100644 evals/cases/smoke-review-ready/rubric.json
+ create mode 100644 evals/cases/smoke-setup-coverage/case.json
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/.coveragerc
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/examples/stock.csv
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/qa/check_inventory.py
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/quality.ini
+ create mode 100644 evals/cases/smoke-setup-coverage/fixture/tools/check.py
+ create mode 100644 evals/cases/smoke-setup-coverage/oracle.py
+ create mode 100644 evals/cases/smoke-setup-coverage/requests/01.md
+ create mode 100644 evals/cases/smoke-setup-coverage/rubric.json
+ create mode 100644 evals/cases/smoke-setup-hook/case.json
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/.coveragerc
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/README.md
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/examples/stock.csv
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/hooks/pre-commit
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/inventory.py
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/qa/check_inventory.py
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/quality.ini
+ create mode 100644 evals/cases/smoke-setup-hook/fixture/tools/check.py
+ create mode 100644 evals/cases/smoke-setup-hook/oracle.py
+ create mode 100644 evals/cases/smoke-setup-hook/requests/01.md
+ create mode 100644 evals/cases/smoke-setup-hook/rubric.json
+ create mode 100644 evals/cases/smoke-transfer-design/fixture/docs/PLATFORM.md
+ create mode 100644 evals/cases/smoke-version-notes/case.json
+ create mode 100644 evals/cases/smoke-version-notes/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-version-notes/fixture/CHANGELOG.md
+ create mode 100644 evals/cases/smoke-version-notes/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-version-notes/fixture/README.md
+ create mode 100644 evals/cases/smoke-version-notes/fixture/VERSION
+ create mode 100644 evals/cases/smoke-version-notes/fixture/examples/stock.csv
+ create mode 100644 evals/cases/smoke-version-notes/fixture/inventory_report.py
+ create mode 100644 evals/cases/smoke-version-notes/fixture/tests/test_inventory_report.py
+ create mode 100644 evals/cases/smoke-version-notes/oracle.py
+ create mode 100644 evals/cases/smoke-version-notes/requests/01.md
+ create mode 100644 evals/cases/smoke-version-notes/rubric.json
+ create mode 100644 evals/cases/smoke-version-prepared/case.json
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/AGENTS.md
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/CHANGELOG.md
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/DEVNOTES.md
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/README.md
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/VERSION
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/examples/stock.csv
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/inventory_report.py
+ create mode 100644 evals/cases/smoke-version-prepared/fixture/tests/test_inventory_report.py
+ create mode 100644 evals/cases/smoke-version-prepared/oracle.py
+ create mode 100644 evals/cases/smoke-version-prepared/requests/01.md
+ create mode 100644 evals/cases/smoke-version-prepared/rubric.json
+ create mode 100644 evals/cases/workflow-setup/fixture/CHANGELOG.md
+ create mode 100644 skills/stage-development/prompts/handoff-stage.md
+ create mode 100644 tests/test_atomic_cases.py
+ create mode 100644 tests/test_new_case_controls.py
+ create mode 100644 tests/test_priority_case_controls.py
+ create mode 100644 tests/test_priority_grading.py
+ create mode 100644 tests/test_scoped_calibration.py
+ create mode 100644 tests/test_specification_contracts.py

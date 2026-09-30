@@ -1,0 +1,17 @@
+{
+  "commit": "1a584bcb7dfda5394fd19c7ae08081c494b6b1bd",
+  "branch": "codex/workflow-canary",
+  "version": "0.1.0",
+  "source_paths": 832,
+  "skill_files": 39,
+  "tests_passed": 390,
+  "tool_coverage_percent": 94,
+  "commit_hooks": "passed",
+  "working_tree": "clean",
+  "formal_release_qualification": "pending",
+  "remote_verified": true,
+  "github_checks": "2/2 passed",
+  "main_merged": false,
+  "tag_created": false,
+  "github_release_created": false
+}

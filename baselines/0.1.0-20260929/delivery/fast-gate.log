@@ -1,0 +1,65 @@
+trim trailing whitespace.................................................Failed
+- hook id: trailing-whitespace
+- exit code: 1
+- files were modified by this hook
+
+Fixing docs/specs/implementation-plan.md
+Fixing docs/specs/stage-development.md
+Fixing docs/specs/dev-workflow.md
+Fixing docs/specs/feature-design.md
+
+fix end of files.........................................................Passed
+check yaml...............................................................Passed
+check toml...............................................................Passed
+check for merge conflicts................................................Passed
+ruff check...............................................................Passed
+ruff format..............................................................Failed
+- hook id: ruff-format
+- files were modified by this hook
+
+1 file reformatted, 77 files left unchanged
+
+Skill bundle and documentation validation................................Passed
+Repository tests with coverage...........................................Passed
+- hook id: tests-with-coverage
+- duration: 152.39s
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/tk/Documents/coding-agent-skills
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 390 items
+
+tests/test_atomic_cases.py .....................                         [  5%]
+tests/test_canary.py ................................................... [ 18%]
+........................................................................ [ 36%]
+............................................                             [ 48%]
+tests/test_canary_runtime.py ...................                         [ 53%]
+tests/test_check.py ..............................                       [ 60%]
+tests/test_continuation_eval.py ...............................          [ 68%]
+tests/test_evidence.py ...                                               [ 69%]
+tests/test_new_case_controls.py ......                                   [ 71%]
+tests/test_priority_case_controls.py ............                        [ 74%]
+tests/test_priority_grading.py ......................................... [ 84%]
+.......................................                                  [ 94%]
+tests/test_scoped_calibration.py .................                       [ 98%]
+tests/test_specification_contracts.py ....                               [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.12.4-final-0 _______________
+
+Name                      Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------
+tools/__init__.py             0      0      0      0   100%
+tools/canary.py             998     55    486     46    93%   88, 104, 115, 126, 131, 215, 226, 328, 364, 368, 377, 393, 458, 463-464, 536, 571, 608, 653, 688-689, 736, 747, 752, 819, 876, 969, 1024, 1064, 1080, 1093, 1220, 1243, 1247, 1370, 1428-1431, 1436, 1542-1543, 1588, 1655, 1681, 1687, 1689->1714, 1702->1714, 1711, 1737, 1755, 1763, 2040, 2050-2052, 2057
+tools/canary_runtime.py      74      2     16      3    94%   76->78, 119, 190
+tools/check.py              107      0     54      0   100%
+tools/evidence.py            12      0      0      0   100%
+---------------------------------------------------------------------
+TOTAL                      1191     57    556     49    94%
+Coverage XML written to file coverage.xml
+======================= 390 passed in 152.10s (0:02:32) ========================
+
+Versioned canary inputs (no model calls).................................Passed

@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "tests_passed": 390,
+  "tool_coverage_percent": 94,
+  "reason": "Hooks formatted four specification documents and one test; substantive checks passed. Formatting restaged; normal commit hook follows."
+}
