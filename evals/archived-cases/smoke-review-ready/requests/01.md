@@ -1,0 +1,1 @@
+Use the review operations in skills/feature-design and skills/implementation-plan for a combined static review of D1/P1 against REQUEST.md. Write REVIEW.md with an actionable verdict and actual review scope. Do not change the reviewed artifacts, run tests or start implementation.

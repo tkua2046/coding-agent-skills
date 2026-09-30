@@ -1,0 +1,31 @@
+minimum_pre_commit_version: "4.6.2"
+default_language_version:
+  python: python3.12
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+        args: [--assume-in-merge]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.6
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: tests-with-coverage
+        name: Full test suite with coverage
+        entry: python -m pytest
+        language: python
+        # Add required application dependencies or use the project's environment.
+        additional_dependencies: [pytest==9.1.1, pytest-cov==7.1.0, coverage==7.16.0]
+        pass_filenames: false
+        always_run: true
+        require_serial: true
+        verbose: true

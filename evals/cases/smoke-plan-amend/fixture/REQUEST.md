@@ -1,0 +1,1 @@
+Blocked F now stops the batch; retain pose and include results through the failed command only. Amend the affected pending plan. Basic motion and the original obstacle delivery remain completed history.

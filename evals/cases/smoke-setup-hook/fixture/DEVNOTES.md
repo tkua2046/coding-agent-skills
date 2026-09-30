@@ -1,0 +1,1 @@
+The maintained hooks/pre-commit wrapper is installed into .git/hooks/pre-commit by checkout setup. Keep that delegation and custom unittest discovery. Normal checks and every commit, including docs-only, run the whole suite. A failing or empty suite must fail. No coverage/document reorganization is requested.

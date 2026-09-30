@@ -1,0 +1,65 @@
+{
+  "version": 4,
+  "criteria": [
+    {
+      "id": "candidate-identity",
+      "required": true,
+      "requirement": "Evaluate current candidate and supplied evidence identity.",
+      "pass_when": "Resolves actual git HEAD for the report and compares required check/review/artifact/heavy commit and bundle/fixture/grader/settings associations.",
+      "fail_when": "Accepts success labels without identity matching or invents hashes for historical status entries.",
+      "goals": [
+        "D5"
+      ]
+    },
+    {
+      "id": "readiness",
+      "required": true,
+      "requirement": "Reach readiness from the supplied facts and actual permitted checks.",
+      "pass_when": "Recognizes that supplied required checks, review, artifact and heavy evidence are current and passing, and reports ready for the separately authorized release step, conditional on these synthetic inputs.",
+      "fail_when": "Invents a missing review/heavy blocker despite complete supplied evidence or refuses to assess solely because no real remote exists.",
+      "goals": [
+        "D5"
+      ]
+    },
+    {
+      "id": "evidence-limits",
+      "required": true,
+      "requirement": "Distinguish synthetic evidence, local execution and publication.",
+      "pass_when": "Reports actual local check results separately from supplied statuses; baseline failures remain visible and are not candidate exemptions; no real tag or release is claimed.",
+      "fail_when": "Calls historical/supplied records new heavy trials, treats baseline failure as a waiver, or claims real CI/publication.",
+      "goals": [
+        "D5"
+      ]
+    },
+    {
+      "id": "scope",
+      "required": true,
+      "requirement": "Keep the release assessment within its authorized boundary.",
+      "pass_when": "Produces a concrete next step without editing supplied metadata/version or performing publication.",
+      "fail_when": "Changes inputs to make readiness pass, bumps version again, commits or tags.",
+      "goals": [
+        "D5"
+      ]
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "D6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "D5"
+      ],
+      "requirement": "A reader can recover the current result from the produced opening, then locate supporting detail.",
+      "pass_when": "The opening exposes ready or blocked status, candidate evidence supporting it, and the remaining authorized next action. It agrees with the full artifact, whose substantive detail is navigable. Inspect actual content; no separate reader invocation or exact template is required for this criterion.",
+      "fail_when": "Policy, repeated requirements or historical rounds precede and obscure those answers; a title or link to buried status substitutes for the answers; opening and detail conflict. A short but incomplete opening fails too."
+    }
+  ]
+}

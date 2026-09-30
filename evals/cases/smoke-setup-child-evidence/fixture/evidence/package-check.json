@@ -1,0 +1,12 @@
+{
+  "context": "Retained handoff from a prior temporary release workspace; the candidate archive and archive checker are not included in this checkout.",
+  "author_summary": "Local tests and candidate archive verification passed; package is ready.",
+  "recorded_wrapper_source": "import subprocess, sys\nunit = subprocess.run([sys.executable, \"-B\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-v\"], text=True, capture_output=True)\nif unit.returncode != 0:\n    raise SystemExit(unit.returncode)\nprint(\"local suite returned zero\")\narchive = subprocess.run([sys.executable, \"verify_archive.py\", \"dist/candidate.zip\"], text=True, capture_output=True)\nprint(\"release checks finished\")\n",
+  "execution": {
+    "status": "completed",
+    "exit_code": 0,
+    "stdout": "local suite returned zero\nrelease checks finished\n",
+    "stderr": "",
+    "source": "This execution records the recorded_wrapper_source above."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "smoke-plan-review-ready",
+  "version": 3,
+  "tier": "smoke",
+  "title": "Independently review a sufficient plan with attributable static evidence",
+  "skills": [
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "REQUEST.md",
+        "docs/DESIGN.md",
+        "docs/PLAN.md",
+        "inventory.py",
+        "tests/test_inventory.py"
+      ]
+    }
+  ]
+}

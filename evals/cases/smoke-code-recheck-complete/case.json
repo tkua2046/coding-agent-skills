@@ -1,0 +1,38 @@
+{
+  "id": "smoke-code-recheck-complete",
+  "version": 4,
+  "tier": "smoke",
+  "title": "Close a completely repaired code finding",
+  "skills": [
+    "stage-development"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "session.py",
+        "REQUEST.md",
+        "tests/test_session.py",
+        "reviews/R1.md",
+        "AUTHOR.md"
+      ]
+    }
+  ]
+}

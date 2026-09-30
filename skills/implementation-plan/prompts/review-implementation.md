@@ -1,0 +1,9 @@
+# Review the implementation plan
+
+1. **Identify the review.** Read the original request, decisions, exact plan revision, relevant code and check configuration. Disclose independent or self-review and the evidence available. Review reports findings; it does not edit the plan or implementation.
+
+2. **Assess the delivery as a whole.** Can the proposed order deliver its claimed outcomes with available dependencies and decisive success/failure acceptance? Do tests and necessary documentation accompany the outcome? Consider coordination and maintenance cost as well as individual stage feasibility. A single increment or combined note can suffice. Planned commands are not verified results, and zero collected tests cannot establish success. Block for concrete correctness, dependency, risk or usability consequences, not presentation preferences.
+
+3. **Resolve findings from evidence.** Explain each material concern's location, trigger, consequence and smallest sufficient correction, with a way to verify it. On recheck, preserve the original concern and assess its full affected contract at the new revision: partial fixes stay open; complete verified fixes close. Distinguish author fix claims, reviewer verification and human acceptance. Reuse applicable verified evidence while content, assumptions, inputs, checks and runtime remain relevant; required rechecks still run. Do not reopen unrelated decisions or continue a cosmetic cycle.
+
+4. **Deliver a clear verdict.** Use the Review questions in [artifact checks](../references/artifact-checks.md) for the final edit. Expose the verdict, material open issues and any necessary next action; keep scope and verification limits accessible. With no material finding, a short acceptance and evidence boundary suffice. The [feedback example](../assets/review.template.md) is optional; no extra report or review round is needed to match it.

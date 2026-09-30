@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Design"
+  short_description: "Clarify features and write or review designs"
+  default_prompt: "Use $feature-design for the requested operation in this repository."

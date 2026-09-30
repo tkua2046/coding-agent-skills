@@ -1,0 +1,40 @@
+{
+  "id": "smoke-plan-recheck-complete",
+  "version": 3,
+  "tier": "smoke",
+  "title": "Recheck complete plan repair",
+  "skills": [
+    "implementation-plan"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "docs/ORIGINAL.md",
+        "docs/PLAN.md",
+        "docs/DESIGN.md",
+        "docs/history/P2.md",
+        "docs/history/R1.md",
+        "docs/history/P1.md",
+        "reviews/prior.md"
+      ]
+    }
+  ]
+}

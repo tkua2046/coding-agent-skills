@@ -1,0 +1,45 @@
+{
+  "id": "local-release-execution",
+  "version": 2,
+  "tier": "heavy",
+  "title": "Execute a small local inventory-tool release and inspect isolated retry variants",
+  "skills": [
+    "dev-workflow"
+  ],
+  "phases": [
+    {
+      "id": "01-release",
+      "request": "requests/01.md"
+    },
+    {
+      "id": "02-retry-variants",
+      "request": "requests/02.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "fixture-policy-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "DEVNOTES.md",
+        "README.md",
+        ".gitignore",
+        "inventory_report.py",
+        "tests",
+        "tools",
+        "examples"
+      ]
+    },
+    {
+      "id": "one-release-commit",
+      "kind": "commit_count",
+      "expected": 1
+    },
+    {
+      "id": "release-associations",
+      "kind": "python",
+      "file": "oracle.py"
+    }
+  ]
+}

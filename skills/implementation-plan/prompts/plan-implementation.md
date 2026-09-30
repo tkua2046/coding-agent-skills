@@ -1,0 +1,9 @@
+# Plan implementation
+
+1. **Ground the delivery.** Read the request, accepted decisions, relevant code and actual check configuration. Investigate only an unknown that could change an outcome or dependency; leave an owner's consequential choice explicit. Honor required reviews and approvals without inventing additional checkpoints.
+
+2. **Choose useful increments.** Order observable outcomes with prerequisites available before their consumers. Include each outcome's meaningful tests and affected documentation. Define decisive success, failure and compatibility acceptance, using an existing example where available. A partial delivery must be useful and clearly distinguished from the eventual feature. One increment is sufficient when there is no real boundary to split. Include PR/release work only when in scope; ordinary commits need neither individual PRs nor version bumps.
+
+3. **Maintain the right decisions.** Use one current plan, possibly a section of an existing note. Update only affected pending outcomes, dependencies and acceptance. Private helper changes or added tests leave the plan unchanged unless they change those decisions. Preserve completed outcomes and original source/review history through existing immutable references; capture an otherwise unavailable reviewed version once. Link execution policy and actual gate commands once. Keep live delivery status in one existing place where needed, separate from proposed work.
+
+4. **Check and finish for the reader.** Check the Plan questions in [artifact checks](../references/artifact-checks.md), then make the next undelivered outcome, prerequisite and acceptance easy to find. Remove duplicated design reasoning, implementation/test inventories and repeated policy. Use the [optional example](../assets/implementation-plan.template.md) if it helps. Correct material gaps and deliver; an unchanged plan or a sufficient short note needs no polish/review loop or self-check report.

@@ -1,0 +1,3 @@
+Work only on the requested operation. Retain supplied requirements and historical records. Use the prepared local tools. No source-repository commits, tags, pushes, releases, downloads or external services. Follow the narrower operation request.
+
+Repository approval policy: tests in the reviewed repository must assert that rejected commands preserve both cursor and selection, and that previous moves by -1 and closes selection. Both durable regressions are required before approval; reviewer scratch probes do not replace them. This review does not authorize adding tests or changing product code.

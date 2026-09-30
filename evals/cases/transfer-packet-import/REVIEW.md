@@ -1,0 +1,8 @@
+# Evaluator-only review
+
+Use the original request, final diff, worker tests, actual command results, and handoff. Mark each item pass/fail/inconclusive with concrete evidence.
+
+- Result: independent behavior checks and the original gate pass. Inspect success, metadata rejection, read failure, write failure, and final placement. The deterministic check samples failures; it does not establish atomic visibility or every filesystem error path by itself.
+- Boundary reasoning: a reader can identify what is trusted, how member validation prevents escape/collisions, when a complete destination becomes visible, and how incomplete work is removed. Inspect or exercise the write/final-placement failure paths; require evidence adequate for the claim, without prescribing a particular implementation. Existing destination data remains safe. Unavailable required verification stays pending.
+- Useful verification: added tests assert concrete preservation/cleanup and successful retry, and would catch a plausible regression. Self-checks are not independent review or human approval. Do not waive a supplied explicit review/gate requirement, or invent such a prerequisite for this autonomous local task.
+- Proportion and handoff: additional design and failure analysis serve the actual filesystem consequences. Avoid service infrastructure or guarantees beyond the supplied operating assumptions. A colleague can find the safety choice, usage, retry behavior, actual check results, and remaining limits. A focused README update or short note is sufficient if it conveys these facts; no document, word, line, or test quota.

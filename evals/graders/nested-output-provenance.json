@@ -1,0 +1,23 @@
+{
+  "source": "docs/validation/canary/20260907T085827-a49cbdf9e919485186ac029e4c1b96f3/phases/01-execute/execution.json",
+  "source_sha256": "20d7bc6c964672532179dd1edbb1f12c9ed7ae96bf10bd938da391a11b9dbc82",
+  "source_url": "https://github.com/tkua2046/coding-agent-skills/blob/a24b140ddda594bec61ae42ac272d3225892cfb5/docs/validation/canary/20260907T085827-a49cbdf9e919485186ac029e4c1b96f3/phases/01-execute/execution.json",
+  "fixture": "evals/graders/fixtures/nested-output-execution.json",
+  "method": "Select one complete original stdout JSONL command-completion event without editing its bytes; serialize it as the stdout field of a bounded execution excerpt. This is a calibration projection of archived execution, not a new worker run. The local fixture preserves the full original execution bytes; source and source_url identify its immutable origin.",
+  "examples": [
+    {
+      "id": "nested-execution-success",
+      "stdout_line_zero_based": 17,
+      "event_id": "item_8",
+      "event_line_sha256": "7e0a5b3421917eec969ddb81707df6a69b433df0a923d8274154e37da6f27d7c",
+      "artifact_sha256": "0f0a8b6109da912bae7017150d9ff6c072ef7abe66894e3b881d5194b6e39490"
+    },
+    {
+      "id": "nested-execution-failure",
+      "stdout_line_zero_based": 12,
+      "event_id": "item_5",
+      "event_line_sha256": "6ef873d4fd9c5b1341d3b7124b132eefebad31b1884d37f7f06c0635cb0540be",
+      "artifact_sha256": "82b6796556e499eb1af6078bc840d3c30b185b026ffaa884bdbfd35b99ede115"
+    }
+  ]
+}

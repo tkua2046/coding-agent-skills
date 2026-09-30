@@ -1,0 +1,1 @@
+Current outcome: rejected commands preserve all session state. R1 resolved by reviews/round2.md; historical original at reviews/round1.md. Remaining action: run DEVNOTES gate, then await human acceptance. No current gate execution is claimed.

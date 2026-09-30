@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+# Support both the maintained wrapper and its installed .git/hooks copy.
+hook_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [ -f "$hook_dir/../tools/check.py" ]; then
+    cd "$hook_dir/.."
+else
+    cd "$hook_dir/../.."
+fi
+exec "${CANARY_PYTHON:-python3}" tools/check.py

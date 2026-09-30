@@ -1,0 +1,46 @@
+{
+  "version": 5,
+  "criteria": [
+    {
+      "id": "code-verdict",
+      "required": true,
+      "goals": [
+        "C1",
+        "C3"
+      ],
+      "requirement": "Evaluate actual behavior separately from a supported, proportionate test-adequacy disposition.",
+      "pass_when": "Recognizes that validation precedes both mutations and valid next/previous close selection and move correctly. Assesses the delivered tests within the explicit review request. May accept with nonblocking regression suggestions or request a bounded test repair, provided a blocker identifies an important contract behavior the suite does not protect, a concrete missed regression, and why requiring the repair is proportionate here. Neither missing assertions alone nor passing scratch probes alone settles adequacy. Any claimed mandatory policy must actually apply; reviewer probes do not replace explicitly required repository tests.",
+      "fail_when": "Invents a current mutation defect or architecture prerequisite; equates incomplete test coverage with broken current behavior; imposes an unsupported coverage quota or approval rule; blocks without a concrete important protection gap and proportionate correction; approves generically without inspecting state behavior and valid commands."
+    },
+    {
+      "id": "scope-and-evidence",
+      "required": true,
+      "goals": [
+        "C3"
+      ],
+      "requirement": "Stay within the supplied operation and distinguish observations from claims.",
+      "pass_when": "Keeps code/tests/requirements unchanged. Static conclusions and actually run checks remain distinct; reviews the current code without authoring a fix.",
+      "fail_when": "Changes preserved inputs or performs a different development operation; claims unperformed checks or unsupported independent review, human approval or real publication. Truthful disclosure of the independently assigned review is allowed. Missing evidence is disclosed, not replaced by an invented success."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "C4"
+      ],
+      "requirement": "Expose the current useful result before supporting detail.",
+      "pass_when": "The opening states verdict, open material findings or none, and next action. Supporting state examples and test limitations are easy to find.",
+      "fail_when": "Logs, policy or historical discussion obscure the result/next action; a heading or link substitutes for the actual answer; the opening contradicts the detailed artifact. Short but incomplete output also fails."
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "C5"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    }
+  ]
+}

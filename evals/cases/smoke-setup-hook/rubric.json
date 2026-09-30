@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "criteria": [
+    {
+      "id": "installed-gate",
+      "required": true,
+      "goals": [
+        "D1"
+      ],
+      "requirement": "Make the actual installed hook enforce the suite.",
+      "pass_when": "Normal nonempty tests pass; the installed hook propagates failing and zero-test discovery even when only docs are staged. Preserves custom unittest location/pattern and wrapper. Actual passing/failing/empty hook probes are observed in isolated copies; a direct runner invocation alone is insufficient.",
+      "fail_when": "Only writes config or runs check.py directly; hook skips doc commits, suppresses failure/empty discovery, discards original tests or replaces the existing toolchain."
+    },
+    {
+      "id": "scope-and-evidence",
+      "required": true,
+      "goals": [
+        "D6"
+      ],
+      "requirement": "Stay within the supplied operation and distinguish observations from claims.",
+      "pass_when": "Preserves application/tests/wrapper/config and user docs; changes only the runner and actual verification records. No commits; sandbox Git commits solely to construct isolated hook probes are allowed. Reports installed execution accurately.",
+      "fail_when": "Changes preserved inputs or performs a different development operation; claims unperformed checks or unsupported independent review, human approval or real publication. Truthful disclosure of the independently assigned review is allowed. Missing evidence is disclosed, not replaced by an invented success."
+    },
+    {
+      "id": "usable-opening",
+      "required": true,
+      "goals": [
+        "D6"
+      ],
+      "requirement": "Expose the current useful result before supporting detail.",
+      "pass_when": "The opening states what the gate now enforces, observed pass/fail/empty results and any limit; detailed command evidence is linked or follows.",
+      "fail_when": "Logs, policy or historical discussion obscure the result/next action; a heading or link substitutes for the actual answer; the opening contradicts the detailed artifact. Short but incomplete output also fails."
+    },
+    {
+      "id": "proportionate-effort",
+      "required": true,
+      "goals": [
+        "D6"
+      ],
+      "requirement": "Reach the requested usable outcome with proportionate time and context; inspect the complete invocation trace, not only the final document.",
+      "pass_when": "Concludes when the requested operation is sufficient, with investigation, rewriting, review and checks proportionate to the task scope, uncertainty and actual policy. Incidental local navigation or verification without a material effect on completion, context or maintenance is advisory. Further substantial work addresses a material unknown, changed evidence or actual policy. Records cover invocation through usable final response; task-supplied deadlines apply. Required fixture phases/gates and necessary failure retention remain valid. With no deadline or justified comparison, a process pass does not establish acceptable latency or a speed gain.",
+      "fail_when": "Trace demonstrates material unnecessary work through unrelated bulk reading, unnecessary whole-document rewrites, loss/replay of completed work after compaction, cosmetic review cycles or unchanged full checks repeated without cause. Identify the operation and its material consequence for completion, context or maintenance relative to the task; small repetitions may accumulate into a material burden. A supplied deadline is exceeded, or output/one run is used to claim unproved speed. Missing/truncated trace or incomplete invocation is inconclusive only when it prevents deciding. A retained trace proving material unnecessary work or elapsed time already beyond a supplied deadline still fails. Compaction, length or elapsed time alone is not a failure without its relevant condition."
+    }
+  ]
+}

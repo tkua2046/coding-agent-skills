@@ -1,0 +1,39 @@
+{
+  "id": "smoke-design-recheck-complete",
+  "version": 3,
+  "tier": "smoke",
+  "title": "Recheck complete design repair",
+  "skills": [
+    "feature-design"
+  ],
+  "phases": [
+    {
+      "id": "01-operation",
+      "request": "requests/01.md"
+    }
+  ],
+  "checks": [
+    {
+      "id": "no-tags",
+      "kind": "no_tags"
+    },
+    {
+      "id": "no-commit",
+      "kind": "commit_count",
+      "expected": 0
+    },
+    {
+      "id": "source-preserved",
+      "kind": "unchanged",
+      "paths": [
+        "AGENTS.md",
+        "docs/ORIGINAL.md",
+        "docs/DESIGN.md",
+        "docs/history/D2.md",
+        "docs/history/D1.md",
+        "docs/history/R1.md",
+        "reviews/prior.md"
+      ]
+    }
+  ]
+}

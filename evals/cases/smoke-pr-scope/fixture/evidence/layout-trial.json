@@ -1,0 +1,13 @@
+{
+  "kind": "local layout exploration",
+  "input": {
+    "layout": "two-column cards",
+    "task_ids": [
+      "T-12",
+      "T-14"
+    ]
+  },
+  "output_path": "generated/layout-preview.html",
+  "output_sha256": "9885a3b7ec62d0f7469bf5da5689e1b21e9e7658c37e41565b32927b3ed590da",
+  "output_html": "<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><title>Task card layout exploration</title>\n<style>body{font-family:system-ui;background:#eef2f6;padding:24px}main{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}article{background:white;padding:20px;border-radius:12px}</style></head>\n<body><h1>Card layout preview</h1><main><article><h2>T-12</h2><p>Order &quot;blue&quot;, large folders</p></article><article><h2>T-14</h2><p>Café stock</p></article></main></body>\n</html>\n"
+}
